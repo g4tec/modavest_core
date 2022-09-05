@@ -1,2 +1,6 @@
 .vscode/launch.json
 .vscode/settings.json
+modavest_core/.flutter-plugins
+modavest_core/.flutter-plugins-dependencies
+.gitignore
+modavest_core/.flutter-plugins-dependencies

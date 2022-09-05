@@ -1,3 +1,4 @@
+import 'package:modavest_core/data/models/productPrice/referenceCodeSequences/reference_code_sequence_hive.dart';
 import 'package:modavest_core/domain/models/reference_code_sequence.dart';
 
 class ReferenceCodeSequenceModel extends ReferenceCodeSequence {
@@ -21,6 +22,24 @@ class ReferenceCodeSequenceModel extends ReferenceCodeSequence {
       name: json["referenceCodeSequenceName"] as String?,
       referenceId: json["referenceCodeSequenceReferenceId"] as int?,
       parentCode: json["referenceCodeSequenceParentCode"] as int?,
+    );
+  }
+  factory ReferenceCodeSequenceModel.fromHive(HiveReferenceCodeSequence hive) {
+    return ReferenceCodeSequenceModel(
+      id: hive.id,
+      code: hive.code,
+      name: hive.name,
+      referenceId: hive.referenceId,
+      parentCode: hive.parentCode,
+    );
+  }
+  HiveReferenceCodeSequence toHive() {
+    return HiveReferenceCodeSequence(
+      id: id,
+      code: code,
+      name: name,
+      referenceId: referenceId,
+      parentCode: parentCode,
     );
   }
 }

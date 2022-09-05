@@ -1,6 +1,8 @@
+import 'package:modavest_core/data/models/color/color_hive.dart';
 import 'package:modavest_core/data/models/color/color_model.dart';
 import 'package:modavest_core/data/models/composition/composition_model.dart';
 import 'package:modavest_core/data/models/details/details_model.dart';
+import 'package:modavest_core/data/models/reference/reference_hive.dart';
 import 'package:modavest_core/data/models/referencePrice/reference_price_model.dart';
 import 'package:modavest_core/domain/models/composition.dart';
 import 'package:modavest_core/domain/models/details.dart';
@@ -29,8 +31,8 @@ class ReferenceModel extends Reference {
     List<Composition>? composition = const [],
     String? imageColorReference,
     ReferencePriceModel? referencePrice,
-    // required int priceTable,
-    // required num oficialStore,
+    int? priceTable,
+    num? oficialStore,
     bool? isPack,
     bool? isGrid,
   }) : super(
@@ -38,8 +40,8 @@ class ReferenceModel extends Reference {
           integrationId: integrationId,
           colors: colors,
           name: name,
-          // oficialStore: oficialStore,
-          // priceTable: priceTable,
+          oficialStore: oficialStore,
+          priceTable: priceTable,
           description: description,
           descriptive: descriptive,
           grid: grid,
@@ -68,8 +70,8 @@ class ReferenceModel extends Reference {
   }) {
     return ReferenceModel(
       code: json["ReferenceCode"] as String,
-      // priceTable: priceTable ?? json["priceTable"] as int,
-      // oficialStore: oficialStore ?? json["oficialStore"] as num,
+      priceTable: priceTable ?? json["priceTable"] as int,
+      oficialStore: oficialStore ?? json["oficialStore"] as num,
       integrationId: json["integrationId"] as int,
       colors: ((json["colors"] ?? []) as List)
           .map(
@@ -120,13 +122,48 @@ class ReferenceModel extends Reference {
     );
   }
 
+  factory ReferenceModel.fromHive(
+    HiveReference reference,
+  ) {
+    return ReferenceModel(
+      code: reference.code,
+      priceTable: reference.priceTable,
+      oficialStore: reference.oficialStore,
+      integrationId: reference.integrationId,
+      colors: (reference.colors ?? [])
+          .map((e) => ColorModel.fromHive(e as HiveColor))
+          .toList(),
+      name: reference.name,
+      description: reference.description,
+      descriptive: reference.descriptive,
+      gridCode: reference.gridCode,
+      grid: reference.grid,
+      weight: reference.weight,
+      height: reference.height,
+      width: reference.width,
+      length: reference.length,
+      packWeight: reference.packWeight,
+      packHeight: reference.packHeight,
+      packWidth: reference.packWidth,
+      packLength: reference.packLength,
+      observations: reference.observations,
+      details: reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+      composition: reference.composition
+          ?.map((e) => CompositionModel.fromHive(e))
+          .toList(),
+      imageColorReference: reference.imageColorReference,
+      isPack: reference.isPack,
+      isGrid: reference.isGrid,
+    );
+  }
+
   factory ReferenceModel.entity(
     Reference reference,
   ) {
     return ReferenceModel(
       code: reference.code,
-      // priceTable: reference.priceTable,
-      // oficialStore: reference.oficialStore,
+      priceTable: reference.priceTable,
+      oficialStore: reference.oficialStore,
       integrationId: reference.integrationId,
       colors: (reference.colors).map((e) => ColorModel.entity(e)).toList(),
       name: reference.name,
@@ -150,6 +187,34 @@ class ReferenceModel extends Reference {
       imageColorReference: reference.imageColorReference,
       isPack: reference.isPack,
       isGrid: reference.isGrid,
+    );
+  }
+
+  HiveReference toHive() {
+    return HiveReference(
+      code: code,
+      priceTable: priceTable,
+      oficialStore: oficialStore,
+      integrationId: integrationId,
+      name: name,
+      description: description,
+      descriptive: descriptive,
+      gridCode: gridCode,
+      grid: grid,
+      weight: weight,
+      height: height,
+      width: width,
+      length: length,
+      packWeight: packWeight,
+      packHeight: packHeight,
+      packWidth: packWidth,
+      packLength: packLength,
+      imageColorReference: imageColorReference,
+      observations: observations,
+      // TODO: Implementar
+      // referencePrice: referencePrice,
+      isPack: isPack,
+      isGrid: isGrid,
     );
   }
 }

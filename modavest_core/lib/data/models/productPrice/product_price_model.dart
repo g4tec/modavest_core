@@ -1,3 +1,4 @@
+import 'package:modavest_core/data/models/productPrice/product_price_hive.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
 
 class ProductPriceModel extends ProductPrice {
@@ -27,6 +28,28 @@ class ProductPriceModel extends ProductPrice {
       productCode: json["productCode"] as num?,
       price: json["price"] as num?,
       scaleCode: json["scaleCode"] as num?,
+    );
+  }
+
+  factory ProductPriceModel.fromHive(HiveProductPrice productPriceHive) {
+    return ProductPriceModel(
+      referenceCode: productPriceHive.referenceCode,
+      originalPrice: productPriceHive.originalPrice,
+      branchCode: productPriceHive.branchCode,
+      productCode: productPriceHive.productCode,
+      price: productPriceHive.price,
+      scaleCode: productPriceHive.scaleCode,
+    );
+  }
+
+  HiveProductPrice toHive() {
+    return HiveProductPrice(
+      referenceCode: referenceCode,
+      originalPrice: originalPrice,
+      branchCode: branchCode,
+      productCode: productCode,
+      price: price,
+      scaleCode: scaleCode,
     );
   }
 }

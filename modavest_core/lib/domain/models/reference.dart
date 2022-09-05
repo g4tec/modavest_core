@@ -25,8 +25,8 @@ class Reference {
   List<Color> colors;
   final String? imageColorReference;
   ReferencePrice? referencePrice;
-  // final int priceTable;
-  // final num oficialStore;
+  int? priceTable;
+  num? oficialStore;
   final bool? isPack;
   final bool? isGrid;
 
@@ -34,8 +34,8 @@ class Reference {
     required this.code,
     required this.integrationId,
     required this.colors,
-    // required this.oficialStore,
-    // required this.priceTable,
+    required this.oficialStore,
+    required this.priceTable,
     this.name,
     this.description,
     this.descriptive,

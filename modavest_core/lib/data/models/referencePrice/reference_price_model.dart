@@ -1,4 +1,6 @@
+import 'package:modavest_core/data/models/productPrice/product_price_hive.dart';
 import 'package:modavest_core/data/models/productPrice/product_price_model.dart';
+import 'package:modavest_core/data/models/referencePrice/reference_price_hive.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
 import 'package:modavest_core/domain/models/reference_price.dart';
 
@@ -30,6 +32,25 @@ class ReferencePriceModel extends ReferencePrice {
             ),
           )
           .toList(),
+    );
+  }
+  factory ReferencePriceModel.fromHive(HiveReferencePrice productPriceHive) {
+    return ReferencePriceModel(
+      referenceCode: productPriceHive.referenceCode,
+      min: productPriceHive.min,
+      prices: (productPriceHive.prices)
+          ?.map((HiveProductPrice e) => ProductPriceModel.fromHive(e))
+          .toList(),
+      priceTableCode: productPriceHive.priceTableCode,
+    );
+  }
+
+  HiveReferencePrice toHive() {
+    return HiveReferencePrice(
+      referenceCode: referenceCode,
+      min: min,
+      prices: null,
+      priceTableCode: priceTableCode,
     );
   }
 }

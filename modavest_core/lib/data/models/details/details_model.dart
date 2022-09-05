@@ -1,3 +1,4 @@
+import 'package:modavest_core/data/models/details/details_hive.dart';
 import 'package:modavest_core/domain/models/details.dart';
 
 class DetailModel extends Detail {
@@ -33,6 +34,17 @@ class DetailModel extends Detail {
       description: json["description"] as String?,
     );
   }
+  factory DetailModel.fromHive(HiveDetail hive) {
+    return DetailModel(
+      integrationId: hive.integrationId,
+      referenceCode: hive.referenceCode,
+      typeCode: hive.typeCode,
+      type: hive.type,
+      auxiliaryType: hive.auxiliaryType,
+      title: hive.title,
+      description: hive.description,
+    );
+  }
 
   factory DetailModel.entity(Detail detail) {
     return DetailModel(
@@ -43,6 +55,18 @@ class DetailModel extends Detail {
       auxiliaryType: detail.auxiliaryType,
       title: detail.title,
       description: detail.description,
+    );
+  }
+
+  HiveDetail toHive() {
+    return HiveDetail(
+      referenceCode: referenceCode,
+      integrationId: integrationId,
+      typeCode: typeCode,
+      type: type,
+      auxiliaryType: auxiliaryType,
+      title: title,
+      description: description,
     );
   }
 }

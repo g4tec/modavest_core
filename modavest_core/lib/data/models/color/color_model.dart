@@ -1,4 +1,7 @@
+import 'package:modavest_core/data/models/color/color_hive.dart';
+import 'package:modavest_core/data/models/image_color_reference/image_color_reference_hive.dart';
 import 'package:modavest_core/data/models/image_color_reference/image_color_reference_model.dart';
+import 'package:modavest_core/data/models/product/product_hive.dart';
 import 'package:modavest_core/data/models/product/product_model.dart';
 import 'package:modavest_core/domain/models/color.dart';
 
@@ -62,6 +65,33 @@ class ColorModel extends Color {
     );
   }
 
+  factory ColorModel.fromHive(HiveColor hive) {
+    final List<ImageColorReferenceModel> imgList = (hive.imgList ?? [])
+        .map(
+          (e) => ImageColorReferenceModel.fromHive(
+            e as HiveImageColorReference,
+          ),
+        )
+        .toList();
+    imgList.sort(
+      (a, b) => a.sequence.compareTo(b.sequence),
+    );
+    return ColorModel(
+      products: (hive.products ?? [])
+          .map((e) => ProductModel.fromHive(e as HiveProduct))
+          .toList(),
+      imgList: imgList,
+      code: hive.code,
+      integrationId: hive.integrationId,
+      referenceCode: hive.referenceCode,
+      name: hive.name,
+      groupName: hive.groupName,
+      auxiliaryCode: hive.auxiliaryCode,
+      auxiliaryName: hive.auxiliaryName,
+      pantoneCode: hive.pantoneCode,
+    );
+  }
+
   factory ColorModel.entity(Color color) {
     final List<ImageColorReferenceModel> imgList = (color.imgList)
         .map(
@@ -84,6 +114,20 @@ class ColorModel extends Color {
       auxiliaryCode: color.auxiliaryCode,
       auxiliaryName: color.auxiliaryName,
       pantoneCode: color.pantoneCode,
+    );
+  }
+
+  HiveColor toHive() {
+    return HiveColor(
+      referenceCode: referenceCode,
+      integrationId: integrationId,
+      code: code,
+      name: name,
+      groupName: groupName,
+      auxiliaryCode: auxiliaryCode,
+      auxiliaryName: auxiliaryName,
+      pantoneCode: pantoneCode,
+      imgList: null,
     );
   }
 }

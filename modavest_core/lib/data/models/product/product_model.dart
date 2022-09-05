@@ -1,6 +1,7 @@
 import 'package:modavest_core/data/models/classification/classification_model.dart';
-import 'package:modavest_core/domain/models/classification.dart';
+import 'package:modavest_core/data/models/product/product_hive.dart';
 import 'package:modavest_core/domain/models/additional_field.dart';
+import 'package:modavest_core/domain/models/classification.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_manufacturer.dart';
 import 'package:modavest_core/domain/models/reference_code_sequence.dart';
@@ -136,6 +137,70 @@ class ProductModel extends Product {
       "referenceCodeSequences": referenceCodeSequences,
       "packAmount": packAmount,
     };
+  }
+
+  HiveProduct toHive() {
+    return HiveProduct(
+      referenceCode: referenceCode,
+      code: code,
+      integrationId: integrationId,
+      colorCode: colorCode,
+      sku: sku,
+      name: name,
+      nmc: nmc,
+      cst: cst,
+      measuredUnit: measuredUnit,
+      size: size,
+      isActive: isActive,
+      isFinishedProduct: isFinishedProduct,
+      isRawMaterial: isRawMaterial,
+      isBulkMaterial: isBulkMaterial,
+      isOwnProduction: isOwnProduction,
+      minimumStockAmount: minimumStockAmount,
+      maximumStockAmount: maximumStockAmount,
+      idealStockAmount: idealStockAmount,
+      salesStartDate: salesStartDate,
+      salesEndDate: salesEndDate,
+      barCodes: barCodes,
+
+      packAmount: packAmount,
+      // classifications: classifications,
+      // additionalFields: additionalFields,
+      // suppliers: suppliers,
+      // productManufacturers: productManufacturers,
+      // referenceCodeSequences: referenceCodeSequences,
+    );
+  }
+
+  factory ProductModel.fromHive(HiveProduct hiveProduct) {
+    return ProductModel(
+      referenceCode: hiveProduct.referenceCode,
+      code: hiveProduct.code,
+      integrationId: hiveProduct.integrationId,
+      colorCode: hiveProduct.colorCode,
+      sku: hiveProduct.sku,
+      name: hiveProduct.name,
+      nmc: hiveProduct.nmc,
+      cst: hiveProduct.cst,
+      measuredUnit: hiveProduct.measuredUnit,
+      size: hiveProduct.size,
+      isActive: hiveProduct.isActive,
+      isFinishedProduct: hiveProduct.isFinishedProduct,
+      isRawMaterial: hiveProduct.isRawMaterial,
+      isBulkMaterial: hiveProduct.isBulkMaterial,
+      isOwnProduction: hiveProduct.isOwnProduction,
+      minimumStockAmount: hiveProduct.minimumStockAmount,
+      maximumStockAmount: hiveProduct.maximumStockAmount,
+      idealStockAmount: hiveProduct.idealStockAmount,
+      salesStartDate: hiveProduct.salesStartDate,
+      salesEndDate: hiveProduct.salesEndDate,
+      barCodes: hiveProduct.barCodes,
+      packAmount: hiveProduct.packAmount,
+      classifications: hiveProduct.classifications
+          ?.map((e) => ClassificationModel.fromHive(e))
+          .toList(),
+      // imgList: hiveProduct.imgList,
+    );
   }
 
   factory ProductModel.entity(Product product) {

@@ -23,6 +23,10 @@ dev_dependencies:
   intl: ^0.17.0
   fluttertoast: ^8.0.9
   validadores: ^1.0.5
+  flutter_svg: ^0.22.0
+  flutter_cache_manager: ^3.3.0
+  auto_size_text_pk: ^3.0.0
+  flutter_rating_bar: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

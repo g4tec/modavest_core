@@ -51,12 +51,12 @@ class LegalPersonEmailModel extends LegalPersonEmail {
     return data;
   }
 
-  factory LegalPersonEmailModel.entitie(LegalPersonEmail e) {
+  factory LegalPersonEmailModel.entitie(LegalPersonEmail e, {int? sequence}) {
     return LegalPersonEmailModel(
       email: e.email,
       typeCode: e.typeCode,
       isDefault: e.isDefault,
-      sequence: e.sequence,
+      sequence: sequence ?? e.sequence,
     );
   }
 }

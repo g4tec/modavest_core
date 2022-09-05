@@ -101,11 +101,12 @@ class LegalPersonContactModel extends LegalPersonContact {
     return data;
   }
 
-  factory LegalPersonContactModel.entitie(LegalPersonContact e) {
+  factory LegalPersonContactModel.entitie(LegalPersonContact e,
+      {int? sequence}) {
     return LegalPersonContactModel(
       legalPersonCode: e.legalPersonCode,
       integrationId: e.integrationId,
-      sequence: e.sequence,
+      sequence: sequence ?? e.sequence,
       name: e.name,
       typeCode: e.typeCode,
       typeName: e.typeName,

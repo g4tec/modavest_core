@@ -74,9 +74,10 @@ class EnterpriseReferenceModel extends EnterpriseReference {
     return data;
   }
 
-  factory EnterpriseReferenceModel.entitie(EnterpriseReference e) {
+  factory EnterpriseReferenceModel.entitie(EnterpriseReference e,
+      {int? sequence}) {
     return EnterpriseReferenceModel(
-      integrationId: e.integrationId,
+      integrationId: sequence ?? e.integrationId,
       sequence: e.sequence,
       name: e.name,
       phoneNumber: e.phoneNumber,

@@ -1,4 +1,3 @@
-
 import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone_hive.dart';
 import 'package:modavest_core/domain/models/legal_person_phone.dart';
 
@@ -45,13 +44,13 @@ class LegalPersonPhoneModel extends LegalPersonPhone {
     );
   }
 
-  factory LegalPersonPhoneModel.entitie(LegalPersonPhone e) {
+  factory LegalPersonPhoneModel.entitie(LegalPersonPhone e, {num? sequence}) {
     return LegalPersonPhoneModel(
       number: e.number,
       typeCode: e.typeCode,
       branchLine: e.branchLine,
       isDefault: e.isDefault,
-      sequence: e.sequence,
+      sequence: sequence ?? e.sequence,
     );
   }
   Map<String, dynamic> toJson({bool noSequence = false}) {

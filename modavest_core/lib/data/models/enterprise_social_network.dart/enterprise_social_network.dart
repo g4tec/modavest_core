@@ -2,7 +2,7 @@ import 'package:modavest_core/data/models/enterprise_social_network.dart/enterpr
 import 'package:modavest_core/domain/models/enterprise_social_network.dart';
 
 class EnterpriseSocialNetworkModel extends EnterpriseSocialNetwork {
-  const EnterpriseSocialNetworkModel({
+  EnterpriseSocialNetworkModel({
     required int? sequence,
     num? integrationId,
     String? address,
@@ -67,9 +67,10 @@ class EnterpriseSocialNetworkModel extends EnterpriseSocialNetwork {
     return data;
   }
 
-  factory EnterpriseSocialNetworkModel.entitie(EnterpriseSocialNetwork e) {
+  factory EnterpriseSocialNetworkModel.entitie(EnterpriseSocialNetwork e,
+      {int? sequence}) {
     return EnterpriseSocialNetworkModel(
-      sequence: e.sequence,
+      sequence: sequence ?? e.sequence,
       integrationId: e.integrationId,
       address: e.address,
       typeCode: e.typeCode,

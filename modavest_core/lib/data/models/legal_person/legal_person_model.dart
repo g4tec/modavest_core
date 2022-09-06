@@ -215,17 +215,19 @@ class LegalPersonModel extends LegalPerson {
           .toList(),
       "phones": phones
           .map(
-            (e) => (e as LegalPersonPhoneModel).toJson(noSequence: noSequence),
+            (e) =>
+                LegalPersonPhoneModel.entitie(e).toJson(noSequence: noSequence),
           )
           .toList(),
       "emails": emails
           .map(
-            (e) => (e as LegalPersonEmailModel).toJson(noSequence: noSequence),
+            (e) =>
+                LegalPersonEmailModel.entitie(e).toJson(noSequence: noSequence),
           )
           .toList(),
       "contacts": contacts
           .map(
-            (e) => (e as LegalPersonContactModel).toJson(
+            (e) => LegalPersonContactModel.entitie(e).toJson(
               integrationIdParam: integrationId,
               legalPersonCodeParam: code,
               noSequence: noSequence,
@@ -234,7 +236,7 @@ class LegalPersonModel extends LegalPerson {
           .toList(),
       "references": references
           .map(
-            (e) => (e as EnterpriseReferenceModel).toJson(
+            (e) => EnterpriseReferenceModel.entitie(e).toJson(
               integrationIdParam: integrationId,
               legalPersonCodeParam: code,
               noSequence: noSequence,
@@ -243,7 +245,7 @@ class LegalPersonModel extends LegalPerson {
           .toList(),
       "socialNetworks": socialNetworks
           .map(
-            (e) => (e as EnterpriseSocialNetworkModel).toJson(
+            (e) => EnterpriseSocialNetworkModel.entitie(e).toJson(
               integrationIdParam: integrationId,
               legalPersonCodeParam: code,
               noSequence: noSequence,

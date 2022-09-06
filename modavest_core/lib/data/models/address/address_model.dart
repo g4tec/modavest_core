@@ -104,10 +104,11 @@ class AddressModel extends Address {
   }
 
   Map<String, dynamic> toJson({
-    bool noSequence = false,
     PositionCoordinates? positionCoordinates,
+    bool noSequence = false,
+    num? integrationId,
   }) {
-    return {
+    final Map<String, dynamic> data = {
       "publicPlace": publicPlace ?? "",
       "number": number ?? 0,
       "addressNumber": number ?? 0,
@@ -122,10 +123,16 @@ class AddressModel extends Address {
       "branchInsertCode": branchInsertCode,
       "addressType": addressType,
       "address": address,
-      "integrationId": integrationId,
+      "integrationId": integrationId ?? this.integrationId,
       "latitude": positionCoordinates?.latitude ?? "",
       "longitude": positionCoordinates?.longitude ?? "",
       "accuracy": positionCoordinates?.accuracy ?? "",
     };
+
+    if (noSequence) {
+      return data;
+    }
+    data.putIfAbsent("sequence", () => 0);
+    return data;
   }
 }

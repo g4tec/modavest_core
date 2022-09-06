@@ -59,4 +59,29 @@ class ClassificationModel extends Classification {
       subcategoryId: subcategoryId,
     );
   }
+
+  factory ClassificationModel.entitie(Classification e) {
+    return ClassificationModel(
+      id: e.id,
+      typeCode: e.typeCode,
+      typeName: e.typeName,
+      typeNameAux: e.typeNameAux,
+      code: e.code,
+      name: e.name,
+      nameAux: e.nameAux,
+      subcategoryId: e.subcategoryId,
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "typeCode": typeCode,
+      "typeName": typeName,
+      "typeNameAux": typeNameAux,
+      "code": code,
+      "name": name,
+      "nameAux": nameAux,
+      "subCategoryId": subcategoryId,
+    };
+  }
 }

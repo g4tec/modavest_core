@@ -1,5 +1,3 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:modavest_core/data/models/category/category_hive.dart';
 import 'package:modavest_core/data/models/classification/classification_model.dart';
 import 'package:modavest_core/domain/models/category.dart';
@@ -83,11 +81,30 @@ class CategoryModel extends Category {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
+  Map<String, dynamic> toJson({bool isSubcategory = false}) {
+    final data = {
       "description": description,
       "categoryPhotoUrl": categoryPhotoUrl,
+      "classifications": classifications
+          ?.map((e) => ClassificationModel.entitie(e).toJson())
+          .toList(),
+      "subCategory": subCategories
+          ?.map(
+            (e) => CategoryModel.entitie(e).toJson(),
+          )
+          .toList(),
+      "isSubcategory": this.isSubcategory,
+      "isStyle": isStyle,
+      "masterCategoryId": masterCategoryId,
     };
+
+    if (isSubcategory) {
+      data.putIfAbsent("subCategoryId", () => categoryId);
+      return data;
+    }
+    data.putIfAbsent("categoryId", () => categoryId);
+
+    return data;
   }
 
   HiveCategory toHive() {
@@ -97,6 +114,22 @@ class CategoryModel extends Category {
       categoryId: categoryId,
       isSubcategory: isSubcategory,
       isStyle: isStyle,
+    );
+  }
+
+  factory CategoryModel.entitie(Category e) {
+    return CategoryModel(
+      description: e.description,
+      categoryPhotoUrl: e.categoryPhotoUrl,
+      classifications: (e.classifications ?? [])
+          .map((e) => ClassificationModel.entitie(e))
+          .toList(),
+      categoryId: e.categoryId,
+      subCategories:
+          e.subCategories?.map((e) => CategoryModel.entitie(e)).toList(),
+      isSubcategory: e.isSubcategory,
+      isStyle: e.isStyle,
+      masterCategoryId: e.masterCategoryId,
     );
   }
 }

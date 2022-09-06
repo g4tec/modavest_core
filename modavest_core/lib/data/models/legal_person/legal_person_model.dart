@@ -1,6 +1,7 @@
 import 'package:modavest_core/assets/modavest_states.dart';
 import 'package:modavest_core/data/models/address/address_hive.dart';
 import 'package:modavest_core/data/models/address/address_model.dart';
+import 'package:modavest_core/data/models/category/category_model.dart';
 import 'package:modavest_core/data/models/enterprise_reference.dart/enterprise_reference.dart';
 import 'package:modavest_core/data/models/enterprise_reference.dart/enterprise_reference_hive.dart';
 import 'package:modavest_core/data/models/enterprise_social_network.dart/enterprise_social_network.dart';
@@ -12,6 +13,7 @@ import 'package:modavest_core/data/models/legal_person_email/legal_person_email.
 import 'package:modavest_core/data/models/legal_person_email/legal_person_email_hive.dart';
 import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone.dart';
 import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone_hive.dart';
+import 'package:modavest_core/domain/models/category.dart';
 import 'package:modavest_core/domain/models/enterprise_reference.dart';
 import 'package:modavest_core/domain/models/enterprise_social_network.dart';
 import 'package:modavest_core/domain/models/legal_person.dart';
@@ -23,7 +25,7 @@ class LegalPersonModel extends LegalPerson {
   LegalPersonModel({
     bool isSynchronized = true,
     int? code,
-    num? integrationId,
+    num integrationId = 0,
     String? cnpj,
     bool isInactive = false,
     int branchInsertCode = 1,
@@ -57,6 +59,7 @@ class LegalPersonModel extends LegalPerson {
     required List<LegalPersonContact> contacts,
     required List<EnterpriseReference> references,
     required List<EnterpriseSocialNetwork> socialNetworks,
+    List<Category>? storeSalesStyles,
   }) : super(
           code: code,
           integrationId: integrationId,
@@ -94,11 +97,12 @@ class LegalPersonModel extends LegalPerson {
           contacts: contacts,
           references: references,
           socialNetworks: socialNetworks,
+          storeSalesStyles: storeSalesStyles,
         );
   factory LegalPersonModel.fromJson(Map json) {
     return LegalPersonModel(
       code: json["code"] as int?,
-      integrationId: json["integrationId"] as num?,
+      integrationId: json["integrationId"] as num? ?? 0,
       cnpj: json["cnpj"] as String?,
       isInactive: json["isInactive"] as bool? ?? false,
       branchInsertCode: json["branchInsertCode"] as int? ?? 1,
@@ -175,11 +179,26 @@ class LegalPersonModel extends LegalPerson {
           )
           .values
           .toList(),
+      storeSalesStyles: (json["storeSalesStyles"] as List?) != null
+          ? (json["storeSalesStyles"] as List? ?? [])
+              .asMap()
+              .map(
+                (index, e) => MapEntry(
+                  index,
+                  CategoryModel.fromJson(
+                    e as Map<String, dynamic>,
+                  ),
+                ),
+              )
+              .values
+              .toList()
+          : null,
     );
   }
 
   Map<String, dynamic> toJson({bool noSequence = false}) {
     return {
+      "integrationId": integrationId,
       "code": code,
       "cnpj": cnpj,
       "isInactive": isInactive,
@@ -252,6 +271,11 @@ class LegalPersonModel extends LegalPerson {
             ),
           )
           .toList(),
+      "storeSalesStyles": storeSalesStyles
+          ?.map(
+            (e) => CategoryModel.entitie(e).toJson(isSubcategory: true),
+          )
+          .toList(),
     };
   }
 
@@ -293,6 +317,9 @@ class LegalPersonModel extends LegalPerson {
       contacts: legalPerson.contacts,
       references: legalPerson.references,
       socialNetworks: legalPerson.socialNetworks,
+      storeSalesStyles: legalPerson.storeSalesStyles
+          ?.map((e) => CategoryModel.entitie(e))
+          .toList(),
     );
   }
 

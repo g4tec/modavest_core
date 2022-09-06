@@ -70,8 +70,8 @@ class ReferenceModel extends Reference {
   }) {
     return ReferenceModel(
       code: json["ReferenceCode"] as String,
-      priceTable: priceTable ?? json["priceTable"] as int,
-      oficialStore: oficialStore ?? json["oficialStore"] as num,
+      priceTable: priceTable ?? json["priceTable"] as int?,
+      oficialStore: oficialStore ?? json["oficialStore"] as num?,
       integrationId: json["integrationId"] as int,
       colors: ((json["colors"] ?? []) as List)
           .map(

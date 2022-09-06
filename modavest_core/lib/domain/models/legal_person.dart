@@ -1,4 +1,3 @@
-
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category.dart';
 import 'package:modavest_core/domain/models/enterprise_reference.dart';
@@ -10,7 +9,7 @@ import 'package:modavest_core/domain/models/legal_person_phone.dart';
 class LegalPerson {
   bool isSynchronized;
   int? code;
-  num? integrationId;
+  num integrationId;
   String? cnpj;
   bool isInactive;
   int branchInsertCode;

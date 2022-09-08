@@ -40,6 +40,7 @@ class CardListingCategory extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               DecoratedBox(
+                position: DecorationPosition.foreground,
                 decoration: ShapeDecoration(
                   color: Colors.transparent,
                   shape: CircleBorder(

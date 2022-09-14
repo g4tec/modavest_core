@@ -18,12 +18,12 @@ class ReferencePriceModel extends ReferencePrice {
         );
   factory ReferencePriceModel.fromJson(
     Map json, {
-    required num priceTableCode,
+    num? priceTableCode,
   }) {
     return ReferencePriceModel(
       referenceCode: json["referenceCode"] as String,
       min: json["referencePrice"] as num?,
-      priceTableCode: priceTableCode,
+      priceTableCode: priceTableCode ?? json["priceTableCode"] as num? ?? 0,
       prices: ((json["prices"] as List?) ?? [])
           .map(
             (price) => ProductPriceModel.fromJson(

@@ -119,6 +119,9 @@ class ReferenceModel extends Reference {
       imageColorReference: json["defaultImage"] as String?,
       isPack: json["isPack"] as bool?,
       isGrid: json["isGrid"] as bool?,
+      referencePrice: json["referencePrice"] != null
+          ? ReferencePriceModel.fromJson(json["referencePrice"])
+          : null,
     );
   }
 

@@ -41,7 +41,7 @@ Map<String, String> contactTypes = {
   "3": "Pessoal"
 };
 
-Map<num, String> goalTypes = {1: "Faturamento", 2: "Pedido"};
+Map<num, String> goalTypes = {1: "Pedido", 2: "Faturamento"};
 
 Map<String, String> onboardingItems = {
   "1":

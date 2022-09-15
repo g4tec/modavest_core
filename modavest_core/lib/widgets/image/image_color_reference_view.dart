@@ -28,7 +28,11 @@ class ImageColorReferenceView extends StatelessWidget {
         Widget body = const Center(child: CircularProgressIndicator());
 
         body = Image.network(
-          imageColorReference?.imageMedium ?? urlImg!,
+          imageColorReference?.imageMedium ??
+              imageColorReference?.imageSmall ??
+              imageColorReference?.image ??
+              urlImg ??
+              "",
           fit: fit ?? BoxFit.fitWidth,
           width: MediaQuery.of(context).size.width,
         );

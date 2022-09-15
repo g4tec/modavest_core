@@ -20,7 +20,7 @@ class SpecicificationsProduct extends StatelessWidget {
   const SpecicificationsProduct({
     Key? key,
     required this.reference,
-    required this.oficialStore,
+    this.oficialStore,
     this.ratting = false,
   }) : super(key: key);
 

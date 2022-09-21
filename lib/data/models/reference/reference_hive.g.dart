@@ -17,8 +17,8 @@ class HiveReferenceAdapter extends TypeAdapter<HiveReference> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HiveReference(
-      oficialStore: fields[25] as num,
-      priceTable: fields[26] as int,
+      oficialStore: fields[25] as num?,
+      priceTable: fields[26] as int?,
       code: fields[0] as String,
       integrationId: fields[1] as int,
       colors: (fields[20] as HiveList?)?.castHiveList(),
@@ -39,7 +39,7 @@ class HiveReferenceAdapter extends TypeAdapter<HiveReference> {
       details: (fields[21] as HiveList?)?.castHiveList(),
       composition: (fields[22] as HiveList?)?.castHiveList(),
       imageColorReference: fields[23] as String?,
-      referencePrice: fields[24] as double?,
+      referencePrice: fields[24] as HiveReferencePrice?,
       isPack: fields[27] as bool?,
       isGrid: fields[28] as bool?,
     );

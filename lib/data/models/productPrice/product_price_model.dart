@@ -42,6 +42,17 @@ class ProductPriceModel extends ProductPrice {
     );
   }
 
+  factory ProductPriceModel.entity(ProductPrice productPrice) {
+    return ProductPriceModel(
+      referenceCode: productPrice.referenceCode,
+      originalPrice: productPrice.originalPrice,
+      branchCode: productPrice.branchCode,
+      productCode: productPrice.productCode,
+      price: productPrice.price,
+      scaleCode: productPrice.scaleCode,
+    );
+  }
+
   HiveProductPrice toHive() {
     return HiveProductPrice(
       referenceCode: referenceCode,

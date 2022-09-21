@@ -70,7 +70,11 @@ class ReferenceModel extends Reference {
   }) {
     return ReferenceModel(
       code: json["ReferenceCode"] as String,
-      priceTable: priceTable ?? json["priceTable"] as int?,
+      priceTable: priceTable ??
+          (json["priceTable"] as int? ??
+              (json["referencePrice"] != null
+                  ? (json["referencePrice"] as Map)["priceTableCode"] as int?
+                  : null)),
       oficialStore: oficialStore ?? json["oficialStore"] as num?,
       integrationId: json["integrationId"] as int,
       colors: ((json["colors"] ?? []) as List)
@@ -129,35 +133,38 @@ class ReferenceModel extends Reference {
     HiveReference reference,
   ) {
     return ReferenceModel(
-      code: reference.code,
-      priceTable: reference.priceTable,
-      oficialStore: reference.oficialStore,
-      integrationId: reference.integrationId,
-      colors: (reference.colors ?? [])
-          .map((e) => ColorModel.fromHive(e as HiveColor))
-          .toList(),
-      name: reference.name,
-      description: reference.description,
-      descriptive: reference.descriptive,
-      gridCode: reference.gridCode,
-      grid: reference.grid,
-      weight: reference.weight,
-      height: reference.height,
-      width: reference.width,
-      length: reference.length,
-      packWeight: reference.packWeight,
-      packHeight: reference.packHeight,
-      packWidth: reference.packWidth,
-      packLength: reference.packLength,
-      observations: reference.observations,
-      details: reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
-      composition: reference.composition
-          ?.map((e) => CompositionModel.fromHive(e))
-          .toList(),
-      imageColorReference: reference.imageColorReference,
-      isPack: reference.isPack,
-      isGrid: reference.isGrid,
-    );
+        code: reference.code,
+        priceTable: reference.priceTable,
+        oficialStore: reference.oficialStore,
+        integrationId: reference.integrationId,
+        colors: (reference.colors ?? [])
+            .map((e) => ColorModel.fromHive(e as HiveColor))
+            .toList(),
+        name: reference.name,
+        description: reference.description,
+        descriptive: reference.descriptive,
+        gridCode: reference.gridCode,
+        grid: reference.grid,
+        weight: reference.weight,
+        height: reference.height,
+        width: reference.width,
+        length: reference.length,
+        packWeight: reference.packWeight,
+        packHeight: reference.packHeight,
+        packWidth: reference.packWidth,
+        packLength: reference.packLength,
+        observations: reference.observations,
+        details:
+            reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+        composition: reference.composition
+            ?.map((e) => CompositionModel.fromHive(e))
+            .toList(),
+        imageColorReference: reference.imageColorReference,
+        isPack: reference.isPack,
+        isGrid: reference.isGrid,
+        referencePrice: reference.referencePrice != null
+            ? ReferencePriceModel.fromHive(reference.referencePrice!)
+            : null);
   }
 
   factory ReferenceModel.entity(
@@ -190,6 +197,9 @@ class ReferenceModel extends Reference {
       imageColorReference: reference.imageColorReference,
       isPack: reference.isPack,
       isGrid: reference.isGrid,
+      referencePrice: reference.referencePrice != null
+          ? ReferencePriceModel.entity(reference.referencePrice!)
+          : null,
     );
   }
 
@@ -215,7 +225,9 @@ class ReferenceModel extends Reference {
       imageColorReference: imageColorReference,
       observations: observations,
       // TODO: Implementar
-      // referencePrice: referencePrice,
+      referencePrice: referencePrice != null
+          ? ReferencePriceModel.entity(referencePrice!).toHive()
+          : null,
       isPack: isPack,
       isGrid: isGrid,
     );

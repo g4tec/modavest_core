@@ -154,6 +154,7 @@ class ListingItensBagState extends State<ListingItensBag> {
                   value: selecteds[saleOrder.orderId] ?? false,
                   onChange: onChildChange,
                   onSelect: setCheckBox,
+                  countingBuildWidget: widget.countingBuildWidget,
                   children: saleOrder.colorItems
                       .asMap()
                       .map((
@@ -175,7 +176,6 @@ class ListingItensBagState extends State<ListingItensBag> {
                       })
                       .values
                       .toList(),
-                  countingBuildWidget: widget.countingBuildWidget,
                 ),
               ),
             );

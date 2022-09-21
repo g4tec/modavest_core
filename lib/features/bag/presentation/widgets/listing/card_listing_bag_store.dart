@@ -1,10 +1,6 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
-import "package:collection/collection.dart";
 import 'package:flutter/material.dart';
-import 'package:modavest_core/assets/moda_vest_labels.dart';
-import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
-import 'package:modavest_core/widgets/text/modavest_money_bold_text.dart';
 
 class CardListingBagStore extends StatefulWidget {
   final String image;
@@ -33,10 +29,10 @@ class CardListingBagStore extends StatefulWidget {
   });
 
   @override
-  _CardListingBagStoreState createState() => _CardListingBagStoreState();
+  CardListingBagStoreState createState() => CardListingBagStoreState();
 }
 
-class _CardListingBagStoreState extends State<CardListingBagStore> {
+class CardListingBagStoreState extends State<CardListingBagStore> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

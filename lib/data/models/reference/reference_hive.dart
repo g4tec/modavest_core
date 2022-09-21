@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:modavest_core/data/models/color/color_hive.dart';
 import 'package:modavest_core/data/models/composition/composition_hive.dart';
 import 'package:modavest_core/data/models/details/details_hive.dart';
+import 'package:modavest_core/data/models/referencePrice/reference_price_hive.dart';
 
 part 'reference_hive.g.dart';
 
@@ -49,7 +50,7 @@ class HiveReference extends HiveObject {
   @HiveField(23)
   final String? imageColorReference;
   @HiveField(24)
-  double? referencePrice;
+  HiveReferencePrice? referencePrice;
   @HiveField(25)
   final num? oficialStore;
   @HiveField(26)

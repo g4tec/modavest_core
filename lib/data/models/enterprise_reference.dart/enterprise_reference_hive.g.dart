@@ -22,7 +22,7 @@ class HiveEnterpriseReferenceAdapter
       name: fields[2] as String?,
       description: fields[4] as String?,
       typeReference: fields[3] as String?,
-      sequence: fields[0] as int,
+      sequence: fields[0] as int?,
       integrationId: fields[5] as num?,
     );
   }

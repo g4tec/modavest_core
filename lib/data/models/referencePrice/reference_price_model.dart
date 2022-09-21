@@ -45,6 +45,17 @@ class ReferencePriceModel extends ReferencePrice {
     );
   }
 
+  factory ReferencePriceModel.entity(ReferencePrice productPrice) {
+    return ReferencePriceModel(
+      referenceCode: productPrice.referenceCode,
+      min: productPrice.min,
+      prices: (productPrice.prices)
+          ?.map((ProductPrice e) => ProductPriceModel.entity(e))
+          .toList(),
+      priceTableCode: productPrice.priceTableCode,
+    );
+  }
+
   HiveReferencePrice toHive() {
     return HiveReferencePrice(
       referenceCode: referenceCode,

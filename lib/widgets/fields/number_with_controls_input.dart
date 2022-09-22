@@ -98,7 +98,7 @@ class NumberWithControlsInput extends StatelessWidget {
                         color: Theme.of(context).canvasColor,
                       ),
                       onPressed: () {
-                        FocusScope.of(context).unfocus();
+                        FocusScope.of(context).requestFocus(FocusNode());
                         _onSubtraction();
                       },
                     ),
@@ -172,7 +172,7 @@ class NumberWithControlsInput extends StatelessWidget {
                         color: Theme.of(context).canvasColor,
                       ),
                       onPressed: () {
-                        FocusScope.of(context).unfocus();
+                        FocusScope.of(context).requestFocus(FocusNode());
                         _onSum();
                       },
                     ),

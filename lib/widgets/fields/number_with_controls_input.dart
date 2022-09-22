@@ -114,7 +114,8 @@ class NumberWithControlsInput extends StatelessWidget {
               readOnly: disableControls,
               focusNode: focusNode,
               keyboardType: TextInputType.number,
-              onFieldSubmitted: onSumbit,
+              onFieldSubmitted: onSumbit ??
+                  (_) => FocusScope.of(context).requestFocus(FocusNode()),
               onChanged: (String value) {
                 if (onChangeByTyping != null) {
                   try {

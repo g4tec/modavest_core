@@ -98,7 +98,7 @@ class NumberWithControlsInput extends StatelessWidget {
                         color: Theme.of(context).canvasColor,
                       ),
                       onPressed: () {
-                        FocusScope.of(context).unfocus();
+                        FocusScope.of(context).requestFocus(FocusNode());
                         _onSubtraction();
                       },
                     ),
@@ -114,7 +114,8 @@ class NumberWithControlsInput extends StatelessWidget {
               readOnly: disableControls,
               focusNode: focusNode,
               keyboardType: TextInputType.number,
-              onFieldSubmitted: onSumbit,
+              onFieldSubmitted: onSumbit ??
+                  (_) => FocusScope.of(context).requestFocus(FocusNode()),
               onChanged: (String value) {
                 if (onChangeByTyping != null) {
                   try {
@@ -171,7 +172,7 @@ class NumberWithControlsInput extends StatelessWidget {
                         color: Theme.of(context).canvasColor,
                       ),
                       onPressed: () {
-                        FocusScope.of(context).unfocus();
+                        FocusScope.of(context).requestFocus(FocusNode());
                         _onSum();
                       },
                     ),

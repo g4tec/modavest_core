@@ -171,7 +171,9 @@ class CountingItemBagState extends State<CountingItemBag> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: Container(
-                            constraints: const BoxConstraints(maxWidth: 140),
+                            constraints: const BoxConstraints(
+                              minWidth: 140,
+                            ),
                             child: NumberWithControlsInput(
                               onChangeByTyping: (int amount) {
                                 widget.onchangeProductAmount(
@@ -229,7 +231,9 @@ class CountingItemBagState extends State<CountingItemBag> {
                   : Align(
                       alignment: Alignment.centerRight,
                       child: Container(
-                        constraints: const BoxConstraints(maxWidth: 140),
+                        constraints: const BoxConstraints(
+                          minWidth: 140,
+                        ),
                         child: NumberWithControlsInput(
                           onChangeByTyping: (int amount) {
                             widget.onchangeProductAmount(

@@ -18,7 +18,7 @@ class HiveReferenceAdapter extends TypeAdapter<HiveReference> {
     };
     return HiveReference(
       oficialStore: fields[25] as num?,
-      priceTable: fields[26] as int?,
+      priceTable: fields[26] as num?,
       code: fields[0] as String,
       integrationId: fields[1] as int,
       colors: (fields[20] as HiveList?)?.castHiveList(),

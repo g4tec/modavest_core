@@ -18,7 +18,7 @@ class AddItemByVariation extends StatelessWidget {
   final Function(Product, int, num, num, {Function()? callBack})
       onChangeProductAmount;
   final bool streamReferencesIsDoneValue;
-  final Function()? getDiscountEvent;
+  final Function(Reference)? getDiscountEvent;
   final Widget Function(ProductPrice?) buildPriceLabel;
 
   AddItemByVariation({
@@ -129,7 +129,7 @@ class AddItemByVariation extends StatelessWidget {
               if (indexReference != null && indexReference >= 0) {
                 referenceAux = snapshot.data![indexReference];
               }
-              getDiscountEvent?.call();
+              getDiscountEvent?.call(referenceAux);
               return CountingItemBag(
                 color: color,
                 key: tableSizes,

@@ -31,7 +31,7 @@ class ReferenceModel extends Reference {
     List<Composition>? composition = const [],
     String? imageColorReference,
     ReferencePriceModel? referencePrice,
-    int? priceTable,
+    num? priceTable,
     num? oficialStore,
     bool? isPack,
     bool? isGrid,

@@ -35,7 +35,7 @@ class EditItemAmountBag extends StatefulWidget {
   final num? priceTableCode;
   final num? conditionCode;
   final Reference? reference;
-  final Function()? initDiscount;
+  final Function(Reference?)? initDiscount;
   final void Function({
     required int quantity,
     List<SalesOrder>? bagOrders,
@@ -73,7 +73,7 @@ class _EditItemAmountBagState extends State<EditItemAmountBag> {
   @override
   void initState() {
     super.initState();
-    widget.initDiscount?.call();
+    widget.initDiscount?.call(widget.reference);
   }
 
   void onChangeInGlobalInput(int value, int amount) {

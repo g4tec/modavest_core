@@ -4,3 +4,13 @@ modavest_core/.flutter-plugins
 modavest_core/.flutter-plugins-dependencies
 .gitignore
 modavest_core/.flutter-plugins-dependencies
+modavest_core/.dart_tool/package_config.json
+modavest_core/pubspec.lock
+.dart_tool/build/098d3ee73e6cc294616d3a2e2c3c81ad/asset_graph.json
+.gitignore
+pubspec.lock
+modavest-app-lojista
+modavest-app
+.dart_tool/package_config_subset
+.dart_tool/package_config_subset
+.flutter-plugins-dependencies

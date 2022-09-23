@@ -54,7 +54,7 @@ class HiveReference extends HiveObject {
   @HiveField(25)
   final num? oficialStore;
   @HiveField(26)
-  int? priceTable;
+  num? priceTable;
   @HiveField(27)
   final bool? isPack;
   @HiveField(28)

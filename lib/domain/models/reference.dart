@@ -25,7 +25,7 @@ class Reference {
   List<Color> colors;
   final String? imageColorReference;
   ReferencePrice? referencePrice;
-  int? priceTable;
+  num? priceTable;
   num? oficialStore;
   final bool? isPack;
   final bool? isGrid;

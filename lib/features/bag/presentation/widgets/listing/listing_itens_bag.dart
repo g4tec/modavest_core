@@ -244,11 +244,14 @@ class ListingItensBagState extends State<ListingItensBag> {
           }
         }.call(),
       ),
-      initDiscount: () => widget.initDiscount?.call(
+      initDiscount: (
+        Reference? reference,
+      ) =>
+          widget.initDiscount?.call(
         prices: prices,
         oficialStoreId: saleOrder.officialStoreId,
         priceTableCode: saleOrder.priceTableCode,
-        reference: colorItems.items.first.reference,
+        reference: reference,
       ),
       updatePrices: ({
         required int quantity,

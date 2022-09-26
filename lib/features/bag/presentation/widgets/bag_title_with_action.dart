@@ -3,13 +3,17 @@ import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/widgets/text/modavest_title.dart';
 
 class BagTitleWithAction extends StatelessWidget {
-  final void Function() onPressed;
+  final void Function() onPressedEdit;
   final bool showClose;
   final void Function()? onPressedClose;
+  final void Function()? onPressedMove;
+  final void Function()? onPressedCopy;
   const BagTitleWithAction({
     super.key,
-    required this.onPressed,
+    required this.onPressedEdit,
     required this.onPressedClose,
+    this.onPressedMove,
+    this.onPressedCopy,
     this.showClose = false,
   });
 
@@ -37,11 +41,25 @@ class BagTitleWithAction extends StatelessWidget {
                     itemBuilder: (BuildContext context) =>
                         <PopupMenuEntry<void Function()>>[
                       PopupMenuItem(
-                        value: onPressed,
+                        value: onPressedEdit,
                         child: GestureDetector(
                           child: Text(ModaVestLabels.edit),
                         ),
                       ),
+                      if (onPressedMove != null)
+                        PopupMenuItem(
+                          value: onPressedMove,
+                          child: GestureDetector(
+                            child: Text(ModaVestLabels.moveBag),
+                          ),
+                        ),
+                      if (onPressedCopy != null)
+                        PopupMenuItem(
+                          value: onPressedCopy,
+                          child: GestureDetector(
+                            child: Text(ModaVestLabels.copyBag),
+                          ),
+                        ),
                     ],
                   )
                 : IconButton(

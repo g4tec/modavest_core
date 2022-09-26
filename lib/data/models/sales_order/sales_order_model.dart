@@ -6,6 +6,8 @@ import 'package:modavest_core/data/models/sales_order/sales_order_hive.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
+import 'package:modavest_core/domain/models/category_item_sales_order.dart';
+import 'package:modavest_core/domain/models/official_store.dart';
 
 class SalesOrderModel extends SalesOrder {
   SalesOrderModel({
@@ -274,6 +276,107 @@ class SalesOrderModel extends SalesOrder {
       priceTableCode: priceTableCode,
       totalOriginalAmountOrder: totalOriginalAmountOrder,
       discountPercentage: discountPercentage,
+    );
+  }
+
+  SalesOrderModel copyWith({
+    int? integrationId,
+    String? orderId,
+    num? branchCode,
+    String? customerOrderCode,
+    String? integrationCode,
+    num? orderCode,
+    DateTime? orderDate,
+    num? customerCode,
+    String? customerCnpj,
+    num? representativeCode,
+    String? representativeCnpj,
+    num? sellerCode,
+    String? sellerCpf,
+    num? purchasingGuideCode,
+    String? cnpjPurchasingGuide,
+    num? operationCode,
+    num? paymentconditionCode,
+    String? paymentConditionName,
+    double? quantity,
+    double? grossValue,
+    num? discountValue,
+    double? netValue,
+    num? priorityCode,
+    num? shippingCompanyCode,
+    String? shippingCompanyCpfCnpj,
+    DateTime? billingForecastDate,
+    num? freightType,
+    double? freightPercentage,
+    double? freightValue,
+    double? packageint,
+    double? weight,
+    double? totalAmountOrder,
+    String? statusOrder,
+    String? customerName,
+    List<ItemSalesOrder>? items,
+    List<ColorItemSalesOrder>? colorItems,
+    OficialStore? oficialStore,
+    Map<String, dynamic>? payload,
+    String? stackTrace,
+    num? sequence,
+    num? officialStoreId,
+    List<String?>? observations,
+    num? priceTableCode,
+    List<Discount>? discounts,
+    double? totalOriginalAmountOrder,
+    num? discountPercentage,
+  }) {
+    return SalesOrderModel(
+      integrationId: integrationId ?? this.integrationId,
+      orderId: orderId ?? this.orderId,
+      branchCode: branchCode ?? this.branchCode,
+      customerOrderCode: customerOrderCode ?? this.customerOrderCode,
+      integrationCode: integrationCode ?? this.integrationCode,
+      orderCode: orderCode ?? this.orderCode,
+      orderDate: orderDate ?? this.orderDate,
+      customerCode: customerCode ?? this.customerCode,
+      customerCnpj: customerCnpj ?? this.customerCnpj,
+      representativeCode: representativeCode ?? this.representativeCode,
+      representativeCnpj: representativeCnpj ?? this.representativeCnpj,
+      sellerCode: sellerCode ?? this.sellerCode,
+      sellerCpf: sellerCpf ?? this.sellerCpf,
+      purchasingGuideCode: purchasingGuideCode ?? this.purchasingGuideCode,
+      cnpjPurchasingGuide: cnpjPurchasingGuide ?? this.cnpjPurchasingGuide,
+      operationCode: operationCode ?? this.operationCode,
+      paymentConditionCode: paymentconditionCode ?? this.paymentconditionCode,
+      paymentConditionName: paymentConditionName ?? this.paymentConditionName,
+      quantity: quantity ?? this.quantity,
+      grossValue: grossValue ?? this.grossValue,
+      discountValue: discountValue ?? this.discountValue,
+      netValue: netValue ?? this.netValue,
+      priorityCode: priorityCode ?? this.priorityCode,
+      shippingCompanyCode: shippingCompanyCode ?? this.shippingCompanyCode,
+      shippingCompanyCpfCnpj:
+          shippingCompanyCpfCnpj ?? this.shippingCompanyCpfCnpj,
+      billingForecastDate: billingForecastDate ?? this.billingForecastDate,
+      freightType: freightType ?? this.freightType,
+      freightPercentage: freightPercentage ?? this.freightPercentage,
+      freightValue: freightValue ?? this.freightValue,
+      packageint: packageint ?? this.packageint,
+      weight: weight ?? this.weight,
+      totalAmountOrder: totalAmountOrder ?? this.totalAmountOrder,
+      statusOrder: statusOrder ?? this.statusOrder,
+      customerName: customerName ?? this.customerName,
+      items: (items ?? this.items)
+              ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
+              .toList() ??
+          [],
+      discounts: (discounts ?? this.discounts)
+              ?.map((Discount e) => DiscountModel.fromEntitie(e))
+              .toList() ??
+          [],
+      officialStoreId: officialStoreId ?? this.officialStoreId,
+      observations: observations ?? this.observations,
+      priceTableCode: priceTableCode ?? this.priceTableCode,
+      totalOriginalAmountOrder:
+          totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
     );
   }
 }

@@ -439,4 +439,10 @@ class ModaVestLabels {
   static String get invalidCustomer => "Lojista #status#";
   static String get bloquedCustomer =>
       "O lojista atual está com o status #status# neste fabricante, não será possível selecionar tabelas de preços do fabricante para o lojista atual.";
+  static String get moveBag => "Mover sacola";
+  static String get copyBag => "Copiar sacola";
+  static String get bloquedToCopyCustomer =>
+      "O lojista #lojista# está com o status #status# neste fabricante, não será possível copiar a sacola de compras.";
+  static String get bloqueToMoveCustomer =>
+      "O lojista #lojista# está com o status #status# neste fabricante, não será possível mover a sacola de compras.";
 }

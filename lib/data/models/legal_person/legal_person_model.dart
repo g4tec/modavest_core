@@ -115,13 +115,37 @@ class LegalPersonModel extends LegalPerson {
           json["numberStateRegistration"] as String? ?? "-",
       dateFoundation: json["dateFoundation"] as String?,
       codeActivity: json["codeActivity"]?.toString(),
-      numberAgents: int.tryParse(json["numberAgents"] as String? ?? "0") ?? 0,
-      monthlyInvoicing: json["monthlyInvoicing"] as String? ?? "0",
-      shareCapital: json["shareCapital"] as String? ?? "0",
+      numberAgents: json["numberAgents"] = json["numberAgents"] is String
+          ? int.tryParse(json["numberAgents"] as String? ?? "0")
+          : json["numberAgents"] is int
+              ? json["numberAgents"]
+              : 0,
+      monthlyInvoicing: json["monthlyInvoicing"] is String
+          ? json["monthlyInvoicing"] as String? ?? "0"
+          : json["monthlyInvoicing"] is int
+              ? json["monthlyInvoicing"].toString()
+              : "0",
+      shareCapital: json["shareCapital"] is String
+          ? json["shareCapital"] as String? ?? "0"
+          : json["shareCapital"] is int
+              ? json["shareCapital"].toString()
+              : "0",
       homePage: json["homePage"] as String?,
-      codeActivityCnae: json["codeActivityCnae"] as String? ?? "0",
-      codeActivityCnae2: json["codeActivityCnae2"] as String? ?? "0",
-      typeTaxRegime: json["typeTaxRegime"] as String? ?? "0",
+      codeActivityCnae: json["codeActivityCnae"] is String
+          ? json["codeActivityCnae"] as String? ?? "0"
+          : json["codeActivityCnae"] is int
+              ? json["codeActivityCnae"].toString()
+              : "0",
+      codeActivityCnae2: json["codeActivityCnae2"] is String
+          ? json["codeActivityCnae2"] as String? ?? "0"
+          : json["codeActivityCnae2"] is int
+              ? json["codeActivityCnae2"].toString()
+              : "0",
+      typeTaxRegime: json["typeTaxRegime"] is String
+          ? json["typeTaxRegime"] as String? ?? "0"
+          : json["typeTaxRegime"] is int
+              ? json["typeTaxRegime"].toString()
+              : "0",
       typeSubTributary: json["typeSubTributary"] as String? ?? "-",
       typeDescriptionSuFrama: json["typeDescriptionSuFrama"] as String? ?? "-",
       registrationMunicipal: json["registrationMunicipal"] as String?,

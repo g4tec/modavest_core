@@ -113,71 +113,6 @@ class BottomButtonBag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO : adiciona a função de builder antes da chamada do bottom
-    // return BlocBuilder(
-    //   bloc: getIt<BagBloc>(),
-    //   builder: (BuildContext context, BagState state) {
-    //     return StreamBuilder(
-    //       stream: getIt<BagBloc>().itensAmountStream,
-    //       builder: (
-    //         BuildContext context,
-    //         AsyncSnapshot<Map<String, double>> snapshot,
-    //       ) {
-    //         bool isActive = state.selecetedSalesOrder != null;
-    //         String label = step > 1
-    //             ? ModaVestLabels.checkout
-    //             : ModaVestLabels.continueLabel;
-    //         switch (step) {
-    //           case 0:
-    //             isActive = (state.salesOrders ?? []).isNotEmpty && isActive;
-    //             if (!isActive) {
-    //               label = (state.salesOrders ?? []).isEmpty
-    //                   ? ModaVestLabels.addProdutctsToBag
-    //                   : ModaVestLabels.selectAnOficialStore;
-    //             }
-    //             break;
-    //           case 1:
-    //             isActive = state.address != null && isActive;
-    //             if (!isActive) {
-    //               label = ModaVestLabels.selectAnAddress;
-    //             }
-    //             break;
-    //           case 2:
-    //             isActive = state.salesOrders?[state.selecetedSalesOrder!]
-    //                         .paymentconditionCode !=
-    //                     null &&
-    //                 isActive;
-
-    //             if (!isActive) {
-    //               label = ModaVestLabels.selectAPaymentCondition;
-    //             }
-    //             if (getIt<AuthBloc>().state.user is Agent &&
-    //                 !((getIt<AuthBloc>().state.user as Agent?)
-    //                         ?.isCustomerOrderAccess ??
-    //                     false)) {
-    //               isActive = false;
-    //               label = ModaVestLabels.orderEndAgent;
-    //             }
-    //             break;
-    //         }
-    //         final double value = state.selecetedSalesOrder != null &&
-    //                 state.salesOrders != null &&
-    //                 state.salesOrders!.isNotEmpty &&
-    //                 snapshot.data != null &&
-    //                 snapshot.data!.isNotEmpty
-    //             ? (snapshot.data?[state
-    //                     .salesOrders?[state.selecetedSalesOrder!].orderId] ??
-    //                 0)
-    //             : 0;
-    //         isActive = isActive && double.parse(value.toStringAsFixed(2)) > 0;
-
-// TODO: remover se não for necessário
-    // return StreamBuilder<List<ItemSalesOrder?>>(
-    //   stream: getIt<HomeBloc>().itemsToUpdateStream,
-    //   builder: (
-    //     context,
-    //     AsyncSnapshot<List<ItemSalesOrder?>> snapshotOrders,
-    //   ) {
     final Widget child = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -241,13 +176,5 @@ class BottomButtonBag extends StatelessWidget {
         ),
       ),
     );
-    // },
-    // );
-    //   },
-    // );
-// TODO: remover se não for necessário
-
-    // },
-    // );
   }
 }

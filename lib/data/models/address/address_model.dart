@@ -17,6 +17,7 @@ class AddressModel extends Address {
     num addressType = 1,
     required String address,
     num? integrationId,
+    num? sequence,
   }) : super(
           publicPlace: publicPlace,
           number: number,
@@ -31,6 +32,7 @@ class AddressModel extends Address {
           addressType: addressType,
           address: address,
           integrationId: integrationId,
+          sequence: sequence,
         );
   factory AddressModel.fromJson(Map json) {
     return AddressModel(
@@ -48,6 +50,7 @@ class AddressModel extends Address {
       addressType: json["addressType"] as num? ?? 1,
       address: json["address"] as String? ?? "-",
       integrationId: json["integrationId"] as num?,
+      sequence: json["sequence"] as num?,
     );
   }
 
@@ -100,6 +103,7 @@ class AddressModel extends Address {
       addressType: address.addressType,
       address: address.address,
       integrationId: address.integrationId,
+      sequence: address.sequence,
     );
   }
 
@@ -132,7 +136,7 @@ class AddressModel extends Address {
     if (noSequence) {
       return data;
     }
-    data.putIfAbsent("sequence", () => 0);
+    data.putIfAbsent("sequence", () => sequence);
     return data;
   }
 }

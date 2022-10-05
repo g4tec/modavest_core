@@ -177,7 +177,7 @@ class SalesOrderModel extends SalesOrder {
               .toList() ??
           [],
       officialStoreId: hive.officialStoreId,
-      observations: hive.observations,
+      observations: hive.observations ?? [],
       priceTableCode: hive.priceTableCode,
       totalOriginalAmountOrder: hive.totalOriginalAmountOrder,
       discountPercentage: hive.discountPercentage,

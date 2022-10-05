@@ -58,7 +58,7 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
       discountPercentage: fields[40] as num?,
     )
       ..discounts = (fields[38] as HiveList?)?.castHiveList()
-      ..observations = (fields[41] as List).cast<String?>();
+      ..observations = (fields[41] as List?)?.cast<String?>();
   }
 
   @override

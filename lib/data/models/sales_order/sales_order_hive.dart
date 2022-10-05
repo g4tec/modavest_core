@@ -88,7 +88,7 @@ class HiveSalesOrder extends HiveObject {
   @HiveField(40)
   num? discountPercentage;
   @HiveField(41)
-  late List<String?> observations = [];
+  late List<String?>? observations = [];
 
   HiveSalesOrder({
     required this.integrationId,

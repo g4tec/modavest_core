@@ -7,7 +7,7 @@ class PaymentConditionsModel extends PaymentConditions {
     required num code,
     required String name,
     required String? installment,
-    // required num? variationPercentage,
+    required num? variationPercentage,
     required String? interestPercentage,
     required bool? isBlocked,
     required bool? isActive,
@@ -15,13 +15,13 @@ class PaymentConditionsModel extends PaymentConditions {
     required num? priceTable,
     required num? officialStore,
     required bool isDefault,
-    // required num? variationValue,
+    required num? variationValue,
     AveragePeriodModel? averagePeriod,
   }) : super(
           code: code,
           name: name,
           installment: installment,
-          // variationPercentage: variationPercentage,
+          variationPercentage: variationPercentage,
           interestPercentage: interestPercentage,
           isBlocked: isBlocked,
           isActive: isActive,
@@ -29,7 +29,7 @@ class PaymentConditionsModel extends PaymentConditions {
           priceTable: priceTable,
           officialStore: officialStore,
           isDefault: isDefault,
-          // variationValue: variationValue,
+          variationValue: variationValue,
           averagePeriod: averagePeriod,
         );
 
@@ -38,18 +38,30 @@ class PaymentConditionsModel extends PaymentConditions {
     num? priceTable,
     num? officialStore,
   }) {
+    PaymentConditionsModel? paymentConditionAux;
+    if (json["paymentCondition"] != null) {
+      if (json["paymentCondition"] is Map) {
+        paymentConditionAux =
+            PaymentConditionsModel.fromJson(json['paymentCondition'] as Map);
+      }
+    }
     return PaymentConditionsModel(
-      code: json['code'] as num,
+      code: json['code'] as num? ?? json["paymentConditionCode"] as num,
       name: json['name'] as String,
-      installment: json['installment'] as String?,
-      // variationPercentage: json['variationPercentage'] as num? ??
-      //     json['discountPercentage'] as num?,
-      // variationValue:
-      //     json['variationValue'] as num? ?? json['discountValue'] as num?,
-      interestPercentage: json['interestPercentage'] as String?,
+      installment:
+          paymentConditionAux?.installment ?? json['installment'] as String?,
+      variationPercentage: paymentConditionAux?.variationPercentage ??
+          json['variationPercentage'] as num? ??
+          json['discountPercentage'] as num?,
+      variationValue: paymentConditionAux?.variationValue ??
+          json['variationValue'] as num? ??
+          json['discountValue'] as num?,
+      interestPercentage: paymentConditionAux?.interestPercentage ??
+          json['interestPercentage'] as String?,
       isBlocked: json['isBlocked'] as bool?,
       isActive: json['isActive'] as bool?,
-      installmentDays:
+      installmentDays: paymentConditionAux?.installmentDays ??
+          paymentConditionAux?.installmentDays ??
           (json['installmentDays'] as List?)?.map((e) => e as String?).toList(),
       priceTable: priceTable,
       officialStore: officialStore,
@@ -63,7 +75,7 @@ class PaymentConditionsModel extends PaymentConditions {
       code: hivePaymentConditions.code,
       name: hivePaymentConditions.name,
       installment: hivePaymentConditions.installment,
-      // variationPercentage: hivePaymentConditions.variationPercentage,
+      variationPercentage: hivePaymentConditions.variationPercentage,
       interestPercentage: hivePaymentConditions.interestPercentage,
       isBlocked: hivePaymentConditions.isBlocked,
       isActive: hivePaymentConditions.isActive,
@@ -71,7 +83,7 @@ class PaymentConditionsModel extends PaymentConditions {
       priceTable: hivePaymentConditions.priceTable,
       officialStore: hivePaymentConditions.officialStore,
       isDefault: hivePaymentConditions.isDefault,
-      // variationValue: hivePaymentConditions.variationValue,
+      variationValue: hivePaymentConditions.variationValue,
     );
   }
 
@@ -80,7 +92,7 @@ class PaymentConditionsModel extends PaymentConditions {
       code: code,
       name: name,
       installment: installment,
-      // variationPercentage: variationPercentage,
+      variationPercentage: variationPercentage,
       interestPercentage: interestPercentage,
       isBlocked: isBlocked,
       isActive: isActive,
@@ -88,7 +100,7 @@ class PaymentConditionsModel extends PaymentConditions {
       priceTable: priceTable,
       officialStore: officialStore,
       isDefault: isDefault,
-      // variationValue: variationValue,
+      variationValue: variationValue,
     );
   }
 }

@@ -20,6 +20,7 @@ class HivePaymentConditionsAdapter extends TypeAdapter<HivePaymentConditions> {
       code: fields[0] as num,
       name: fields[1] as String,
       installment: fields[2] as String?,
+      variationPercentage: fields[3] as num?,
       interestPercentage: fields[4] as String?,
       isBlocked: fields[5] as bool?,
       isActive: fields[6] as bool?,
@@ -27,19 +28,22 @@ class HivePaymentConditionsAdapter extends TypeAdapter<HivePaymentConditions> {
       priceTable: fields[8] as num?,
       officialStore: fields[9] as num?,
       isDefault: fields[10] as bool,
+      variationValue: fields[11] as num?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HivePaymentConditions obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.code)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
       ..write(obj.installment)
+      ..writeByte(3)
+      ..write(obj.variationPercentage)
       ..writeByte(4)
       ..write(obj.interestPercentage)
       ..writeByte(5)
@@ -53,7 +57,9 @@ class HivePaymentConditionsAdapter extends TypeAdapter<HivePaymentConditions> {
       ..writeByte(9)
       ..write(obj.officialStore)
       ..writeByte(10)
-      ..write(obj.isDefault);
+      ..write(obj.isDefault)
+      ..writeByte(11)
+      ..write(obj.variationValue);
   }
 
   @override

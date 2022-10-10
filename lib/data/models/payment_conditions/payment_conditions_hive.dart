@@ -9,8 +9,8 @@ class HivePaymentConditions extends HiveObject {
   final String name;
   @HiveField(2)
   final String? installment;
-  // @HiveField(3)
-  // // final num? variationPercentage;
+  @HiveField(3)
+  final num? variationPercentage;
   @HiveField(4)
   final String? interestPercentage;
   @HiveField(5)
@@ -25,14 +25,14 @@ class HivePaymentConditions extends HiveObject {
   final num? officialStore;
   @HiveField(10)
   final bool isDefault;
-  // @HiveField(11)
-  // final num? variationValue;
+  @HiveField(11)
+  final num? variationValue;
 
   HivePaymentConditions({
     required this.code,
     required this.name,
     required this.installment,
-    // required this.variationPercentage,
+    required this.variationPercentage,
     required this.interestPercentage,
     required this.isBlocked,
     required this.isActive,
@@ -40,6 +40,6 @@ class HivePaymentConditions extends HiveObject {
     required this.priceTable,
     required this.officialStore,
     required this.isDefault,
-    // required this.variationValue,
+    required this.variationValue,
   });
 }

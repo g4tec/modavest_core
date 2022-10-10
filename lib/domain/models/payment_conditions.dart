@@ -4,7 +4,7 @@ class PaymentConditions {
   final num code;
   final String name;
   final String? installment;
-  // final num? variationPercentage;
+  final num? variationPercentage;
   final String? interestPercentage;
   final bool? isBlocked;
   final bool? isActive;
@@ -12,13 +12,13 @@ class PaymentConditions {
   final num? priceTable;
   final num? officialStore;
   final bool isDefault;
-  // final num? variationValue;
+  final num? variationValue;
   AveragePeriod? averagePeriod;
   PaymentConditions({
     required this.code,
     required this.name,
     required this.installment,
-    // required this.variationPercentage,
+    required this.variationPercentage,
     required this.interestPercentage,
     required this.isBlocked,
     required this.isActive,
@@ -26,7 +26,7 @@ class PaymentConditions {
     required this.priceTable,
     required this.officialStore,
     required this.isDefault,
-    // required this.variationValue,
+    required this.variationValue,
     this.averagePeriod,
   });
 }

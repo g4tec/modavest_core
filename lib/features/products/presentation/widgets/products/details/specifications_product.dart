@@ -212,7 +212,10 @@ class SpecicificationsProduct extends StatelessWidget {
                                       color: Colors.black,
                                     ),
                               ),
-                              TextSpan(text: oficialStore?.description),
+                              TextSpan(
+                                  text: oficialStore?.description ??
+                                      reference.oficialStore?.toString() ??
+                                      " - "),
                             ],
                           ),
                         ),

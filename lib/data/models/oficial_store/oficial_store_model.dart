@@ -62,6 +62,7 @@ class OficialStoreModel extends OficialStore {
               e as Map,
               json['officialStoreId'] as num,
               json['integrationId'] as num,
+              averagePeriod: json['averagePeriod'],
             ),
           )
           .toList(),

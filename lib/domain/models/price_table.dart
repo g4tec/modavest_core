@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:modavest_core/domain/models/average_period.dart';
 import 'package:modavest_core/domain/models/payment_conditions.dart';
+import 'package:modavest_core/domain/models/price_table_scales.dart';
 
 class PriceTable extends Equatable {
   final int? officialStoreId;
@@ -11,6 +12,7 @@ class PriceTable extends Equatable {
   final String? description;
   final List<AveragePeriod>? averagePeriod;
   final List<PaymentConditions>? paymentConditions;
+  final List<PriceTableScales>? scales;
 
   const PriceTable({
     required this.officialStoreId,
@@ -21,6 +23,7 @@ class PriceTable extends Equatable {
     required this.description,
     required this.averagePeriod,
     required this.paymentConditions,
+    required this.scales,
   });
 
   @override
@@ -31,5 +34,6 @@ class PriceTable extends Equatable {
         stateCode,
         state,
         description,
+        scales,
       ];
 }

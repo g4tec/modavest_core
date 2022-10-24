@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/price_table_scales.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
+import 'package:modavest_core/domain/models/scale.dart';
+import 'package:modavest_core/utils/uniques.dart';
 
 class ModavestScale extends StatelessWidget {
   final num priceTableCode;
@@ -56,20 +58,23 @@ class ModavestScale extends StatelessWidget {
                   )
                   .map((e) => e.size ?? "")
                   .toList();
-              for (int i = 0; i < scale.scales.length; i++) {
+
+              final List<Scale> scales = scale.scales;
+              scales.unique((scale) => scale.sequence);
+              for (int i = 0; i < scales.length; i++) {
                 final String discountString =
-                    scale.scales[i].variationValue != null &&
-                            scale.scales[i].variationValue! != 0
-                        ? "R\$${scale.scales[i].variationValue ?? 0}"
-                        : "${scale.scales[i].variationPercentage!}%";
+                    scales[i].variationValue != null &&
+                            scales[i].variationValue! != 0
+                        ? "R\$${scales[i].variationValue ?? 0}"
+                        : "${scales[i].variationPercentage!}%";
                 late String text;
                 // TODO: ver a questão do máximo de desconto
-                // if (i + 1 >= scale.scales.length) {
+                // if (i + 1 >= scales.length) {
                 //   text =
-                //       "A partir de\n${(scale.scales[i - 1].quantity ?? 0) + 1} $paramType";
+                //       "A partir de\n${(scales[i - 1].quantity ?? 0) + 1} $paramType";
                 // } else {
                 text =
-                    "$discountString em até\n${scale.scales[i].quantity} $paramType";
+                    "$discountString em até\n${scales[i].quantity} $paramType";
                 // }
                 itens.add(
                   Container(
@@ -81,7 +86,7 @@ class ModavestScale extends StatelessWidget {
                         : Theme.of(context).primaryColor.withAlpha(70),
                     child: Center(
                       child: AutoSizeText(
-                        "${scale.scales[i].quantity}|$discountString",
+                        "${scales[i].quantity}|$discountString",
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         minFontSize: 5,

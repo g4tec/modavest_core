@@ -4,12 +4,11 @@ import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modavest_core/assets/moda_vest_images.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class CarouselWithIndicator extends StatefulWidget {
   final List<ImageColorReference> imgList;
@@ -30,10 +29,10 @@ class CarouselWithIndicator extends StatefulWidget {
     this.onPressBack,
   }) : super(key: key);
   @override
-  _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
+  CarouselWithIndicatorState createState() => CarouselWithIndicatorState();
 }
 
-class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
+class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
   CarouselController carouselController = CarouselController();
   int currentTab = 0;
   ValueNotifier<int> indexPage = ValueNotifier(0);

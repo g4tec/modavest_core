@@ -1,11 +1,12 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
-
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
+import 'package:modavest_core/domain/models/price_table_scales.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
 import 'package:modavest_core/domain/models/reference.dart';
+import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/counting_item_bag.dart';
 import 'package:modavest_core/widgets/fields/modavest_scale_field.dart';
 import 'package:modavest_core/widgets/fields/number_with_controls_input.dart';
@@ -20,6 +21,12 @@ class AddItemByVariation extends StatelessWidget {
   final bool streamReferencesIsDoneValue;
   final Function(Reference)? getDiscountEvent;
   final Widget Function(ProductPrice?) buildPriceLabel;
+  final Future<List<PriceTableScales>?>? getScale;
+  final Function({
+    required int quantity,
+    List<SalesOrder>? bagOrders,
+    required Reference referenceAux,
+  })? updatePrices;
 
   AddItemByVariation({
     super.key,
@@ -31,6 +38,8 @@ class AddItemByVariation extends StatelessWidget {
     this.streamReferencesIsDoneValue = true,
     this.getDiscountEvent,
     required this.buildPriceLabel,
+    this.getScale,
+    this.updatePrices,
   });
 
   final GlobalKey tableSizes = GlobalKey(debugLabel: "tableSizes");
@@ -110,6 +119,7 @@ class AddItemByVariation extends StatelessWidget {
                         ),
                       )
                       .toList(),
+                  getScale: getScale,
                 ),
               );
             },
@@ -143,6 +153,11 @@ class AddItemByVariation extends StatelessWidget {
                 reference: referenceAux,
                 showAmountColor: true,
                 buildPriceLabel: buildPriceLabel,
+                updatePrices: ({bagOrders, required int quantity}) =>
+                    updatePrices?.call(
+                        bagOrders: bagOrders,
+                        quantity: quantity,
+                        referenceAux: referenceAux),
               );
             },
           ),

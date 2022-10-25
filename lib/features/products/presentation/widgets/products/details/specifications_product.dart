@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/assets/modavest_type_code.dart';
 import 'package:modavest_core/domain/models/details.dart';
@@ -212,7 +211,10 @@ class SpecicificationsProduct extends StatelessWidget {
                                       color: Colors.black,
                                     ),
                               ),
-                              TextSpan(text: oficialStore?.description),
+                              TextSpan(
+                                  text: oficialStore?.description ??
+                                      reference.oficialStore?.toString() ??
+                                      " - "),
                             ],
                           ),
                         ),

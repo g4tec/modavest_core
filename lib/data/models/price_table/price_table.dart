@@ -1,8 +1,11 @@
 import 'package:modavest_core/data/models/average_period/average_period_model.dart';
 import 'package:modavest_core/data/models/payment_conditions/payment_conditions_model.dart';
 import 'package:modavest_core/data/models/price_table/price_table_hive.dart';
+import 'package:modavest_core/data/models/price_table_scales/price_table_scales_model.dart';
+import 'package:modavest_core/domain/models/average_period.dart';
 import 'package:modavest_core/domain/models/payment_conditions.dart';
 import 'package:modavest_core/domain/models/price_table.dart';
+import 'package:modavest_core/domain/models/price_table_scales.dart';
 
 class PriceTableModel extends PriceTable {
   const PriceTableModel({
@@ -12,8 +15,9 @@ class PriceTableModel extends PriceTable {
     String? stateCode,
     String? state,
     String? description,
-    required List<AveragePeriodModel>? averagePeriod,
+    required List<AveragePeriod>? averagePeriod,
     required List<PaymentConditions>? paymentConditions,
+    List<PriceTableScales>? scales,
   }) : super(
           officialStoreId: officialStoreId,
           integrationId: integrationId,
@@ -23,6 +27,7 @@ class PriceTableModel extends PriceTable {
           description: description,
           averagePeriod: averagePeriod,
           paymentConditions: paymentConditions,
+          scales: scales,
         );
 
   factory PriceTableModel.fromJson(Map json) {
@@ -39,14 +44,18 @@ class PriceTableModel extends PriceTable {
       paymentConditions: (json["paymentConditions"] as List? ?? [])
           .map((e) => PaymentConditionsModel.fromJson(e as Map))
           .toList(),
+      scales: (json['priceTableScale'] as List? ?? [])
+          .map((e) => PriceTableScalesModel.fromJson(e as Map, '1'))
+          .toList(),
     );
   }
 
   factory PriceTableModel.fromOfficialStoreJson(
     Map json,
     num officialStoreId,
-    num integrationId,
-  ) {
+    num integrationId, {
+    MapEntry? averagePeriod,
+  }) {
     PriceTableModel? priceTableAux;
     if (json["priceTable"] != null) {
       if (json["priceTable"] is Map) {
@@ -58,13 +67,15 @@ class PriceTableModel extends PriceTable {
       integrationId: integrationId.toInt(),
       priceTableCode: json['priceTableCode'] as int,
       description: json['description'] as String,
-      averagePeriod: (json["averagePeriod"] as List? ?? [])
-          .map((e) => AveragePeriodModel.fromJson(e as Map))
-          .toList(),
+      averagePeriod: priceTableAux?.averagePeriod ??
+          (json["averagePeriod"] as List? ?? [])
+              .map((e) => AveragePeriodModel.fromJson(e as Map))
+              .toList(),
       paymentConditions: priceTableAux?.paymentConditions ??
           (json["paymentConditions"] as List? ?? [])
               .map((e) => PaymentConditionsModel.fromJson(e as Map))
               .toList(),
+      scales: priceTableAux?.scales,
     );
   }
   HivePriceTable toHive() {

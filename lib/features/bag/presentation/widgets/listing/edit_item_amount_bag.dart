@@ -64,10 +64,10 @@ class EditItemAmountBag extends StatefulWidget {
   });
 
   @override
-  _EditItemAmountBagState createState() => _EditItemAmountBagState();
+  EditItemAmountBagState createState() => EditItemAmountBagState();
 }
 
-class _EditItemAmountBagState extends State<EditItemAmountBag> {
+class EditItemAmountBagState extends State<EditItemAmountBag> {
   final GlobalKey tableSizes = GlobalKey(debugLabel: "tableSizes");
 
   @override
@@ -153,7 +153,7 @@ class _EditItemAmountBagState extends State<EditItemAmountBag> {
                         textAlign: TextAlign.left,
                       ),
                     ),
-                    // TODO
+                    // TODO: marca
                     // Padding(
                     //   padding: const EdgeInsets.symmetric(vertical: 2),
                     //   child: AutoSizeText(

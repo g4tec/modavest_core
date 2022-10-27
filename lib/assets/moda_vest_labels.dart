@@ -445,4 +445,15 @@ class ModaVestLabels {
       "O lojista #lojista# está com o status #status# neste fabricante, não será possível copiar a sacola de compras.";
   static String get bloqueToMoveCustomer =>
       "O lojista #lojista# está com o status #status# neste fabricante, não será possível mover a sacola de compras.";
+  static String get notFoundWidget => "Falha ao buscar componente de seleção";
+  static String get invalidCardNumber =>
+      "O número do cartão não é um número de cartão de crédito válido";
+  static String get invalidCardExpiryMonth => "Mês de expiração inválido";
+  static String get invalidCardExpiryYear => "Ano de expiração inválido";
+  static String get insufficientFundsError =>
+      "O crédito solicitado excede os fundos liquidados restantes";
+  static String get expiredCardError => "O cartão de crédito expirou";
+  static String get invalidPinCode => "Código PIN inválido";
+  static String get authorizationRefused => "Transação ilegal";
+  static String get cardCustomerNotAssociated => "Nenhum cartão ativo";
 }

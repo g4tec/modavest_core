@@ -463,4 +463,5 @@ class ModaVestLabels {
   static String get cvv => "CVC";
   static String get expiry => "Validade";
   static String get addingCreditCard => "Cadastrando cartão";
+  static String get loadingCreditCards => "Buscado seus cartões cadastrados";
 }

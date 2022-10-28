@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/payment_conditions.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
+import 'package:modavest_core/widgets/fields/credit_card_infos.dart';
 
 import 'credit_card_payment_condition.dart';
 
@@ -12,7 +13,8 @@ class PaymentOptions {
       List<PaymentConditions> paymentConditions,
       {void Function(num?)? onSelectConditions,
       void Function(CrediCartPaymentCondition? crediCartPaymentCondition)?
-          onSelectCard})? buildConditions;
+          onSelectCard,
+      List<CreditCardInfos>? creditCardsInfos})? buildConditions;
 
   PaymentOptions({
     required this.name,

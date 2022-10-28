@@ -4,7 +4,6 @@ import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/credit_card_payment_condition.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/credit_card/list_credit_cards.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/credit_card/modavest_credit_card_form.dart';
-import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 import 'package:modavest_core/widgets/fields/credit_card_infos.dart';
 import 'package:modavest_core/widgets/fields/modavest_dropdown_field.dart';
 
@@ -14,10 +13,14 @@ class CreditCardSelectionOption extends StatefulWidget {
       onSubmitCard;
   final Function(CrediCartPaymentCondition? selectedCreditPaymentCondition)
       onSelectCreditPaymentCondition;
-  const CreditCardSelectionOption(
-      {super.key,
-      this.onSubmitCard,
-      required this.onSelectCreditPaymentCondition});
+
+  final List<CreditCardInfos> creditCardsInfos;
+  const CreditCardSelectionOption({
+    super.key,
+    this.onSubmitCard,
+    required this.onSelectCreditPaymentCondition,
+    required this.creditCardsInfos,
+  });
 
   @override
   State<CreditCardSelectionOption> createState() =>
@@ -27,35 +30,11 @@ class CreditCardSelectionOption extends StatefulWidget {
 class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
   bool addCard = false;
   bool isSending = false;
-  late String cardToken;
+  String? cardToken;
   TextEditingController paymentOptionController = TextEditingController();
-  final List<CreditCardInfos> creditCardInfos = [
-    CreditCardInfos(
-        holderName: "Jailson L Panizzon",
-        expirationMonth: "12",
-        expirationYear: "25",
-        cardNumber: "4539********7497",
-        securityCode: "***",
-        token: "3eae481d6ee44c228d1086cca1d97be1"),
-    CreditCardInfos(
-        holderName: "Leandro Araujo",
-        expirationMonth: "12",
-        expirationYear: "25",
-        cardNumber: "5138692036125449",
-        securityCode: "***",
-        token: "e1b1f50e870b4ba09dcebe849dfe82b0"),
-    CreditCardInfos(
-        holderName: "Luizão Smith",
-        expirationMonth: "12",
-        expirationYear: "25",
-        cardNumber: "4532650104137832",
-        securityCode: "***",
-        token: "11a0b6973ca64e5b984dcd8549193a32"),
-  ];
 
   @override
   void initState() {
-    cardToken = creditCardInfos.first.token!;
     super.initState();
   }
 
@@ -84,25 +63,20 @@ class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
         : Column(
             children: [
               ListCreditCards(
-                creditCardInfos: creditCardInfos,
+                creditCardInfos: widget.creditCardsInfos,
                 initialCard: cardToken,
-                onCardChange: (cardToken) {
+                onAddCard: () => setState(() => addCard = !addCard),
+                onCardChange: (token) {
                   paymentOptionController.clear();
                   FocusScope.of(context).unfocus();
-                  setState(() => cardToken = cardToken);
                   widget.onSelectCreditPaymentCondition.call(null);
+                  setState(() => cardToken = token);
                 },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 32, top: 0, right: 32),
-                child: ModaVestTextButton(
-                  title: ModaVestLabels.addCreditCard,
-                  onPressed: () => setState(() => addCard = !addCard),
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
                 child: ModaVestDropdownField(
+                  readOnly: cardToken == null,
                   controller: paymentOptionController,
                   title: ModaVestLabels.installments,
                   items: const {
@@ -112,10 +86,10 @@ class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
                     "4": "  3X com juros",
                   },
                   onChange: (condition) {
-                    if (condition != null) {
+                    if (condition != null && cardToken != null) {
                       widget.onSelectCreditPaymentCondition
                           .call(CrediCartPaymentCondition(
-                        cardToken: cardToken,
+                        cardToken: cardToken!,
                         installment: condition,
                       ));
                     }

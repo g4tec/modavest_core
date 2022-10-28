@@ -1,6 +1,7 @@
+import 'package:awesome_card/awesome_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 import 'package:modavest_core/widgets/loading/sending_loading.dart';
 import 'package:modavest_core/widgets/fields/credit_card_infos.dart';
@@ -62,21 +63,22 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
       children: [
         Column(
           children: <Widget>[
-            CreditCardWidget(
-              glassmorphismConfig:
-                  useGlassMorphism ? Glassmorphism.defaultConfig() : null,
-              cardNumber: cardNumber,
-              expiryDate: expiryDate,
-              cardHolderName: cardHolderName,
-              cvvCode: cvvCode,
-              showBackView: isCvvFocused,
-              labelCardHolder: "Nome titular",
-              obscureCardNumber: true,
-              obscureCardCvv: true,
-              isHolderNameVisible: true,
-              cardBgColor: Theme.of(context).primaryColor,
-              isSwipeGestureEnabled: true,
-              onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
+            Transform.scale(
+              scale: 0.75,
+              child: CreditCard(
+                cardNumber: cardNumber,
+                cardExpiry: expiryDate,
+                cardHolderName: cardHolderName,
+                cvv: cvvCode,
+                showBackSide: isCvvFocused,
+                textName: ModaVestLabels.holdName,
+                textExpDate: ModaVestLabels.expiry,
+                backTextColor: Colors.white,
+                frontBackground: CardBackgrounds.custom(
+                    Theme.of(context).colorScheme.primary.value),
+                backBackground: CardBackgrounds.custom(
+                    Theme.of(context).colorScheme.primary.value),
+              ),
             ),
             Column(
               children: <Widget>[
@@ -95,9 +97,9 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
                   textColor: Theme.of(context).textTheme.headline5?.color ??
                       Colors.black,
                   cardNumberDecoration:
-                      decoration.copyWith(labelText: "Número do cartão"),
+                      decoration.copyWith(labelText: ModaVestLabels.cardNumber),
                   expiryDateDecoration:
-                      decoration.copyWith(labelText: "Validade"),
+                      decoration.copyWith(labelText: ModaVestLabels.expiry),
                   cvvCodeDecoration: decoration.copyWith(
                     labelText: "CVC",
                     suffixIcon: IconButton(
@@ -115,7 +117,7 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
                     ),
                   ),
                   cardHolderDecoration:
-                      decoration.copyWith(labelText: "Nome do titular"),
+                      decoration.copyWith(labelText: ModaVestLabels.holdName),
                   onCreditCardModelChange: onCreditCardModelChange,
                 ),
                 Container(
@@ -124,7 +126,7 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
                   child: Column(
                     children: [
                       ModaVestTextButton(
-                        title: "Adicionar",
+                        title: ModaVestLabels.add,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             final CreditCardInfos creditCardInfos =
@@ -141,7 +143,7 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
                       ),
                       if (widget.onCancel != null)
                         ModaVestTextButton(
-                          title: "Cancelar",
+                          title: ModaVestLabels.cancelLabel,
                           outlined: true,
                           onPressed: widget.onCancel,
                         ),
@@ -156,8 +158,8 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
           Positioned.fill(
             child: Material(
                 color: Theme.of(context).primaryColor.withOpacity(0.9),
-                child: const SendingLoading(
-                  title: "Cadastrando cartão",
+                child: SendingLoading(
+                  title: ModaVestLabels.addingCreditCard,
                   blackForegraund: true,
                 )),
           ),

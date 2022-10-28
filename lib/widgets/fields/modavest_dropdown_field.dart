@@ -53,8 +53,9 @@ class _ModaVestDropdownFieldState extends State<ModaVestDropdownField> {
         children: [
           DropdownButtonFormField<String?>(
             isExpanded: true,
-            value:
-                widget.controller.text.isEmpty ? null : widget.controller.text,
+            value: widget.controller.value.text.isEmpty
+                ? null
+                : widget.controller.text,
             style: Theme.of(context).textTheme.headline5,
             onChanged: (value) {
               setState(() {
@@ -74,10 +75,11 @@ class _ModaVestDropdownFieldState extends State<ModaVestDropdownField> {
             ),
           ),
           if (widget.readOnly)
-            Container(
-              color: Theme.of(context).primaryColor.withAlpha(60),
-              width: double.infinity,
-              height: 63,
+            Positioned.fill(
+              child: Container(
+                color: Theme.of(context).primaryColor.withAlpha(60),
+                width: double.infinity,
+              ),
             ),
         ],
       ),

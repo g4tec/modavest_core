@@ -73,9 +73,12 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                   width: MediaQuery.of(context).size.width * 0.3,
                   child: FittedBox(
                     fit: BoxFit.fitWidth,
-                    child: ImageColorReferenceView(
-                      urlImg: widget.image,
-                      fit: BoxFit.scaleDown,
+                    child: Padding(
+                      padding: const EdgeInsets.all(0.5),
+                      child: ImageColorReferenceView(
+                        urlImg: widget.image,
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                   ),
                 ),

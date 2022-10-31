@@ -5,7 +5,7 @@ import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 
 class OrderError extends StatelessWidget {
   final dynamic stackTrace;
-  final Function() onTapToReturn;
+  final Function()? onTapToReturn;
   const OrderError({
     super.key,
     required this.stackTrace,
@@ -57,14 +57,15 @@ class OrderError extends StatelessWidget {
                 .values
                 .toList()
             : [Text(stackTrace.toString())],
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ModaVestTextButton(
-            title: ModaVestLabels.returnOrderToBag,
-            onPressed: onTapToReturn,
-            color: Theme.of(context).colorScheme.error,
+        if (onTapToReturn != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ModaVestTextButton(
+              title: ModaVestLabels.returnOrderToBag,
+              onPressed: onTapToReturn,
+              color: Theme.of(context).colorScheme.error,
+            ),
           ),
-        ),
       ],
     );
   }

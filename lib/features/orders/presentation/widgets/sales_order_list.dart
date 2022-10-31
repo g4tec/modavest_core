@@ -71,7 +71,7 @@ class SalesOrderList extends StatelessWidget {
         //   );
         // }
         return RefreshIndicator(
-          onRefresh: onRefresh,
+          onRefresh: () => onRefresh.call(),
           child: ListView.builder(
             itemCount: salesOrderList.length + 1,
             cacheExtent: 10,
@@ -120,7 +120,7 @@ class SalesOrderList extends StatelessWidget {
                   children: [
                     ModavestError(
                       msg: emptyListMessageCase(),
-                      onPress: () => onRefresh,
+                      onPress: () => onRefresh.call(),
                     )
                   ],
                 );

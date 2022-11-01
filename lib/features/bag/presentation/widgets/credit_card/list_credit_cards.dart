@@ -69,7 +69,10 @@ class _ListCreditCardsState extends State<ListCreditCards> {
       items: creditCards,
       options: CarouselOptions(
         aspectRatio: 15 / 7,
-        initialPage: 0,
+        initialPage: widget.initialCard != null
+            ? widget.creditCardInfos
+                .indexWhere((element) => element.token == widget.initialCard)
+            : 0,
         reverse: false,
         enableInfiniteScroll: false,
         viewportFraction: 0.75,

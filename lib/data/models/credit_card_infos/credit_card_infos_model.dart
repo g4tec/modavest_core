@@ -7,6 +7,7 @@ class CreditCardInfosModel extends CreditCardInfos {
     required super.expirationYear,
     required super.cardNumber,
     required super.securityCode,
+    super.token,
   });
 
   factory CreditCardInfosModel.entity(CreditCardInfos creditCardInfos) {
@@ -16,6 +17,17 @@ class CreditCardInfosModel extends CreditCardInfos {
         expirationYear: creditCardInfos.expirationYear,
         cardNumber: creditCardInfos.cardNumber,
         securityCode: creditCardInfos.securityCode);
+  }
+
+  factory CreditCardInfosModel.fromJson(Map<String, dynamic> json) {
+    return CreditCardInfosModel(
+      holderName: json["holder_name"] as String,
+      expirationMonth: json["expiration_month"] as String,
+      expirationYear: json["expiration_year"] as String,
+      cardNumber: "${json["first4_digits"]} **** **** ${json["last4_digits"]}",
+      securityCode: "***",
+      token: json["id"],
+    );
   }
 
   Map<String, dynamic> toJson() {

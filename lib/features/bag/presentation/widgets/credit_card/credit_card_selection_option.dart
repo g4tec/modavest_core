@@ -14,12 +14,15 @@ class CreditCardSelectionOption extends StatefulWidget {
   final Function(CrediCartPaymentCondition? selectedCreditPaymentCondition)
       onSelectCreditPaymentCondition;
 
+  final String? initialCard;
+
   final List<CreditCardInfos> creditCardsInfos;
   const CreditCardSelectionOption({
     super.key,
     this.onSubmitCard,
     required this.onSelectCreditPaymentCondition,
     required this.creditCardsInfos,
+    this.initialCard,
   });
 
   @override
@@ -35,6 +38,7 @@ class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
 
   @override
   void initState() {
+    cardToken = widget.initialCard;
     super.initState();
   }
 

@@ -10,7 +10,7 @@ class PaymentOptions {
   final int id;
   final IconData icon;
   final Widget Function(BuildContext context, SalesOrder order,
-      List<PaymentConditions> paymentConditions,
+      List<PaymentConditions> paymentConditions, String? initialCardToken,
       {void Function(num?)? onSelectConditions,
       void Function(CrediCartPaymentCondition? crediCartPaymentCondition)?
           onSelectCard,

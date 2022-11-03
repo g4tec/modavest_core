@@ -13,6 +13,7 @@ class CreditCardSelectionOption extends StatefulWidget {
       onSubmitCard;
   final Function(CrediCartPaymentCondition? selectedCreditPaymentCondition)
       onSelectCreditPaymentCondition;
+  final Function(String?, Function())? onDeleteCard;
 
   final String? initialCard;
 
@@ -23,6 +24,7 @@ class CreditCardSelectionOption extends StatefulWidget {
     required this.onSelectCreditPaymentCondition,
     required this.creditCardsInfos,
     this.initialCard,
+    this.onDeleteCard,
   });
 
   @override
@@ -76,6 +78,7 @@ class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
                   widget.onSelectCreditPaymentCondition.call(null);
                   setState(() => cardToken = token);
                 },
+                onDeleteCard: widget.onDeleteCard,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, top: 16, right: 16),

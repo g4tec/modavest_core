@@ -464,4 +464,5 @@ class ModaVestLabels {
   static String get expiry => "Validade";
   static String get addingCreditCard => "Cadastrando cartão";
   static String get loadingCreditCards => "Buscado seus cartões cadastrados";
+  static String get deletingCard => "Apagando cartão";
 }

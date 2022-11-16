@@ -48,10 +48,21 @@ class TitlePageBack extends StatelessWidget {
           ),
         ),
         leading ??
-            const SizedBox(
-              width: 24,
-              height: 24,
-            )
+            Material(
+              shape: const CircleBorder(),
+              color: Colors.transparent,
+              child: IconButton(
+                color: Colors.transparent,
+                icon: const Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.transparent,
+                  ),
+                ),
+                onPressed: onPop,
+              ),
+            ),
       ],
     );
   }

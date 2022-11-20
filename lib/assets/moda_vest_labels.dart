@@ -468,4 +468,5 @@ class ModaVestLabels {
   static String get allProducts => "Todos os produtos";
   static String get brandMenu => "Menu da Marca";
   static String get all => "Todos";
+  static String get emptyProducts => "Nenhum produto encontrado";
 }

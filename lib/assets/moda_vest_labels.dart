@@ -465,5 +465,8 @@ class ModaVestLabels {
   static String get addingCreditCard => "Cadastrando cartão";
   static String get loadingCreditCards => "Buscado seus cartões cadastrados";
   static String get deletingCard => "Apagando cartão";
+  static String get allProducts => "Todos os produtos";
+  static String get brandMenu => "Menu da Marca";
+  static String get all => "Todos";
   static String get emptyProducts => "Nenhum produto encontrado";
 }

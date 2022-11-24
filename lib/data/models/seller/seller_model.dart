@@ -19,15 +19,15 @@ class SellerModel extends Seller {
     return SellerModel(
       sellerCode: json["sellerCode"],
       integrationId: json["integrationId"],
-      name: json["name"],
-      personCode: json["personCode"],
-      personName: json["personName"],
-      photoUrl: json["photoUrl"],
-      canMakeToOrder: json["canMakeToOrder"],
-      canDeliveryImmediately: json["canDeliveryImmediately"],
-      canCheckFinance: json["canCheckFinance"],
-      cpf: json["cpf"],
-      maxChangeFilterDate: json["maxChangeFilterDate"],
+      name: json["sellerName"] as String?,
+      personCode: json["personCode"] as int?,
+      personName: json["personName"] as String?,
+      photoUrl: json["photoUrl"] as String?,
+      canMakeToOrder: json["canMakeToOrder"] as bool?,
+      canDeliveryImmediately: json["canDeliveryImmediately"] as bool?,
+      canCheckFinance: json["canCheckFinance"] as bool?,
+      cpf: json["cpf"] as String?,
+      maxChangeFilterDate: json["maxChangeFilterDate"] as String?,
     );
   }
 

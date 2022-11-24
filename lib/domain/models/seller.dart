@@ -1,15 +1,15 @@
 class Seller {
   final int sellerCode;
   final int integrationId;
-  final String name;
-  final int personCode;
-  final String personName;
-  final String maxChangeFilterDate;
-  final String photoUrl;
-  final bool canMakeToOrder;
-  final bool canDeliveryImmediately;
-  final bool canCheckFinance;
-  final String cpf;
+  final String? name;
+  final int? personCode;
+  final String? personName;
+  final String? maxChangeFilterDate;
+  final String? photoUrl;
+  final bool? canMakeToOrder;
+  final bool? canDeliveryImmediately;
+  final bool? canCheckFinance;
+  final String? cpf;
 
   const Seller({
     required this.sellerCode,

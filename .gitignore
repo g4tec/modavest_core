@@ -11,6 +11,10 @@ modavest_core/pubspec.lock
 pubspec.lock
 modavest-app-lojista
 modavest-app
+/modavest-app-vendedor/
 .dart_tool/package_config_subset
 .dart_tool/package_config_subset
 .flutter-plugins-dependencies
+.flutter-plugins
+.DS_Store
+modavest-app-vendedor

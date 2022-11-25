@@ -20,7 +20,7 @@ class CustomerModel extends Customer {
       code: json["personCode"] as int? ?? json["code"] as int,
       name: json["name"] as String?,
       fantasyName: json["fantasyName"] as String?,
-      cpfCnpj: json["cpfCnpj"] as String?,
+      cpfCnpj: json["document"] as String? ?? json["cpfCnpj"] as String?,
       addresses: (json["addresses"] as List?)
               ?.map((e) => AddressModel.fromJson(e as Map))
               .toList() ??

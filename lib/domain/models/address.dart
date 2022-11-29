@@ -36,4 +36,24 @@ class Address {
     this.branchInsertCode = 1,
     this.sequence,
   });
+
+  bool compareTo(Address address) {
+    return addressType == address.addressType &&
+        integrationId == address.integrationId &&
+        publicPlace == address.publicPlace &&
+        this.address == address.address &&
+        number == address.number &&
+        complement == address.complement &&
+        neighborhood == address.neighborhood &&
+        ibgeCityCode == address.ibgeCityCode &&
+        cityName == address.cityName &&
+        stateAbbreviation == address.stateAbbreviation &&
+        cep == address.cep &&
+        bcbCountryCode == address.bcbCountryCode &&
+        countryName == address.countryName &&
+        postOfficeBox == address.postOfficeBox &&
+        reference == address.reference &&
+        branchInsertCode == address.branchInsertCode &&
+        sequence == address.sequence;
+  }
 }

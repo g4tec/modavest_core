@@ -37,7 +37,8 @@ class AddressDisplayBag extends StatelessWidget {
               },
               child: ListView(
                 children: [
-                  AddAddressCard(onPressed: onPressedAdd),
+                  if (onPressedAdd != null)
+                    AddAddressCard(onPressed: onPressedAdd),
                   ...legalPersonCustomer!.addresses
                       .asMap()
                       .map(

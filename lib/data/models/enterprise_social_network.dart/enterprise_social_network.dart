@@ -21,7 +21,7 @@ class EnterpriseSocialNetworkModel extends EnterpriseSocialNetwork {
   ) {
     return EnterpriseSocialNetworkModel(
       sequence: json["sequence"] as int? ?? sequence ?? 0,
-      integrationId: json["integrationId"] as num,
+      integrationId: json["integrationId"] as num?,
       address: json["address"] as String?,
       typeCode: json["typeCode"] as num,
       typeName: json["typeName"] as String?,

@@ -1,5 +1,6 @@
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
+import 'package:modavest_core/data/models/official_store_installment/official_store_installment_model.dart';
 import 'package:modavest_core/data/models/oficial_store/oficial_store_hive.dart';
 import 'package:modavest_core/data/models/payment_conditions/payment_conditions_hive.dart';
 import 'package:modavest_core/data/models/payment_conditions/payment_conditions_model.dart';
@@ -24,6 +25,7 @@ class OficialStoreModel extends OficialStore {
     required List<PriceTableModel> priceTables,
     required List<DiscountModel> discount,
     required List<PaymentConditionsModel> paymentConditions,
+    OfficialStoreInstallmentModel? installment,
   }) : super(
           integrationId: integrationId,
           officialStoreId: officialStoreId,
@@ -40,6 +42,7 @@ class OficialStoreModel extends OficialStore {
           priceTables: priceTables,
           discount: discount,
           paymentConditions: paymentConditions,
+          installment: installment,
         );
 
   factory OficialStoreModel.fromJson(Map json) {
@@ -77,6 +80,9 @@ class OficialStoreModel extends OficialStore {
             ),
           )
           .toList(),
+      installment: json["installment"] != null
+          ? OfficialStoreInstallmentModel.fromJson(json["installment"])
+          : null,
     );
   }
   HiveOficialStore toHive() {

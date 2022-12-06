@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart' as either;
 import 'package:flutter/material.dart';
-import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/credit_card_payment_condition.dart';
+import 'package:modavest_core/domain/models/official_store_installment.dart';
+import 'package:modavest_core/features/bag/presentation/widgets/credit_card/credit_card_installment.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/credit_card/list_credit_cards.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/credit_card/modavest_credit_card_form.dart';
 import 'package:modavest_core/widgets/fields/credit_card_infos.dart';
-import 'package:modavest_core/widgets/fields/modavest_dropdown_field.dart';
 
 class CreditCardSelectionOption extends StatefulWidget {
   final Function(CreditCardInfos,
@@ -14,6 +14,7 @@ class CreditCardSelectionOption extends StatefulWidget {
   final Function(CrediCartPaymentCondition? selectedCreditPaymentCondition)
       onSelectCreditPaymentCondition;
   final Function(String?, Function())? onDeleteCard;
+  final OfficialStoreInstallment? installment;
 
   final String? initialCard;
 
@@ -25,6 +26,7 @@ class CreditCardSelectionOption extends StatefulWidget {
     required this.creditCardsInfos,
     this.initialCard,
     this.onDeleteCard,
+    this.installment,
   });
 
   @override
@@ -80,18 +82,11 @@ class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
                 },
                 onDeleteCard: widget.onDeleteCard,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                child: ModaVestDropdownField(
+              if (widget.installment != null)
+                CreditCardInstallment(
                   readOnly: cardToken == null,
-                  controller: paymentOptionController,
-                  title: ModaVestLabels.installments,
-                  items: const {
-                    "1": "  A vista",
-                    "2": "  1X com juros",
-                    "3": "  2X com juros",
-                    "4": "  3X com juros",
-                  },
+                  officialStoreInstallment: widget.installment!,
+                  paymentOptionController: paymentOptionController,
                   onChange: (condition) {
                     if (condition != null && cardToken != null) {
                       widget.onSelectCreditPaymentCondition
@@ -102,7 +97,6 @@ class _CreditCardSelectionOptionState extends State<CreditCardSelectionOption> {
                     }
                   },
                 ),
-              )
             ],
           );
   }

@@ -1,3 +1,4 @@
+import 'package:modavest_core/data/models/person/person_model.dart';
 import 'package:modavest_core/domain/models/seller.dart';
 
 class SellerModel extends Seller {
@@ -13,6 +14,7 @@ class SellerModel extends Seller {
     required super.canCheckFinance,
     required super.cpf,
     required super.maxChangeFilterDate,
+    super.person,
   });
 
   factory SellerModel.fromJson(Map json) {
@@ -28,6 +30,9 @@ class SellerModel extends Seller {
       canCheckFinance: json["canCheckFinance"] as bool?,
       cpf: json["cpf"] as String?,
       maxChangeFilterDate: json["maxChangeFilterDate"] as String?,
+      person: json["person"] != null
+          ? PersonModel.fromJson(json["person"] as Map<String, dynamic>)
+          : null,
     );
   }
 

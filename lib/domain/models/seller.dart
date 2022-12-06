@@ -1,3 +1,5 @@
+import 'package:modavest_core/domain/models/person.dart';
+
 class Seller {
   final int sellerCode;
   final int integrationId;
@@ -11,6 +13,8 @@ class Seller {
   final bool? canCheckFinance;
   final String? cpf;
 
+  final Person? person;
+
   const Seller({
     required this.sellerCode,
     required this.integrationId,
@@ -23,5 +27,6 @@ class Seller {
     required this.canCheckFinance,
     required this.cpf,
     required this.maxChangeFilterDate,
+    this.person,
   });
 }

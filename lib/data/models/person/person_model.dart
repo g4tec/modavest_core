@@ -79,7 +79,6 @@ class PersonModel extends Person {
       isPurchasingGuide: json["isPurchasingGuide"],
       isShippingCompany: json["isShippingCompany"],
       addresses: json["addresses"],
-      phones: json["phones"],
       emails:
           json["emails"] != null && json["emails"] is List<Map<String, dynamic>>
               ? (json["emails"] as List<Map<String, dynamic>>)

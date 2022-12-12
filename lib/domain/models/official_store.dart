@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/official_store_installment.dart';
 import 'package:modavest_core/domain/models/payment_conditions.dart';
+import 'package:modavest_core/domain/models/payment_types.dart';
 import 'package:modavest_core/domain/models/price_table.dart';
 
 class OficialStore extends Equatable {
@@ -21,6 +22,7 @@ class OficialStore extends Equatable {
   final List<Discount> discount;
   final List<PaymentConditions> paymentConditions;
   final OfficialStoreInstallment? installment;
+  final List<PaymentTypes>? paymentTypes;
 
   const OficialStore({
     required this.integrationId,
@@ -39,6 +41,7 @@ class OficialStore extends Equatable {
     required this.discount,
     required this.paymentConditions,
     this.installment,
+    this.paymentTypes,
   });
 
   @override

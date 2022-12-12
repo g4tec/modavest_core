@@ -4,6 +4,7 @@ import 'package:modavest_core/data/models/official_store_installment/official_st
 import 'package:modavest_core/data/models/oficial_store/oficial_store_hive.dart';
 import 'package:modavest_core/data/models/payment_conditions/payment_conditions_hive.dart';
 import 'package:modavest_core/data/models/payment_conditions/payment_conditions_model.dart';
+import 'package:modavest_core/data/models/payment_types/payment_types_model.dart';
 import 'package:modavest_core/data/models/price_table/price_table.dart';
 import 'package:modavest_core/data/models/price_table/price_table_hive.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
@@ -26,6 +27,7 @@ class OficialStoreModel extends OficialStore {
     required List<DiscountModel> discount,
     required List<PaymentConditionsModel> paymentConditions,
     OfficialStoreInstallmentModel? installment,
+    List<PaymentTypesModel>? paymentTypes,
   }) : super(
           integrationId: integrationId,
           officialStoreId: officialStoreId,
@@ -43,6 +45,7 @@ class OficialStoreModel extends OficialStore {
           discount: discount,
           paymentConditions: paymentConditions,
           installment: installment,
+          paymentTypes: paymentTypes,
         );
 
   factory OficialStoreModel.fromJson(Map json) {
@@ -83,6 +86,11 @@ class OficialStoreModel extends OficialStore {
       installment: json["installment"] != null
           ? OfficialStoreInstallmentModel.fromJson(json["installment"])
           : null,
+      paymentTypes: ((json['paymentTypes'] as List?) ?? [])
+          .map(
+            (e) => PaymentTypesModel.fromJson(e),
+          )
+          .toList(),
     );
   }
   HiveOficialStore toHive() {

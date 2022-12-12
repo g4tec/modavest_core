@@ -79,12 +79,12 @@ class PersonModel extends Person {
       isPurchasingGuide: json["isPurchasingGuide"],
       isShippingCompany: json["isShippingCompany"],
       addresses: json["addresses"],
-      emails:
-          json["emails"] != null && json["emails"] is List<Map<String, dynamic>>
-              ? (json["emails"] as List<Map<String, dynamic>>)
-                  .map((e) => LegalPersonEmailModel.fromJson(e))
-                  .toList()
-              : null,
+      emails: json["emails"] != null && json["emails"] is List
+          ? (json["emails"] as List)
+              .map((e) =>
+                  LegalPersonEmailModel.fromJson(e as Map<String, dynamic>))
+              .toList()
+          : null,
       observations: json["observations"],
       additionalFields: json["additionalFields"],
       classifications: json["classifications"],

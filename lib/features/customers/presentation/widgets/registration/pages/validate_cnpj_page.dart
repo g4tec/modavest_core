@@ -12,6 +12,8 @@ class ValidateCustomerCnpjWidget extends StatefulWidget {
   final Function() onChangeForm;
   final String? errorMsg;
   final GlobalKey<FormState> formKey;
+  final TextEditingController cnpjController;
+
   const ValidateCustomerCnpjWidget({
     super.key,
     required this.submitForm,
@@ -19,6 +21,7 @@ class ValidateCustomerCnpjWidget extends StatefulWidget {
     required this.onChangeForm,
     required this.errorMsg,
     required this.formKey,
+    required this.cnpjController,
   });
 
   @override
@@ -28,8 +31,6 @@ class ValidateCustomerCnpjWidget extends StatefulWidget {
 
 class ValidateCustomerCnpjWidgetState
     extends State<ValidateCustomerCnpjWidget> {
-  final TextEditingController cnpjController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -70,7 +71,7 @@ class ValidateCustomerCnpjWidgetState
                     ),
                     ModaVestCNPJField(
                       label: ModaVestLabels.customerCNPJ,
-                      controller: cnpjController,
+                      controller: widget.cnpjController,
                       cnpjOnly: true,
                       maskFormatterCnpjCpf: TextInputMask(
                         mask: ['99.999.999/9999-99'],

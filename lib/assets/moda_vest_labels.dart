@@ -469,4 +469,8 @@ class ModaVestLabels {
   static String get brandMenu => "Menu da Marca";
   static String get all => "Todos";
   static String get emptyProducts => "Nenhum produto encontrado";
+  static String get modavestAlreadyRegisteredWithStore =>
+      "O cadastro com CNPJ informado já consta na plataforma para a loja #store#.\n\nVerifique o email de cadastro na plataforma!";
+  static String get modavestAlreadyRegisteredWithOutStore =>
+      "O cadastro com CNPJ informado foi cadastrado na plataforma :)";
 }

@@ -1,10 +1,13 @@
+import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/legal_person_email/legal_person_email.dart';
+import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone.dart';
 import 'package:modavest_core/domain/models/person.dart';
 
 class PersonModel extends Person {
   PersonModel({
     super.code,
     super.cpf,
+    super.image,
     super.isInactive,
     super.maritalStatus,
     super.gender,
@@ -49,7 +52,8 @@ class PersonModel extends Person {
   factory PersonModel.fromJson(Map<String, dynamic> json) {
     return PersonModel(
       cpf: json["cpf"],
-      isInactive: json["isInactive"],
+      image: json["image"],
+      isInactive: json["isInactive"] is bool ? json["isInactive"] : false,
       maritalStatus: json["maritalStatus"],
       gender: json["gender"],
       ctps: json["ctps"],
@@ -78,7 +82,17 @@ class PersonModel extends Person {
       isRepresentative: json["isRepresentative"],
       isPurchasingGuide: json["isPurchasingGuide"],
       isShippingCompany: json["isShippingCompany"],
-      addresses: json["addresses"],
+      addresses: json["addresses"] != null && json["addresses"] is List
+          ? (json["addresses"] as List)
+              .map((e) => AddressModel.fromJson(e as Map<String, dynamic>))
+              .toList()
+          : null,
+      phones: json["phones"] != null && json["phones"] is List
+          ? (json["phones"] as List)
+              .map((e) =>
+                  LegalPersonPhoneModel.fromJson(e as Map<String, dynamic>))
+              .toList()
+          : null,
       emails: json["emails"] != null && json["emails"] is List
           ? (json["emails"] as List)
               .map((e) =>

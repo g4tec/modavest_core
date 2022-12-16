@@ -1,13 +1,16 @@
+import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/legal_person_email.dart';
+import 'package:modavest_core/domain/models/legal_person_phone.dart';
 
 class Person {
   num? code;
   String? cpf;
+  String? image;
   bool? isInactive;
-  String? maritalStatus;
+  bool? maritalStatus;
   String? gender;
-  num? ctps;
-  num? ctpsSerial;
+  String? ctps;
+  String? ctpsSerial;
   String? rg;
   String? rgFederalAgency;
   String? motherName;
@@ -32,8 +35,8 @@ class Person {
   bool? isRepresentative;
   bool? isPurchasingGuide;
   bool? isShippingCompany;
-  String? addresses;
-  String? phones;
+  List<Address>? addresses;
+  List<LegalPersonPhone>? phones;
   List<LegalPersonEmail>? emails;
   String? observations;
   String? additionalFields;
@@ -46,6 +49,7 @@ class Person {
   Person({
     this.code,
     this.cpf,
+    this.image,
     this.isInactive,
     this.maritalStatus,
     this.gender,

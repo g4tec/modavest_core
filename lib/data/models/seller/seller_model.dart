@@ -56,7 +56,7 @@ class SellerModel extends Seller {
     return {
       "sellerCode": sellerCode,
       "integrationId": integrationId,
-      "name": name,
+      "sellerName": name,
       "personCode": personCode,
       "personName": personName,
       "photoUrl": photoUrl,

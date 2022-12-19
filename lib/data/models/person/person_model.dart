@@ -108,4 +108,103 @@ class PersonModel extends Person {
       statistics: json["statistics"],
     );
   }
+
+  factory PersonModel.entite(Person person) {
+    return PersonModel(
+      cpf: person.cpf,
+      image: person.image,
+      isInactive: person.isInactive,
+      maritalStatus: person.maritalStatus,
+      gender: person.gender,
+      ctps: person.ctps,
+      ctpsSerial: person.ctpsSerial,
+      rg: person.rg,
+      rgFederalAgency: person.rgFederalAgency,
+      motherName: person.motherName,
+      fatherName: person.fatherName,
+      nationality: person.nationality,
+      birthDate: person.birthDate,
+      monthlyIncome: person.monthlyIncome,
+      occupation: person.occupation,
+      hireDate: person.hireDate,
+      workPlace: person.workPlace,
+      homeTown: person.homeTown,
+      branchInsertCode: person.branchInsertCode,
+      name: person.name,
+      homePage: person.homePage,
+      codeMainRelated: person.codeMainRelated,
+      cpfCnpjMainRelated: person.cpfCnpjMainRelated,
+      nameMainRelated: person.nameMainRelated,
+      insertDate: person.insertDate,
+      maxChangeFilterDate: person.maxChangeFilterDate,
+      isCustomer: person.isCustomer,
+      isSupplier: person.isSupplier,
+      isRepresentative: person.isRepresentative,
+      isPurchasingGuide: person.isPurchasingGuide,
+      isShippingCompany: person.isShippingCompany,
+      addresses: person.addresses?.map((e) => AddressModel.entite(e)).toList(),
+      phones:
+          person.phones?.map((e) => LegalPersonPhoneModel.entitie(e)).toList(),
+      emails:
+          person.emails?.map((e) => LegalPersonEmailModel.entitie(e)).toList(),
+      observations: person.observations,
+      additionalFields: person.additionalFields,
+      classifications: person.classifications,
+      references: person.references,
+      relateds: person.relateds,
+      shippingCompany: person.shippingCompany,
+      statistics: person.statistics,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "cpf": cpf,
+      "image": image,
+      "isInactive": isInactive,
+      "maritalStatus": maritalStatus,
+      "gender": gender,
+      "ctps": ctps,
+      "ctpsSerial": ctpsSerial,
+      "rg": rg,
+      "rgFederalAgency": rgFederalAgency,
+      "motherName": motherName,
+      "fatherName": fatherName,
+      "nationality": nationality,
+      "birthDate": birthDate,
+      "monthlyIncome": monthlyIncome,
+      "occupation": occupation,
+      "hireDate": hireDate,
+      "workPlace": workPlace,
+      "homeTown": homeTown,
+      "branchInsertCode": branchInsertCode,
+      "name": name,
+      "homePage": homePage,
+      "codeMainRelated": codeMainRelated,
+      "cpfCnpjMainRelated": cpfCnpjMainRelated,
+      "nameMainRelated": nameMainRelated,
+      "insertDate": insertDate,
+      "maxChangeFilterDate": maxChangeFilterDate,
+      "isCustomer": isCustomer,
+      "isSupplier": isSupplier,
+      "isRepresentative": isRepresentative,
+      "isPurchasingGuide": isPurchasingGuide,
+      "isShippingCompany": isShippingCompany,
+      "observations": observations,
+      "additionalFields": additionalFields,
+      "classifications": classifications,
+      "references": references,
+      "relateds": relateds,
+      "shippingCompany": shippingCompany,
+      "statistics": statistics,
+      "addresses":
+          addresses?.map((e) => AddressModel.entite(e).toJson()).toList(),
+      "phones": phones
+          ?.map((e) => LegalPersonPhoneModel.entitie(e).toJson())
+          .toList(),
+      "emails": emails
+          ?.map((e) => LegalPersonEmailModel.entitie(e).toJson())
+          .toList(),
+    };
+  }
 }

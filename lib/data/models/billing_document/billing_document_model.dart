@@ -75,7 +75,11 @@ class BillingDocumentModel extends BillingDocument {
       branchCode: json["branchCode"] as int?,
       customerCode: json["customerCode"] as int?,
       customerCpfCnpj: json["customerCpfCnpj"] as String?,
-      receivableCode: json["receivableCode"] as int,
+      receivableCode: json["receivableCode"] is int
+          ? json["receivableCode"] as int
+          : json["receivableCode"] is String
+              ? int.tryParse(json["receivableCode"] as String) ?? 0
+              : 0,
       installmentCode: json["installmentCode"] as int?,
       maxChangeFilterDate: json["maxChangeFilterDate"] != null
           ? DateTime.parse(json["maxChangeFilterDate"] as String)

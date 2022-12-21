@@ -473,4 +473,5 @@ class ModaVestLabels {
       "O cadastro com CNPJ informado já consta na plataforma para a loja #store#.\n\nVerifique o email de cadastro na plataforma!";
   static String get modavestAlreadyRegisteredWithOutStore =>
       "O cadastro com CNPJ informado foi cadastrado na plataforma :)";
+  static String get partiallyAnswered => "Parcialmente atendido";
 }

@@ -66,6 +66,15 @@ class SalesOrderCard extends StatelessWidget {
                         "${ModaVestLabels.amount} ${salesOrder.quantity}",
                         style: Theme.of(context).textTheme.headline5,
                       ),
+                    if (salesOrder.statusOrder != null &&
+                        salesOrder.statusOrder == "PartiallyAnswered")
+                      AutoSizeText(
+                        ModaVestLabels.partiallyAnswered,
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.amber,
+                            ),
+                      ),
                   ],
                 ),
               ),

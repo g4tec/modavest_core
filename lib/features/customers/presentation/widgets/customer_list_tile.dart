@@ -2,6 +2,7 @@ import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/modavest_legal_person_status.dart';
 import 'package:modavest_core/domain/models/customer.dart';
+import 'package:modavest_core/utils/format_cnpj_cpf.dart';
 
 class CustomerListTile extends StatelessWidget {
   final Customer customer;
@@ -15,9 +16,6 @@ class CustomerListTile extends StatelessWidget {
     return FittedBox(
       child: GestureDetector(
         onTap: () => onTap?.call(customer),
-        // onTap: () => widget.onSelectCustomer != null
-        //     ? widget.onSelectCustomer!.call(customer)
-        //     : bloc.add(SetCustomerEvent(customer: customer)),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Row(
@@ -62,7 +60,7 @@ class CustomerListTile extends StatelessWidget {
                         ),
                         if (customer.cpfCnpj != null)
                           AutoSizeText(
-                            "CNPJ: ${customer.cpfCnpj.toString()}",
+                            "CNPJ: ${(formatCnpjCpf(customer.cpfCnpj.toString()))}",
                             style: LegalPersonStatus.active
                                 .style(context)
                                 ?.copyWith(fontSize: 14),

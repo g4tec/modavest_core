@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
+import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 
 class VariationProduct extends StatelessWidget {
   final color_entitie.Color color;
   final Function()? onTap;
   final bool isSelected;
+  final Function(ImageColorReference? imageColorReference)? buildImage;
+
   const VariationProduct({
     Key? key,
     required this.color,
     this.onTap,
     this.isSelected = false,
+    this.buildImage,
   }) : super(key: key);
 
   @override
@@ -35,9 +39,11 @@ class VariationProduct extends StatelessWidget {
                     child: color.imgList.isNotEmpty
                         ? Opacity(
                             opacity: isSelected ? 0.5 : 1,
-                            child: ImageColorReferenceView(
-                              imageColorReference: color.imgList.first,
-                            ),
+                            child: buildImage != null
+                                ? buildImage?.call(color.imgList.first)
+                                : ImageColorReferenceView(
+                                    imageColorReference: color.imgList.first,
+                                  ),
                           )
                         : Opacity(
                             opacity: isSelected ? 0.8 : 1,

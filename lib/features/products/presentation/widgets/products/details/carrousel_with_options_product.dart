@@ -13,6 +13,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 class CarouselWithIndicator extends StatefulWidget {
   final List<ImageColorReference> imgList;
   final GlobalKey scaffoldKey;
+  final Function(ImageColorReference? imageColorReference)? buildImage;
 
   final void Function()? onPressBag;
   final void Function()? onPressBack;
@@ -27,6 +28,7 @@ class CarouselWithIndicator extends StatefulWidget {
     this.streamConection,
     this.bagStream,
     this.onPressBack,
+    this.buildImage,
   }) : super(key: key);
   @override
   CarouselWithIndicatorState createState() => CarouselWithIndicatorState();
@@ -45,7 +47,9 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
       children: [
         StreamBuilder<FileResponse>(
           stream: DefaultCacheManager().getFileStream(
-            widget.imgList[index].imageSmall ?? "",
+            widget.imgList[index].imageSmall ??
+                widget.imgList[index].image ??
+                "",
             withProgress: true,
           ),
           builder: (context, snapshot) {
@@ -204,9 +208,11 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                             width: MediaQuery.of(context).size.width,
                             height: 300,
                             child: InkWell(
-                              child: ImageColorReferenceView(
-                                imageColorReference: i,
-                              ),
+                              child: widget.buildImage != null
+                                  ? widget.buildImage?.call(i)
+                                  : ImageColorReferenceView(
+                                      imageColorReference: i,
+                                    ),
                               onTap: () => openImage(
                                 context,
                                 widget.imgList.indexOf(i),

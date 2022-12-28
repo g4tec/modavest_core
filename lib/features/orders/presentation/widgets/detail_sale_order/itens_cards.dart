@@ -223,7 +223,7 @@ class ItensRequestCard extends StatelessWidget {
                       return null;
                     }
                   }.call(),
-                  fit: BoxFit.scaleDown,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
               Container(

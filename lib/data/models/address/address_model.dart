@@ -45,7 +45,7 @@ class AddressModel extends Address {
           (json["stateAbbreviation"] as String?),
       cep: json["cep"] as String,
       countryName: json["countryName"] as String,
-      reference: json["reference)"] as String?,
+      reference: json["reference"] as String?,
       branchInsertCode: json["branchInsertCode"] as int? ?? 0,
       addressType: json["addressType"] as num? ?? 1,
       address: json["address"] as String? ?? "-",

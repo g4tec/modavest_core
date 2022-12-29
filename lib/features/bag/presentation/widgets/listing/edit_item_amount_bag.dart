@@ -117,7 +117,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
                       return null;
                     }
                   }.call(),
-                  fit: BoxFit.scaleDown,
+                  fit: BoxFit.contain,
                 ),
               ),
               Container(

@@ -229,7 +229,19 @@ class LegalPersonModel extends LegalPerson {
       "branchInsertCode": branchInsertCode,
       "name": name ?? (fantasyName ?? "-"),
       "fantasyName": fantasyName,
-      "uf": uf,
+      "uf": (uf ?? "").length <= 2
+          ? uf
+          : () {
+              try {
+                return states.entries
+                    .firstWhere(
+                      (element) => element.value == uf || element.key == uf,
+                    )
+                    .key;
+              } catch (e) {
+                return null;
+              }
+            }.call(),
       "numberStateRegistration": numberStateRegistration,
       "dateFoundation-": dateFoundation,
       "codeActivity": codeActivity != null ? int.tryParse(codeActivity!) : null,

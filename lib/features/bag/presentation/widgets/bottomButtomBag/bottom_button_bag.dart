@@ -71,7 +71,8 @@ class BottomButtonBag extends StatelessWidget {
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children:[ SizedBox(
+        children: [
+          SizedBox(
             width: 50,
             child: ImageColorReferenceView(
               urlImg: selectedSalesOrder.oficialStore?.logoUrl ?? "",
@@ -80,7 +81,6 @@ class BottomButtonBag extends StatelessWidget {
             ),
           ),
         ],
-        
       ),
       title: ModavestTitle(
         ModaVestLabels.subtotal,

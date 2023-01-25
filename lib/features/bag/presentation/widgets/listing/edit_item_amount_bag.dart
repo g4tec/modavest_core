@@ -109,15 +109,19 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: MediaQuery.of(context).size.width * 0.3,
-                child: ImageColorReferenceView(
-                  imageColorReference: () {
-                    try {
-                      return widget.color.imgList.first;
-                    } catch (e) {
-                      return null;
-                    }
-                  }.call(),
+                child: FittedBox(
                   fit: BoxFit.contain,
+                  child: ImageColorReferenceView(
+                    imageColorReference: () {
+                      try {
+                        return widget.color.imgList.first;
+                      } catch (e) {
+                        return null;
+                      }
+                    }.call(),
+                    fit: BoxFit.cover,
+                    cacheWidth: 150,
+                  ),
                 ),
               ),
               Container(

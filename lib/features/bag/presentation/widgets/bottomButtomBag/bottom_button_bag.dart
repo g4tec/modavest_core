@@ -68,14 +68,19 @@ class BottomButtonBag extends StatelessWidget {
   }) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: SizedBox(
-        width: 50,
-        child: FittedBox(
-          fit: BoxFit.fitWidth,
-          child: ImageColorReferenceView(
-            urlImg: selectedSalesOrder.oficialStore?.logoUrl ?? "",
+      leading: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 50,
+            child: ImageColorReferenceView(
+              urlImg: selectedSalesOrder.oficialStore?.logoUrl ?? "",
+              fit: BoxFit.cover,
+              cacheWidth: 50,
+            ),
           ),
-        ),
+        ],
       ),
       title: ModavestTitle(
         ModaVestLabels.subtotal,

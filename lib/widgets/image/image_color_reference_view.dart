@@ -5,12 +5,14 @@ class ImageColorReferenceView extends StatelessWidget {
   final ImageColorReference? imageColorReference;
   final String? urlImg;
   final BoxFit? fit;
-  const ImageColorReferenceView({
-    Key? key,
-    this.imageColorReference,
-    this.urlImg,
-    this.fit,
-  }) : super(key: key);
+  final int? cacheWidth;
+  const ImageColorReferenceView(
+      {Key? key,
+      this.imageColorReference,
+      this.urlImg,
+      this.fit,
+      this.cacheWidth})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,32 +35,19 @@ class ImageColorReferenceView extends StatelessWidget {
             "";
         body = Image.network(
           url,
-          fit: fit ?? BoxFit.fitWidth,
+          fit: fit ?? BoxFit.cover,
           width: MediaQuery.of(context).size.width,
+          cacheWidth: cacheWidth,
           loadingBuilder: (
             BuildContext context,
             Widget child,
             ImageChunkEvent? loadingProgress,
           ) {
             if (loadingProgress == null) {
-              return FittedBox(
-                fit: fit ?? BoxFit.cover,
-                child: Container(
-                  constraints: const BoxConstraints(
-                    minHeight: 2.0,
-                    minWidth: 2.0,
-                  ),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(url),
-                      fit: fit ?? BoxFit.cover,
-                    ),
-                  ),
-                ),
-              );
+              return child;
             }
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(20.0),
               child: Center(
                 child: CircularProgressIndicator(
                   value: loadingProgress.expectedTotalBytes != null

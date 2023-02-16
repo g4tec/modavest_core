@@ -14,6 +14,7 @@ List sizes = [
   "XGG",
   "EG",
   "EGG",
+  "EXG",
   "S",
   "L",
   "XL",

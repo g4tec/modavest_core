@@ -30,8 +30,8 @@ class GoalItemCard extends StatelessWidget {
       goalString = toCurrency(goalItem.goalValue!.toDouble());
       reachedString = toCurrency(goalItem.reachedValue?.toDouble() ?? 0);
     } else {
-      goalString = "${goalItem.goalQuantity.toString()} pedidos";
-      reachedString = "${goalItem.reachedQuantity.toString()} pedidos";
+      goalString = "${goalItem.goalQuantity.toString()} itens";
+      reachedString = "${goalItem.reachedQuantity.toString()} itens";
     }
 
     final String percentageString =

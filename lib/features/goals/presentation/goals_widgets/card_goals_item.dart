@@ -27,11 +27,11 @@ class GoalItemCard extends StatelessWidget {
     late String reachedString;
     late String goalString;
     if (goalItem.goalValue != null) {
-      goalString = toCurrency(goalItem.goalValue!.toDouble());
+      goalString = toCurrency((goalItem.goalValue ?? 0).toDouble());
       reachedString = toCurrency(goalItem.reachedValue?.toDouble() ?? 0);
     } else {
-      goalString = "${goalItem.goalQuantity.toString()} itens";
-      reachedString = "${goalItem.reachedQuantity.toString()} itens";
+      goalString = "Qtd: ${(goalItem.goalQuantity ?? 0).toString()}";
+      reachedString = "Qtd: ${(goalItem.reachedQuantity ?? 0).toString()}";
     }
 
     final String percentageString =

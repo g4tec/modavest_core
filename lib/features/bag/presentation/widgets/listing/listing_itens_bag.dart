@@ -11,6 +11,10 @@ import 'package:modavest_core/features/bag/presentation/widgets/listing/delete_h
 import 'package:modavest_core/features/bag/presentation/widgets/listing/edit_item_amount_bag.dart';
 
 class ListingItensBag extends StatefulWidget {
+  final bool isDismembration;
+  final List<ColorItemSalesOrder>? selectedColorItems;
+
+  final void Function(String, bool)? onSelectCheckBox;
   final List<SalesOrder> salesOrders;
   final void Function()? onCloseTitle;
   final int? selecetedSalesOrderIndex;
@@ -44,6 +48,7 @@ class ListingItensBag extends StatefulWidget {
   final Widget Function(ProductPrice?) buildPriceLabel;
   final void Function(List<SalesOrder> salesOrders) deleteSalesOrder;
   final Function() onPop;
+  final Function(ColorItemSalesOrder, bool)? onCheckBoxItemChange;
   const ListingItensBag({
     super.key,
     required this.salesOrders,
@@ -57,6 +62,10 @@ class ListingItensBag extends StatefulWidget {
     required this.deleteSalesOrder,
     required this.onPop,
     required this.countingBuildWidget,
+    this.isDismembration = false,
+    this.selectedColorItems,
+    this.onSelectCheckBox,
+    this.onCheckBoxItemChange,
   });
 
   @override
@@ -64,7 +73,7 @@ class ListingItensBag extends StatefulWidget {
 }
 
 class ListingItensBagState extends State<ListingItensBag> {
-  bool showCheckBoxes = false;
+  late bool showCheckBoxes;
   bool selectAll = false;
   Map<String, Key> itensKeys = {};
   Map<String, bool> selecteds = {};
@@ -95,7 +104,8 @@ class ListingItensBagState extends State<ListingItensBag> {
       );
       selecteds.putIfAbsent(salesOrder.orderId!, () => false);
     }
-
+    showCheckBoxes =
+        widget.isDismembration && widget.selectedColorItems == null;
     super.initState();
   }
 
@@ -109,6 +119,11 @@ class ListingItensBagState extends State<ListingItensBag> {
   }
 
   void setCheckBox({required bool value, required String orderId}) {
+    if (widget.isDismembration) {
+      selecteds.updateAll((key, value) => false);
+
+      widget.onSelectCheckBox?.call(orderId, value);
+    }
     setState(() {
       selecteds[orderId] = value;
     });
@@ -142,7 +157,10 @@ class ListingItensBagState extends State<ListingItensBag> {
             return MapEntry(
               index,
               Opacity(
-                opacity: widget.selecetedSalesOrderIndex == index ? 1 : 0.5,
+                opacity: widget.selecetedSalesOrderIndex == index ||
+                        widget.isDismembration
+                    ? 1
+                    : 0.5,
                 child: CardListingBagStore(
                   showCheckBox: showCheckBoxes,
                   onSelectSalesOrder: () =>
@@ -213,6 +231,11 @@ class ListingItensBagState extends State<ListingItensBag> {
       referenceIsPack: colorItems.items.first.referenceIsPack ?? false,
       productAmount: buildGridAmount(colorItems),
       prices: prices,
+      disableExpand: widget.isDismembration,
+      isChecked: widget.selectedColorItems?.contains(colorItems),
+      onCheckBoxItemChange: (value) {
+        widget.onCheckBoxItemChange?.call(colorItems, value);
+      },
       priceTableCode: saleOrder.priceTableCode,
       officialStoreCode: saleOrder.officialStoreId,
       conditionCode: saleOrder.paymentconditionCode,
@@ -274,7 +297,7 @@ class ListingItensBagState extends State<ListingItensBag> {
     return ListView(
       shrinkWrap: true,
       children: [
-        if (showCheckBoxes)
+        if (showCheckBoxes && !widget.isDismembration)
           DeleteHeaderBag(
             key: GlobalKey(),
             value: selectAll,
@@ -311,19 +334,20 @@ class ListingItensBagState extends State<ListingItensBag> {
             );
           },
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: TextButton(
-            onPressed: () => widget.onPop.call(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.arrow_back_ios),
-                Text(ModaVestLabels.continueBuying)
-              ],
+        if (!widget.isDismembration)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: TextButton(
+              onPressed: () => widget.onPop.call(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.arrow_back_ios),
+                  Text(ModaVestLabels.continueBuying)
+                ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }

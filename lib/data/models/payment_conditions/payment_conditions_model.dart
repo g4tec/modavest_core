@@ -52,7 +52,9 @@ class PaymentConditionsModel extends PaymentConditions {
           paymentConditionAux?.installment ?? json['installment'] as String?,
       variationPercentage: paymentConditionAux?.variationPercentage ??
           json['variationPercentage'] as num? ??
-          json['discountPercentage'] as num?,
+          (json['discountPercentage'] is String
+              ? num.parse(json['discountPercentage'] as String)
+              : json['discountPercentage'] as num?),
       variationValue: paymentConditionAux?.variationValue ??
           json['variationValue'] as num? ??
           json['discountValue'] as num?,

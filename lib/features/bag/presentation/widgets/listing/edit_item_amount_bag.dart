@@ -23,6 +23,7 @@ class EditItemAmountBag extends StatefulWidget {
   final Map<Product, int> productAmount;
   final num subtotal;
   final num amount;
+  final bool? isChecked;
   final Function(
     Product,
     int,
@@ -36,6 +37,7 @@ class EditItemAmountBag extends StatefulWidget {
   final num? conditionCode;
   final Reference? reference;
   final Function(Reference?)? initDiscount;
+  final Function(bool)? onCheckBoxItemChange;
   final void Function({
     required int quantity,
     List<SalesOrder>? bagOrders,
@@ -61,6 +63,8 @@ class EditItemAmountBag extends StatefulWidget {
     required this.initDiscount,
     required this.updatePrices,
     required this.buildPriceLabel,
+    this.isChecked,
+    this.onCheckBoxItemChange,
   });
 
   @override
@@ -101,75 +105,86 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
       tilePadding: widget.disableExpand
           ? EdgeInsets.zero
           : const EdgeInsets.symmetric(horizontal: 16),
-      title: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: FittedBox(
-          child: Row(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: MediaQuery.of(context).size.width * 0.3,
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: ImageColorReferenceView(
-                    imageColorReference: () {
-                      try {
-                        return widget.color.imgList.first;
-                      } catch (e) {
-                        return null;
-                      }
-                    }.call(),
-                    fit: BoxFit.cover,
-                    cacheWidth: 150,
+      title: InkWell(
+        onTap: widget.onCheckBoxItemChange != null
+            ? () =>
+                widget.onCheckBoxItemChange?.call(!(widget.isChecked ?? true))
+            : null,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: FittedBox(
+            child: Row(
+              children: [
+                if (widget.isChecked != null)
+                  Checkbox(
+                      value: widget.isChecked,
+                      onChanged: (value) =>
+                          widget.onCheckBoxItemChange?.call(value ?? false)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  height: MediaQuery.of(context).size.width * 0.3,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: ImageColorReferenceView(
+                      imageColorReference: () {
+                        try {
+                          return widget.color.imgList.first;
+                        } catch (e) {
+                          return null;
+                        }
+                      }.call(),
+                      fit: BoxFit.cover,
+                      cacheWidth: 150,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ModavestTitle(
-                      "${widget.referenceName} - ${widget.color.name!}",
-                      textAlign: TextAlign.left,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: AutoSizeText(
-                        "${ModaVestLabels.ref}: ${widget.referenceCode}",
-                        style: Theme.of(context).textTheme.headline5,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ModavestTitle(
+                        "${widget.referenceName} - ${widget.color.name!}",
                         textAlign: TextAlign.left,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: ModavestMoneyBoldText(
-                        originalValue: widget.subtotal.toDouble(),
-                        fontSize: 16,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: AutoSizeText(
+                          "${ModaVestLabels.ref}: ${widget.referenceCode}",
+                          style: Theme.of(context).textTheme.headline5,
+                          textAlign: TextAlign.left,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: AutoSizeText(
-                        "${ModaVestLabels.qtdProduct}: ${widget.amount.toInt()}",
-                        style: Theme.of(context).textTheme.headline5,
-                        textAlign: TextAlign.left,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: ModavestMoneyBoldText(
+                          originalValue: widget.subtotal.toDouble(),
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    // TODO: marca
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 2),
-                    //   child: AutoSizeText(
-                    //     "${ModaVestLabels.brand}: ${widget.brandName}",
-                    //     style: Theme.of(context).textTheme.headline5,
-                    //     textAlign: TextAlign.left,
-                    //   ),
-                    // ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: AutoSizeText(
+                          "${ModaVestLabels.qtdProduct}: ${widget.amount.toInt()}",
+                          style: Theme.of(context).textTheme.headline5,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      // TODO: marca
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(vertical: 2),
+                      //   child: AutoSizeText(
+                      //     "${ModaVestLabels.brand}: ${widget.brandName}",
+                      //     style: Theme.of(context).textTheme.headline5,
+                      //     textAlign: TextAlign.left,
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

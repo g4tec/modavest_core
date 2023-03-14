@@ -24,6 +24,7 @@ class ImageColorReferenceView extends StatelessWidget {
     }
 
     return Builder(
+      key: ValueKey("${imageColorReference?.image ?? (urlImg ?? "")}builder"),
       builder: (
         context,
       ) {
@@ -33,36 +34,41 @@ class ImageColorReferenceView extends StatelessWidget {
             imageColorReference?.image ??
             urlImg ??
             "";
-        body = Image.network(
-          url,
-          fit: fit ?? BoxFit.cover,
-          width: MediaQuery.of(context).size.width,
-          cacheWidth: cacheWidth,
-          loadingBuilder: (
-            BuildContext context,
-            Widget child,
-            ImageChunkEvent? loadingProgress,
-          ) {
-            if (loadingProgress == null) {
-              return child;
-            }
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes!
-                      : null,
-                ),
-              ),
-            );
-          },
-          errorBuilder: (context, error, stackTrace) => Container(
+        body = Image.network(url,
+            key: ValueKey(
+                "${imageColorReference?.imageMedium ?? imageColorReference?.imageSmall ?? imageColorReference?.image ?? urlImg ?? ""}viewer "),
+            fit: fit ?? BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            cacheWidth: cacheWidth, loadingBuilder: (
+          BuildContext context,
+          Widget child,
+          ImageChunkEvent? loadingProgress,
+        ) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: const Icon(Icons.image_not_supported),
-          ),
-        );
+            child: Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            ),
+          );
+        }, errorBuilder: (context, error, stackTrace) {
+          print(error);
+          print(stackTrace);
+          return Container(
+            padding: const EdgeInsets.all(20.0),
+            child: const Icon(
+              Icons.image_not_supported,
+              color: Colors.red,
+            ),
+          );
+        });
         return body;
       },
     );

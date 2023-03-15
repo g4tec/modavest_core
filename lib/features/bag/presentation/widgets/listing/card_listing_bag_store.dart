@@ -76,6 +76,7 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                     child: Padding(
                       padding: const EdgeInsets.all(0.5),
                       child: ImageColorReferenceView(
+                        prefixKey: "bagStore",
                         urlImg: widget.image,
                         fit: BoxFit.cover,
                         cacheWidth: 100,

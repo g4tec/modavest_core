@@ -126,6 +126,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
                   child: FittedBox(
                     fit: BoxFit.contain,
                     child: ImageColorReferenceView(
+                      prefixKey: "bagStore",
                       imageColorReference: () {
                         try {
                           return widget.color.imgList.first;

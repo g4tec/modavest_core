@@ -6,13 +6,15 @@ class ImageColorReferenceView extends StatelessWidget {
   final String? urlImg;
   final BoxFit? fit;
   final int? cacheWidth;
-  const ImageColorReferenceView(
-      {Key? key,
-      this.imageColorReference,
-      this.urlImg,
-      this.fit,
-      this.cacheWidth})
-      : super(key: key);
+  final String? prefixKey;
+  const ImageColorReferenceView({
+    Key? key,
+    this.imageColorReference,
+    this.urlImg,
+    this.fit,
+    this.cacheWidth,
+    this.prefixKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,8 @@ class ImageColorReferenceView extends StatelessWidget {
     }
 
     return Builder(
-      key: ValueKey("${imageColorReference?.image ?? (urlImg ?? "")}builder"),
+      key: ValueKey(
+          "${prefixKey ?? ""}${imageColorReference?.image ?? (urlImg ?? "")}builder"),
       builder: (
         context,
       ) {
@@ -35,11 +38,9 @@ class ImageColorReferenceView extends StatelessWidget {
             urlImg ??
             "";
         body = Image.network(url,
-            key: ValueKey(
-                "${imageColorReference?.imageMedium ?? imageColorReference?.imageSmall ?? imageColorReference?.image ?? urlImg ?? ""}viewer "),
+            key: ValueKey("${prefixKey ?? ""}${url ?? ""}viewer "),
             fit: fit ?? BoxFit.cover,
-            width: MediaQuery.of(context).size.width,
-            cacheWidth: cacheWidth, loadingBuilder: (
+            width: MediaQuery.of(context).size.width, loadingBuilder: (
           BuildContext context,
           Widget child,
           ImageChunkEvent? loadingProgress,

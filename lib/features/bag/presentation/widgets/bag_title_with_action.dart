@@ -8,12 +8,14 @@ class BagTitleWithAction extends StatelessWidget {
   final void Function()? onPressedClose;
   final void Function()? onPressedMove;
   final void Function()? onPressedCopy;
+  final void Function()? onPressedDismember;
   const BagTitleWithAction({
     super.key,
     required this.onPressedEdit,
     required this.onPressedClose,
     this.onPressedMove,
     this.onPressedCopy,
+    this.onPressedDismember,
     this.showClose = false,
   });
 
@@ -58,6 +60,13 @@ class BagTitleWithAction extends StatelessWidget {
                           value: onPressedCopy,
                           child: GestureDetector(
                             child: Text(ModaVestLabels.copyBag),
+                          ),
+                        ),
+                      if (onPressedDismember != null)
+                        PopupMenuItem(
+                          value: onPressedDismember,
+                          child: GestureDetector(
+                            child: Text(ModaVestLabels.dismemberBag),
                           ),
                         ),
                     ],

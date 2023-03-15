@@ -64,15 +64,21 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
               builder: (BuildContext contextPhoto, int index) {
                 final urlImage = imgList[index].image;
                 return PhotoViewGalleryPageOptions(
+                  key: ValueKey("${urlImage ?? ""}carrouselPage"),
                   imageProvider: showAll
-                      ? NetworkImage(urlImage ?? "")
+                      ? Image.network(
+                          urlImage ?? "",
+                          key: ValueKey("${urlImage ?? ""}carrousel22"),
+                        ).image
                       : (data != null && data is FileInfo
                           ? Image.file(
                               data.file,
+                              key: ValueKey("${urlImage ?? ""}carrousel"),
                             ).image
-                          : Image.asset(
-                              ModaVestImages.imageNotSuportedWhite,
-                            ).image),
+                          : Image.asset(ModaVestImages.imageNotSuportedWhite,
+                                  key: ValueKey(
+                                      "${urlImage ?? ""}carrouselfile"))
+                              .image),
                 );
               },
             );

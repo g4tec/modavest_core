@@ -288,6 +288,10 @@ class ModaVestLabels {
   static String get returnOrderToBag => "Retornar itens para a sacola";
   static String get hadSureDoYouWantReturn =>
       "Tem certeza que deseja retornar os itens desse pedido para a sacola?";
+  static String get hadSureDoYouWantExitDesmembration =>
+      "Tem certeza que deseja sair do desmembramento?";
+  static String get hadSureDoYouWantExitDesmembrationSubtitle =>
+      "Após sair, todo o processo de desmembramento será cancelado e todos os produtos retornarão para a sacola.";
   static String get hadSureDoYouWantReturnSubtitle =>
       "Evite reenviar pedidos antes de resolver suas pendências. Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço";
   static String get selectedCustomerDoNotMatch =>
@@ -441,6 +445,7 @@ class ModaVestLabels {
       "O lojista atual está com o status #status# neste fabricante, não será possível selecionar tabelas de preços do fabricante para o lojista atual.";
   static String get moveBag => "Mover sacola";
   static String get copyBag => "Copiar sacola";
+  static String get dismemberBag => "Desmembrar";
   static String get bloquedToCopyCustomer =>
       "O lojista #lojista# está com o status #status# neste fabricante, não será possível copiar a sacola de compras.";
   static String get bloqueToMoveCustomer =>
@@ -474,4 +479,12 @@ class ModaVestLabels {
   static String get modavestAlreadyRegisteredWithOutStore =>
       "O cadastro com CNPJ informado foi cadastrado na plataforma :)";
   static String get partiallyAnswered => "Parcialmente atendido";
+  static String get dismember => "Desmembrar";
+  static String get selectAnProduct => "Selecione um ou mais produtos";
+  static String get finishedOneDismembration =>
+      "Desmembramento ## realizado com sucesso!";
+  static String get finishedAllDismembration =>
+      "Os ## pedidos foram realizados e serão processados em breve!";
+  static String get dismembrationWarning =>
+      "Os pedidos serão enviados quando for finalizado todo o desmembramento";
 }

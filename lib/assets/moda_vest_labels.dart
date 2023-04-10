@@ -487,4 +487,5 @@ class ModaVestLabels {
       "Os ## pedidos foram realizados e serão processados em breve!";
   static String get dismembrationWarning =>
       "Os pedidos serão enviados quando for finalizado todo o desmembramento";
+  static String get birthDate => "Aniversário";
 }

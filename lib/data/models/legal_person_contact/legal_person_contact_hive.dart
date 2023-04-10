@@ -25,7 +25,7 @@ class HiveLegalPersonContact extends HiveObject {
   @HiveField(9)
   final String? email;
   @HiveField(10)
-  final DateTime? bithDate;
+  final DateTime? birthDate;
 
   HiveLegalPersonContact({
     this.legalPersonCode,
@@ -38,6 +38,6 @@ class HiveLegalPersonContact extends HiveObject {
     this.phoneNumber,
     this.cellNumber,
     this.email,
-    this.bithDate,
+    this.birthDate,
   });
 }

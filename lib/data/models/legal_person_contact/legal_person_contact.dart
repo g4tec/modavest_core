@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:modavest_core/data/models/legal_person_contact/legal_person_contact_hive.dart';
 import 'package:modavest_core/domain/models/legal_person_contact.dart';
 
@@ -13,7 +14,7 @@ class LegalPersonContactModel extends LegalPersonContact {
     String? phoneNumber,
     String? cellNumber,
     String? email,
-    DateTime? bithDate,
+    DateTime? birthDate,
   }) : super(
           legalPersonCode: legalPersonCode,
           integrationId: integrationId,
@@ -25,7 +26,7 @@ class LegalPersonContactModel extends LegalPersonContact {
           phoneNumber: phoneNumber,
           cellNumber: cellNumber,
           email: email,
-          bithDate: bithDate,
+          birthDate: birthDate,
         );
   factory LegalPersonContactModel.fromJson(Map<String, dynamic> json) {
     return LegalPersonContactModel(
@@ -39,8 +40,8 @@ class LegalPersonContactModel extends LegalPersonContact {
       phoneNumber: json["phoneNumber"] as String?,
       cellNumber: json["cellNumber"] as String?,
       email: json["email"] as String?,
-      bithDate: json["bithDate"] != null
-          ? DateTime.parse(json["bithDate"] as String)
+      birthDate: json["birthDate"] != null
+          ? DateTime.parse(json["birthDate"] as String)
           : null,
     );
   }
@@ -59,7 +60,7 @@ class LegalPersonContactModel extends LegalPersonContact {
       phoneNumber: hiveLegalPersonContact.phoneNumber,
       cellNumber: hiveLegalPersonContact.cellNumber,
       email: hiveLegalPersonContact.email,
-      bithDate: hiveLegalPersonContact.bithDate,
+      birthDate: hiveLegalPersonContact.birthDate,
     );
   }
 
@@ -75,7 +76,7 @@ class LegalPersonContactModel extends LegalPersonContact {
       phoneNumber: phoneNumber,
       cellNumber: cellNumber,
       email: email,
-      bithDate: bithDate,
+      birthDate: birthDate,
     );
   }
 
@@ -84,6 +85,11 @@ class LegalPersonContactModel extends LegalPersonContact {
     num? legalPersonCodeParam,
     bool noSequence = false,
   }) {
+    String? formattedBirthDate;
+    if (birthDate != null) {
+      var dateFormatter = DateFormat('yyyy-MM-dd');
+      formattedBirthDate = dateFormatter.format(birthDate!);
+    }
     final Map<String, dynamic> data = {
       "legalPersonCode": legalPersonCodeParam ?? legalPersonCode,
       "integrationId": integrationIdParam ?? integrationId,
@@ -95,8 +101,9 @@ class LegalPersonContactModel extends LegalPersonContact {
       "phoneNumber": phoneNumber,
       "cellNumber": cellNumber,
       "email": email,
-      "bithDate": bithDate,
+      "birthDate": formattedBirthDate,
     };
+
     data.removeWhere((key, value) => value == null);
     return data;
   }
@@ -114,7 +121,7 @@ class LegalPersonContactModel extends LegalPersonContact {
       phoneNumber: e.phoneNumber,
       cellNumber: e.cellNumber,
       email: e.email,
-      bithDate: e.bithDate,
+      birthDate: e.birthDate,
     );
   }
 }

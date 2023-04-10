@@ -9,7 +9,7 @@ class LegalPersonContact {
   final String? phoneNumber;
   final String? cellNumber;
   final String? email;
-  final DateTime? bithDate;
+  final DateTime? birthDate;
 
   LegalPersonContact({
     this.legalPersonCode,
@@ -22,6 +22,6 @@ class LegalPersonContact {
     this.phoneNumber,
     this.cellNumber,
     this.email,
-    this.bithDate,
+    this.birthDate,
   });
 }

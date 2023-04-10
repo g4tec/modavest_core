@@ -1,8 +1,11 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/assets/moda_vest_parameters.dart';
 import 'package:modavest_core/domain/models/legal_person_contact.dart';
+import 'package:modavest_core/utils/format_date.dart';
 import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 import 'package:modavest_core/widgets/fields/modavest_email_field.dart';
 import 'package:modavest_core/widgets/fields/modavest_phone_field.dart';
@@ -32,6 +35,7 @@ class _AddContactState extends State<AddContact> {
   late TextEditingController cellNumberController;
   late TextEditingController emailController;
   late TextEditingController typeContactController;
+  late TextEditingController birthDateController;
   final GlobalKey<FormState> textFieldFormKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -45,6 +49,11 @@ class _AddContactState extends State<AddContact> {
         TextEditingController(text: widget.contactInitial?.email ?? "");
     typeContactController = TextEditingController(
       text: widget.contactInitial?.typeCode?.toString() ?? "",
+    );
+    birthDateController = TextEditingController(
+      text: widget.contactInitial?.birthDate != null
+          ? formatDate(widget.contactInitial!.birthDate!)
+          : '',
     );
     super.initState();
   }
@@ -85,6 +94,17 @@ class _AddContactState extends State<AddContact> {
                 maxLength: 45,
                 isRequired: false,
               ),
+              ModaVestTextField(
+                controller: birthDateController,
+                title: ModaVestLabels.birthDate,
+                maxLength: 45,
+                maskFormatter: [
+                  TextInputMask(
+                    mask: ['99/99/9999'],
+                  )
+                ],
+                isRequired: false,
+              ),
             ],
           ),
         ),
@@ -94,6 +114,8 @@ class _AddContactState extends State<AddContact> {
               : ModaVestLabels.add,
           onPressed: () {
             if (textFieldFormKey.currentState?.validate() ?? false) {
+              var inputFormat = DateFormat('dd/MM/yyyy');
+
               widget.onAdd.call(
                 LegalPersonContact(
                   name: nameController.text,
@@ -104,6 +126,9 @@ class _AddContactState extends State<AddContact> {
                   typeCode: num.tryParse(typeContactController.text),
                   legalPersonCode: widget.contactInitial?.legalPersonCode,
                   integrationId: widget.contactInitial?.integrationId,
+                  birthDate: birthDateController.text != ''
+                      ? inputFormat.parse(birthDateController.text)
+                      : null,
                 ),
               );
             }

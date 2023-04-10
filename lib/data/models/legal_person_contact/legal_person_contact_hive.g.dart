@@ -28,7 +28,7 @@ class HiveLegalPersonContactAdapter
       phoneNumber: fields[7] as String?,
       cellNumber: fields[8] as String?,
       email: fields[9] as String?,
-      bithDate: fields[10] as DateTime?,
+      birthDate: fields[10] as DateTime?,
     );
   }
 
@@ -57,7 +57,7 @@ class HiveLegalPersonContactAdapter
       ..writeByte(9)
       ..write(obj.email)
       ..writeByte(10)
-      ..write(obj.bithDate);
+      ..write(obj.birthDate);
   }
 
   @override

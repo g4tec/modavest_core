@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/legal_person_contact.dart';
+import 'package:modavest_core/utils/format_date.dart';
 import 'package:modavest_core/widgets/text/modavest_title.dart';
 
 class ContactCard extends StatelessWidget {
@@ -66,6 +67,18 @@ class ContactCard extends StatelessWidget {
                             ),
                             Text(
                               contact.email!,
+                            ),
+                          ],
+                        ),
+                      if (contact.birthDate != null)
+                        Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(right: 5),
+                              child: Icon(Icons.celebration),
+                            ),
+                            Text(
+                              formatDate(contact.birthDate!),
                             ),
                           ],
                         ),

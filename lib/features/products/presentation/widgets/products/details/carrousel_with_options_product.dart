@@ -7,6 +7,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modavest_core/assets/moda_vest_images.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
+import 'package:modavest_core/features/products/presentation/widgets/products/details/modavest_video_player.dart';
 import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -14,6 +15,7 @@ class CarouselWithIndicator extends StatefulWidget {
   final List<ImageColorReference> imgList;
   final GlobalKey scaffoldKey;
   final Function(ImageColorReference? imageColorReference)? buildImage;
+  final String? videoUrl;
 
   final void Function()? onPressBag;
   final void Function()? onPressBack;
@@ -29,6 +31,7 @@ class CarouselWithIndicator extends StatefulWidget {
     this.bagStream,
     this.onPressBack,
     this.buildImage,
+    this.videoUrl,
   }) : super(key: key);
   @override
   CarouselWithIndicatorState createState() => CarouselWithIndicatorState();
@@ -194,7 +197,7 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                 },
               ),
               carouselController: carouselController,
-              items: widget.imgList.isEmpty
+              items: widget.imgList.isEmpty && widget.videoUrl == null
                   ? [
                       Builder(
                         builder: (BuildContext context) {
@@ -204,61 +207,87 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                             child: const Icon(Icons.image_not_supported),
                           );
                         },
-                      )
+                      ),
                     ]
-                  : (showAll ? widget.imgList : [widget.imgList.first])
-                      .map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 300,
-                            child: InkWell(
-                              child: widget.buildImage != null
-                                  ? widget.buildImage?.call(i)
-                                  : ImageColorReferenceView(
-                                      imageColorReference: i,
-                                    ),
-                              onTap: () => openImage(
-                                context,
-                                widget.imgList.indexOf(i),
-                                showAll: showAll,
-                              ),
-                            ),
+                  : [
+                      if (widget.imgList.isNotEmpty)
+                        ...(showAll ? widget.imgList : [widget.imgList.first])
+                            .map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 300,
+                                child: InkWell(
+                                  child: widget.buildImage != null
+                                      ? widget.buildImage?.call(i)
+                                      : ImageColorReferenceView(
+                                          imageColorReference: i,
+                                        ),
+                                  onTap: () => openImage(
+                                    context,
+                                    widget.imgList.indexOf(i),
+                                    showAll: showAll,
+                                  ),
+                                ),
+                              );
+                            },
                           );
-                        },
-                      );
-                    }).toList(),
+                        }).toList(),
+                      if (widget.videoUrl != null)
+                        ModavestVideoPlayer(videoUrl: widget.videoUrl!)
+                    ],
             ),
             if (widget.imgList.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: (showAll ? widget.imgList : [widget.imgList.first])
-                    .asMap()
-                    .map(
-                      (key, value) => MapEntry(
-                        key,
-                        GestureDetector(
-                          onTap: () => carouselController.animateToPage(key),
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              color: currentTab == key
-                                  ? Theme.of(context).primaryColor
-                                  : Theme.of(context).unselectedWidgetColor,
-                              shape: const CircleBorder(),
-                            ),
-                            width: 8.0,
-                            height: 8.0,
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 2.0,
+                children: [
+                  ...(showAll ? widget.imgList : [widget.imgList.first])
+                      .asMap()
+                      .map(
+                        (key, value) => MapEntry(
+                          key,
+                          GestureDetector(
+                            onTap: () => carouselController.animateToPage(key),
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                color: currentTab == key
+                                    ? Theme.of(context).primaryColor
+                                    : Theme.of(context).unselectedWidgetColor,
+                                shape: const CircleBorder(),
+                              ),
+                              width: 8.0,
+                              height: 8.0,
+                              margin: const EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 2.0,
+                              ),
                             ),
                           ),
                         ),
+                      )
+                      .values
+                      .toList(),
+                  if (widget.videoUrl != null)
+                    GestureDetector(
+                      onTap: () => carouselController
+                          .animateToPage(widget.imgList.length),
+                      child: Container(
+                        decoration: ShapeDecoration(
+                          color: currentTab == widget.imgList.length
+                              ? Theme.of(context).primaryColor
+                              : Theme.of(context).unselectedWidgetColor,
+                          shape: const CircleBorder(),
+                        ),
+                        width: 8.0,
+                        height: 8.0,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 2.0,
+                        ),
                       ),
-                    )
-                    .values
-                    .toList(),
+                    ),
+                ],
               ),
           ],
         ),

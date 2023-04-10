@@ -29,6 +29,7 @@ class Reference {
   num? oficialStore;
   final bool? isPack;
   final bool? isGrid;
+  String? videoUrl;
 
   Reference({
     required this.code,
@@ -56,6 +57,7 @@ class Reference {
     required this.referencePrice,
     this.isPack,
     this.isGrid,
+    this.videoUrl,
   });
 
   bool filter(String string) {

@@ -241,32 +241,53 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
             if (widget.imgList.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: (showAll ? widget.imgList : [widget.imgList.first])
-                    .asMap()
-                    .map(
-                      (key, value) => MapEntry(
-                        key,
-                        GestureDetector(
-                          onTap: () => carouselController.animateToPage(key),
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              color: currentTab == key
-                                  ? Theme.of(context).primaryColor
-                                  : Theme.of(context).unselectedWidgetColor,
-                              shape: const CircleBorder(),
-                            ),
-                            width: 8.0,
-                            height: 8.0,
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 2.0,
+                children: [
+                  ...(showAll ? widget.imgList : [widget.imgList.first])
+                      .asMap()
+                      .map(
+                        (key, value) => MapEntry(
+                          key,
+                          GestureDetector(
+                            onTap: () => carouselController.animateToPage(key),
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                color: currentTab == key
+                                    ? Theme.of(context).primaryColor
+                                    : Theme.of(context).unselectedWidgetColor,
+                                shape: const CircleBorder(),
+                              ),
+                              width: 8.0,
+                              height: 8.0,
+                              margin: const EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 2.0,
+                              ),
                             ),
                           ),
                         ),
+                      )
+                      .values
+                      .toList(),
+                  if (widget.videoUrl != null)
+                    GestureDetector(
+                      onTap: () => carouselController
+                          .animateToPage(widget.imgList.length),
+                      child: Container(
+                        decoration: ShapeDecoration(
+                          color: currentTab == widget.imgList.length
+                              ? Theme.of(context).primaryColor
+                              : Theme.of(context).unselectedWidgetColor,
+                          shape: const CircleBorder(),
+                        ),
+                        width: 8.0,
+                        height: 8.0,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 2.0,
+                        ),
                       ),
-                    )
-                    .values
-                    .toList(),
+                    ),
+                ],
               ),
           ],
         ),

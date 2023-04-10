@@ -16,6 +16,7 @@ class ModavestVideoPlayer extends StatefulWidget {
 class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
   VideoPlayerController? videoController;
   CustomVideoPlayerController? _customVideoPlayerController;
+  ValueNotifier<bool> muteNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
@@ -49,15 +50,40 @@ class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return videoController?.value.isInitialized == true
-        ? AspectRatio(
-            aspectRatio: videoController!.value.aspectRatio,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              child: CustomVideoPlayer(
-                customVideoPlayerController: _customVideoPlayerController!,
+        ? Stack(
+            children: [
+              AspectRatio(
+                aspectRatio: videoController!.value.aspectRatio,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 300,
+                  child: CustomVideoPlayer(
+                    customVideoPlayerController: _customVideoPlayerController!,
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: IconButton(
+                  onPressed: () {
+                    videoController?.setVolume(muteNotifier.value ? 0 : 1);
+                    muteNotifier.value = !muteNotifier.value;
+                  },
+                  icon: AnimatedBuilder(
+                    animation: muteNotifier,
+                    builder: ((context, child) {
+                      return Icon(
+                        muteNotifier.value
+                            ? Icons.volume_up
+                            : Icons.volume_mute,
+                        color: Colors.white,
+                      );
+                    }),
+                  ),
+                ),
+              )
+            ],
           )
         : const Center(child: CircularProgressIndicator());
   }

@@ -89,6 +89,10 @@ class HiveSalesOrder extends HiveObject {
   num? discountPercentage;
   @HiveField(41)
   late List<String?>? observations = [];
+  @HiveField(42)
+  DateTime? arrivalDate;
+  @HiveField(43)
+  String? shippingCompanyName;
 
   HiveSalesOrder({
     required this.integrationId,
@@ -130,5 +134,7 @@ class HiveSalesOrder extends HiveObject {
     required this.priceTableCode,
     this.totalOriginalAmountOrder,
     this.discountPercentage,
+    this.arrivalDate,
+    this.shippingCompanyName,
   });
 }

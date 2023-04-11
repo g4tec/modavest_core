@@ -1,7 +1,10 @@
+import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
+import 'package:modavest_core/domain/models/sales_order_classification.dart';
+import 'package:modavest_core/domain/models/sales_order_observation.dart';
 
 class SalesOrder {
   final int? integrationId;
@@ -51,11 +54,15 @@ class SalesOrder {
   String? stackTrace;
   num? sequence;
   final num? officialStoreId;
-  List<String?> observations;
+  List<SalesOrderObservation?> observations;
   num? priceTableCode;
   List<Discount>? discounts;
   double? totalOriginalAmountOrder;
   num? discountPercentage;
+  DateTime? arrivalDate;
+  String? shippingCompanyName;
+  List<SalesOrderClassification>? classifications;
+  Address? shippingAddress;
 
   SalesOrder({
     this.integrationId,
@@ -104,6 +111,10 @@ class SalesOrder {
     this.discounts,
     this.totalOriginalAmountOrder,
     this.discountPercentage,
+    this.arrivalDate,
+    this.shippingCompanyName,
+    this.classifications,
+    this.shippingAddress,
   });
 
   SalesOrder copyWith({
@@ -162,6 +173,10 @@ class SalesOrder {
       totalOriginalAmountOrder:
           totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
       discountPercentage: discountPercentage,
+      arrivalDate: arrivalDate,
+      shippingCompanyName: shippingCompanyName,
+      classifications: classifications,
+      shippingAddress: shippingAddress,
     );
   }
 
@@ -213,6 +228,10 @@ class SalesOrder {
       discounts: order.discounts,
       totalOriginalAmountOrder: order.totalOriginalAmountOrder,
       discountPercentage: order.discountPercentage,
+      arrivalDate: order.arrivalDate,
+      shippingCompanyName: order.shippingCompanyName,
+      classifications: order.classifications,
+      shippingAddress: order.shippingAddress,
     );
   }
 }

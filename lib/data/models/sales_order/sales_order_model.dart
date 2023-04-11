@@ -1,16 +1,18 @@
-import 'package:modavest_core/data/models/classification%20copy/classification_model.dart';
+import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_model.dart';
 import 'package:modavest_core/data/models/sales_order/sales_order_hive.dart';
 import 'package:modavest_core/data/models/sales_order_classification/sales_order_classification_model.dart';
+import 'package:modavest_core/data/models/sales_order_observation/classification_model.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
 import 'package:modavest_core/domain/models/sales_order_classification.dart';
+import 'package:modavest_core/domain/models/sales_order_observation.dart';
 
 class SalesOrderModel extends SalesOrder {
   SalesOrderModel({
@@ -61,91 +63,98 @@ class SalesOrderModel extends SalesOrder {
     super.arrivalDate,
     super.shippingCompanyName,
     super.classifications,
+    super.shippingAddress,
   }) : super(
           paymentconditionCode: paymentConditionCode,
         );
   factory SalesOrderModel.fromJson(Map json) {
     return SalesOrderModel(
-        payload: json["payload"] as Map<String, dynamic>?,
-        stackTrace: json["stacktrace"] as String?,
-        sequence: json["sequence"] as num?,
-        integrationId: json["integrationId"] as int?,
-        orderId: json["orderId"] as String?,
-        branchCode: json["branchCode"] as num?,
-        customerOrderCode: json["customerOrderCode"] as String?,
-        integrationCode: json["integrationCode"] as String?,
-        orderCode: json["orderCode"] as num?,
-        orderDate: json["orderDate"] != null
-            ? DateTime.parse(json["orderDate"] as String)
-            : null,
-        customerCode: json["customerCode"] as num?,
-        customerCnpj: json["customerCnpj"] as String? ??
-            json["customerCpfCnpj"] as String?,
-        representativeCode: json["representativeCode"] as num?,
-        representativeCnpj: json["representativeCnpj"] as String?,
-        sellerCode: json["sellerCode"] as num?,
-        sellerCpf: json["sellerCpf"] as String?,
-        purchasingGuideCode: json["purchasingGuideCode"] as num?,
-        cnpjPurchasingGuide: json["cnpjPurchasingGuide"] as String?,
-        operationCode: json["operationCode"] as num?,
-        paymentConditionCode: json["paymentconditionCode"] as num?,
-        paymentConditionName: json["paymentConditionName"] as String?,
-        customerName: json["customerName"] as String?,
-        quantity: ((json["quantity"] is int)
-                ? (json["quantity"] as int).toDouble()
-                : json["quantity"] as double?) ??
-            ((json["Quantity"] is int)
-                ? (json["Quantity"] as int).toDouble()
-                : json["Quantity"] as double?),
-        grossValue: (json["grossValue"] is int)
-            ? (json["grossValue"] as int).toDouble()
-            : json["grossValue"] as double?,
-        discountValue: (json["discountValue"] is int)
-            ? (json["discountValue"] as int).toDouble()
-            : json["discountValue"] as double?,
-        netValue: (json["netValue"] is int)
-            ? (json["netValue"] as int).toDouble()
-            : json["netValue"] as double?,
-        priorityCode: json["priorityCode"] as num?,
-        shippingCompanyCode: json["shippingCompanyCode"] as num?,
-        shippingCompanyCpfCnpj: json["shippingCompanyCpfCnpj"] as String?,
-        billingForecastDate: json["billingForecastDate"] != null
-            ? DateTime.parse(json["billingForecastDate"] as String)
-            : null,
-        freightType: json["freightType"] as num?,
-        freightPercentage: json["freightPercentage"] is int
-            ? (json["freightPercentage"] as int).toDouble()
-            : json["freightPercentage"] as double?,
-        freightValue: json["freightValue"] is int
-            ? (json["freightValue"] as int).toDouble()
-            : json["freightValue"] as double?,
-        packageint: json["packageint"] is int
-            ? (json["packageint"] as int).toDouble()
-            : json["packageint"] as double?,
-        weight: json["weight"] as double?,
-        totalAmountOrder: json["totalAmountOrder"] is int
-            ? (json["totalAmountOrder"] as int).toDouble()
-            : json["totalAmountOrder"] as double?,
-        statusOrder: json["statusOrder"]?.toString(),
-        items: ((json["items"] ?? []) as List)
-            .map((value) => ItemSalesOrderModel.fromJson(value as Map))
-            .toList(),
-        officialStoreId: json["officialStoreId"] as num?,
-        observations: (json["observations"] as List? ?? [])
-            .map((e) => (e as Map)["observation"] as String?)
-            .toList(),
-        priceTableCode: json["priceTableCode"] as num? ?? 0,
-        arrivalDate: json["arrivalDate"] != null
-            ? DateTime.parse(json["arrivalDate"] as String)
-            : null,
-        shippingCompanyName: json["shippingCompanyName"] as String?,
-        classifications:
-            json["classifications"] != null && json["classifications"] is List
-                ? ((json["classifications"] ?? []) as List)
-                    .map((value) =>
-                        SalesOrderClassificationModel.fromJson(value as Map))
-                    .toList()
-                : null);
+      payload: json["payload"] as Map<String, dynamic>?,
+      stackTrace: json["stacktrace"] as String?,
+      sequence: json["sequence"] as num?,
+      integrationId: json["integrationId"] as int?,
+      orderId: json["orderId"] as String?,
+      branchCode: json["branchCode"] as num?,
+      customerOrderCode: json["customerOrderCode"] as String?,
+      integrationCode: json["integrationCode"] as String?,
+      orderCode: json["orderCode"] as num?,
+      orderDate: json["orderDate"] != null
+          ? DateTime.parse(json["orderDate"] as String)
+          : null,
+      customerCode: json["customerCode"] as num?,
+      customerCnpj:
+          json["customerCnpj"] as String? ?? json["customerCpfCnpj"] as String?,
+      representativeCode: json["representativeCode"] as num?,
+      representativeCnpj: json["representativeCnpj"] as String?,
+      sellerCode: json["sellerCode"] as num?,
+      sellerCpf: json["sellerCpf"] as String?,
+      purchasingGuideCode: json["purchasingGuideCode"] as num?,
+      cnpjPurchasingGuide: json["cnpjPurchasingGuide"] as String?,
+      operationCode: json["operationCode"] as num?,
+      paymentConditionCode: json["paymentconditionCode"] as num?,
+      paymentConditionName: json["paymentConditionName"] as String?,
+      customerName: json["customerName"] as String?,
+      quantity: ((json["quantity"] is int)
+              ? (json["quantity"] as int).toDouble()
+              : json["quantity"] as double?) ??
+          ((json["Quantity"] is int)
+              ? (json["Quantity"] as int).toDouble()
+              : json["Quantity"] as double?),
+      grossValue: (json["grossValue"] is int)
+          ? (json["grossValue"] as int).toDouble()
+          : json["grossValue"] as double?,
+      discountValue: (json["discountValue"] is int)
+          ? (json["discountValue"] as int).toDouble()
+          : json["discountValue"] as double?,
+      netValue: (json["netValue"] is int)
+          ? (json["netValue"] as int).toDouble()
+          : json["netValue"] as double?,
+      priorityCode: json["priorityCode"] as num?,
+      shippingCompanyCode: json["shippingCompanyCode"] as num?,
+      shippingCompanyCpfCnpj: json["shippingCompanyCpfCnpj"] as String?,
+      billingForecastDate: json["billingForecastDate"] != null
+          ? DateTime.parse(json["billingForecastDate"] as String)
+          : null,
+      freightType: json["freightType"] as num?,
+      freightPercentage: json["freightPercentage"] is int
+          ? (json["freightPercentage"] as int).toDouble()
+          : json["freightPercentage"] as double?,
+      freightValue: json["freightValue"] is int
+          ? (json["freightValue"] as int).toDouble()
+          : json["freightValue"] as double?,
+      packageint: json["packageint"] is int
+          ? (json["packageint"] as int).toDouble()
+          : json["packageint"] as double?,
+      weight: json["weight"] as double?,
+      totalAmountOrder: json["totalAmountOrder"] is int
+          ? (json["totalAmountOrder"] as int).toDouble()
+          : json["totalAmountOrder"] as double?,
+      statusOrder: json["statusOrder"]?.toString(),
+      items: ((json["items"] ?? []) as List)
+          .map((value) => ItemSalesOrderModel.fromJson(value as Map))
+          .toList(),
+      officialStoreId: json["officialStoreId"] as num?,
+      observations: json["observations"] is List
+          ? (json["observations"] as List)
+              .map((e) => SalesOrderObservationModel.fromJson(e))
+              .toList()
+          : [],
+      priceTableCode: json["priceTableCode"] as num? ?? 0,
+      arrivalDate: json["arrivalDate"] != null
+          ? DateTime.parse(json["arrivalDate"] as String)
+          : null,
+      shippingCompanyName: json["shippingCompanyName"] as String?,
+      classifications:
+          json["classifications"] != null && json["classifications"] is List
+              ? ((json["classifications"] ?? []) as List)
+                  .map((value) =>
+                      SalesOrderClassificationModel.fromJson(value as Map))
+                  .toList()
+              : null,
+      shippingAddress: json["shippingAddress"] != null
+          ? AddressModel.fromJson(json["shippingAddress"])
+          : null,
+    );
   }
 
   factory SalesOrderModel.fromHive(HiveSalesOrder hive) {
@@ -193,7 +202,6 @@ class SalesOrderModel extends SalesOrder {
               .toList() ??
           [],
       officialStoreId: hive.officialStoreId,
-      observations: hive.observations ?? [],
       priceTableCode: hive.priceTableCode,
       totalOriginalAmountOrder: hive.totalOriginalAmountOrder,
       discountPercentage: hive.discountPercentage,
@@ -346,7 +354,7 @@ class SalesOrderModel extends SalesOrder {
     String? stackTrace,
     num? sequence,
     num? officialStoreId,
-    List<String?>? observations,
+    List<SalesOrderObservation?>? observations,
     num? priceTableCode,
     List<Discount>? discounts,
     double? totalOriginalAmountOrder,
@@ -355,61 +363,63 @@ class SalesOrderModel extends SalesOrder {
     List<SalesOrderClassification>? classifications,
   }) {
     return SalesOrderModel(
-      integrationId: integrationId ?? this.integrationId,
-      orderId: orderId ?? this.orderId,
-      branchCode: branchCode ?? this.branchCode,
-      customerOrderCode: customerOrderCode ?? this.customerOrderCode,
-      integrationCode: integrationCode ?? this.integrationCode,
-      orderCode: orderCode ?? this.orderCode,
-      orderDate: orderDate ?? this.orderDate,
-      customerCode: customerCode ?? this.customerCode,
-      customerCnpj: customerCnpj ?? this.customerCnpj,
-      representativeCode: representativeCode ?? this.representativeCode,
-      representativeCnpj: representativeCnpj ?? this.representativeCnpj,
-      sellerCode: sellerCode ?? this.sellerCode,
-      sellerCpf: sellerCpf ?? this.sellerCpf,
-      purchasingGuideCode: purchasingGuideCode ?? this.purchasingGuideCode,
-      cnpjPurchasingGuide: cnpjPurchasingGuide ?? this.cnpjPurchasingGuide,
-      operationCode: operationCode ?? this.operationCode,
-      paymentConditionCode: paymentconditionCode ?? this.paymentconditionCode,
-      paymentConditionName: paymentConditionName ?? this.paymentConditionName,
-      quantity: quantity ?? this.quantity,
-      grossValue: grossValue ?? this.grossValue,
-      discountValue: discountValue ?? this.discountValue,
-      netValue: netValue ?? this.netValue,
-      priorityCode: priorityCode ?? this.priorityCode,
-      shippingCompanyCode: shippingCompanyCode ?? this.shippingCompanyCode,
-      shippingCompanyCpfCnpj:
-          shippingCompanyCpfCnpj ?? this.shippingCompanyCpfCnpj,
-      billingForecastDate: billingForecastDate ?? this.billingForecastDate,
-      freightType: freightType ?? this.freightType,
-      freightPercentage: freightPercentage ?? this.freightPercentage,
-      freightValue: freightValue ?? this.freightValue,
-      packageint: packageint ?? this.packageint,
-      weight: weight ?? this.weight,
-      totalAmountOrder: totalAmountOrder ?? this.totalAmountOrder,
-      statusOrder: statusOrder ?? this.statusOrder,
-      customerName: customerName ?? this.customerName,
-      items: (items ?? this.items)
-              ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
-              .toList() ??
-          [],
-      discounts: (discounts ?? this.discounts)
-              ?.map((Discount e) => DiscountModel.fromEntitie(e))
-              .toList() ??
-          [],
-      officialStoreId: officialStoreId ?? this.officialStoreId,
-      observations: observations ?? this.observations,
-      priceTableCode: priceTableCode ?? this.priceTableCode,
-      totalOriginalAmountOrder:
-          totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
-      discountPercentage: discountPercentage ?? this.discountPercentage,
-      arrivalDate: arrivalDate ?? this.arrivalDate,
-      classifications: (classifications ?? this.classifications)
-              ?.map((SalesOrderClassification e) =>
-                  SalesOrderClassificationModel.entitie(e))
-              .toList() ??
-          [],
-    );
+        integrationId: integrationId ?? this.integrationId,
+        orderId: orderId ?? this.orderId,
+        branchCode: branchCode ?? this.branchCode,
+        customerOrderCode: customerOrderCode ?? this.customerOrderCode,
+        integrationCode: integrationCode ?? this.integrationCode,
+        orderCode: orderCode ?? this.orderCode,
+        orderDate: orderDate ?? this.orderDate,
+        customerCode: customerCode ?? this.customerCode,
+        customerCnpj: customerCnpj ?? this.customerCnpj,
+        representativeCode: representativeCode ?? this.representativeCode,
+        representativeCnpj: representativeCnpj ?? this.representativeCnpj,
+        sellerCode: sellerCode ?? this.sellerCode,
+        sellerCpf: sellerCpf ?? this.sellerCpf,
+        purchasingGuideCode: purchasingGuideCode ?? this.purchasingGuideCode,
+        cnpjPurchasingGuide: cnpjPurchasingGuide ?? this.cnpjPurchasingGuide,
+        operationCode: operationCode ?? this.operationCode,
+        paymentConditionCode: paymentconditionCode ?? this.paymentconditionCode,
+        paymentConditionName: paymentConditionName ?? this.paymentConditionName,
+        quantity: quantity ?? this.quantity,
+        grossValue: grossValue ?? this.grossValue,
+        discountValue: discountValue ?? this.discountValue,
+        netValue: netValue ?? this.netValue,
+        priorityCode: priorityCode ?? this.priorityCode,
+        shippingCompanyCode: shippingCompanyCode ?? this.shippingCompanyCode,
+        shippingCompanyCpfCnpj:
+            shippingCompanyCpfCnpj ?? this.shippingCompanyCpfCnpj,
+        billingForecastDate: billingForecastDate ?? this.billingForecastDate,
+        freightType: freightType ?? this.freightType,
+        freightPercentage: freightPercentage ?? this.freightPercentage,
+        freightValue: freightValue ?? this.freightValue,
+        packageint: packageint ?? this.packageint,
+        weight: weight ?? this.weight,
+        totalAmountOrder: totalAmountOrder ?? this.totalAmountOrder,
+        statusOrder: statusOrder ?? this.statusOrder,
+        customerName: customerName ?? this.customerName,
+        items: (items ?? this.items)
+                ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
+                .toList() ??
+            [],
+        discounts: (discounts ?? this.discounts)
+                ?.map((Discount e) => DiscountModel.fromEntitie(e))
+                .toList() ??
+            [],
+        officialStoreId: officialStoreId ?? this.officialStoreId,
+        observations: observations ?? this.observations,
+        priceTableCode: priceTableCode ?? this.priceTableCode,
+        totalOriginalAmountOrder:
+            totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
+        discountPercentage: discountPercentage ?? this.discountPercentage,
+        arrivalDate: arrivalDate ?? this.arrivalDate,
+        classifications: (classifications ?? this.classifications)
+                ?.map((SalesOrderClassification e) =>
+                    SalesOrderClassificationModel.entitie(e))
+                .toList() ??
+            [],
+        shippingAddress: shippingAddress != null
+            ? AddressModel.entite(shippingAddress!)
+            : null);
   }
 }

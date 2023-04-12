@@ -64,6 +64,7 @@ class SalesOrderModel extends SalesOrder {
     super.shippingCompanyName,
     super.classifications,
     super.shippingAddress,
+    super.chargeType,
   }) : super(
           paymentconditionCode: paymentConditionCode,
         );
@@ -154,6 +155,7 @@ class SalesOrderModel extends SalesOrder {
       shippingAddress: json["shippingAddress"] != null
           ? AddressModel.fromJson(json["shippingAddress"])
           : null,
+      chargeType: json["chargeType"] as num?,
     );
   }
 
@@ -212,59 +214,61 @@ class SalesOrderModel extends SalesOrder {
 
   factory SalesOrderModel.entiy(SalesOrder order) {
     return SalesOrderModel(
-        integrationId: order.integrationId,
-        orderId: order.orderId,
-        branchCode: order.branchCode,
-        customerOrderCode: order.customerOrderCode,
-        integrationCode: order.integrationCode,
-        orderCode: order.orderCode,
-        orderDate: order.orderDate,
-        customerCode: order.customerCode,
-        customerCnpj: order.customerCnpj,
-        representativeCode: order.representativeCode,
-        representativeCnpj: order.representativeCnpj,
-        sellerCode: order.sellerCode,
-        sellerCpf: order.sellerCpf,
-        purchasingGuideCode: order.purchasingGuideCode,
-        cnpjPurchasingGuide: order.cnpjPurchasingGuide,
-        operationCode: order.operationCode,
-        paymentConditionCode: order.paymentconditionCode,
-        paymentConditionName: order.paymentConditionName,
-        quantity: order.quantity,
-        grossValue: order.grossValue,
-        discountValue: order.discountValue,
-        netValue: order.netValue,
-        priorityCode: order.priorityCode,
-        shippingCompanyCode: order.shippingCompanyCode,
-        shippingCompanyCpfCnpj: order.shippingCompanyCpfCnpj,
-        billingForecastDate: order.billingForecastDate,
-        freightType: order.freightType,
-        freightPercentage: order.freightPercentage,
-        freightValue: order.freightValue,
-        packageint: order.packageint,
-        weight: order.weight,
-        totalAmountOrder: order.totalAmountOrder,
-        statusOrder: order.statusOrder,
-        customerName: order.customerName,
-        items: order.items
-                ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
-                .toList() ??
-            [],
-        discounts: order.discounts
-                ?.map((Discount e) => DiscountModel.fromEntitie(e))
-                .toList() ??
-            [],
-        officialStoreId: order.officialStoreId,
-        priceTableCode: order.priceTableCode,
-        totalOriginalAmountOrder: order.totalOriginalAmountOrder,
-        discountPercentage: order.discountPercentage,
-        observations: order.observations,
-        arrivalDate: order.arrivalDate,
-        shippingCompanyName: order.shippingCompanyName,
-        classifications: order.classifications
-            ?.map((SalesOrderClassification e) =>
-                SalesOrderClassificationModel.entitie(e))
-            .toList());
+      integrationId: order.integrationId,
+      orderId: order.orderId,
+      branchCode: order.branchCode,
+      customerOrderCode: order.customerOrderCode,
+      integrationCode: order.integrationCode,
+      orderCode: order.orderCode,
+      orderDate: order.orderDate,
+      customerCode: order.customerCode,
+      customerCnpj: order.customerCnpj,
+      representativeCode: order.representativeCode,
+      representativeCnpj: order.representativeCnpj,
+      sellerCode: order.sellerCode,
+      sellerCpf: order.sellerCpf,
+      purchasingGuideCode: order.purchasingGuideCode,
+      cnpjPurchasingGuide: order.cnpjPurchasingGuide,
+      operationCode: order.operationCode,
+      paymentConditionCode: order.paymentconditionCode,
+      paymentConditionName: order.paymentConditionName,
+      quantity: order.quantity,
+      grossValue: order.grossValue,
+      discountValue: order.discountValue,
+      netValue: order.netValue,
+      priorityCode: order.priorityCode,
+      shippingCompanyCode: order.shippingCompanyCode,
+      shippingCompanyCpfCnpj: order.shippingCompanyCpfCnpj,
+      billingForecastDate: order.billingForecastDate,
+      freightType: order.freightType,
+      freightPercentage: order.freightPercentage,
+      freightValue: order.freightValue,
+      packageint: order.packageint,
+      weight: order.weight,
+      totalAmountOrder: order.totalAmountOrder,
+      statusOrder: order.statusOrder,
+      customerName: order.customerName,
+      items: order.items
+              ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
+              .toList() ??
+          [],
+      discounts: order.discounts
+              ?.map((Discount e) => DiscountModel.fromEntitie(e))
+              .toList() ??
+          [],
+      officialStoreId: order.officialStoreId,
+      priceTableCode: order.priceTableCode,
+      totalOriginalAmountOrder: order.totalOriginalAmountOrder,
+      discountPercentage: order.discountPercentage,
+      observations: order.observations,
+      arrivalDate: order.arrivalDate,
+      shippingCompanyName: order.shippingCompanyName,
+      classifications: order.classifications
+          ?.map((SalesOrderClassification e) =>
+              SalesOrderClassificationModel.entitie(e))
+          .toList(),
+      chargeType: order.chargeType,
+    );
   }
 
   HiveSalesOrder toHive() {
@@ -361,65 +365,68 @@ class SalesOrderModel extends SalesOrder {
     num? discountPercentage,
     DateTime? arrivalDate,
     List<SalesOrderClassification>? classifications,
+    num? chargeType,
   }) {
     return SalesOrderModel(
-        integrationId: integrationId ?? this.integrationId,
-        orderId: orderId ?? this.orderId,
-        branchCode: branchCode ?? this.branchCode,
-        customerOrderCode: customerOrderCode ?? this.customerOrderCode,
-        integrationCode: integrationCode ?? this.integrationCode,
-        orderCode: orderCode ?? this.orderCode,
-        orderDate: orderDate ?? this.orderDate,
-        customerCode: customerCode ?? this.customerCode,
-        customerCnpj: customerCnpj ?? this.customerCnpj,
-        representativeCode: representativeCode ?? this.representativeCode,
-        representativeCnpj: representativeCnpj ?? this.representativeCnpj,
-        sellerCode: sellerCode ?? this.sellerCode,
-        sellerCpf: sellerCpf ?? this.sellerCpf,
-        purchasingGuideCode: purchasingGuideCode ?? this.purchasingGuideCode,
-        cnpjPurchasingGuide: cnpjPurchasingGuide ?? this.cnpjPurchasingGuide,
-        operationCode: operationCode ?? this.operationCode,
-        paymentConditionCode: paymentconditionCode ?? this.paymentconditionCode,
-        paymentConditionName: paymentConditionName ?? this.paymentConditionName,
-        quantity: quantity ?? this.quantity,
-        grossValue: grossValue ?? this.grossValue,
-        discountValue: discountValue ?? this.discountValue,
-        netValue: netValue ?? this.netValue,
-        priorityCode: priorityCode ?? this.priorityCode,
-        shippingCompanyCode: shippingCompanyCode ?? this.shippingCompanyCode,
-        shippingCompanyCpfCnpj:
-            shippingCompanyCpfCnpj ?? this.shippingCompanyCpfCnpj,
-        billingForecastDate: billingForecastDate ?? this.billingForecastDate,
-        freightType: freightType ?? this.freightType,
-        freightPercentage: freightPercentage ?? this.freightPercentage,
-        freightValue: freightValue ?? this.freightValue,
-        packageint: packageint ?? this.packageint,
-        weight: weight ?? this.weight,
-        totalAmountOrder: totalAmountOrder ?? this.totalAmountOrder,
-        statusOrder: statusOrder ?? this.statusOrder,
-        customerName: customerName ?? this.customerName,
-        items: (items ?? this.items)
-                ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
-                .toList() ??
-            [],
-        discounts: (discounts ?? this.discounts)
-                ?.map((Discount e) => DiscountModel.fromEntitie(e))
-                .toList() ??
-            [],
-        officialStoreId: officialStoreId ?? this.officialStoreId,
-        observations: observations ?? this.observations,
-        priceTableCode: priceTableCode ?? this.priceTableCode,
-        totalOriginalAmountOrder:
-            totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
-        discountPercentage: discountPercentage ?? this.discountPercentage,
-        arrivalDate: arrivalDate ?? this.arrivalDate,
-        classifications: (classifications ?? this.classifications)
-                ?.map((SalesOrderClassification e) =>
-                    SalesOrderClassificationModel.entitie(e))
-                .toList() ??
-            [],
-        shippingAddress: shippingAddress != null
-            ? AddressModel.entite(shippingAddress!)
-            : null);
+      integrationId: integrationId ?? this.integrationId,
+      orderId: orderId ?? this.orderId,
+      branchCode: branchCode ?? this.branchCode,
+      customerOrderCode: customerOrderCode ?? this.customerOrderCode,
+      integrationCode: integrationCode ?? this.integrationCode,
+      orderCode: orderCode ?? this.orderCode,
+      orderDate: orderDate ?? this.orderDate,
+      customerCode: customerCode ?? this.customerCode,
+      customerCnpj: customerCnpj ?? this.customerCnpj,
+      representativeCode: representativeCode ?? this.representativeCode,
+      representativeCnpj: representativeCnpj ?? this.representativeCnpj,
+      sellerCode: sellerCode ?? this.sellerCode,
+      sellerCpf: sellerCpf ?? this.sellerCpf,
+      purchasingGuideCode: purchasingGuideCode ?? this.purchasingGuideCode,
+      cnpjPurchasingGuide: cnpjPurchasingGuide ?? this.cnpjPurchasingGuide,
+      operationCode: operationCode ?? this.operationCode,
+      paymentConditionCode: paymentconditionCode ?? this.paymentconditionCode,
+      paymentConditionName: paymentConditionName ?? this.paymentConditionName,
+      quantity: quantity ?? this.quantity,
+      grossValue: grossValue ?? this.grossValue,
+      discountValue: discountValue ?? this.discountValue,
+      netValue: netValue ?? this.netValue,
+      priorityCode: priorityCode ?? this.priorityCode,
+      shippingCompanyCode: shippingCompanyCode ?? this.shippingCompanyCode,
+      shippingCompanyCpfCnpj:
+          shippingCompanyCpfCnpj ?? this.shippingCompanyCpfCnpj,
+      billingForecastDate: billingForecastDate ?? this.billingForecastDate,
+      freightType: freightType ?? this.freightType,
+      freightPercentage: freightPercentage ?? this.freightPercentage,
+      freightValue: freightValue ?? this.freightValue,
+      packageint: packageint ?? this.packageint,
+      weight: weight ?? this.weight,
+      totalAmountOrder: totalAmountOrder ?? this.totalAmountOrder,
+      statusOrder: statusOrder ?? this.statusOrder,
+      customerName: customerName ?? this.customerName,
+      items: (items ?? this.items)
+              ?.map((ItemSalesOrder e) => ItemSalesOrderModel.entity(e))
+              .toList() ??
+          [],
+      discounts: (discounts ?? this.discounts)
+              ?.map((Discount e) => DiscountModel.fromEntitie(e))
+              .toList() ??
+          [],
+      officialStoreId: officialStoreId ?? this.officialStoreId,
+      observations: observations ?? this.observations,
+      priceTableCode: priceTableCode ?? this.priceTableCode,
+      totalOriginalAmountOrder:
+          totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
+      arrivalDate: arrivalDate ?? this.arrivalDate,
+      classifications: (classifications ?? this.classifications)
+              ?.map((SalesOrderClassification e) =>
+                  SalesOrderClassificationModel.entitie(e))
+              .toList() ??
+          [],
+      shippingAddress: shippingAddress != null
+          ? AddressModel.entite(shippingAddress!)
+          : null,
+      chargeType: chargeType ?? this.chargeType,
+    );
   }
 }

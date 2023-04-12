@@ -65,6 +65,7 @@ class SalesOrderModel extends SalesOrder {
     super.classifications,
     super.shippingAddress,
     super.chargeType,
+    super.representativeObservations,
   }) : super(
           paymentconditionCode: paymentConditionCode,
         );
@@ -141,6 +142,11 @@ class SalesOrderModel extends SalesOrder {
       officialStoreId: json["officialStoreId"] as num?,
       observations: json["observations"] is List
           ? (json["observations"] as List)
+              .map((e) => SalesOrderObservationModel.fromJson(e))
+              .toList()
+          : [],
+      representativeObservations: json["representativeObservations"] is List
+          ? (json["representativeObservations"] as List)
               .map((e) => SalesOrderObservationModel.fromJson(e))
               .toList()
           : [],
@@ -272,6 +278,7 @@ class SalesOrderModel extends SalesOrder {
               SalesOrderClassificationModel.entitie(e))
           .toList(),
       chargeType: order.chargeType,
+      representativeObservations: order.representativeObservations,
     );
   }
 
@@ -370,6 +377,7 @@ class SalesOrderModel extends SalesOrder {
     DateTime? arrivalDate,
     List<SalesOrderClassification>? classifications,
     num? chargeType,
+    List<SalesOrderObservation?>? representativeObservations,
   }) {
     return SalesOrderModel(
       integrationId: integrationId ?? this.integrationId,
@@ -417,6 +425,8 @@ class SalesOrderModel extends SalesOrder {
           [],
       officialStoreId: officialStoreId ?? this.officialStoreId,
       observations: observations ?? this.observations,
+      representativeObservations:
+          representativeObservations ?? this.representativeObservations,
       priceTableCode: priceTableCode ?? this.priceTableCode,
       totalOriginalAmountOrder:
           totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,

@@ -55,6 +55,8 @@ class SalesOrder {
   num? sequence;
   final num? officialStoreId;
   List<SalesOrderObservation?> observations;
+  List<SalesOrderObservation?> representativeObservations;
+
   num? priceTableCode;
   List<Discount>? discounts;
   double? totalOriginalAmountOrder;
@@ -117,6 +119,7 @@ class SalesOrder {
     this.classifications,
     this.shippingAddress,
     this.chargeType,
+    this.representativeObservations = const [],
   });
 
   SalesOrder copyWith({

@@ -45,8 +45,8 @@ class DetailsCard extends StatelessWidget {
     num? settledQuantity = salesOrder.items?.fold(
         0.0,
         (previousValue, element) =>
-            previousValue ??
-            0 + (element.settledQuantity ?? element.quantity ?? 0));
+            (previousValue ?? 0) +
+            (element.settledQuantity ?? element.quantity ?? 0));
     return ListView(
       children: [
         buildRow(
@@ -91,9 +91,11 @@ class DetailsCard extends StatelessWidget {
           title2: settledQuantity != null
               ? settledQuantity == 0 &&
                       (salesOrder.items ?? []).isEmpty &&
-                      salesOrder.items!.first.settledQuantity == null
+                      salesOrder.items!.first.settledQuantity != null
                   ? settledQuantity.toString()
-                  : " - "
+                  : settledQuantity == 0
+                      ? " - "
+                      : settledQuantity.toString()
               : " - ",
           context: context,
           filled: true,

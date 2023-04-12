@@ -63,6 +63,7 @@ class SalesOrder {
   String? shippingCompanyName;
   List<SalesOrderClassification>? classifications;
   Address? shippingAddress;
+  num? chargeType;
 
   SalesOrder({
     this.integrationId,
@@ -115,6 +116,7 @@ class SalesOrder {
     this.shippingCompanyName,
     this.classifications,
     this.shippingAddress,
+    this.chargeType,
   });
 
   SalesOrder copyWith({
@@ -177,6 +179,7 @@ class SalesOrder {
       shippingCompanyName: shippingCompanyName,
       classifications: classifications,
       shippingAddress: shippingAddress,
+      chargeType: chargeType,
     );
   }
 
@@ -232,6 +235,7 @@ class SalesOrder {
       shippingCompanyName: order.shippingCompanyName,
       classifications: order.classifications,
       shippingAddress: order.shippingAddress,
+      chargeType: order.chargeType,
     );
   }
 }

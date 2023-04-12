@@ -28,6 +28,27 @@ Map<String, String> addressTypes = {
   "5": "Entrega",
 };
 
+Map<String, num> addressFromStringTypes = {
+  "Commercial": 1,
+  "Residential": 2,
+  "Billing": 3,
+  "Shopping": 4,
+  "Mailing": 6,
+  "ShowRoom": 7,
+  "PickUp": 8,
+  "CommercialPrevious": 11,
+  "ResidentialPrevious": 12,
+  "Delivery": 5,
+};
+
+Map<num, String> freightTypes = {
+  1: "CIF",
+  2: "FOB",
+  3: "Contratado por conta Terceiros",
+  4: "Sem ocorrência transporte",
+  5: "Próprio por conta Remetente",
+  6: "Próprio por conta Destinatário",
+};
 Map<String, String> referenceTypes = {
   "Banking": "Bancária",
   "ConsSci": "Cons. Sci",

@@ -86,7 +86,7 @@ class ItensRequestCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: padding),
                   child: FittedBox(
                     child: Text(
-                      "${item.quantity} unid.",
+                      "${item.settledQuantity ?? item.quantity}/${item.quantity}",
                     ),
                   ),
                 ),
@@ -119,7 +119,7 @@ class ItensRequestCard extends StatelessWidget {
     return [
       DataColumn(
         label: Container(
-          width: width,
+          width: width - 10,
           padding: const EdgeInsets.symmetric(vertical: padding),
           child: Row(
             children: [
@@ -155,13 +155,13 @@ class ItensRequestCard extends StatelessWidget {
       ),
       DataColumn(
         label: Container(
-          width: width,
+          width: width + 10,
           padding: const EdgeInsets.symmetric(vertical: padding),
           child: Row(
             children: [
               Expanded(
                 child: Text(
-                  ModaVestLabels.qtdProduct,
+                  ModaVestLabels.qtdProductSettled,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

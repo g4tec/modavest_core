@@ -1,3 +1,4 @@
+import 'package:modavest_core/assets/modavest_type_code.dart';
 import 'package:modavest_core/data/models/address/address_hive.dart';
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/position_coordinates.dart';
@@ -47,7 +48,9 @@ class AddressModel extends Address {
       countryName: json["countryName"] as String,
       reference: json["reference"] as String?,
       branchInsertCode: json["branchInsertCode"] as int? ?? 0,
-      addressType: json["addressType"] as num? ?? 1,
+      addressType: json["addressType"] is String
+          ? addressFromStringTypes[json["addressType"]] ?? 5
+          : json["addressType"] as num? ?? 1,
       address: json["address"] as String? ?? "-",
       integrationId: json["integrationId"] as num?,
       sequence: json["sequence"] as num?,

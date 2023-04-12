@@ -125,6 +125,7 @@ class ModaVestLabels {
   static String get shipping => "Frete";
   static String get totalItens => "Total dos itens";
   static String get totalBag => "Total do pedido";
+  static String get qtdItens => "Qtd. peças";
   static String get freeShipping => "Frete grátis a partir de ";
   static String get agreeWithTerms => "Concordo com os termos de uso";
   static String get name => "Nome";

@@ -12,6 +12,7 @@ class BottomButtonBag extends StatelessWidget {
   final bool isActive;
   final double? total;
   final double? subTotal;
+  final double? totalItens;
   final SalesOrder? selectedSalesOrder;
   final String label;
 
@@ -24,6 +25,7 @@ class BottomButtonBag extends StatelessWidget {
     this.selectedSalesOrder,
     this.subTotal,
     this.total,
+    this.totalItens,
   });
 
   Widget buildTotal({
@@ -31,31 +33,57 @@ class BottomButtonBag extends StatelessWidget {
     required double total,
   }) {
     return FittedBox(
-      child: Row(
+      child: Column(
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.20,
-            child: ModavestTitle(
-              ModaVestLabels.totalBag,
-              color: Colors.white,
-            ),
+          Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.35,
+                child: ModavestTitle(
+                  ModaVestLabels.totalBag,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.30,
+                child: AutoSizeText(
+                  toCurrency(total),
+                  minFontSize: 1,
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
+                  textAlign: TextAlign.end,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.30,
-            child: AutoSizeText(
-              toCurrency(total),
-              minFontSize: 1,
-              style: Theme.of(context).textTheme.headline4!.copyWith(
+          if (totalItens != null)
+            Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: ModavestTitle(
+                    ModaVestLabels.qtdItens,
                     color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
                   ),
-              textAlign: TextAlign.end,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.30,
+                  child: AutoSizeText(
+                    totalItens!.toStringAsFixed(0),
+                    minFontSize: 1,
+                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+              ],
             ),
-          ),
         ],
       ),
     );

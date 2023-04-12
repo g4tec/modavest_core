@@ -110,13 +110,17 @@ class SalesOrderModel extends SalesOrder {
       netValue: (json["netValue"] is int)
           ? (json["netValue"] as int).toDouble()
           : json["netValue"] as double?,
-      priorityCode: json["priorityCode"] as num?,
+      priorityCode: json["priorityCode"] is String
+          ? num.tryParse(json["priorityCode"] as String)
+          : json["priorityCode"] as num?,
       shippingCompanyCode: json["shippingCompanyCode"] as num?,
       shippingCompanyCpfCnpj: json["shippingCompanyCpfCnpj"] as String?,
       billingForecastDate: json["billingForecastDate"] != null
           ? DateTime.parse(json["billingForecastDate"] as String)
           : null,
-      freightType: json["freightType"] as num?,
+      freightType: json["freightType"] is String
+          ? num.tryParse(json["freightType"] as String)
+          : json["freightType"] as num?,
       freightPercentage: json["freightPercentage"] is int
           ? (json["freightPercentage"] as int).toDouble()
           : json["freightPercentage"] as double?,

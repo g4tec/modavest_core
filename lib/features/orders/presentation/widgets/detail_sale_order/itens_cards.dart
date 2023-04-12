@@ -86,7 +86,7 @@ class ItensRequestCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: padding),
                   child: FittedBox(
                     child: Text(
-                      "${item.settledQuantity ?? item.quantity}/${item.quantity}",
+                      "${item.settledQuantity ?? "-"}/${item.quantity}",
                     ),
                   ),
                 ),

@@ -158,6 +158,7 @@ class ModaVestLabels {
   static String get items => "Itens";
   static String get address => "Endereço";
   static String get delivery => "Entrega";
+  static String get classifications => "Classificações";
   static String get payment => "Pagamento";
   static String get completeToProcced =>
       "Complete este passo antes de prosseguir";

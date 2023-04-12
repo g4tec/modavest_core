@@ -42,6 +42,11 @@ class DetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    num? settledQuantity = salesOrder.items?.fold(
+        0.0,
+        (previousValue, element) =>
+            previousValue ??
+            0 + (element.settledQuantity ?? element.quantity ?? 0));
     return ListView(
       children: [
         buildRow(
@@ -83,14 +88,13 @@ class DetailsCard extends StatelessWidget {
         ),
         buildRow(
           title: "Qt. de peças faturadas",
-          title2: salesOrder.items
-                  ?.fold(
-                      0.0,
-                      (previousValue, element) =>
-                          previousValue +
-                          (element.settledQuantity ?? element.quantity ?? 0))
-                  .toString() ??
-              " - ",
+          title2: settledQuantity != null
+              ? settledQuantity == 0 &&
+                      (salesOrder.items ?? []).isEmpty &&
+                      salesOrder.items!.first.settledQuantity == null
+                  ? settledQuantity.toString()
+                  : " - "
+              : " - ",
           context: context,
           filled: true,
         ),

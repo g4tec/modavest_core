@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/modavest_type_code.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/utils/format_money.dart';
-import 'package:modavest_core/utils/format_cnpj_cpf.dart';
 
 class PaymentDetailCard extends StatelessWidget {
   final SalesOrder salesOrder;

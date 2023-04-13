@@ -35,6 +35,7 @@ class DeliveryCards extends StatelessWidget {
           Flexible(
             child: AutoSizeText(
               title2,
+              textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.headline5,
             ),
           )
@@ -49,7 +50,7 @@ class DeliveryCards extends StatelessWidget {
       children: [
         buildRow(
           title: "Previsão de faturamento",
-          title2: (salesOrder.items ?? []).isEmpty &&
+          title2: (salesOrder.items ?? []).isNotEmpty &&
                   salesOrder.items!.first.billingForecastDate != null
               ? formatDate(salesOrder.items!.first.billingForecastDate!)
               : " - ",

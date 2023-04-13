@@ -31,6 +31,7 @@ class ClassificationsCard extends StatelessWidget {
           Flexible(
             child: AutoSizeText(
               title2,
+              textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.headline5,
             ),
           )

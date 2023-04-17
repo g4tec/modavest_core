@@ -2,18 +2,13 @@ import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 
 class DiscountModel extends Discount {
-  const DiscountModel({
-    required num code,
-    required num percentage,
-  }) : super(
-          code: code,
-          percentage: percentage,
-        );
+  const DiscountModel({super.code, super.percentage, super.value});
 
   factory DiscountModel.fromJson(Map json) {
     return DiscountModel(
-      code: json["code"] as num,
-      percentage: json["percentage"] as num,
+      code: json["code"] as num?,
+      percentage: json["percentage"] as num?,
+      value: json["value"] as num?,
     );
   }
 
@@ -26,8 +21,8 @@ class DiscountModel extends Discount {
 
   HiveDiscount toHive() {
     return HiveDiscount(
-      code: code,
-      percentage: percentage,
+      code: code ?? 0,
+      percentage: percentage ?? 0,
     );
   }
 
@@ -35,6 +30,7 @@ class DiscountModel extends Discount {
     return {
       "typeDiscountCode": code,
       "discountPercentage": percentage,
+      "value": value,
     };
   }
 

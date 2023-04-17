@@ -1,9 +1,11 @@
 class Discount {
-  final num code;
-  final num percentage;
+  final num? code;
+  final num? percentage;
+  final num? value;
 
   const Discount({
-    required this.code,
-    required this.percentage,
+    this.code,
+    this.percentage,
+    this.value,
   });
 }

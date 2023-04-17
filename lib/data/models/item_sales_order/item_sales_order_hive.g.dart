@@ -29,6 +29,7 @@ class HiveItemSalesOrderAdapter extends TypeAdapter<HiveItemSalesOrder> {
       colorName: fields[9] as String?,
       sizeName: fields[10] as String?,
       quantity: fields[11] as num?,
+      settledQuantity: fields[25] as num?,
       originalPrice: fields[18] as num?,
       price: fields[19] as num,
       discountPercentage: fields[20] as num?,
@@ -42,7 +43,7 @@ class HiveItemSalesOrderAdapter extends TypeAdapter<HiveItemSalesOrder> {
   @override
   void write(BinaryWriter writer, HiveItemSalesOrder obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(20)
       ..writeByte(0)
       ..write(obj.integrationId)
       ..writeByte(1)
@@ -80,7 +81,9 @@ class HiveItemSalesOrderAdapter extends TypeAdapter<HiveItemSalesOrder> {
       ..writeByte(23)
       ..write(obj.referenceIsPack)
       ..writeByte(24)
-      ..write(obj.scaleCode);
+      ..write(obj.scaleCode)
+      ..writeByte(25)
+      ..write(obj.settledQuantity);
   }
 
   @override

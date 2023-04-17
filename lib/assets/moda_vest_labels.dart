@@ -97,6 +97,7 @@ class ModaVestLabels {
   static String get estoque => "Estoque";
   static String get precoUnid => "Preço Unid.";
   static String get qtdProduct => "Qtd. de Peças";
+  static String get qtdProductSettled => "Qtd. Fat/Sol";
   static String get amountProduct => "Quantidade de Peças";
   static String get amount => "Quantidade";
   static String get addDeliveryAddres => "Adicionar um endereço de entrega";
@@ -124,6 +125,7 @@ class ModaVestLabels {
   static String get select => "Selecionar";
   static String get shipping => "Frete";
   static String get totalItens => "Total dos itens";
+  static String get totalUnids => "Total de peças";
   static String get totalBag => "Total do pedido";
   static String get qtdItens => "Qtd. peças";
   static String get freeShipping => "Frete grátis a partir de ";
@@ -156,6 +158,7 @@ class ModaVestLabels {
   static String get items => "Itens";
   static String get address => "Endereço";
   static String get delivery => "Entrega";
+  static String get classifications => "Classificações";
   static String get payment => "Pagamento";
   static String get completeToProcced =>
       "Complete este passo antes de prosseguir";
@@ -233,6 +236,7 @@ class ModaVestLabels {
   static String get searchingSaleOrderDetail => "Buscando detalhes do pedido";
   static String get datails => "Detalhes";
   static String get orderItens => "Itens do pedido";
+  static String get details => "Detalhes";
   static String get value => "Valor";
   static String get itemSubtotal => "Subtotal do item";
   static String get validateCustomerCnpj =>

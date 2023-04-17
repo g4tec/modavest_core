@@ -18,3 +18,4 @@ modavest-app
 .flutter-plugins
 .DS_Store
 modavest-app-vendedor
+.dart_tool/

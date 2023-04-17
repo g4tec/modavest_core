@@ -23,6 +23,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
     ReferenceModel? super.reference,
     required super.referenceIsPack,
     required super.scaleCode,
+    super.settledQuantity,
   });
 
   factory ItemSalesOrderModel.fromJson(Map json) {
@@ -39,6 +40,8 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       colorName: json["colorName"] as String?,
       sizeName: json["sizeName"] as String?,
       quantity: (json["quantity"] as num?) ?? json["Quantity"] as num?,
+      settledQuantity:
+          (json["settledQuantity"] as num?) ?? json["settledQuantity"] as num?,
       originalPrice: json["originalPrice"] as num?,
       price: json["price"] as num,
       discountPercentage: json["discountPercentage"] as num?,
@@ -63,6 +66,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       colorName: hive.colorName,
       sizeName: hive.sizeName,
       quantity: hive.quantity,
+      settledQuantity: hive.settledQuantity,
       originalPrice: hive.originalPrice,
       price: hive.price,
       discountPercentage: hive.discountPercentage,
@@ -88,6 +92,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       colorName: item.colorName,
       sizeName: item.sizeName,
       quantity: item.quantity,
+      settledQuantity: item.settledQuantity,
       originalPrice: item.originalPrice,
       price: item.price,
       discountPercentage: item.discountPercentage,
@@ -114,6 +119,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       colorName: colorName,
       sizeName: sizeName,
       quantity: quantity,
+      settledQuantity: settledQuantity,
       originalPrice: originalPrice,
       price: price,
       discountPercentage: discountPercentage,

@@ -1,13 +1,18 @@
+import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_model.dart';
 import 'package:modavest_core/data/models/sales_order/sales_order_hive.dart';
+import 'package:modavest_core/data/models/sales_order_classification/sales_order_classification_model.dart';
+import 'package:modavest_core/data/models/sales_order_observation/classification_model.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
+import 'package:modavest_core/domain/models/sales_order_classification.dart';
+import 'package:modavest_core/domain/models/sales_order_observation.dart';
 
 class SalesOrderModel extends SalesOrder {
   SalesOrderModel({
@@ -55,6 +60,12 @@ class SalesOrderModel extends SalesOrder {
     List<DiscountModel>? super.discounts = const [],
     required super.priceTableCode,
     super.totalOriginalAmountOrder,
+    super.arrivalDate,
+    super.shippingCompanyName,
+    super.classifications,
+    super.shippingAddress,
+    super.chargeType,
+    super.representativeObservations,
   }) : super(
           paymentconditionCode: paymentConditionCode,
         );
@@ -100,13 +111,17 @@ class SalesOrderModel extends SalesOrder {
       netValue: (json["netValue"] is int)
           ? (json["netValue"] as int).toDouble()
           : json["netValue"] as double?,
-      priorityCode: json["priorityCode"] as num?,
+      priorityCode: json["priorityCode"] is String
+          ? num.tryParse(json["priorityCode"] as String)
+          : json["priorityCode"] as num?,
       shippingCompanyCode: json["shippingCompanyCode"] as num?,
       shippingCompanyCpfCnpj: json["shippingCompanyCpfCnpj"] as String?,
       billingForecastDate: json["billingForecastDate"] != null
           ? DateTime.parse(json["billingForecastDate"] as String)
           : null,
-      freightType: json["freightType"] as num?,
+      freightType: json["freightType"] is String
+          ? num.tryParse(json["freightType"] as String)
+          : json["freightType"] as num?,
       freightPercentage: json["freightPercentage"] is int
           ? (json["freightPercentage"] as int).toDouble()
           : json["freightPercentage"] as double?,
@@ -125,10 +140,32 @@ class SalesOrderModel extends SalesOrder {
           .map((value) => ItemSalesOrderModel.fromJson(value as Map))
           .toList(),
       officialStoreId: json["officialStoreId"] as num?,
-      observations: (json["observations"] as List? ?? [])
-          .map((e) => (e as Map)["observation"] as String?)
-          .toList(),
+      observations: json["observations"] is List
+          ? (json["observations"] as List)
+              .map((e) => SalesOrderObservationModel.fromJson(e))
+              .toList()
+          : [],
+      representativeObservations: json["representativeObservations"] is List
+          ? (json["representativeObservations"] as List)
+              .map((e) => SalesOrderObservationModel.fromJson(e))
+              .toList()
+          : [],
       priceTableCode: json["priceTableCode"] as num? ?? 0,
+      arrivalDate: json["arrivalDate"] != null
+          ? DateTime.parse(json["arrivalDate"] as String)
+          : null,
+      shippingCompanyName: json["shippingCompanyName"] as String?,
+      classifications:
+          json["classifications"] != null && json["classifications"] is List
+              ? ((json["classifications"] ?? []) as List)
+                  .map((value) =>
+                      SalesOrderClassificationModel.fromJson(value as Map))
+                  .toList()
+              : null,
+      shippingAddress: json["shippingAddress"] != null
+          ? AddressModel.fromJson(json["shippingAddress"])
+          : null,
+      chargeType: json["chargeType"] as num?,
     );
   }
 
@@ -177,10 +214,11 @@ class SalesOrderModel extends SalesOrder {
               .toList() ??
           [],
       officialStoreId: hive.officialStoreId,
-      observations: hive.observations ?? [],
       priceTableCode: hive.priceTableCode,
       totalOriginalAmountOrder: hive.totalOriginalAmountOrder,
       discountPercentage: hive.discountPercentage,
+      arrivalDate: hive.arrivalDate,
+      shippingCompanyName: hive.shippingCompanyName,
     );
   }
 
@@ -233,6 +271,14 @@ class SalesOrderModel extends SalesOrder {
       totalOriginalAmountOrder: order.totalOriginalAmountOrder,
       discountPercentage: order.discountPercentage,
       observations: order.observations,
+      arrivalDate: order.arrivalDate,
+      shippingCompanyName: order.shippingCompanyName,
+      classifications: order.classifications
+          ?.map((SalesOrderClassification e) =>
+              SalesOrderClassificationModel.entitie(e))
+          .toList(),
+      chargeType: order.chargeType,
+      representativeObservations: order.representativeObservations,
     );
   }
 
@@ -276,6 +322,8 @@ class SalesOrderModel extends SalesOrder {
       priceTableCode: priceTableCode,
       totalOriginalAmountOrder: totalOriginalAmountOrder,
       discountPercentage: discountPercentage,
+      arrivalDate: arrivalDate,
+      shippingCompanyName: shippingCompanyName,
     );
   }
 
@@ -321,11 +369,15 @@ class SalesOrderModel extends SalesOrder {
     String? stackTrace,
     num? sequence,
     num? officialStoreId,
-    List<String?>? observations,
+    List<SalesOrderObservation?>? observations,
     num? priceTableCode,
     List<Discount>? discounts,
     double? totalOriginalAmountOrder,
     num? discountPercentage,
+    DateTime? arrivalDate,
+    List<SalesOrderClassification>? classifications,
+    num? chargeType,
+    List<SalesOrderObservation?>? representativeObservations,
   }) {
     return SalesOrderModel(
       integrationId: integrationId ?? this.integrationId,
@@ -373,10 +425,22 @@ class SalesOrderModel extends SalesOrder {
           [],
       officialStoreId: officialStoreId ?? this.officialStoreId,
       observations: observations ?? this.observations,
+      representativeObservations:
+          representativeObservations ?? this.representativeObservations,
       priceTableCode: priceTableCode ?? this.priceTableCode,
       totalOriginalAmountOrder:
           totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,
       discountPercentage: discountPercentage ?? this.discountPercentage,
+      arrivalDate: arrivalDate ?? this.arrivalDate,
+      classifications: (classifications ?? this.classifications)
+              ?.map((SalesOrderClassification e) =>
+                  SalesOrderClassificationModel.entitie(e))
+              .toList() ??
+          [],
+      shippingAddress: shippingAddress != null
+          ? AddressModel.entite(shippingAddress!)
+          : null,
+      chargeType: chargeType ?? this.chargeType,
     );
   }
 }

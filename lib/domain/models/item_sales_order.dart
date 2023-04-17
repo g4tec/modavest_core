@@ -13,6 +13,7 @@ class ItemSalesOrder {
   final String? colorName;
   final String? sizeName;
   num? quantity;
+  num? settledQuantity;
   num? originalPrice;
   num price;
   final num? discountPercentage;
@@ -41,6 +42,7 @@ class ItemSalesOrder {
     this.billingForecastDate,
     this.reference,
     this.scaleCode,
+    this.settledQuantity,
   });
 
   factory ItemSalesOrder.copy(ItemSalesOrder item) {
@@ -64,6 +66,7 @@ class ItemSalesOrder {
       billingForecastDate: item.billingForecastDate,
       reference: item.reference,
       scaleCode: item.scaleCode,
+      settledQuantity: item.settledQuantity,
     );
   }
 }

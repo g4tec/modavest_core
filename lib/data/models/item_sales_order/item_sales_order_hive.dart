@@ -43,6 +43,8 @@ class HiveItemSalesOrder extends HiveObject {
   bool? referenceIsPack;
   @HiveField(24)
   num? scaleCode;
+  @HiveField(25)
+  num? settledQuantity;
 
   HiveItemSalesOrder({
     required this.integrationId,
@@ -57,6 +59,7 @@ class HiveItemSalesOrder extends HiveObject {
     this.colorName,
     this.sizeName,
     required this.quantity,
+    required this.settledQuantity,
     this.originalPrice,
     required this.price,
     this.discountPercentage,

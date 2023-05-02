@@ -1,5 +1,6 @@
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
+import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
@@ -66,6 +67,7 @@ class SalesOrder {
   List<SalesOrderClassification>? classifications;
   Address? shippingAddress;
   num? chargeType;
+  List<ImageColorReference>? imageColorsReferences;
 
   SalesOrder({
     this.integrationId,
@@ -120,6 +122,7 @@ class SalesOrder {
     this.shippingAddress,
     this.chargeType,
     this.representativeObservations = const [],
+    this.imageColorsReferences,
   });
 
   SalesOrder copyWith({
@@ -183,6 +186,7 @@ class SalesOrder {
       classifications: classifications,
       shippingAddress: shippingAddress,
       chargeType: chargeType,
+      imageColorsReferences: imageColorsReferences,
     );
   }
 
@@ -239,6 +243,7 @@ class SalesOrder {
       classifications: order.classifications,
       shippingAddress: order.shippingAddress,
       chargeType: order.chargeType,
+      imageColorsReferences: order.imageColorsReferences,
     );
   }
 }

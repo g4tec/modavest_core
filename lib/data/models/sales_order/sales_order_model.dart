@@ -1,6 +1,7 @@
 import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
+import 'package:modavest_core/data/models/image_color_reference/image_color_reference_model.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_model.dart';
 import 'package:modavest_core/data/models/sales_order/sales_order_hive.dart';
@@ -66,6 +67,7 @@ class SalesOrderModel extends SalesOrder {
     super.shippingAddress,
     super.chargeType,
     super.representativeObservations,
+    super.imageColorsReferences,
   }) : super(
           paymentconditionCode: paymentConditionCode,
         );
@@ -166,6 +168,11 @@ class SalesOrderModel extends SalesOrder {
           ? AddressModel.fromJson(json["shippingAddress"])
           : null,
       chargeType: json["chargeType"] as num?,
+      imageColorsReferences: json['imageColorsReferences'] != null
+          ? (json['imageColorsReferences'] as List)
+              .map((json) => ImageColorReferenceModel.fromJson(json))
+              .toList()
+          : null,
     );
   }
 

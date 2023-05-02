@@ -4,23 +4,23 @@ import 'package:modavest_core/data/models/oficial_store/oficial_store_model.dart
 import 'package:modavest_core/domain/models/goal_item.dart';
 
 class GoalItemModel extends GoalItem {
-  GoalItemModel({
-    required super.goalCode,
-    required super.goalType,
-    required super.initialDate,
-    required super.finalDate,
-    required List<OficialStoreModel> super.officialStores,
-    required super.colections,
-    required super.ufs,
-    required List<LegalPersonModel> super.legalPersons,
-    required List<ClassificationModel> super.productClassifications,
-    required List<ClassificationModel> super.orderClassifications,
-    required super.references,
-    super.goalValue,
-    super.reachedValue,
-    super.goalQuantity,
-    super.reachedQuantity,
-  });
+  GoalItemModel(
+      {required super.goalCode,
+      required super.goalType,
+      required super.initialDate,
+      required super.finalDate,
+      required List<OficialStoreModel> super.officialStores,
+      required super.colections,
+      required super.ufs,
+      required List<LegalPersonModel> super.legalPersons,
+      required List<ClassificationModel> super.productClassifications,
+      required List<ClassificationModel> super.orderClassifications,
+      required super.references,
+      super.goalValue,
+      super.reachedValue,
+      super.goalQuantity,
+      super.reachedQuantity,
+      super.description});
 
   factory GoalItemModel.fromJson(Map<String, dynamic> json) => GoalItemModel(
         goalCode: json["goalId"] as num,
@@ -50,5 +50,6 @@ class GoalItemModel extends GoalItem {
         reachedValue: json["reachedValue"] as num?,
         goalQuantity: json["goalQuantity"] as num?,
         reachedQuantity: json["reachedQuantity"] as num?,
+        description: json["description"] as String?,
       );
 }

@@ -18,6 +18,7 @@ class GoalItem {
   final num? reachedValue;
   final num? goalQuantity;
   final num? reachedQuantity;
+  final String? description;
 
   GoalItem({
     required this.goalCode,
@@ -35,5 +36,6 @@ class GoalItem {
     required this.reachedValue,
     required this.goalQuantity,
     required this.reachedQuantity,
+    this.description,
   });
 }

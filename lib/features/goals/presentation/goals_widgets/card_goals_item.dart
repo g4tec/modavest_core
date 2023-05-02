@@ -139,6 +139,13 @@ class GoalItemCard extends StatelessWidget {
     return Wrap(
       runSpacing: 10,
       children: [
+        if (goalItem.description != null)
+          buildSpecification(
+            titleStyle: titleStyle,
+            size: cellSize,
+            title: ModaVestLabels.description,
+            values: [goalItem.description!],
+          ),
         buildSpecification(
           titleStyle: titleStyle,
           size: cellSize,
@@ -284,13 +291,27 @@ class GoalItemCard extends StatelessWidget {
           padding: const EdgeInsets.only(top: 10, bottom: 10),
           child: FittedBox(
             alignment: Alignment.topCenter,
-            child: Row(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: ProgressCard(value: progressPercentage),
+                if (goalItem.description != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      goalItem.description!,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: ProgressCard(value: progressPercentage),
+                    ),
+                    const Icon(Icons.expand_more),
+                  ],
                 ),
-                const Icon(Icons.expand_more),
               ],
             ),
           ),

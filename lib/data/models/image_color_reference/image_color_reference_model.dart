@@ -7,11 +7,17 @@ class ImageColorReferenceModel extends ImageColorReference {
     required String? image,
     required String? imageMedium,
     required String? imageSmall,
+    String? referenceCode,
+    String? colorCode,
+    bool? isDefault,
   }) : super(
           sequence: sequence,
           image: image,
           imageMedium: imageMedium,
           imageSmall: imageSmall,
+          referenceCode: referenceCode,
+          colorCode: colorCode,
+          isDefault: isDefault,
         );
 
   factory ImageColorReferenceModel.fromJson(Map json) {
@@ -20,6 +26,9 @@ class ImageColorReferenceModel extends ImageColorReference {
       image: json["image"] as String?,
       imageMedium: json["image_medium"] as String?,
       imageSmall: json["image_small"] as String?,
+      referenceCode: json["ReferenceCode"] as String?,
+      colorCode: json["code"] as String?,
+      isDefault: json["isDefault"] as bool?,
     );
   }
 

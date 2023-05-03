@@ -13,6 +13,7 @@ class CardListingBagStore extends StatefulWidget {
   final bool value;
   final String orderId;
   final Widget Function(String) countingBuildWidget;
+  final Widget Function(String url)? buildImage;
 
   const CardListingBagStore({
     super.key,
@@ -26,6 +27,7 @@ class CardListingBagStore extends StatefulWidget {
     this.onChange,
     required this.onSelectSalesOrder,
     required this.countingBuildWidget,
+    this.buildImage,
   });
 
   @override
@@ -75,12 +77,13 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                     fit: BoxFit.contain,
                     child: Padding(
                       padding: const EdgeInsets.all(0.5),
-                      child: ImageColorReferenceView(
-                        prefixKey: "bagStore",
-                        urlImg: widget.image,
-                        fit: BoxFit.cover,
-                        cacheWidth: 100,
-                      ),
+                      child: widget.buildImage?.call(widget.image) ??
+                          ImageColorReferenceView(
+                            prefixKey: "bagStore",
+                            urlImg: widget.image,
+                            fit: BoxFit.cover,
+                            cacheWidth: 100,
+                          ),
                     ),
                   ),
                 ),

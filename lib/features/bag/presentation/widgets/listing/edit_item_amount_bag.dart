@@ -43,6 +43,7 @@ class EditItemAmountBag extends StatefulWidget {
     List<SalesOrder>? bagOrders,
   })? updatePrices;
   final Widget Function(ProductPrice?) buildPriceLabel;
+  final Widget Function(String? url)? buildImage;
 
   const EditItemAmountBag({
     super.key,
@@ -65,6 +66,7 @@ class EditItemAmountBag extends StatefulWidget {
     required this.buildPriceLabel,
     this.isChecked,
     this.onCheckBoxItemChange,
+    this.buildImage,
   });
 
   @override
@@ -125,18 +127,27 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
                   height: MediaQuery.of(context).size.width * 0.3,
                   child: FittedBox(
                     fit: BoxFit.contain,
-                    child: ImageColorReferenceView(
-                      prefixKey: "bagStore",
-                      imageColorReference: () {
-                        try {
-                          return widget.color.imgList.first;
-                        } catch (e) {
-                          return null;
-                        }
-                      }.call(),
-                      fit: BoxFit.cover,
-                      cacheWidth: 150,
-                    ),
+                    child: widget.buildImage?.call(
+                          () {
+                            try {
+                              return widget.color.imgList.first;
+                            } catch (e) {
+                              return null;
+                            }
+                          }.call()?.image,
+                        ) ??
+                        ImageColorReferenceView(
+                          prefixKey: "bagStore",
+                          imageColorReference: () {
+                            try {
+                              return widget.color.imgList.first;
+                            } catch (e) {
+                              return null;
+                            }
+                          }.call(),
+                          fit: BoxFit.cover,
+                          cacheWidth: 150,
+                        ),
                   ),
                 ),
                 Container(

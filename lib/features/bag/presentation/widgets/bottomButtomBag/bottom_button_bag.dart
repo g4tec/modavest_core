@@ -15,6 +15,7 @@ class BottomButtonBag extends StatelessWidget {
   final double? totalItens;
   final SalesOrder? selectedSalesOrder;
   final String label;
+  final Widget Function(String?)? buildImage;
 
   const BottomButtonBag({
     super.key,
@@ -26,6 +27,7 @@ class BottomButtonBag extends StatelessWidget {
     this.subTotal,
     this.total,
     this.totalItens,
+    this.buildImage,
   });
 
   Widget buildTotal({
@@ -102,11 +104,13 @@ class BottomButtonBag extends StatelessWidget {
         children: [
           SizedBox(
             width: 50,
-            child: ImageColorReferenceView(
-              urlImg: selectedSalesOrder.oficialStore?.logoUrl ?? "",
-              fit: BoxFit.cover,
-              cacheWidth: 50,
-            ),
+            child: buildImage
+                    ?.call(selectedSalesOrder?.oficialStore?.logoUrl ?? "") ??
+                ImageColorReferenceView(
+                  urlImg: selectedSalesOrder.oficialStore?.logoUrl ?? "",
+                  fit: BoxFit.cover,
+                  cacheWidth: 50,
+                ),
           ),
         ],
       ),

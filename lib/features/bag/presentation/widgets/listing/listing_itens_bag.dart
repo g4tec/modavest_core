@@ -49,6 +49,7 @@ class ListingItensBag extends StatefulWidget {
   final void Function(List<SalesOrder> salesOrders) deleteSalesOrder;
   final Function() onPop;
   final Function(ColorItemSalesOrder, bool)? onCheckBoxItemChange;
+  final Widget Function(String?)? buildImage;
   const ListingItensBag({
     super.key,
     required this.salesOrders,
@@ -66,6 +67,7 @@ class ListingItensBag extends StatefulWidget {
     this.selectedColorItems,
     this.onSelectCheckBox,
     this.onCheckBoxItemChange,
+    this.buildImage,
   });
 
   @override
@@ -166,6 +168,7 @@ class ListingItensBagState extends State<ListingItensBag> {
                   onSelectSalesOrder: () =>
                       widget.onSelectSalesOrder.call(index),
                   key: itensKeys[saleOrder.orderId],
+                  buildImage: widget.buildImage,
                   orderId: saleOrder.orderId ?? "",
                   image: saleOrder.oficialStore?.logoUrl ?? "",
                   title: saleOrder.oficialStore?.description ?? "",
@@ -225,6 +228,7 @@ class ListingItensBagState extends State<ListingItensBag> {
       subtotal: colorItems.subtotal,
       amount: colorItems.amount,
       color: colorItems.color,
+      buildImage: widget.buildImage,
       referenceCode: colorItems.items.first.referenceCode ?? "",
       referenceName:
           "${colorItems.items.first.referenceCode ?? ""} - ${colorItems.items.first.referenceName ?? ""}",

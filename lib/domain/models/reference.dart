@@ -2,6 +2,7 @@ import 'package:modavest_core/domain/models/color.dart';
 import 'package:modavest_core/domain/models/composition.dart';
 import 'package:modavest_core/domain/models/details.dart';
 import 'package:modavest_core/domain/models/reference_price.dart';
+import 'package:modavest_core/domain/models/reference_simple.dart';
 
 class Reference {
   final String code;
@@ -64,5 +65,20 @@ class Reference {
     return (name ?? "").toLowerCase().contains(string.toLowerCase()) ||
         (description ?? "").toLowerCase().contains(string.toLowerCase()) ||
         code.toLowerCase().contains(string.toLowerCase());
+  }
+
+  ReferenceSimple simplifyReference() {
+    return ReferenceSimple(
+      code: code,
+      integrationId: integrationId,
+      oficialStore: oficialStore,
+      priceTable: priceTable,
+      description: description,
+      name: name,
+      imageColorReference: imageColorReference,
+      referencePrice: referencePrice,
+      officialStoreCode: oficialStore,
+      priceTableCode: priceTable,
+    );
   }
 }

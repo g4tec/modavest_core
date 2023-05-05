@@ -150,7 +150,6 @@ class AddItemByVariation extends StatelessWidget {
                 prices: referenceAux.referencePrice?.prices ?? [],
                 officialStoreCode: referenceAux.oficialStore,
                 priceTableCode: referenceAux.priceTable,
-                reference: referenceAux,
                 showAmountColor: true,
                 buildPriceLabel: buildPriceLabel,
                 updatePrices: ({bagOrders, required int quantity}) =>

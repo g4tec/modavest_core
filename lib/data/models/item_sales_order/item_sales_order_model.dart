@@ -20,7 +20,8 @@ class ItemSalesOrderModel extends ItemSalesOrder {
     required super.price,
     super.discountPercentage,
     super.billingForecastDate,
-    ReferenceModel? super.reference,
+    // TODO: remover se necessário
+    // ReferenceModel? super.reference,
     required super.referenceIsPack,
     required super.scaleCode,
     super.settledQuantity,
@@ -71,9 +72,10 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       price: hive.price,
       discountPercentage: hive.discountPercentage,
       billingForecastDate: hive.billingForecastDate,
-      reference: hive.reference != null
-          ? ReferenceModel.fromHive(hive.reference!)
-          : null,
+      // TODO: remover se necessário
+      // reference: hive.reference != null
+      //     ? ReferenceModel.fromHive(hive.reference!)
+      //     : null,
       referenceIsPack: hive.referenceIsPack,
       scaleCode: hive.scaleCode,
     );
@@ -97,9 +99,10 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       price: item.price,
       discountPercentage: item.discountPercentage,
       billingForecastDate: item.billingForecastDate,
-      reference: item.reference != null
-          ? ReferenceModel.entity(item.reference!)
-          : null,
+      //  TODO: remover se necessário
+      // referenceSimple: item.referenceSimple != null
+      //     ? ReferenceModel.entity(item.reference!)
+      //     : null,
       referenceIsPack: item.referenceIsPack,
       scaleCode: item.scaleCode,
     );

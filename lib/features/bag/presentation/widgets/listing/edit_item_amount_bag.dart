@@ -35,8 +35,7 @@ class EditItemAmountBag extends StatefulWidget {
   final num? officialStoreCode;
   final num? priceTableCode;
   final num? conditionCode;
-  final Reference? reference;
-  final Function(Reference?)? initDiscount;
+  final Function()? initDiscount;
   final Function(bool)? onCheckBoxItemChange;
   final void Function({
     required int quantity,
@@ -58,7 +57,6 @@ class EditItemAmountBag extends StatefulWidget {
     required this.officialStoreCode,
     required this.priceTableCode,
     required this.conditionCode,
-    required this.reference,
     required this.subtotal,
     required this.amount,
     required this.initDiscount,
@@ -79,7 +77,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
   @override
   void initState() {
     super.initState();
-    widget.initDiscount?.call(widget.reference);
+    widget.initDiscount?.call();
   }
 
   void onChangeInGlobalInput(int value, int amount) {
@@ -246,7 +244,6 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
               officialStoreCode: widget.officialStoreCode,
               priceTableCode: widget.priceTableCode,
               conditionCode: widget.conditionCode,
-              reference: widget.reference,
               updatePrices: widget.updatePrices,
               buildPriceLabel: widget.buildPriceLabel,
             ),

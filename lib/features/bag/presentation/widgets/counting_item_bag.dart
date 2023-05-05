@@ -6,7 +6,6 @@ import 'package:modavest_core/assets/modavest_sizes.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
-import 'package:modavest_core/domain/models/reference.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/utils/uniques.dart';
 import 'package:modavest_core/widgets/fields/number_with_controls_input.dart';
@@ -28,7 +27,6 @@ class CountingItemBag extends StatefulWidget {
   final num? officialStoreCode;
   final num? priceTableCode;
   final num? conditionCode;
-  final Reference? reference;
 
   final Widget Function(ProductPrice?) buildPriceLabel;
 
@@ -48,7 +46,6 @@ class CountingItemBag extends StatefulWidget {
     this.officialStoreCode,
     required this.priceTableCode,
     this.conditionCode,
-    required this.reference,
     this.showAmountColor = false,
     this.updatePrices,
     required this.buildPriceLabel,

@@ -34,14 +34,12 @@ class ListingItensBag extends StatefulWidget {
     required List<ProductPrice?>? prices,
     num? oficialStoreId,
     num? priceTableCode,
-    required Reference? reference,
   })? initDiscount;
   final void Function({
     required int quantity,
     List<SalesOrder>? bagOrders,
     num? oficialStoreId,
     num? priceTableCode,
-    Reference? reference,
     List<ProductPrice>? prices,
   })? updatePrices;
 
@@ -220,7 +218,7 @@ class ListingItensBagState extends State<ListingItensBag> {
 
     for (final ItemSalesOrder itens in colorItems.items) {
       prices.addAll(
-        itens.reference?.referencePrice?.prices ?? [],
+        itens.referenceSimple?.referencePrice?.prices ?? [],
       );
     }
 
@@ -243,7 +241,8 @@ class ListingItensBagState extends State<ListingItensBag> {
       priceTableCode: saleOrder.priceTableCode,
       officialStoreCode: saleOrder.officialStoreId,
       conditionCode: saleOrder.paymentconditionCode,
-      reference: colorItems.items.first.reference,
+      // TODO: rever
+      // reference: colorItems.items.first.reference,
       onchangeProductAmount: (
         Product product,
         int value,
@@ -271,14 +270,10 @@ class ListingItensBagState extends State<ListingItensBag> {
           }
         }.call(),
       ),
-      initDiscount: (
-        Reference? reference,
-      ) =>
-          widget.initDiscount?.call(
+      initDiscount: () => widget.initDiscount?.call(
         prices: prices,
         oficialStoreId: saleOrder.officialStoreId,
         priceTableCode: saleOrder.priceTableCode,
-        reference: reference,
       ),
       updatePrices: ({
         required int quantity,
@@ -289,7 +284,8 @@ class ListingItensBagState extends State<ListingItensBag> {
         bagOrders: bagOrders,
         oficialStoreId: saleOrder.officialStoreId,
         priceTableCode: saleOrder.priceTableCode,
-        reference: colorItems.items.first.reference,
+        // TODO: rever
+        // reference: colorItems.items.first.reference,
         prices: prices,
       ),
       buildPriceLabel: widget.buildPriceLabel,

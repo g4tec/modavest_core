@@ -82,7 +82,7 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                             prefixKey: "bagStore",
                             urlImg: widget.image,
                             fit: BoxFit.cover,
-                            cacheWidth: 100,
+                            cacheWidth: 50,
                           ),
                     ),
                   ),

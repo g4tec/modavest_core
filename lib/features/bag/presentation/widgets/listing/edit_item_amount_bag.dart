@@ -144,7 +144,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
                             }
                           }.call(),
                           fit: BoxFit.cover,
-                          cacheWidth: 150,
+                          cacheWidth: 50,
                         ),
                   ),
                 ),

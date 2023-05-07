@@ -71,7 +71,8 @@ class EditItemAmountBag extends StatefulWidget {
   EditItemAmountBagState createState() => EditItemAmountBagState();
 }
 
-class EditItemAmountBagState extends State<EditItemAmountBag> {
+class EditItemAmountBagState extends State<EditItemAmountBag>
+    with AutomaticKeepAliveClientMixin {
   final GlobalKey tableSizes = GlobalKey(debugLabel: "tableSizes");
 
   @override
@@ -251,4 +252,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => false;
 }

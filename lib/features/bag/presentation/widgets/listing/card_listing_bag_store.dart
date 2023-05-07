@@ -5,7 +5,7 @@ import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 class CardListingBagStore extends StatefulWidget {
   final String image;
   final String title;
-  final List<Widget> children;
+  final Widget child;
   final bool showCheckBox;
   final Function(bool)? onChange;
   final Function() onSelectSalesOrder;
@@ -14,15 +14,17 @@ class CardListingBagStore extends StatefulWidget {
   final String orderId;
   final Widget Function(String) countingBuildWidget;
   final Widget Function(String url)? buildImage;
+  final Function() onExpand;
 
   const CardListingBagStore({
     super.key,
+    required this.onExpand,
     required this.onSelect,
     required this.value,
     required this.orderId,
     required this.image,
     this.title = "Loja oficial",
-    this.children = const [],
+    required this.child,
     this.showCheckBox = true,
     this.onChange,
     required this.onSelectSalesOrder,
@@ -38,14 +40,17 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onSelectSalesOrder,
-      child: ExpansionTile(
-        backgroundColor: const Color(0xffe8e8e8),
-        maintainState: true,
-        onExpansionChanged: (value) {
-          widget.onSelectSalesOrder.call();
-        },
-        collapsedBackgroundColor: const Color(0xffe8e8e8),
+      onTap: () {
+        widget.onSelectSalesOrder.call();
+      },
+      child: ListTile(
+        // backgroundColor: const Color(0xffe8e8e8),
+        // maintainState: true,
+        // onExpansionChanged: (value) {
+        //   widget.onSelectSalesOrder.call();
+        // },
+        // collapsedBackgroundColor: const Color(0xffe8e8e8),
+
         title: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: FittedBox(
@@ -82,7 +87,7 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                             prefixKey: "bagStore",
                             urlImg: widget.image,
                             fit: BoxFit.cover,
-                            cacheWidth: 50,
+                            cacheWidth: 180,
                           ),
                     ),
                   ),
@@ -103,11 +108,15 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                     ],
                   ),
                 ),
+                IconButton(
+                  onPressed: widget.onExpand,
+                  icon: const Icon(Icons.expand_more),
+                )
               ],
             ),
           ),
         ),
-        children: widget.children,
+        // children: [widget.child],
       ),
     );
   }

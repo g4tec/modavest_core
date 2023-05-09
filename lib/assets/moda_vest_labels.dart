@@ -430,7 +430,7 @@ class ModaVestLabels {
   static String get youHaveUpdates =>
       "Os dados do seu aplicativo precisam ser atualizados, deseja prosseguir com a atualização?\n\nVocê precisará aguardar a sincronização dos dados terminar para voltar a usar o aplicativo.";
   static String get youDontHaveData =>
-      "Parce que você ainda não baixou seus dados de trabalho, deseja iniciar a carga dos seus dados?\n\nVocê precisará aguardar a sincronização dos dados terminar para voltar a usar o aplicativo, isso pode demorar um pouco, prefira utilizar uma rede com boa conexão à internet.";
+      "Parece que você ainda não baixou seus dados de trabalho, deseja iniciar a carga dos seus dados?\n\nVocê precisará aguardar a sincronização dos dados terminar para voltar a usar o aplicativo, isso pode demorar um pouco, prefira utilizar uma rede com boa conexão à internet.";
   static String get confirmUpdateDataTitle =>
       "Tem certeza que deseja iniciar a atualização dos dados?";
   static String get confirmUpdateDataMsg =>

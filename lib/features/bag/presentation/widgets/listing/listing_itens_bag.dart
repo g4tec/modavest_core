@@ -1,3 +1,4 @@
+import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
@@ -9,6 +10,7 @@ import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/card_listing_bag_store.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/delete_header_bag.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/edit_item_amount_bag.dart';
+import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 
 class ListingItensBag extends StatefulWidget {
   final bool isDismembration;
@@ -34,14 +36,12 @@ class ListingItensBag extends StatefulWidget {
     required List<ProductPrice?>? prices,
     num? oficialStoreId,
     num? priceTableCode,
-    required Reference? reference,
   })? initDiscount;
   final void Function({
     required int quantity,
     List<SalesOrder>? bagOrders,
     num? oficialStoreId,
     num? priceTableCode,
-    Reference? reference,
     List<ProductPrice>? prices,
   })? updatePrices;
 
@@ -79,6 +79,7 @@ class ListingItensBagState extends State<ListingItensBag> {
   bool selectAll = false;
   Map<String, Key> itensKeys = {};
   Map<String, bool> selecteds = {};
+  SalesOrder? expandSaleOrder;
 
   // ignore: avoid_positional_boolean_parameters
   void setSelection(bool? value) {
@@ -146,12 +147,13 @@ class ListingItensBagState extends State<ListingItensBag> {
     return productAmount;
   }
 
-  Future<List<Widget>> buildItems() async {
-    await Future.delayed(
-      Duration(
-        milliseconds: 10 * widget.salesOrders.length,
-      ),
-    );
+  List<Widget> buildItems() {
+    // await Future.delayed(
+    //   Duration(
+    //     milliseconds: 10 * widget.salesOrders.length,
+    //   ),
+    // );
+
     return widget.salesOrders
         .asMap()
         .map(
@@ -164,40 +166,23 @@ class ListingItensBagState extends State<ListingItensBag> {
                     ? 1
                     : 0.5,
                 child: CardListingBagStore(
-                  showCheckBox: showCheckBoxes,
-                  onSelectSalesOrder: () =>
-                      widget.onSelectSalesOrder.call(index),
-                  key: itensKeys[saleOrder.orderId],
-                  buildImage: widget.buildImage,
-                  orderId: saleOrder.orderId ?? "",
-                  image: saleOrder.oficialStore?.logoUrl ?? "",
-                  title: saleOrder.oficialStore?.description ?? "",
-                  value: selecteds[saleOrder.orderId] ?? false,
-                  onChange: onChildChange,
-                  onSelect: setCheckBox,
-                  countingBuildWidget: widget.countingBuildWidget,
-                  children: saleOrder.colorItems
-                      .asMap()
-                      .map((
-                        int index,
-                        ColorItemSalesOrder colorItems,
-                      ) {
-                        return MapEntry(
-                          index,
-                          FutureBuilder<Widget>(
-                            future: buildItem(colorItems, saleOrder, index),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return snapshot.data!;
-                              }
-                              return const CircularProgressIndicator();
-                            },
-                          ),
-                        );
-                      })
-                      .values
-                      .toList(),
-                ),
+                    showCheckBox: showCheckBoxes,
+                    onExpand: () {
+                      setState(() => expandSaleOrder = saleOrder);
+                    },
+                    onSelectSalesOrder: () {
+                      widget.onSelectSalesOrder.call(index);
+                    },
+                    key: itensKeys[saleOrder.orderId],
+                    buildImage: widget.buildImage,
+                    orderId: saleOrder.orderId ?? "",
+                    image: saleOrder.oficialStore?.logoUrl ?? "",
+                    title: saleOrder.oficialStore?.description ?? "",
+                    value: selecteds[saleOrder.orderId] ?? false,
+                    onChange: onChildChange,
+                    onSelect: setCheckBox,
+                    countingBuildWidget: widget.countingBuildWidget,
+                    child: const SizedBox()),
               ),
             );
           },
@@ -206,21 +191,21 @@ class ListingItensBagState extends State<ListingItensBag> {
         .toList();
   }
 
-  Future<Widget> buildItem(
+  Widget buildItem(
     ColorItemSalesOrder colorItems,
     SalesOrder saleOrder,
     int index,
-  ) async {
-    await Future.delayed(
-      Duration(
-        milliseconds: 100 * index,
-      ),
-    );
+  ) {
+    // await Future.delayed(
+    //   Duration(
+    //     milliseconds: 100 * index,
+    //   ),
+    // );
     final List<ProductPrice> prices = [];
 
     for (final ItemSalesOrder itens in colorItems.items) {
       prices.addAll(
-        itens.reference?.referencePrice?.prices ?? [],
+        itens.referenceSimple?.referencePrice?.prices ?? [],
       );
     }
 
@@ -243,7 +228,8 @@ class ListingItensBagState extends State<ListingItensBag> {
       priceTableCode: saleOrder.priceTableCode,
       officialStoreCode: saleOrder.officialStoreId,
       conditionCode: saleOrder.paymentconditionCode,
-      reference: colorItems.items.first.reference,
+      // TODO: rever
+      // reference: colorItems.items.first.reference,
       onchangeProductAmount: (
         Product product,
         int value,
@@ -271,14 +257,10 @@ class ListingItensBagState extends State<ListingItensBag> {
           }
         }.call(),
       ),
-      initDiscount: (
-        Reference? reference,
-      ) =>
-          widget.initDiscount?.call(
+      initDiscount: () => widget.initDiscount?.call(
         prices: prices,
         oficialStoreId: saleOrder.officialStoreId,
         priceTableCode: saleOrder.priceTableCode,
-        reference: reference,
       ),
       updatePrices: ({
         required int quantity,
@@ -289,7 +271,8 @@ class ListingItensBagState extends State<ListingItensBag> {
         bagOrders: bagOrders,
         oficialStoreId: saleOrder.officialStoreId,
         priceTableCode: saleOrder.priceTableCode,
-        reference: colorItems.items.first.reference,
+        // TODO: rever
+        // reference: colorItems.items.first.reference,
         prices: prices,
       ),
       buildPriceLabel: widget.buildPriceLabel,
@@ -298,8 +281,81 @@ class ListingItensBagState extends State<ListingItensBag> {
 
   @override
   Widget build(BuildContext context) {
+    if (expandSaleOrder != null) {
+      return ListView.builder(
+          itemCount: expandSaleOrder!.colorItems.length + 1,
+          addAutomaticKeepAlives: false,
+          cacheExtent: 5,
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) {
+              return GestureDetector(
+                onTap: () {
+                  widget.onSelectSalesOrder.call(index);
+                },
+                child: Opacity(
+                  opacity: widget.selecetedSalesOrderIndex == index ||
+                          widget.isDismembration
+                      ? 1
+                      : 0.5,
+                  child: ListTile(
+                    title: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: FittedBox(
+                        child: Row(
+                          children: [
+                            const SizedBox(),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.width * 0.2,
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(0.5),
+                                  child: widget.buildImage?.call(
+                                      expandSaleOrder?.oficialStore?.logoUrl),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              color: Colors.transparent,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                    expandSaleOrder
+                                            ?.oficialStore?.description ??
+                                        "",
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
+                                  ),
+                                  widget.countingBuildWidget
+                                      .call(expandSaleOrder!.orderId ?? ""),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () =>
+                                    setState(() => expandSaleOrder = null),
+                                icon: const Icon(Icons.expand_less))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+            return buildItem(expandSaleOrder!.colorItems[index - 1],
+                expandSaleOrder!, index - 1);
+          });
+    }
+
     return ListView(
       shrinkWrap: true,
+      cacheExtent: 2,
       children: [
         if (showCheckBoxes && !widget.isDismembration)
           DeleteHeaderBag(
@@ -325,19 +381,23 @@ class ListingItensBagState extends State<ListingItensBag> {
               widget.onCloseTitle?.call();
             },
           ),
-        FutureBuilder<List<Widget>>(
-          future: buildItems(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(children: snapshot.data!);
-            }
 
-            return const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircularProgressIndicator(),
-            );
-          },
+        Column(
+          children: buildItems(),
         ),
+        // FutureBuilder<List<Widget>>(
+        //   future: buildItems(),
+        //   builder: (context, snapshot) {
+        //     if (snapshot.hasData) {
+        //       return Column(children: snapshot.data!);
+        //     }
+
+        //     return const Padding(
+        //       padding: EdgeInsets.all(8.0),
+        //       child: CircularProgressIndicator(),
+        //     );
+        //   },
+        // ),
         if (!widget.isDismembration)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),

@@ -1,4 +1,4 @@
-import 'package:modavest_core/domain/models/reference.dart';
+import 'package:modavest_core/domain/models/reference_simple.dart';
 
 class ItemSalesOrder {
   final int? integrationId;
@@ -18,7 +18,7 @@ class ItemSalesOrder {
   num price;
   final num? discountPercentage;
   final DateTime? billingForecastDate;
-  Reference? reference;
+  ReferenceSimple? referenceSimple;
   bool? referenceIsPack;
   num? scaleCode;
 
@@ -40,7 +40,7 @@ class ItemSalesOrder {
     required this.price,
     this.discountPercentage,
     this.billingForecastDate,
-    this.reference,
+    this.referenceSimple,
     this.scaleCode,
     this.settledQuantity,
   });
@@ -64,7 +64,7 @@ class ItemSalesOrder {
       price: item.price,
       discountPercentage: item.discountPercentage,
       billingForecastDate: item.billingForecastDate,
-      reference: item.reference,
+      referenceSimple: item.referenceSimple,
       scaleCode: item.scaleCode,
       settledQuantity: item.settledQuantity,
     );

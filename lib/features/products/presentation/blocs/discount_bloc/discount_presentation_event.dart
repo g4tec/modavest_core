@@ -11,13 +11,11 @@ class GetPricesEvent extends DiscountPresentationEvent {
   final List<ProductPrice?> prices;
   final num oficialStoreId;
   final num priceTableCode;
-  final Reference? reference;
 
   const GetPricesEvent({
     required this.prices,
     required this.oficialStoreId,
     required this.priceTableCode,
-    required this.reference,
   });
 
   @override

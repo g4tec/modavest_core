@@ -117,8 +117,8 @@ class AddressModel extends Address {
   }) {
     final Map<String, dynamic> data = {
       "publicPlace": publicPlace ?? "",
-      "number": number ?? 0,
-      "addressNumber": number ?? 0,
+      "number": number,
+      "addressNumber": number,
       "complement": complement ?? "",
       "neighborhood": neighborhood ?? "",
       "cityName": cityName,

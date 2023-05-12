@@ -50,9 +50,7 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
       children: [
         StreamBuilder<FileResponse>(
           stream: DefaultCacheManager().getFileStream(
-            widget.imgList[index].imageSmall ??
-                widget.imgList[index].image ??
-                "",
+            widget.imgList[index].image ?? "",
             withProgress: true,
           ),
           builder: (context, snapshot) {

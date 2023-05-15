@@ -1,6 +1,7 @@
 import 'package:modavest_core/data/models/check/check_model.dart';
 import 'package:modavest_core/domain/models/billing_document.dart';
 import 'package:modavest_core/domain/models/check.dart';
+import 'package:modavest_core/utils/format_date.dart';
 
 class BillingDocumentModel extends BillingDocument {
   BillingDocumentModel({
@@ -88,7 +89,7 @@ class BillingDocumentModel extends BillingDocument {
       paymentDate: json["paymentDate"] != null
           ? DateTime.parse(json["paymentDate"] as String)
           : null,
-      issueDate: DateTime.parse(json["issueDate"] as String),
+      issueDate: safeParseDate(json["issueDate"] as String),
       settlementDate: json["settlementDate"] != null
           ? DateTime.parse(json["settlementDate"] as String)
           : null,

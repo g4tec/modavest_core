@@ -11,6 +11,7 @@ class NumberWithControlsInput extends StatelessWidget {
   final TextEditingController controller;
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
+  final int? maxValue;
   NumberWithControlsInput({
     super.key,
     this.onChange,
@@ -22,6 +23,7 @@ class NumberWithControlsInput extends StatelessWidget {
     this.textInputAction,
     this.focusNode,
     this.onSumbit,
+    this.maxValue,
   });
   final MaskTextInputFormatter maskFormatter =
       MaskTextInputFormatter(mask: '#######', filter: {"#": RegExp('[0-9]')});
@@ -30,12 +32,15 @@ class NumberWithControlsInput extends StatelessWidget {
     try {
       int value = controller.text.isNotEmpty ? int.parse(controller.text) : 0;
       value += stepSize;
-      controller.text = value.toString();
-      if (onChange != null) {
-        onChange!.call(
-          1,
-          controller.text.isNotEmpty ? int.parse(controller.text) : 0,
-        );
+
+      if (maxValue == null || value <= maxValue!) {
+        controller.text = value.toString();
+        if (onChange != null) {
+          onChange!.call(
+            1,
+            controller.text.isNotEmpty ? int.parse(controller.text) : 0,
+          );
+        }
       }
     } catch (e) {
       rethrow;
@@ -69,7 +74,10 @@ class NumberWithControlsInput extends StatelessWidget {
   }
 
   void setValue(int value) {
-    final int total = value * stepSize;
+    int total = value * stepSize;
+    if (maxValue != null && total > maxValue!) {
+      total = maxValue!;
+    }
     controller.text = total.toString();
     onChangeByTyping?.call(total);
   }
@@ -117,12 +125,15 @@ class NumberWithControlsInput extends StatelessWidget {
               onFieldSubmitted: onSumbit ??
                   (_) => FocusScope.of(context).requestFocus(FocusNode()),
               onChanged: (String value) {
+                int? value = int.tryParse(controller.text);
+                if (maxValue != null && (value ?? 0) > maxValue!) {
+                  value = maxValue;
+                  controller.text = value.toString();
+                }
                 if (onChangeByTyping != null) {
                   try {
                     onChangeByTyping!.call(
-                      controller.text.isNotEmpty
-                          ? int.parse(controller.text)
-                          : 0,
+                      value ?? 0,
                     );
                   } catch (e) {
                     rethrow;
@@ -131,7 +142,7 @@ class NumberWithControlsInput extends StatelessWidget {
                 if (onChange != null) {
                   onChange!.call(
                     0,
-                    controller.text.isNotEmpty ? int.parse(controller.text) : 0,
+                    value ?? 0,
                   );
                 }
               },

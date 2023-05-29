@@ -42,6 +42,7 @@ class OficialStore extends Equatable {
     required this.paymentConditions,
     this.installment,
     this.paymentTypes,
+    this.productStocks,
   });
 
   @override

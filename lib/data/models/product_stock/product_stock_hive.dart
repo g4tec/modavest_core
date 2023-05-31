@@ -9,9 +9,9 @@ class HiveProductStock extends HiveObject {
   @HiveField(1)
   final num officialStoreId;
   @HiveField(2)
-  final num? productCode;
+  final num productCode;
   @HiveField(3)
-  final num stock;
+  final num? stock;
 
   HiveProductStock({
     required this.integrationId,

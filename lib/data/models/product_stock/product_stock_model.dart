@@ -1,3 +1,4 @@
+import 'package:modavest_core/data/models/product_stock/product_stock_hive.dart';
 import 'package:modavest_core/domain/models/product_stock.dart';
 
 class ProductStockModel extends ProductStock {
@@ -14,6 +15,32 @@ class ProductStockModel extends ProductStock {
       officialStoreId: json["officialStoreId"],
       productCode: json["productCode"],
       stock: json["stock"],
+    );
+  }
+
+  factory ProductStockModel.fromHive(HiveProductStock hiveProductStock) {
+    return ProductStockModel(
+      integrationId: hiveProductStock.integrationId,
+      officialStoreId: hiveProductStock.officialStoreId,
+      productCode: hiveProductStock.productCode,
+      stock: hiveProductStock.stock,
+    );
+  }
+  factory ProductStockModel.entity(ProductStock entity) {
+    return ProductStockModel(
+      integrationId: entity.integrationId,
+      officialStoreId: entity.officialStoreId,
+      productCode: entity.productCode,
+      stock: entity.stock,
+    );
+  }
+
+  HiveProductStock toHive() {
+    return HiveProductStock(
+      integrationId: integrationId,
+      officialStoreId: officialStoreId,
+      productCode: productCode,
+      stock: stock,
     );
   }
 }

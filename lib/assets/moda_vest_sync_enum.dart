@@ -4,6 +4,7 @@ enum SyncEntities {
   creditLimit,
   operationalArea,
   references,
+  stock,
   other,
 }
 
@@ -20,6 +21,8 @@ extension SyncEntitiesExtension on SyncEntities {
         return 'LEGALPERSON';
       case SyncEntities.operationalArea:
         return 'OPERATIONAL_AREA';
+      case SyncEntities.stock:
+        return 'STOCK';
       default:
         return "";
     }
@@ -37,6 +40,8 @@ extension SyncEntitiesExtension on SyncEntities {
         return 'Clientes e endereços';
       case SyncEntities.operationalArea:
         return 'Áreas operacionais';
+      case SyncEntities.stock:
+        return 'Estoques';
       default:
         return "";
     }
@@ -58,6 +63,9 @@ extension SyncEntitiesExtension on SyncEntities {
 
       case 'OPERATIONAL_AREA':
         return SyncEntities.operationalArea;
+
+      case 'STOCK':
+        return SyncEntities.stock;
 
       default:
         return SyncEntities.other;

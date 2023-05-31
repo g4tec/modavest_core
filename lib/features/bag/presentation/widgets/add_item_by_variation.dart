@@ -5,6 +5,7 @@ import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/price_table_scales.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
+import 'package:modavest_core/domain/models/product_stock.dart';
 import 'package:modavest_core/domain/models/reference.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/counting_item_bag.dart';
@@ -27,7 +28,7 @@ class AddItemByVariation extends StatelessWidget {
     List<SalesOrder>? bagOrders,
     required Reference referenceAux,
   })? updatePrices;
-  final Map<num, int?>? productStock;
+  final List<ProductStock>? productStock;
 
   AddItemByVariation({
     super.key,
@@ -89,7 +90,6 @@ class AddItemByVariation extends StatelessWidget {
                       onChange: onChangeInGlobalInput,
                       controller: TextEditingController(text: "0"),
                       onChangeByTyping: onTypeGlobalInput,
-                      maxValue: 12,
                     ),
                   ),
               ],

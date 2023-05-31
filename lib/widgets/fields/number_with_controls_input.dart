@@ -93,7 +93,10 @@ class NumberWithControlsInput extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
-                color: Theme.of(context).primaryColor,
+                color:
+                    maxValue != null && maxValue! < num.parse(controller.text)
+                        ? Colors.red
+                        : Theme.of(context).primaryColor,
               ),
               width: 32,
               child: disableControls
@@ -151,14 +154,20 @@ class NumberWithControlsInput extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
+                    color: maxValue != null &&
+                            maxValue! < num.parse(controller.text)
+                        ? Colors.red
+                        : Theme.of(context).primaryColor,
                     width: 2,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
+                    color: maxValue != null &&
+                            maxValue! < num.parse(controller.text)
+                        ? Colors.red
+                        : Theme.of(context).primaryColor,
                     width: 2,
                   ),
                 ),
@@ -170,7 +179,10 @@ class NumberWithControlsInput extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
-                color: Theme.of(context).primaryColor,
+                color:
+                    maxValue != null && maxValue! < num.parse(controller.text)
+                        ? Colors.red
+                        : Theme.of(context).primaryColor,
               ),
               width: 32,
               child: disableControls

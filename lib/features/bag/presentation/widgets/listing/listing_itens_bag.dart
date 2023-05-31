@@ -210,6 +210,7 @@ class ListingItensBagState extends State<ListingItensBag> {
     }
 
     return EditItemAmountBag(
+      productStock: colorItems.productStock,
       subtotal: colorItems.subtotal,
       amount: colorItems.amount,
       color: colorItems.color,

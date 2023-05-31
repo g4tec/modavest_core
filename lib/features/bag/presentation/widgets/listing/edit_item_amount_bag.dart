@@ -4,6 +4,7 @@ import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
+import 'package:modavest_core/domain/models/product_stock.dart';
 import 'package:modavest_core/domain/models/reference.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/counting_item_bag.dart';
@@ -43,6 +44,7 @@ class EditItemAmountBag extends StatefulWidget {
   })? updatePrices;
   final Widget Function(ProductPrice?) buildPriceLabel;
   final Widget Function(String? url)? buildImage;
+  final List<ProductStock>? productStock;
 
   const EditItemAmountBag({
     super.key,
@@ -65,6 +67,7 @@ class EditItemAmountBag extends StatefulWidget {
     this.isChecked,
     this.onCheckBoxItemChange,
     this.buildImage,
+    this.productStock,
   });
 
   @override
@@ -235,6 +238,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
         if (!widget.disableExpand)
           FittedBox(
             child: CountingItemBag(
+              productStock: widget.productStock,
               key: tableSizes,
               color: widget.color,
               disableInputsControls: widget.referenceIsPack,

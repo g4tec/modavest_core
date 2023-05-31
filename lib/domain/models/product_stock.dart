@@ -4,7 +4,7 @@ class ProductStock extends Equatable {
   final num integrationId;
   final num officialStoreId;
   final num productCode;
-  final num stock;
+  final num? stock;
 
   const ProductStock({
     required this.integrationId,

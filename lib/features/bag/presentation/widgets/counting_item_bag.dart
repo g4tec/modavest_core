@@ -103,8 +103,14 @@ class CountingItemBagState extends State<CountingItemBag> {
   void setValueAll(int value) {
     for (final GlobalKey element in keys.values) {
       final widget = element.currentWidget as NumberWithControlsInput?;
-      widget?.setValue(value);
-      widget?.onChange!(0, value);
+      if (widget?.maxValue != null && value >= widget!.maxValue!) {
+        widget.setValue(widget.maxValue!);
+        widget.onChange!(0, widget.maxValue!);
+      } else {
+        widget?.setValue(value);
+
+        widget?.onChange!(0, value);
+      }
     }
   }
 

@@ -14,7 +14,11 @@ class ProductStockModel extends ProductStock {
       integrationId: json["integrationId"],
       officialStoreId: json["officialStoreId"],
       productCode: json["productCode"],
-      stock: json["stock"],
+      stock: json["stock"] != null
+          ? json["stock"] > 0
+              ? json["stock"]
+              : 0
+          : null,
     );
   }
 

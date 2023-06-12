@@ -6,6 +6,7 @@ import 'package:modavest_core/assets/modavest_sizes.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
+import 'package:modavest_core/domain/models/product_stock.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/utils/uniques.dart';
 import 'package:modavest_core/widgets/fields/number_with_controls_input.dart';
@@ -14,7 +15,7 @@ class CountingItemBag extends StatefulWidget {
   final color_entitie.Color color;
   final bool disableInputsControls;
   final Map<Product, int?> productAmount;
-  final Map<num, int?>? productStock;
+  final List<ProductStock>? productStock;
   final bool showAmountColor;
   final Function(
     Product,
@@ -102,8 +103,14 @@ class CountingItemBagState extends State<CountingItemBag> {
   void setValueAll(int value) {
     for (final GlobalKey element in keys.values) {
       final widget = element.currentWidget as NumberWithControlsInput?;
-      widget?.setValue(value);
-      widget?.onChange!(0, value);
+      if (widget?.maxValue != null && value >= widget!.maxValue!) {
+        widget.setValue(widget.maxValue!);
+        widget.onChange!(0, widget.maxValue!);
+      } else {
+        widget?.setValue(value);
+
+        widget?.onChange!(0, value);
+      }
     }
   }
 
@@ -151,11 +158,11 @@ class CountingItemBagState extends State<CountingItemBag> {
                 ),
               ),
             ),
-            if ((widget.productStock?.entries ?? []).isNotEmpty)
+            if ((widget.productStock ?? []).isNotEmpty)
               DataCell(
                 Center(
                   child: Text(
-                    "${widget.productStock?.entries.firstWhereOrNull((stock) => stock.key == element.code)?.value?.toString() ?? "-"} unid",
+                    "${widget.productStock?.firstWhereOrNull((stock) => stock.productCode == element.code)?.stock?.toString() ?? "0"} unid",
                   ),
                 ),
               ),
@@ -175,10 +182,14 @@ class CountingItemBagState extends State<CountingItemBag> {
                               minWidth: 140,
                             ),
                             child: NumberWithControlsInput(
-                              maxValue: widget.productStock?.entries
-                                  .firstWhereOrNull(
-                                      (stock) => stock.key == element.code)
-                                  ?.value,
+                              maxValue: (widget.productStock ?? []).isNotEmpty
+                                  ? widget.productStock
+                                          ?.firstWhereOrNull((stock) =>
+                                              stock.productCode == element.code)
+                                          ?.stock
+                                          ?.toInt() ??
+                                      0
+                                  : null,
                               onChangeByTyping: (int amount) {
                                 widget.onchangeProductAmount(
                                   element,
@@ -239,10 +250,14 @@ class CountingItemBagState extends State<CountingItemBag> {
                           minWidth: 140,
                         ),
                         child: NumberWithControlsInput(
-                          maxValue: widget.productStock?.entries
-                              .firstWhereOrNull(
-                                  (stock) => stock.key == element.code)
-                              ?.value,
+                          maxValue: (widget.productStock ?? []).isNotEmpty
+                              ? widget.productStock
+                                      ?.firstWhereOrNull((stock) =>
+                                          stock.productCode == element.code)
+                                      ?.stock
+                                      ?.toInt() ??
+                                  0
+                              : null,
                           onChangeByTyping: (int amount) {
                             widget.onchangeProductAmount(
                               element,
@@ -304,7 +319,7 @@ class CountingItemBagState extends State<CountingItemBag> {
           child: Text(ModaVestLabels.tamanho),
         ),
       ),
-      if ((widget.productStock?.entries ?? []).isNotEmpty)
+      if ((widget.productStock ?? []).isNotEmpty)
         DataColumn(
           label: FittedBox(
             child: Text(ModaVestLabels.estoque),

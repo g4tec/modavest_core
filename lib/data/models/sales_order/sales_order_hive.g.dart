@@ -56,6 +56,8 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
       priceTableCode: fields[37] as num?,
       totalOriginalAmountOrder: fields[39] as double?,
       discountPercentage: fields[40] as num?,
+      arrivalDate: fields[42] as DateTime?,
+      shippingCompanyName: fields[43] as String?,
     )
       ..discounts = (fields[38] as HiveList?)?.castHiveList()
       ..observations = (fields[41] as List?)?.cast<String?>();
@@ -64,7 +66,7 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
   @override
   void write(BinaryWriter writer, HiveSalesOrder obj) {
     writer
-      ..writeByte(41)
+      ..writeByte(43)
       ..writeByte(1)
       ..write(obj.integrationId)
       ..writeByte(2)
@@ -146,7 +148,11 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
       ..writeByte(40)
       ..write(obj.discountPercentage)
       ..writeByte(41)
-      ..write(obj.observations);
+      ..write(obj.observations)
+      ..writeByte(42)
+      ..write(obj.arrivalDate)
+      ..writeByte(43)
+      ..write(obj.shippingCompanyName);
   }
 
   @override

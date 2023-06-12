@@ -27,6 +27,7 @@ class AddItemByVariation extends StatelessWidget {
     List<SalesOrder>? bagOrders,
     required Reference referenceAux,
   })? updatePrices;
+  final Map<num, int?>? productStock;
 
   AddItemByVariation({
     super.key,
@@ -40,6 +41,7 @@ class AddItemByVariation extends StatelessWidget {
     required this.buildPriceLabel,
     this.getScale,
     this.updatePrices,
+    this.productStock,
   });
 
   final GlobalKey tableSizes = GlobalKey(debugLabel: "tableSizes");
@@ -87,6 +89,7 @@ class AddItemByVariation extends StatelessWidget {
                       onChange: onChangeInGlobalInput,
                       controller: TextEditingController(text: "0"),
                       onChangeByTyping: onTypeGlobalInput,
+                      maxValue: 12,
                     ),
                   ),
               ],
@@ -143,6 +146,7 @@ class AddItemByVariation extends StatelessWidget {
               return CountingItemBag(
                 color: color,
                 key: tableSizes,
+                productStock: productStock,
                 disableInputsControls: referenceAux.isPack ?? false,
                 productAmount: productAmount,
                 onchangeProductAmount: onChangeProductAmount,

@@ -14,6 +14,7 @@ class CountingItemBag extends StatefulWidget {
   final color_entitie.Color color;
   final bool disableInputsControls;
   final Map<Product, int?> productAmount;
+  final Map<num, int?>? productStock;
   final bool showAmountColor;
   final Function(
     Product,
@@ -49,6 +50,7 @@ class CountingItemBag extends StatefulWidget {
     this.showAmountColor = false,
     this.updatePrices,
     required this.buildPriceLabel,
+    this.productStock,
   });
 
   @override
@@ -110,12 +112,13 @@ class CountingItemBagState extends State<CountingItemBag> {
       0,
       (previousValue, key) =>
           previousValue +
-          int.parse(
-            (key.value.currentWidget as NumberWithControlsInput?)
-                    ?.controller
-                    .text ??
-                '0',
-          ),
+          (int.tryParse(
+                (key.value.currentWidget as NumberWithControlsInput?)
+                        ?.controller
+                        .text ??
+                    '0',
+              ) ??
+              0),
     );
     amountValue.value = subtotal;
   }
@@ -148,14 +151,14 @@ class CountingItemBagState extends State<CountingItemBag> {
                 ),
               ),
             ),
-            // TODO : Estoque
-            // const DataCell(
-            //   Center(
-            //     child: Text(
-            //       "500 unid",
-            //     ),
-            //   ),
-            // ),
+            if ((widget.productStock?.entries ?? []).isNotEmpty)
+              DataCell(
+                Center(
+                  child: Text(
+                    "${widget.productStock?.entries.firstWhereOrNull((stock) => stock.key == element.code)?.value?.toString() ?? "-"} unid",
+                  ),
+                ),
+              ),
             DataCell(
               Center(
                 child: priceLabel,
@@ -172,6 +175,10 @@ class CountingItemBagState extends State<CountingItemBag> {
                               minWidth: 140,
                             ),
                             child: NumberWithControlsInput(
+                              maxValue: widget.productStock?.entries
+                                  .firstWhereOrNull(
+                                      (stock) => stock.key == element.code)
+                                  ?.value,
                               onChangeByTyping: (int amount) {
                                 widget.onchangeProductAmount(
                                   element,
@@ -232,6 +239,10 @@ class CountingItemBagState extends State<CountingItemBag> {
                           minWidth: 140,
                         ),
                         child: NumberWithControlsInput(
+                          maxValue: widget.productStock?.entries
+                              .firstWhereOrNull(
+                                  (stock) => stock.key == element.code)
+                              ?.value,
                           onChangeByTyping: (int amount) {
                             widget.onchangeProductAmount(
                               element,
@@ -293,12 +304,12 @@ class CountingItemBagState extends State<CountingItemBag> {
           child: Text(ModaVestLabels.tamanho),
         ),
       ),
-      // TODO : Estoque
-      // DataColumn(
-      //   label: FittedBox(
-      //     child: Text(ModaVestLabels.estoque),
-      //   ),
-      // ),
+      if ((widget.productStock?.entries ?? []).isNotEmpty)
+        DataColumn(
+          label: FittedBox(
+            child: Text(ModaVestLabels.estoque),
+          ),
+        ),
       DataColumn(
         label: FittedBox(
           child: Text(ModaVestLabels.precoUnid),

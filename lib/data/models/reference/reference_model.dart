@@ -2,6 +2,7 @@ import 'package:modavest_core/data/models/color/color_hive.dart';
 import 'package:modavest_core/data/models/color/color_model.dart';
 import 'package:modavest_core/data/models/composition/composition_model.dart';
 import 'package:modavest_core/data/models/details/details_model.dart';
+import 'package:modavest_core/data/models/reference/reference_bags_hive.dart';
 import 'package:modavest_core/data/models/reference/reference_hive.dart';
 import 'package:modavest_core/data/models/referencePrice/reference_price_model.dart';
 import 'package:modavest_core/domain/models/composition.dart';
@@ -167,6 +168,44 @@ class ReferenceModel extends Reference {
             : null);
   }
 
+  factory ReferenceModel.fromBagsHive(
+    HiveReferenceBags reference,
+  ) {
+    return ReferenceModel(
+        code: reference.code,
+        priceTable: reference.priceTable,
+        oficialStore: reference.oficialStore,
+        integrationId: reference.integrationId,
+        colors: (reference.colors ?? [])
+            .map((e) => ColorModel.fromHive(e as HiveColor))
+            .toList(),
+        name: reference.name,
+        description: reference.description,
+        descriptive: reference.descriptive,
+        gridCode: reference.gridCode,
+        grid: reference.grid,
+        weight: reference.weight,
+        height: reference.height,
+        width: reference.width,
+        length: reference.length,
+        packWeight: reference.packWeight,
+        packHeight: reference.packHeight,
+        packWidth: reference.packWidth,
+        packLength: reference.packLength,
+        observations: reference.observations,
+        details:
+            reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+        composition: reference.composition
+            ?.map((e) => CompositionModel.fromHive(e))
+            .toList(),
+        imageColorReference: reference.imageColorReference,
+        isPack: reference.isPack,
+        isGrid: reference.isGrid,
+        referencePrice: reference.referencePrice != null
+            ? ReferencePriceModel.fromHive(reference.referencePrice!)
+            : null);
+  }
+
   factory ReferenceModel.entity(
     Reference reference,
   ) {
@@ -205,6 +244,36 @@ class ReferenceModel extends Reference {
 
   HiveReference toHive() {
     return HiveReference(
+      code: code,
+      priceTable: priceTable,
+      oficialStore: oficialStore,
+      integrationId: integrationId,
+      name: name,
+      description: description,
+      descriptive: descriptive,
+      gridCode: gridCode,
+      grid: grid,
+      weight: weight,
+      height: height,
+      width: width,
+      length: length,
+      packWeight: packWeight,
+      packHeight: packHeight,
+      packWidth: packWidth,
+      packLength: packLength,
+      imageColorReference: imageColorReference,
+      observations: observations,
+      // TODO: Implementar
+      referencePrice: referencePrice != null
+          ? ReferencePriceModel.entity(referencePrice!).toHive()
+          : null,
+      isPack: isPack,
+      isGrid: isGrid,
+    );
+  }
+
+  HiveReferenceBags toBagHive() {
+    return HiveReferenceBags(
       code: code,
       priceTable: priceTable,
       oficialStore: oficialStore,

@@ -32,7 +32,7 @@ class HiveItemSalesOrder extends HiveObject {
   @HiveField(18)
   num? originalPrice;
   @HiveField(19)
-  num price;
+  num? price;
   @HiveField(20)
   final num? discountPercentage;
   @HiveField(21)

@@ -40,7 +40,8 @@ class ItensRequestCard extends StatelessWidget {
     subtototal["subtotal"] = 0;
     final List<DataRow> rows = [];
     for (final ItemSalesOrder item in itemSalesOrder) {
-      final double totalItem = (item.quantity?.toDouble() ?? 0) * item.price;
+      final double totalItem =
+          (item.quantity?.toDouble() ?? 0) * (item.price ?? 0);
       subtototal["subtotal"] = totalItem + (subtototal["subtotal"] ?? 0);
       rows.add(
         DataRow(
@@ -74,7 +75,7 @@ class ItensRequestCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: padding),
                   child: FittedBox(
                     child: Text(
-                      toCurrency(item.price.toDouble()),
+                      toCurrency((item.price ?? 0).toDouble()),
                     ),
                   ),
                 ),

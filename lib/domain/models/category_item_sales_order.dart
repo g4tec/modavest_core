@@ -8,11 +8,13 @@ class ColorItemSalesOrder {
   List<ProductStock>? productStock;
   num subtotal;
   num amount;
+  num notIncludedAmount;
 
   ColorItemSalesOrder({
     required this.color,
     this.items = const [],
     required this.amount,
+    required this.notIncludedAmount,
     required this.subtotal,
     this.productStock,
   });

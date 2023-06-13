@@ -1,4 +1,5 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
@@ -6,6 +7,7 @@ import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
 import 'package:modavest_core/domain/models/reference.dart';
+import 'package:modavest_core/domain/models/reference_simple.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/card_listing_bag_store.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/delete_header_bag.dart';
@@ -50,6 +52,8 @@ class ListingItensBag extends StatefulWidget {
   final Function() onPop;
   final Function(ColorItemSalesOrder, bool)? onCheckBoxItemChange;
   final Widget Function(String?)? buildImage;
+  final List<ProductPrice>? prices;
+  final bool showNotIncluded;
   const ListingItensBag({
     super.key,
     required this.salesOrders,
@@ -68,6 +72,8 @@ class ListingItensBag extends StatefulWidget {
     this.onSelectCheckBox,
     this.onCheckBoxItemChange,
     this.buildImage,
+    this.prices,
+    this.showNotIncluded = false,
   });
 
   @override
@@ -203,14 +209,24 @@ class ListingItensBagState extends State<ListingItensBag> {
     // );
     final List<ProductPrice> prices = [];
 
+    final ReferenceSimple? referenceSimple = colorItems.items
+        .firstWhereOrNull((item) => item.referenceSimple != null)
+        ?.referenceSimple;
+
     for (final ItemSalesOrder itens in colorItems.items) {
-      prices.addAll(
-        itens.referenceSimple?.referencePrice?.prices ?? [],
-      );
+      if ((itens.price ?? 0) > 0) {
+        final ProductPrice? price =
+            (referenceSimple?.referencePrice?.prices ?? []).firstWhereOrNull(
+                (price) => price.productCode == itens.productCode);
+        if (price != null) {
+          prices.add(price);
+        }
+      }
     }
 
     return EditItemAmountBag(
       productStock: colorItems.productStock,
+      notIncludedAmount: colorItems.notIncludedAmount,
       subtotal: colorItems.subtotal,
       amount: colorItems.amount,
       color: colorItems.color,

@@ -104,7 +104,8 @@ class BagCoreDatasource {
                 element.quantity! > 0 &&
                 element.quantity! > (scaleSimplified.minQuantity ?? 0) &&
                 element.quantity! <= (scaleSimplified.quantity ?? 9999999) &&
-                element.scaleCode == scaleSimplified.scaleCode,
+                element.scaleCode == scaleSimplified.scaleCode &&
+                (element.price ?? 0) > 0,
           );
           await setDiscounts?.call(
             itensToDiscount: itensToDiscount,
@@ -143,7 +144,8 @@ class BagCoreDatasource {
           res.removeWhere((key, value) {
             final num total = value.fold(0, (total, next) {
               num nextValue = 0;
-              if (next.scaleCode == scaleSimplified.scaleCode) {
+              if (next.scaleCode == scaleSimplified.scaleCode &&
+                  (next.price ?? 0) > 0) {
                 nextValue = next.quantity ?? 0;
               }
               return total + nextValue;
@@ -199,7 +201,8 @@ class BagCoreDatasource {
           res.removeWhere((key, value) {
             final num total = value.fold(0, (total, next) {
               num nextValue = 0;
-              if (next.scaleCode == scaleSimplified.scaleCode) {
+              if (next.scaleCode == scaleSimplified.scaleCode &&
+                  (next.price ?? 0) > 0) {
                 nextValue = next.quantity ?? 0;
               }
               return total + nextValue;

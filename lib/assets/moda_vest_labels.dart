@@ -493,4 +493,7 @@ class ModaVestLabels {
   static String get dismembrationWarning =>
       "Os pedidos serão enviados quando for finalizado todo o desmembramento";
   static String get birthDate => "Aniversário";
+  static String get shoppkeepers => "Lojistas";
+  static String get allShoppkeepers => "Todos os lojistas";
+  static String get onlyOpenBags => "Somente lojistas com sacola em aberto";
 }

@@ -496,4 +496,9 @@ class ModaVestLabels {
   static String get shoppkeepers => "Lojistas";
   static String get allShoppkeepers => "Todos os lojistas";
   static String get onlyOpenBags => "Somente lojistas com sacola em aberto";
+  static String get yesDelete => "Sim, desejo excluir!";
+  static String get afterDeleteYouCantRowback =>
+      "Após excluir, essa ação não poderá ser desfeita e os itens selecionados serão removidos.";
+  static String get areYousureToDelete =>
+      "Tem certeza que deseja excluir esses itens?";
 }

@@ -12,6 +12,7 @@ import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/card_listing_bag_store.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/delete_header_bag.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/edit_item_amount_bag.dart';
+import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 
 class ListingItensBag extends StatefulWidget {
@@ -381,6 +382,7 @@ class ListingItensBagState extends State<ListingItensBag> {
             onChange: changeAll,
             onDelete: () {
               final List<SalesOrder> deleteOrderSale = [];
+
               selecteds.forEach((key, value) {
                 if (value) {
                   final int index = widget.salesOrders
@@ -393,9 +395,59 @@ class ListingItensBagState extends State<ListingItensBag> {
                   }
                 }
               });
-              widget.deleteSalesOrder.call(deleteOrderSale);
-              setSelection(false);
-              widget.onCloseTitle?.call();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: FittedBox(
+                          child: Icon(
+                            Icons.warning_amber,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        ModaVestLabels.areYousureToDelete,
+                        style: Theme.of(context).textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  content: Text(
+                    ModaVestLabels.afterDeleteYouCantRowback,
+                    style: Theme.of(context).textTheme.headline5,
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ModaVestTextButton(
+                        outlined: true,
+                        onPressed: () => Navigator.of(context).pop(),
+                        title: ModaVestLabels.cancelLabel,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ModaVestTextButton(
+                        onPressed: () {
+                          widget.deleteSalesOrder.call(deleteOrderSale);
+                          setSelection(false);
+                          widget.onCloseTitle?.call();
+                        },
+                        title: ModaVestLabels.yesDelete,
+                        color: Colors.red,
+                        colorText: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
 

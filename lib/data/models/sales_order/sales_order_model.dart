@@ -1,3 +1,4 @@
+import 'package:modavest_core/assets/moda_vest_bag_status_enum.dart';
 import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
@@ -68,6 +69,7 @@ class SalesOrderModel extends SalesOrder {
     super.chargeType,
     super.representativeObservations,
     super.imageColorsReferences,
+    super.status,
   }) : super(
           paymentconditionCode: paymentConditionCode,
         );
@@ -173,6 +175,7 @@ class SalesOrderModel extends SalesOrder {
               .map((json) => ImageColorReferenceModel.fromJson(json))
               .toList()
           : null,
+      status: EnumStatusBag.finished,
     );
   }
 
@@ -226,6 +229,7 @@ class SalesOrderModel extends SalesOrder {
       discountPercentage: hive.discountPercentage,
       arrivalDate: hive.arrivalDate,
       shippingCompanyName: hive.shippingCompanyName,
+      status: hive.status?.toStatusBag ?? EnumStatusBag.other,
     );
   }
 
@@ -286,6 +290,7 @@ class SalesOrderModel extends SalesOrder {
           .toList(),
       chargeType: order.chargeType,
       representativeObservations: order.representativeObservations,
+      status: order.status,
     );
   }
 
@@ -331,6 +336,7 @@ class SalesOrderModel extends SalesOrder {
       discountPercentage: discountPercentage,
       arrivalDate: arrivalDate,
       shippingCompanyName: shippingCompanyName,
+      status: status.value,
     );
   }
 
@@ -385,6 +391,7 @@ class SalesOrderModel extends SalesOrder {
     List<SalesOrderClassification>? classifications,
     num? chargeType,
     List<SalesOrderObservation?>? representativeObservations,
+    EnumStatusBag? status,
   }) {
     return SalesOrderModel(
       integrationId: integrationId ?? this.integrationId,
@@ -448,6 +455,58 @@ class SalesOrderModel extends SalesOrder {
           ? AddressModel.entite(shippingAddress!)
           : null,
       chargeType: chargeType ?? this.chargeType,
+      status: status ?? this.status,
     );
+  }
+
+  dynamic toJson() {
+    return {
+      "integrationId": integrationId,
+      "orderId": orderId,
+      "branchCode": branchCode,
+      "customerOrderCode": customerOrderCode,
+      "integrationCode": integrationCode,
+      "orderCode": orderCode,
+      "orderDate": orderDate?.toString(),
+      "customerCode": customerCode,
+      "customerCnpj": customerCnpj,
+      "customerName": customerName,
+      "representativeCode": representativeCode,
+      "representativeCnpj": representativeCnpj,
+      "sellerCode": sellerCode,
+      "sellerCpf": sellerCpf,
+      "purchasingGuideCode": purchasingGuideCode,
+      "cnpjPurchasingGuide": cnpjPurchasingGuide,
+      "operationCode": operationCode,
+      "paymentConditionCode": paymentconditionCode,
+      "paymentConditionName": paymentConditionName,
+      "quantity": quantity,
+      "grossValue": grossValue,
+      "discountValue": discountValue,
+      "netValue": netValue,
+      "priorityCode": priorityCode,
+      "shippingCompanyCode": shippingCompanyCode,
+      "shippingCompanyCpfCnpj": shippingCompanyCpfCnpj,
+      "billingForecastDate": billingForecastDate?.toString(),
+      "freightType": freightType,
+      "freightPercentage": freightPercentage,
+      "freightValue": freightValue,
+      "packageint": packageint,
+      "weight": weight,
+      "totalAmountOrder": totalAmountOrder,
+      "statusOrder": statusOrder,
+      "officialStoreId": officialStoreId!,
+      "priceTableCode": priceTableCode,
+      "totalOriginalAmountOrder": totalOriginalAmountOrder,
+      "discountPercentage": discountPercentage,
+      "arrivalDate": arrivalDate,
+      "shippingCompanyName": shippingCompanyName,
+      "status": status.value,
+      "items": items
+              ?.map(
+                  (ItemSalesOrder e) => ItemSalesOrderModel.entity(e).toJson())
+              .toList() ??
+          [],
+    };
   }
 }

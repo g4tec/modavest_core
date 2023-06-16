@@ -93,6 +93,8 @@ class HiveSalesOrder extends HiveObject {
   DateTime? arrivalDate;
   @HiveField(43)
   String? shippingCompanyName;
+  @HiveField(44)
+  String? status;
 
   HiveSalesOrder({
     required this.integrationId,
@@ -136,5 +138,6 @@ class HiveSalesOrder extends HiveObject {
     this.discountPercentage,
     this.arrivalDate,
     this.shippingCompanyName,
+    required this.status,
   });
 }

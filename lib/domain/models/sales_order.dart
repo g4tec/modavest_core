@@ -1,3 +1,4 @@
+import 'package:modavest_core/assets/moda_vest_bag_status_enum.dart';
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
@@ -57,6 +58,7 @@ class SalesOrder {
   final num? officialStoreId;
   List<SalesOrderObservation?> observations;
   List<SalesOrderObservation?> representativeObservations;
+  EnumStatusBag status;
 
   num? priceTableCode;
   List<Discount>? discounts;
@@ -123,6 +125,7 @@ class SalesOrder {
     this.chargeType,
     this.representativeObservations = const [],
     this.imageColorsReferences,
+    this.status = EnumStatusBag.active,
   });
 
   SalesOrder copyWith({

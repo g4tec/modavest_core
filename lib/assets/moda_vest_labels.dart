@@ -501,4 +501,7 @@ class ModaVestLabels {
       "Após excluir, essa ação não poderá ser desfeita e os itens selecionados serão removidos.";
   static String get areYousureToDelete =>
       "Tem certeza que deseja excluir esses itens?";
+  static String get backupBags => "Backup de sacolas";
+  static String get exportAllBags =>
+      "Exportar todas as sacolas salvas no dispositivo";
 }

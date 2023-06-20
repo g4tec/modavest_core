@@ -135,6 +135,7 @@ class SalesOrder {
     List<ItemSalesOrder>? items,
     num? paymentconditionCode,
     String? paymentConditionName,
+    num? priceTableCode,
   }) {
     return SalesOrder(
       integrationId: integrationId,
@@ -179,7 +180,7 @@ class SalesOrder {
       stackTrace: stackTrace,
       payload: payload,
       observations: observations,
-      priceTableCode: priceTableCode,
+      priceTableCode: priceTableCode ?? priceTableCode,
       discounts: discounts,
       totalOriginalAmountOrder:
           totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,

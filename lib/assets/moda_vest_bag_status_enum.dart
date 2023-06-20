@@ -1,4 +1,11 @@
-enum EnumStatusBag { active, deleted, finished, other, moved }
+enum EnumStatusBag {
+  active,
+  deleted,
+  finished,
+  other,
+  moved,
+  movedBetweenPriceTables
+}
 
 extension EnumStatusBagExtension on EnumStatusBag {
   String get value {
@@ -11,6 +18,8 @@ extension EnumStatusBagExtension on EnumStatusBag {
         return 'moved';
       case EnumStatusBag.finished:
         return 'finished';
+      case EnumStatusBag.movedBetweenPriceTables:
+        return 'movedBetweenPriceTables';
       default:
         return 'other';
     }
@@ -28,6 +37,8 @@ extension StringEnumStatusBagExtension on String {
         return EnumStatusBag.finished;
       case 'moved':
         return EnumStatusBag.moved;
+      case 'movedBetweenPriceTables':
+        return EnumStatusBag.movedBetweenPriceTables;
       default:
         return EnumStatusBag.other;
     }

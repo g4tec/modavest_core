@@ -206,7 +206,7 @@ class ModaVestLabels {
       "Selecione uma condição de pagamento";
   static String get orderEndAgent =>
       "Acesse o aplicativo do representante para concluir o pedido";
-  static String get initShopping => "Atualizar produtos e iniciar compras";
+  static String get initShopping => "Ir para os produtos";
   static String get emailSendoTo => "Convite enviado para o email";
   static String get failToGetRepresentativeData =>
       "Não foi possível obter dados para enviar o convite";
@@ -504,4 +504,12 @@ class ModaVestLabels {
   static String get backupBags => "Backup de sacolas";
   static String get exportAllBags =>
       "Exportar todas as sacolas salvas no dispositivo";
+  static String get priceTableOptions => "Opções para troca de tabela de preço";
+  static String get createNewBag =>
+      "Crie uma sacola vazia nesta tabela selecionada, sem mover os itens.";
+  static String get moveToPriceTableBag =>
+      "Mover itens da sacola atual para\nesta nova tab. de preço";
+  static String get copyWithoutSomeItens =>
+      "Existem itens que não serão incluídos. Tem certeza que deseja mover?";
+  static String get moveEvenSo => "Mover mesmo assim";
 }

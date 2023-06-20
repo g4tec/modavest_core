@@ -52,7 +52,7 @@ dependencies:
   http: ^0.13.5
 
 dev_dependencies:
-  build_runner: null
+  build_runner: ^1.0.0
 
   flutter_test:
     sdk: flutter

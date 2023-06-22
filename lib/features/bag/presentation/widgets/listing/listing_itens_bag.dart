@@ -173,23 +173,32 @@ class ListingItensBagState extends State<ListingItensBag> {
                     ? 1
                     : 0.5,
                 child: CardListingBagStore(
-                    showCheckBox: showCheckBoxes,
-                    onExpand: () {
-                      setState(() => expandSaleOrder = saleOrder);
-                    },
-                    onSelectSalesOrder: () {
-                      widget.onSelectSalesOrder.call(index);
-                    },
-                    key: itensKeys[saleOrder.orderId],
-                    buildImage: widget.buildImage,
-                    orderId: saleOrder.orderId ?? "",
-                    image: saleOrder.oficialStore?.logoUrl ?? "",
-                    title: saleOrder.oficialStore?.description ?? "",
-                    value: selecteds[saleOrder.orderId] ?? false,
-                    onChange: onChildChange,
-                    onSelect: setCheckBox,
-                    countingBuildWidget: widget.countingBuildWidget,
-                    child: const SizedBox()),
+                  showCheckBox: showCheckBoxes,
+                  onExpand: () {
+                    setState(() => expandSaleOrder = saleOrder);
+                  },
+                  onSelectSalesOrder: () {
+                    widget.onSelectSalesOrder.call(index);
+                  },
+                  key: itensKeys[saleOrder.orderId],
+                  buildImage: widget.buildImage,
+                  orderId: saleOrder.orderId ?? "",
+                  image: saleOrder.oficialStore?.logoUrl ?? "",
+                  title: saleOrder.oficialStore?.description ?? "",
+                  value: selecteds[saleOrder.orderId] ?? false,
+                  onChange: onChildChange,
+                  onSelect: setCheckBox,
+                  countingBuildWidget: widget.countingBuildWidget,
+                  child: SizedBox(
+                    child: Text(
+                      "Tab. Preço: ${saleOrder.priceTableCode?.toString() ?? ""}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(fontSize: 14),
+                    ),
+                  ),
+                ),
               ),
             );
           },
@@ -351,6 +360,15 @@ class ListingItensBagState extends State<ListingItensBag> {
                                   ),
                                   widget.countingBuildWidget
                                       .call(expandSaleOrder!.orderId ?? ""),
+                                  SizedBox(
+                                    child: Text(
+                                      "Tab. Preço: ${expandSaleOrder?.priceTableCode?.toString() ?? ""}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5
+                                          ?.copyWith(fontSize: 14),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

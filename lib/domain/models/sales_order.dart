@@ -125,7 +125,7 @@ class SalesOrder {
     this.chargeType,
     this.representativeObservations = const [],
     this.imageColorsReferences,
-    this.status = EnumStatusBag.active,
+    this.status = EnumStatusBag.other,
   });
 
   SalesOrder copyWith({
@@ -180,7 +180,7 @@ class SalesOrder {
       stackTrace: stackTrace,
       payload: payload,
       observations: observations,
-      priceTableCode: priceTableCode ?? priceTableCode,
+      priceTableCode: priceTableCode ?? this.priceTableCode,
       discounts: discounts,
       totalOriginalAmountOrder:
           totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,

@@ -505,8 +505,8 @@ class ModaVestLabels {
   static String get exportAllBags =>
       "Exportar todas as sacolas salvas no dispositivo";
   static String get priceTableOptions => "Opções para troca de tabela de preço";
-  static String get createNewBag =>
-      "Crie uma sacola vazia nesta tabela selecionada, sem mover os itens.";
+  static String get goToNewBag =>
+      "Ir para a sacola nesta tabela selecionada, sem mover o itens atuais";
   static String get moveToPriceTableBag =>
       "Mover itens da sacola atual para\nesta nova tab. de preço";
   static String get copyWithoutSomeItens =>

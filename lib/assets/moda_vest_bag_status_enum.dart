@@ -44,3 +44,22 @@ extension StringEnumStatusBagExtension on String {
     }
   }
 }
+
+extension StringLabelEnumStatusBagExtension on EnumStatusBag {
+  String get toLabelStatusBag {
+    switch (this) {
+      case EnumStatusBag.active:
+        return "Ativa";
+      case EnumStatusBag.deleted:
+        return "Deletada";
+      case EnumStatusBag.finished:
+        return "Finalizada";
+      case EnumStatusBag.moved:
+        return "Movida";
+      case EnumStatusBag.movedBetweenPriceTables:
+        return 'Movida entre tabela de preço';
+      default:
+        return "Outro";
+    }
+  }
+}

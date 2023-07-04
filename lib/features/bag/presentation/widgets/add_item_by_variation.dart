@@ -87,6 +87,9 @@ class AddItemByVariation extends StatelessWidget {
                       maxWidth: 140,
                     ),
                     child: NumberWithControlsInput(
+                      key: GlobalKey(
+                        debugLabel: "global${color.code}",
+                      ),
                       onChange: onChangeInGlobalInput,
                       controller: TextEditingController(text: "0"),
                       onChangeByTyping: onTypeGlobalInput,

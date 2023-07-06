@@ -6,14 +6,12 @@ import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
-import 'package:modavest_core/domain/models/reference.dart';
 import 'package:modavest_core/domain/models/reference_simple.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/card_listing_bag_store.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/delete_header_bag.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/edit_item_amount_bag.dart';
 import 'package:modavest_core/widgets/buttons/modavest_button.dart';
-import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 
 class ListingItensBag extends StatefulWidget {
   final bool isDismembration;
@@ -240,6 +238,7 @@ class ListingItensBagState extends State<ListingItensBag> {
       subtotal: colorItems.subtotal,
       amount: colorItems.amount,
       color: colorItems.color,
+      defaultImage: referenceSimple?.imageColorReference,
       buildImage: widget.buildImage,
       referenceCode: colorItems.items.first.referenceCode ?? "",
       referenceName:

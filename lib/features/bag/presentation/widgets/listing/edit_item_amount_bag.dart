@@ -46,6 +46,7 @@ class EditItemAmountBag extends StatefulWidget {
   final Widget Function(ProductPrice?) buildPriceLabel;
   final Widget Function(String? url)? buildImage;
   final List<ProductStock>? productStock;
+  final String? defaultImage;
 
   const EditItemAmountBag({
     super.key,
@@ -70,6 +71,7 @@ class EditItemAmountBag extends StatefulWidget {
     this.onCheckBoxItemChange,
     this.buildImage,
     this.productStock,
+    this.defaultImage,
   });
 
   @override
@@ -133,12 +135,13 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                     fit: BoxFit.contain,
                     child: widget.buildImage?.call(
                           () {
-                            try {
-                              return widget.color.imgList.first;
-                            } catch (e) {
-                              return null;
-                            }
-                          }.call()?.image,
+                                try {
+                                  return widget.color.imgList.first;
+                                } catch (e) {
+                                  return null;
+                                }
+                              }.call()?.image ??
+                              widget.defaultImage,
                         ) ??
                         ImageColorReferenceView(
                           prefixKey: "bagStore",

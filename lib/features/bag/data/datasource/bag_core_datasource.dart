@@ -139,7 +139,7 @@ class BagCoreDatasource {
         if (salesOrder.items != null) {
           final Map<String?, List<ItemSalesOrder>> res = groupBy(
             salesOrder.items ?? [],
-            (ItemSalesOrder item) => item.colorCode,
+            (ItemSalesOrder item) => '${item.referenceCode}${item.colorCode}',
           );
           res.removeWhere((key, value) {
             final num total = value.fold(0, (total, next) {

@@ -97,6 +97,10 @@ class CustomerAddMainEmailRegistrationPageState
                     email: emailController.text,
                     typeCode: int.parse(typeEmailController.text),
                     sequence: widget.emailInitial?.sequence ?? widget.sequence,
+                    isDefault: typeEmailController.text ==
+                        EnumParameters.pesTipoEmail.value.items
+                            .firstWhere((item) => item.value == "Comercial")
+                            .variant,
                   ),
                 );
               }

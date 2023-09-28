@@ -31,7 +31,7 @@ class HiveItemSalesOrderAdapter extends TypeAdapter<HiveItemSalesOrder> {
       quantity: fields[11] as num?,
       settledQuantity: fields[25] as num?,
       originalPrice: fields[18] as num?,
-      price: fields[19] as num,
+      price: fields[19] as num?,
       discountPercentage: fields[20] as num?,
       billingForecastDate: fields[21] as DateTime?,
       reference: fields[22] as HiveReference?,

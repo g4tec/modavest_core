@@ -105,18 +105,18 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       widget.countingBuildWidget.call(widget.orderId),
+                      widget.child,
                     ],
                   ),
                 ),
                 IconButton(
                   onPressed: widget.onExpand,
                   icon: const Icon(Icons.expand_more),
-                )
+                ),
               ],
             ),
           ),
         ),
-        // children: [widget.child],
       ),
     );
   }

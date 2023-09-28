@@ -1,3 +1,4 @@
+import 'package:modavest_core/assets/moda_vest_bag_status_enum.dart';
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
@@ -57,6 +58,7 @@ class SalesOrder {
   final num? officialStoreId;
   List<SalesOrderObservation?> observations;
   List<SalesOrderObservation?> representativeObservations;
+  EnumStatusBag status;
 
   num? priceTableCode;
   List<Discount>? discounts;
@@ -123,6 +125,7 @@ class SalesOrder {
     this.chargeType,
     this.representativeObservations = const [],
     this.imageColorsReferences,
+    this.status = EnumStatusBag.other,
   });
 
   SalesOrder copyWith({
@@ -132,6 +135,7 @@ class SalesOrder {
     List<ItemSalesOrder>? items,
     num? paymentconditionCode,
     String? paymentConditionName,
+    num? priceTableCode,
   }) {
     return SalesOrder(
       integrationId: integrationId,
@@ -155,8 +159,8 @@ class SalesOrder {
       sellerCpf: sellerCpf,
       purchasingGuideCode: purchasingGuideCode,
       cnpjPurchasingGuide: cnpjPurchasingGuide,
-      paymentconditionCode: paymentconditionCode ?? paymentconditionCode,
-      paymentConditionName: paymentConditionName ?? paymentConditionName,
+      paymentconditionCode: paymentconditionCode ?? this.paymentconditionCode,
+      paymentConditionName: paymentConditionName ?? this.paymentConditionName,
       quantity: quantity,
       grossValue: grossValue,
       discountValue: discountValue,
@@ -176,7 +180,7 @@ class SalesOrder {
       stackTrace: stackTrace,
       payload: payload,
       observations: observations,
-      priceTableCode: priceTableCode,
+      priceTableCode: priceTableCode ?? this.priceTableCode,
       discounts: discounts,
       totalOriginalAmountOrder:
           totalOriginalAmountOrder ?? this.totalOriginalAmountOrder,

@@ -24,6 +24,7 @@ class EditItemAmountBag extends StatefulWidget {
   final Map<Product, int> productAmount;
   final num subtotal;
   final num amount;
+  final num notIncludedAmount;
   final bool? isChecked;
   final Function(
     Product,
@@ -45,6 +46,7 @@ class EditItemAmountBag extends StatefulWidget {
   final Widget Function(ProductPrice?) buildPriceLabel;
   final Widget Function(String? url)? buildImage;
   final List<ProductStock>? productStock;
+  final String? defaultImage;
 
   const EditItemAmountBag({
     super.key,
@@ -61,6 +63,7 @@ class EditItemAmountBag extends StatefulWidget {
     required this.conditionCode,
     required this.subtotal,
     required this.amount,
+    required this.notIncludedAmount,
     required this.initDiscount,
     required this.updatePrices,
     required this.buildPriceLabel,
@@ -68,6 +71,7 @@ class EditItemAmountBag extends StatefulWidget {
     this.onCheckBoxItemChange,
     this.buildImage,
     this.productStock,
+    this.defaultImage,
   });
 
   @override
@@ -131,12 +135,13 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                     fit: BoxFit.contain,
                     child: widget.buildImage?.call(
                           () {
-                            try {
-                              return widget.color.imgList.first;
-                            } catch (e) {
-                              return null;
-                            }
-                          }.call()?.image,
+                                try {
+                                  return widget.color.imgList.first;
+                                } catch (e) {
+                                  return null;
+                                }
+                              }.call()?.image ??
+                              widget.defaultImage,
                         ) ??
                         ImageColorReferenceView(
                           prefixKey: "bagStore",
@@ -162,38 +167,97 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                         "${widget.referenceName} - ${widget.color.name!}",
                         textAlign: TextAlign.left,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: AutoSizeText(
-                          "${ModaVestLabels.ref}: ${widget.referenceCode}",
-                          style: Theme.of(context).textTheme.headline5,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: ModavestMoneyBoldText(
-                          originalValue: widget.subtotal.toDouble(),
-                          fontSize: 16,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: AutoSizeText(
-                          "${ModaVestLabels.qtdProduct}: ${widget.amount.toInt()}",
-                          style: Theme.of(context).textTheme.headline5,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      // TODO: marca
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(vertical: 2),
-                      //   child: AutoSizeText(
-                      //     "${ModaVestLabels.brand}: ${widget.brandName}",
-                      //     style: Theme.of(context).textTheme.headline5,
-                      //     textAlign: TextAlign.left,
-                      //   ),
-                      // ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 2),
+                                  child: AutoSizeText(
+                                    "${ModaVestLabels.ref}: ${widget.referenceCode}",
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 2),
+                                  child: ModavestMoneyBoldText(
+                                    originalValue: widget.subtotal.toDouble(),
+                                    fontSize: 16,
+                                    color: widget.notIncludedAmount > 0
+                                        ? widget.amount > 0
+                                            ? Colors.orange
+                                            : Colors.red
+                                        : Colors.green,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 2),
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                              "${ModaVestLabels.qtdProduct}: ${widget.amount.toInt()} ",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5,
+                                        ),
+                                        if (widget.notIncludedAmount > 0)
+                                          TextSpan(
+                                            text:
+                                                "(${widget.notIncludedAmount.toInt()})",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline5
+                                                ?.copyWith(
+                                                  color: Colors.grey,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                // TODO: marca
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(vertical: 2),
+                                //   child: AutoSizeText(
+                                //     "${ModaVestLabels.brand}: ${widget.brandName}",
+                                //     style: Theme.of(context).textTheme.headline5,
+                                //     textAlign: TextAlign.left,
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                            if (widget.notIncludedAmount > 0)
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: widget.amount > 0
+                                      ? Colors.orange
+                                      : Colors.red,
+                                ),
+                                child: Text(
+                                  widget.amount > 0
+                                      ? "Inclusão parcial"
+                                      : "Não icluso",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                              ),
+                          ])
                     ],
                   ),
                 ),

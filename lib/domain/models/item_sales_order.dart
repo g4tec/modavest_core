@@ -15,7 +15,7 @@ class ItemSalesOrder {
   num? quantity;
   num? settledQuantity;
   num? originalPrice;
-  num price;
+  num? price;
   final num? discountPercentage;
   final DateTime? billingForecastDate;
   ReferenceSimple? referenceSimple;

@@ -131,4 +131,28 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       scaleCode: scaleCode,
     );
   }
+
+  dynamic toJson() {
+    return {
+      "integrationId": integrationId,
+      "orderId": orderId,
+      "sequenceItem": sequenceItem,
+      "productCode": productCode,
+      "productSku": productSku,
+      "productName": productName,
+      "referenceCode": referenceCode,
+      "referenceName": referenceName,
+      "colorCode": colorCode,
+      "colorName": colorName,
+      "sizeName": sizeName,
+      "quantity": quantity,
+      "settledQuantity": settledQuantity,
+      "originalPrice": originalPrice,
+      "price": price,
+      "discountPercentage": discountPercentage,
+      "billingForecastDate": billingForecastDate,
+      "referenceIsPack": referenceIsPack,
+      "scaleCode": scaleCode,
+    };
+  }
 }

@@ -1,16 +1,17 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
-import 'package:modavest_core/domain/models/reference.dart';
+import 'package:modavest_core/domain/models/reference_simple.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/card_listing_bag_store.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/delete_header_bag.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/listing/edit_item_amount_bag.dart';
-import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
+import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 
 class ListingItensBag extends StatefulWidget {
   final bool isDismembration;
@@ -50,6 +51,8 @@ class ListingItensBag extends StatefulWidget {
   final Function() onPop;
   final Function(ColorItemSalesOrder, bool)? onCheckBoxItemChange;
   final Widget Function(String?)? buildImage;
+  final List<ProductPrice>? prices;
+  final bool showNotIncluded;
   const ListingItensBag({
     super.key,
     required this.salesOrders,
@@ -68,6 +71,8 @@ class ListingItensBag extends StatefulWidget {
     this.onSelectCheckBox,
     this.onCheckBoxItemChange,
     this.buildImage,
+    this.prices,
+    this.showNotIncluded = false,
   });
 
   @override
@@ -166,23 +171,32 @@ class ListingItensBagState extends State<ListingItensBag> {
                     ? 1
                     : 0.5,
                 child: CardListingBagStore(
-                    showCheckBox: showCheckBoxes,
-                    onExpand: () {
-                      setState(() => expandSaleOrder = saleOrder);
-                    },
-                    onSelectSalesOrder: () {
-                      widget.onSelectSalesOrder.call(index);
-                    },
-                    key: itensKeys[saleOrder.orderId],
-                    buildImage: widget.buildImage,
-                    orderId: saleOrder.orderId ?? "",
-                    image: saleOrder.oficialStore?.logoUrl ?? "",
-                    title: saleOrder.oficialStore?.description ?? "",
-                    value: selecteds[saleOrder.orderId] ?? false,
-                    onChange: onChildChange,
-                    onSelect: setCheckBox,
-                    countingBuildWidget: widget.countingBuildWidget,
-                    child: const SizedBox()),
+                  showCheckBox: showCheckBoxes,
+                  onExpand: () {
+                    setState(() => expandSaleOrder = saleOrder);
+                  },
+                  onSelectSalesOrder: () {
+                    widget.onSelectSalesOrder.call(index);
+                  },
+                  key: itensKeys[saleOrder.orderId],
+                  buildImage: widget.buildImage,
+                  orderId: saleOrder.orderId ?? "",
+                  image: saleOrder.oficialStore?.logoUrl ?? "",
+                  title: saleOrder.oficialStore?.description ?? "",
+                  value: selecteds[saleOrder.orderId] ?? false,
+                  onChange: onChildChange,
+                  onSelect: setCheckBox,
+                  countingBuildWidget: widget.countingBuildWidget,
+                  child: SizedBox(
+                    child: Text(
+                      "Tab. Preço: ${saleOrder.priceTableCode?.toString() ?? ""}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(fontSize: 14),
+                    ),
+                  ),
+                ),
               ),
             );
           },
@@ -203,17 +217,28 @@ class ListingItensBagState extends State<ListingItensBag> {
     // );
     final List<ProductPrice> prices = [];
 
+    final ReferenceSimple? referenceSimple = colorItems.items
+        .firstWhereOrNull((item) => item.referenceSimple != null)
+        ?.referenceSimple;
+
     for (final ItemSalesOrder itens in colorItems.items) {
-      prices.addAll(
-        itens.referenceSimple?.referencePrice?.prices ?? [],
-      );
+      if ((itens.price ?? 0) > 0) {
+        final ProductPrice? price =
+            (referenceSimple?.referencePrice?.prices ?? []).firstWhereOrNull(
+                (price) => price.productCode == itens.productCode);
+        if (price != null) {
+          prices.add(price);
+        }
+      }
     }
 
     return EditItemAmountBag(
       productStock: colorItems.productStock,
+      notIncludedAmount: colorItems.notIncludedAmount,
       subtotal: colorItems.subtotal,
       amount: colorItems.amount,
       color: colorItems.color,
+      defaultImage: referenceSimple?.imageColorReference,
       buildImage: widget.buildImage,
       referenceCode: colorItems.items.first.referenceCode ?? "",
       referenceName:
@@ -334,6 +359,15 @@ class ListingItensBagState extends State<ListingItensBag> {
                                   ),
                                   widget.countingBuildWidget
                                       .call(expandSaleOrder!.orderId ?? ""),
+                                  SizedBox(
+                                    child: Text(
+                                      "Tab. Preço: ${expandSaleOrder?.priceTableCode?.toString() ?? ""}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5
+                                          ?.copyWith(fontSize: 14),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -365,6 +399,7 @@ class ListingItensBagState extends State<ListingItensBag> {
             onChange: changeAll,
             onDelete: () {
               final List<SalesOrder> deleteOrderSale = [];
+
               selecteds.forEach((key, value) {
                 if (value) {
                   final int index = widget.salesOrders
@@ -377,9 +412,59 @@ class ListingItensBagState extends State<ListingItensBag> {
                   }
                 }
               });
-              widget.deleteSalesOrder.call(deleteOrderSale);
-              setSelection(false);
-              widget.onCloseTitle?.call();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: FittedBox(
+                          child: Icon(
+                            Icons.warning_amber,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        ModaVestLabels.areYousureToDelete,
+                        style: Theme.of(context).textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  content: Text(
+                    ModaVestLabels.afterDeleteYouCantRowback,
+                    style: Theme.of(context).textTheme.headline5,
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ModaVestTextButton(
+                        outlined: true,
+                        onPressed: () => Navigator.of(context).pop(),
+                        title: ModaVestLabels.cancelLabel,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ModaVestTextButton(
+                        onPressed: () {
+                          widget.deleteSalesOrder.call(deleteOrderSale);
+                          setSelection(false);
+                          widget.onCloseTitle?.call();
+                        },
+                        title: ModaVestLabels.yesDelete,
+                        color: Colors.red,
+                        colorText: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
 

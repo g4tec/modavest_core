@@ -1,5 +1,5 @@
 class EnterpriseReference {
-  final int? sequence;
+  int? sequence;
   final num? integrationId;
   final String? phoneNumber;
   final String? name;

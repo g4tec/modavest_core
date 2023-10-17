@@ -1,7 +1,7 @@
 class LegalPersonContact {
   final num? legalPersonCode;
   final num? integrationId;
-  final int sequence;
+   int? sequence;
   final String name;
   final num? typeCode;
   final String? typeName;
@@ -14,7 +14,7 @@ class LegalPersonContact {
   LegalPersonContact({
     this.legalPersonCode,
     this.integrationId,
-    required this.sequence,
+    this.sequence,
     required this.name,
     this.typeCode,
     this.typeName,

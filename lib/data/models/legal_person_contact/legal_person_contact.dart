@@ -6,7 +6,7 @@ class LegalPersonContactModel extends LegalPersonContact {
   LegalPersonContactModel({
     num? legalPersonCode,
     num? integrationId,
-    required int sequence,
+    int? sequence,
     required String name,
     num? typeCode,
     String? typeName,
@@ -68,7 +68,7 @@ class LegalPersonContactModel extends LegalPersonContact {
     return HiveLegalPersonContact(
       legalPersonCode: legalPersonCode,
       integrationId: integrationId,
-      sequence: sequence,
+      sequence: sequence ?? 0,
       name: name,
       typeCode: typeCode,
       typeName: typeName,

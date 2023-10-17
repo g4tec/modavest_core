@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -373,7 +373,7 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                         child: StreamBuilder(
                           stream: widget.bagStream,
                           builder: (context, AsyncSnapshot<int> snapshot) =>
-                              Badge(
+                              badge.Badge(
                             badgeContent: Text((snapshot.data ?? 0).toString()),
                             badgeColor: Theme.of(context).canvasColor,
                             alignment: Alignment.bottomRight,

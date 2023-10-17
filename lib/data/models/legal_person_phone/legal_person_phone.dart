@@ -21,6 +21,7 @@ class LegalPersonPhoneModel extends LegalPersonPhone {
       typeCode: json["typeCode"] as int? ?? 1,
       branchLine: json["branchLine"] as int?,
       isDefault: json["isDefault"] as bool? ?? false,
+      sequence: json["sequence"] as num?,
     );
   }
 

@@ -42,3 +42,10 @@ class UpdatePriceEvent extends DiscountPresentationEvent {
   @override
   List<Object> get props => [];
 }
+
+class ResetDiscountsEvent extends DiscountPresentationEvent {
+  const ResetDiscountsEvent();
+
+  @override
+  List<Object> get props => [];
+}

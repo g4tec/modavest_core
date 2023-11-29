@@ -7,11 +7,11 @@ class PaymentConditionsWidget extends StatelessWidget {
   final void Function(num?) onSelect;
   final List<PaymentConditions> paymentConditions;
   final num? selected;
-  final SalesOrder order;
+  final SalesOrder? order;
   final Widget Function({
     required SalesOrder order,
     required PaymentConditions condition,
-  }) buildPrice;
+  })? buildPrice;
 
   const PaymentConditionsWidget({
     super.key,
@@ -67,13 +67,14 @@ class PaymentConditionsWidget extends StatelessWidget {
                 ),
               ),
             ),
-            DataCell(
-              FittedBox(
-                  child: buildPrice.call(
-                order: order,
-                condition: condition,
-              )),
-            ),
+            if (order != null && buildPrice != null)
+              DataCell(
+                FittedBox(
+                    child: buildPrice?.call(
+                  order: order!,
+                  condition: condition,
+                )),
+              ),
             DataCell(
               Center(
                 child: Text(

@@ -204,6 +204,7 @@ class ModaVestLabels {
   static String get selectAnAddress => "Selecione um endereço";
   static String get selectAPaymentCondition =>
       "Selecione uma condição de pagamento";
+  static String get paymentCondition => "Condição de pagamento";
   static String get orderEndAgent =>
       "Acesse o aplicativo do representante para concluir o pedido";
   static String get initShopping => "Ir para os produtos";

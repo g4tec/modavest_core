@@ -16,6 +16,7 @@ class BottomButtonBag extends StatelessWidget {
   final SalesOrder? selectedSalesOrder;
   final String label;
   final Widget Function(String?)? buildImage;
+  final bool isLoadingTotal;
 
   const BottomButtonBag({
     super.key,
@@ -28,6 +29,7 @@ class BottomButtonBag extends StatelessWidget {
     this.total,
     this.totalItens,
     this.buildImage,
+    this.isLoadingTotal = false,
   });
 
   Widget buildTotal({
@@ -48,16 +50,18 @@ class BottomButtonBag extends StatelessWidget {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.30,
-                child: AutoSizeText(
-                  toCurrency(total),
-                  minFontSize: 1,
-                  style: Theme.of(context).textTheme.headline4!.copyWith(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
+                child: isLoadingTotal
+                    ? CircularProgressIndicator()
+                    : AutoSizeText(
+                        toCurrency(total),
+                        minFontSize: 1,
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                            ),
+                        textAlign: TextAlign.end,
                       ),
-                  textAlign: TextAlign.end,
-                ),
               ),
             ],
           ),
@@ -121,15 +125,17 @@ class BottomButtonBag extends StatelessWidget {
       ),
       subtitle: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text(
-          toCurrency(selectedSalesOrder.totalAmountOrder ?? 0),
-          style: Theme.of(context).textTheme.headline4!.copyWith(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
+        child: isLoadingTotal
+            ? CircularProgressIndicator()
+            : Text(
+                toCurrency(selectedSalesOrder.totalAmountOrder ?? 0),
+                style: Theme.of(context).textTheme.headline4!.copyWith(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                textAlign: TextAlign.center,
               ),
-          textAlign: TextAlign.center,
-        ),
       ),
     );
   }

@@ -16,11 +16,19 @@ class SpecicificationsProduct extends StatelessWidget {
   // TODO: remover para aparecer o ratting e passar os valores de referencia
   final bool ratting;
   final OficialStore? oficialStore;
+  final Widget Function({
+    required num priceTable,
+    required double price,
+    required num oficialStoreId,
+    required double spacing,
+  })? buildPriceWidget;
+
   const SpecicificationsProduct({
     Key? key,
     required this.reference,
     this.oficialStore,
     this.ratting = false,
+    this.buildPriceWidget,
   }) : super(key: key);
 
   List<Widget> buildComposition(BuildContext context) {
@@ -229,12 +237,19 @@ class SpecicificationsProduct extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ModavestDiscountPrice(
-                        spacing: spacing,
-                        price: price.toDouble(),
-                        oficialStoreId: reference.oficialStore ?? 0,
-                        priceTable: reference.priceTable ?? 0,
-                      ),
+                      buildPriceWidget != null
+                          ? buildPriceWidget!.call(
+                              spacing: spacing,
+                              price: price.toDouble(),
+                              oficialStoreId: reference.oficialStore ?? 0,
+                              priceTable: reference.priceTable ?? 0,
+                            )
+                          : ModavestDiscountPrice(
+                              spacing: spacing,
+                              price: price.toDouble(),
+                              oficialStoreId: reference.oficialStore ?? 0,
+                              priceTable: reference.priceTable ?? 0,
+                            ),
                       if (ratting)
                         Padding(
                           padding:

@@ -513,4 +513,5 @@ class ModaVestLabels {
   static String get copyWithoutSomeItens =>
       "Existem itens que não serão incluídos. Tem certeza que deseja mover?";
   static String get moveEvenSo => "Mover mesmo assim";
+  static String get showMoreOptions => "Visualizar mais opções";
 }

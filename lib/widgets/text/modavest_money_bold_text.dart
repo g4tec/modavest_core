@@ -31,7 +31,7 @@ class ModavestMoneyBoldText extends StatelessWidget {
             TextSpan(
               children: <TextSpan>[
                 TextSpan(
-                  text: "${toCurrency(originalValue)}\n",
+                  text: "${toCurrency(originalValue)}\t\t",
                   style: discountValue != null && discountValue != originalValue
                       ? const TextStyle(
                           color: Colors.grey,

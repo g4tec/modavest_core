@@ -39,6 +39,8 @@ class CardListingBagStore extends StatefulWidget {
 class CardListingBagStoreState extends State<CardListingBagStore> {
   @override
   Widget build(BuildContext context) {
+    final aspectRatio = MediaQuery.of(context).size.aspectRatio;
+
     return GestureDetector(
       onTap: () {
         widget.onSelectSalesOrder.call();
@@ -51,8 +53,15 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
         // },
         // collapsedBackgroundColor: const Color(0xffe8e8e8),
 
-        title: SizedBox(
+        title: Container(
           width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: aspectRatio < 0.6 ? 16 : 32),
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+                side: BorderSide(color: Color(0xFFE4E4E4), width: 1),
+                borderRadius: BorderRadius.circular(8)),
+          ),
           child: FittedBox(
             child: Row(
               children: [
@@ -75,9 +84,11 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                   )
                 else
                   const SizedBox(),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.2,
-                  width: MediaQuery.of(context).size.width * 0.3,
+                Container(
+                  height: MediaQuery.of(context).size.width *
+                      (aspectRatio < 0.6 ? 0.2 : 0.18),
+                  width: MediaQuery.of(context).size.width *
+                      (aspectRatio < 0.6 ? 0.3 : 0.22),
                   child: FittedBox(
                     fit: BoxFit.contain,
                     child: Padding(
@@ -93,25 +104,30 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  color: Colors.transparent,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.11,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       AutoSizeText(
                         widget.title,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                              fontSize: 16,
+                            ),
                       ),
                       widget.countingBuildWidget.call(widget.orderId),
                       widget.child,
                     ],
                   ),
                 ),
-                IconButton(
-                  onPressed: widget.onExpand,
-                  icon: const Icon(Icons.expand_more),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.14,
+                  alignment: Alignment.topCenter,
+                  child: IconButton(
+                    onPressed: widget.onExpand,
+                    icon: const Icon(Icons.expand_more),
+                  ),
                 ),
               ],
             ),

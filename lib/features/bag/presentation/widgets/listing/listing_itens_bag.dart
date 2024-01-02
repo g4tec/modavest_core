@@ -358,10 +358,13 @@ class ListingItensBagState extends State<ListingItensBag> {
                           color: Color(0xFFE4E4E4),
                           width: 1,
                         ),
+                        bottom: BorderSide(
+                          color: Color(0xFFE4E4E4),
+                          width: 1,
+                        ),
                       ),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
                       ),
                     ),
                     child: FittedBox(
@@ -449,27 +452,30 @@ class ListingItensBagState extends State<ListingItensBag> {
             );
           }
           if ((expandSaleOrder!.colorItems.length + 2) == (index + 1)) {
-            return Container(
-              height: 5,
-              width: MediaQuery.of(context).size.width,
-              margin:
-                  EdgeInsets.symmetric(horizontal: aspectRatio < 0.6 ? 32 : 47),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    width: 1,
-                    color: Color(0xFFE4E4E4),
+            return Transform.translate(
+              offset: Offset(0.0, -8.0),
+              child: Container(
+                height: 5,
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(
+                    horizontal: aspectRatio < 0.6 ? 32 : 47),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 1,
+                      color: Color(0xFFE4E4E4),
+                    ),
                   ),
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
                 ),
               ),
             );
           }
-          return buildItem(expandSaleOrder!.colorItems[index - 1],
-              expandSaleOrder!, index - 1);
+          return Transform.translate(
+            offset: Offset(0.0, -8.0),
+            child: buildItem(expandSaleOrder!.colorItems[index - 1],
+                expandSaleOrder!, index - 1),
+          );
         },
       );
     }

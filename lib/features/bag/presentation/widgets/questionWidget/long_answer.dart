@@ -42,7 +42,7 @@ class LongAnswerState extends State<LongAnswer> {
         maxLines: null,
         minLines: 6,
         keyboardType: TextInputType.multiline,
-        textInputAction: TextInputAction.done,
+        textInputAction: TextInputAction.newline,
         validator: (String? value) => widget.isRequired
             ? defaultValidate.call(value, widget.isRequired)
             : null,

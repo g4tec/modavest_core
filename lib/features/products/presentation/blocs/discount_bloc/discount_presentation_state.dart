@@ -2,8 +2,12 @@ part of 'discount_presentation_bloc.dart';
 
 abstract class DiscountPresentationState extends Equatable {
   final Map<ProductPrice, double?> productPriceDiscountPrice;
+  final bool showDiscounts;
 
-  const DiscountPresentationState(this.productPriceDiscountPrice);
+  const DiscountPresentationState(
+    this.productPriceDiscountPrice, {
+    this.showDiscounts = false,
+  });
 
   @override
   List<Object> get props => [productPriceDiscountPrice];
@@ -16,7 +20,7 @@ class DiscountPresentationInitial extends DiscountPresentationState {
 }
 
 class DiscountPrice extends DiscountPresentationState {
-  const DiscountPrice(super.productPriceDiscountPrice);
+  const DiscountPrice(super.productPriceDiscountPrice, {super.showDiscounts});
 
   @override
   List<Object> get props => [productPriceDiscountPrice];

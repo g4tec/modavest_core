@@ -278,7 +278,8 @@ class ModaVestLabels {
   static String get validatedSalesRegion => "Região de venda validada: ";
   static String get salesRegionError =>
       "O cep, estado ou cidade informado não corresponde a nenhuma das suas regiões de venda";
-
+  static String get vinculatingSalesRegionError =>
+      "O cep, estado ou cidade desse representante não corresponde a nenhuma das suas regiões de venda";
   static String get addCustomer => "Novo lojista";
   static String get searchingCreditLimit => "Buscando limites de crédito";
   static String get emptyCreditLimit =>
@@ -514,4 +515,6 @@ class ModaVestLabels {
       "Existem itens que não serão incluídos. Tem certeza que deseja mover?";
   static String get moveEvenSo => "Mover mesmo assim";
   static String get showMoreOptions => "Visualizar mais opções";
+  static String get settings => "Configurações";
+  static String get checkUpdates => "Buscar atualizações";
 }

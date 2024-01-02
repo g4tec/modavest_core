@@ -116,7 +116,9 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                               fontSize: 16,
                             ),
                       ),
-                      widget.countingBuildWidget.call(widget.orderId),
+                      FittedBox(
+                        child: widget.countingBuildWidget.call(widget.orderId),
+                      ),
                       widget.child,
                     ],
                   ),

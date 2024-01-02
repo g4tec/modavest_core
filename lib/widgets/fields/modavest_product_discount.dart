@@ -25,32 +25,41 @@ class ModavestProductDiscountPrice extends StatelessWidget {
             state.productPriceDiscountPrice.containsKey(price) &&
             state.productPriceDiscountPrice[price] != null &&
             state.productPriceDiscountPrice[price] != price?.originalPrice) {
-          return Column(
-            children: [
-              Text.rich(
-                TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text:
-                          "${toCurrency((price?.originalPrice ?? 0).toDouble())}\n",
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                    TextSpan(
-                      text: toCurrency(
-                        num.tryParse(
-                              '${state.productPriceDiscountPrice[price]}',
-                            )?.toDouble() ??
-                            0,
+          return !state.showDiscounts
+              ? Text(
+                  toCurrency(
+                    num.tryParse(
+                          '${state.productPriceDiscountPrice[price]}',
+                        )?.toDouble() ??
+                        0,
+                  ),
+                )
+              : Column(
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            text:
+                                "${toCurrency((price?.originalPrice ?? 0).toDouble())}\n",
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          TextSpan(
+                            text: toCurrency(
+                              num.tryParse(
+                                    '${state.productPriceDiscountPrice[price]}',
+                                  )?.toDouble() ??
+                                  0,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
-                ),
-              ),
-            ],
-          );
+                );
         }
         return Text(
           toCurrency(

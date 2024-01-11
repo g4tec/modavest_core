@@ -28,7 +28,7 @@ class VariationProduct extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CircleAvatar(
-                radius: 50,
+                radius: 40,
                 backgroundColor: isSelected
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).secondaryHeaderColor,
@@ -55,8 +55,9 @@ class VariationProduct extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.0,
+              Container(
+                padding: EdgeInsets.only(top: 4, bottom: 4),
+                height: 28.0,
                 child: Text(
                   color.name ?? (color.auxiliaryName ?? ""),
                   style: Theme.of(context).textTheme.headline5,

@@ -16,6 +16,8 @@ class CarouselWithIndicator extends StatefulWidget {
   final GlobalKey scaffoldKey;
   final Function(ImageColorReference? imageColorReference)? buildImage;
   final String? videoUrl;
+  final double? width;
+  final double? height;
 
   final void Function()? onPressBag;
   final void Function()? onPressBack;
@@ -32,6 +34,8 @@ class CarouselWithIndicator extends StatefulWidget {
     this.onPressBack,
     this.buildImage,
     this.videoUrl,
+    this.height,
+    this.width,
   }) : super(key: key);
   @override
   CarouselWithIndicatorState createState() => CarouselWithIndicatorState();
@@ -187,7 +191,8 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
             CarouselSlider(
               options: CarouselOptions(
                 viewportFraction: 1.0,
-                height: MediaQuery.of(context).size.height * 0.6,
+                height:
+                    widget.height ?? MediaQuery.of(context).size.height * 0.6,
                 onPageChanged: (int index, reason) {
                   setState(() {
                     currentTab = index;
@@ -200,8 +205,9 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                       Builder(
                         builder: (BuildContext context) {
                           return SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 300,
+                            width: widget.width ??
+                                MediaQuery.of(context).size.width,
+                            height: widget.height ?? 300,
                             child: const Icon(Icons.image_not_supported),
                           );
                         },
@@ -214,8 +220,9 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                           return Builder(
                             builder: (BuildContext context) {
                               return SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: 300,
+                                width: widget.width ??
+                                    MediaQuery.of(context).size.width,
+                                height: widget.height ?? 300,
                                 child: InkWell(
                                   child: widget.buildImage != null
                                       ? widget.buildImage?.call(i)
@@ -291,7 +298,7 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
         ),
         Container(
           height: MediaQuery.of(context).size.height * 0.6,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -317,82 +324,82 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Material(
-                shape: const CircleBorder(),
-                color: Theme.of(context).primaryColor,
-                child: IconButton(
-                  color: Theme.of(context).primaryColor,
-                  icon: Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Theme.of(context).canvasColor,
-                    ),
-                  ),
-                  onPressed: widget.onPressBack,
-                  // () => getIt<AppNavigator>().pop(),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // TODO: Favoritar
-                  // Material(
-                  //   shape: const CircleBorder(),
-                  //   color: Theme.of(context).primaryColor,
-                  //   child: IconButton(
-                  //     color: Theme.of(context).primaryColor,
-                  //     icon: Align(
-                  //       child: Badge(
-                  //         showBadge: false,
-                  //         badgeColor: Theme.of(context).canvasColor,
-                  //         alignment: Alignment.bottomRight,
-                  //         child: Icon(
-                  //           Icons.favorite_outline,
-                  //           color: Theme.of(context).canvasColor,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     onPressed: () {},
-                  //   ),
-                  // ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Material(
-                    shape: const CircleBorder(),
-                    color: Theme.of(context).primaryColor,
-                    child: IconButton(
-                      color: Theme.of(context).primaryColor,
-                      icon: Align(
-                        child: StreamBuilder(
-                          stream: widget.bagStream,
-                          builder: (context, AsyncSnapshot<int> snapshot) =>
-                              badge.Badge(
-                            badgeContent: Text((snapshot.data ?? 0).toString()),
-                            badgeColor: Theme.of(context).canvasColor,
-                            alignment: Alignment.bottomRight,
-                            child: Icon(
-                              Icons.shopping_bag_outlined,
-                              size: 24,
-                              color: Theme.of(context).canvasColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: widget.onPressBag,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: [
+        //       // Material(
+        //       //   shape: const CircleBorder(),
+        //       //   color: Theme.of(context).primaryColor,
+        //       //   child: IconButton(
+        //       //     color: Theme.of(context).primaryColor,
+        //       //     icon: Align(
+        //       //       alignment: Alignment.centerRight,
+        //       //       child: Icon(
+        //       //         Icons.arrow_back_ios,
+        //       //         color: Theme.of(context).canvasColor,
+        //       //       ),
+        //       //     ),
+        //       //     onPressed: widget.onPressBack,
+        //       //     // () => getIt<AppNavigator>().pop(),
+        //       //   ),
+        //       // ),
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           // TODO: Favoritar
+        //           // Material(
+        //           //   shape: const CircleBorder(),
+        //           //   color: Theme.of(context).primaryColor,
+        //           //   child: IconButton(
+        //           //     color: Theme.of(context).primaryColor,
+        //           //     icon: Align(
+        //           //       child: Badge(
+        //           //         showBadge: false,
+        //           //         badgeColor: Theme.of(context).canvasColor,
+        //           //         alignment: Alignment.bottomRight,
+        //           //         child: Icon(
+        //           //           Icons.favorite_outline,
+        //           //           color: Theme.of(context).canvasColor,
+        //           //         ),
+        //           //       ),
+        //           //     ),
+        //           //     onPressed: () {},
+        //           //   ),
+        //           // ),
+        //           const SizedBox(
+        //             width: 10,
+        //           ),
+        //           // Material(
+        //           //   shape: const CircleBorder(),
+        //           //   color: Theme.of(context).primaryColor,
+        //           //   child: IconButton(
+        //           //     color: Theme.of(context).primaryColor,
+        //           //     icon: Align(
+        //           //       child: StreamBuilder(
+        //           //         stream: widget.bagStream,
+        //           //         builder: (context, AsyncSnapshot<int> snapshot) =>
+        //           //             badge.Badge(
+        //           //           badgeContent: Text((snapshot.data ?? 0).toString()),
+        //           //           badgeColor: Theme.of(context).canvasColor,
+        //           //           alignment: Alignment.bottomRight,
+        //           //           child: Icon(
+        //           //             Icons.shopping_bag_outlined,
+        //           //             size: 24,
+        //           //             color: Theme.of(context).canvasColor,
+        //           //           ),
+        //           //         ),
+        //           //       ),
+        //           //     ),
+        //           //     onPressed: widget.onPressBag,
+        //           //   ),
+        //           // ),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

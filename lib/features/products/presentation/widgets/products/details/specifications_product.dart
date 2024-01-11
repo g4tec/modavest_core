@@ -12,7 +12,7 @@ import 'package:modavest_core/widgets/text/modavest_title.dart';
 
 class SpecicificationsProduct extends StatelessWidget {
   final Reference reference;
-  static const double spacing = 3;
+  static const double spacing = 8;
   // TODO: remover para aparecer o ratting e passar os valores de referencia
   final bool ratting;
   final OficialStore? oficialStore;
@@ -88,7 +88,13 @@ class SpecicificationsProduct extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Column(
         children: [
-          ModavestTitle("${reference.code} - ${reference.name ?? ""}"),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.90,
+            child: ModavestTitle(
+              "${reference.code} - ${reference.name ?? ""}",
+              mainAxisAlignment: MainAxisAlignment.start,
+            ),
+          ),
           const SizedBox(
             height: 5,
           ),

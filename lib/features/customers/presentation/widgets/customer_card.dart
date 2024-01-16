@@ -40,7 +40,9 @@ class CustomerCard extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: Theme.of(context).primaryColor,
                               child: Text(
-                                ((customer.name ?? customer.fantasyName) ?? "")
+                                ((customer.name ?? "").isEmpty
+                                        ? "-"
+                                        : customer.name!)
                                     .substring(0, 1),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,

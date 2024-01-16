@@ -23,12 +23,14 @@ class EnterpriseForm extends StatefulWidget {
   final GlobalKey formKey;
   final LegalPerson? initialLegalPerson;
   final String? initialCnpj;
+  final String? initialName;
 
   const EnterpriseForm({
     required this.formKey,
     this.specialistFields = const [],
     this.initialCnpj,
     this.initialLegalPerson,
+    this.initialName,
   }) : super(key: formKey);
 
   @override
@@ -66,7 +68,7 @@ class EnterpriseFormState extends State<EnterpriseForm> {
       key: const Key("socialReason"),
       title: ModaVestLabels.socialReason,
       controller: TextEditingController(
-        text: widget.initialLegalPerson?.name ?? "",
+        text: widget.initialLegalPerson?.name ?? (widget.initialName ?? ""),
       ),
     );
 

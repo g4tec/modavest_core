@@ -7,9 +7,15 @@ import 'package:modavest_core/utils/format_cnpj_cpf.dart';
 class CustomerListTile extends StatelessWidget {
   final Customer customer;
   final double width;
+  final Function(Customer customer)? onTapFinishRegister;
   final Function(Customer customer)? onTap;
-  const CustomerListTile(
-      {super.key, required this.customer, required this.width, this.onTap});
+  const CustomerListTile({
+    super.key,
+    required this.customer,
+    required this.width,
+    this.onTap,
+    this.onTapFinishRegister,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class CustomerListTile extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                width: width * 0.18,
+                width: width * 0.16,
                 height: 60,
                 child: customer.image != null
                     ? Image.network(customer.image!)
@@ -29,9 +35,16 @@ class CustomerListTile extends StatelessWidget {
                         child: CircleAvatar(
                           backgroundColor: Theme.of(context).primaryColor,
                           child: Text(
-                            customer.name?.substring(0, 1) ?? "",
-                            style: const TextStyle(
+                            ((customer.name ?? "").isEmpty
+                                        ? "-"
+                                        : customer.name!)
+                                    .substring(0, 1) ??
+                                "",
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              fontStyle: customer.code == null
+                                  ? FontStyle.italic
+                                  : null,
                               color: Colors.white,
                             ),
                           ),
@@ -41,7 +54,7 @@ class CustomerListTile extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    width: width * 0.75,
+                    width: width * 0.67,
                     height: 80,
                     padding: EdgeInsets.only(left: width * 0.05),
                     alignment: Alignment.centerLeft,
@@ -54,22 +67,57 @@ class CustomerListTile extends StatelessWidget {
                               (customer.fantasyName ?? customer.integrationId)
                                   .toString(),
                           maxLines: 2,
-                          style: LegalPersonStatus.active
-                              .style(context)
-                              ?.copyWith(fontWeight: FontWeight.w700),
+                          style:
+                              LegalPersonStatus.active.style(context)?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: customer.code == null
+                                        ? FontStyle.italic
+                                        : null,
+                                  ),
                         ),
                         if (customer.cpfCnpj != null)
                           AutoSizeText(
                             "CNPJ: ${(formatCnpjCpf(customer.cpfCnpj.toString()))}",
                             style: LegalPersonStatus.active
                                 .style(context)
-                                ?.copyWith(fontSize: 14),
+                                ?.copyWith(
+                                  fontSize: 14,
+                                  fontStyle: customer.code == null
+                                      ? FontStyle.italic
+                                      : null,
+                                ),
+                          ),
+                        if (customer.code == null)
+                          AutoSizeText(
+                            "Pré cadastro",
+                            style: LegalPersonStatus.active
+                                .style(context)
+                                ?.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: customer.code == null
+                                      ? FontStyle.italic
+                                      : null,
+                                ),
                           ),
                       ],
                     ),
                   ),
                 ],
               ),
+              SizedBox(
+                width: width * 0.10,
+                child: customer.code == null
+                    ? IconButton(
+                        onPressed: () => onTapFinishRegister?.call(customer),
+                        icon: Icon(
+                          Icons.save,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const SizedBox(),
+              )
             ],
           ),
         ),

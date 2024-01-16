@@ -522,4 +522,6 @@ class ModaVestLabels {
   static String get fillCustomerName => "Preencha o a razão social";
   static String get preRegistrationComplete =>
       "Pré cadastro concluído com sucesso :)\nATENÇÃO: Você precisará realizar o cadastro completo antes de finalizar qualquer pedido!";
+  static String get preRegistrationCustomers =>
+      "Somente lojistas em pré-cadastro";
 }

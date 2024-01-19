@@ -163,6 +163,7 @@ class ModaVestLabels {
   static String get completeToProcced =>
       "Complete este passo antes de prosseguir";
   static String get cnpjNotFound => "CNPJ ou CPF não encontrado";
+  static String get notFound => "Não encontrado";
   static String get installment => "Parcelas";
   static String get portion => "Prazo médio";
   static String get description => "Descrição";
@@ -521,4 +522,11 @@ class ModaVestLabels {
   static String get skip => "Pular";
   static String get firstAccess => "Primeiro acesso? ";
   static String get tapToContinue => "Clique aqui para continuar.";
+  static String get continueParcialRegister => "Efetuar pré-cadastro";
+  static String get continueFullRegister => "Continuar cadastro completo";
+  static String get fillCustomerName => "Preencha o a razão social";
+  static String get preRegistrationComplete =>
+      "Pré cadastro concluído com sucesso :)\nATENÇÃO: Você precisará realizar o cadastro completo antes de finalizar qualquer pedido!";
+  static String get preRegistrationCustomers =>
+      "Somente lojistas em pré-cadastro";
 }

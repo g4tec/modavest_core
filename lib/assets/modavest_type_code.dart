@@ -65,10 +65,12 @@ Map<String, String> contactTypes = {
 Map<num, String> goalTypes = {1: "Pedido", 2: "Faturamento"};
 
 Map<String, String> onboardingItems = {
-  "1":
-      "But i must explain to you how all this mistaken idea of But i must explain to you how all this mistaken idea of But i must explain to you how all this mistaken idea of",
-  "2": "But i must explain to you how all this mistaken idea of",
-  "3": "But i must explain to you how all this mistaken idea of"
+  "Módulo offline":
+      "Monte os pedidos sem internet e ao reestabelecer a conexão, sincronizamos automaticamente para você.",
+  "Flexibilidade nos pedidos":
+      "Opção de duplicar e mover sacolas de compras entre lojistas, eliminando a necessidade de retrabalho no pedido.",
+  "Visão Estratégica":
+      "Realize um gerenciamento completo, acompanhando metas, tabelas de preços, visitas e pedidos."
 };
 
 Map<String, String> statusType = {

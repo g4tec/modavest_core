@@ -517,4 +517,8 @@ class ModaVestLabels {
   static String get showMoreOptions => "Visualizar mais opções";
   static String get settings => "Configurações";
   static String get checkUpdates => "Buscar atualizações";
+  static String get back => "Voltar";
+  static String get skip => "Pular";
+  static String get firstAccess => "Primeiro acesso? ";
+  static String get tapToContinue => "Clique aqui para continuar.";
 }

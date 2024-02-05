@@ -42,11 +42,11 @@ class ModavestMoneyBoldText extends StatelessWidget {
                     .headline4!
                     .copyWith(color: color, fontSize: fontSize),
               )
-            : (Text.rich(
+            : Text.rich(
                 TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: "${toCurrency(originalValue)}\n",
+                      text: "${toCurrency(originalValue)}\t\t",
                       style: discountValue != null &&
                               discountValue != originalValue
                           ? const TextStyle(
@@ -73,6 +73,6 @@ class ModavestMoneyBoldText extends StatelessWidget {
                       ),
                   ],
                 ),
-              ));
+              );
   }
 }

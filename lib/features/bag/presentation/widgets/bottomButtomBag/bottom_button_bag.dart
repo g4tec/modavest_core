@@ -156,15 +156,21 @@ class BottomButtonBag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double aspectRatio = MediaQuery.of(context).size.aspectRatio;
+    final customHeight = aspectRatio < 0.6
+        ? MediaQuery.of(context).size.height * 0.1
+        : MediaQuery.of(context).size.height * 0.08;
+
     final Widget child = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 0.1,
+          height: customHeight,
           width: MediaQuery.of(context).size.width * 0.5,
+          alignment: Alignment.center,
           color: const Color(0xff434343),
           padding: const EdgeInsets.symmetric(
-            vertical: 5,
             horizontal: 10,
           ),
           child: buildTotalChild(
@@ -172,12 +178,13 @@ class BottomButtonBag extends StatelessWidget {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * 0.1,
+          height: customHeight,
           width: MediaQuery.of(context).size.width * 0.5,
           padding: const EdgeInsets.symmetric(
             vertical: 10,
             horizontal: 30,
           ),
+          color: isActive ? const Color(0xffea0e47) : Colors.grey[50],
           alignment: Alignment.center,
           child: FittedBox(
             child: Row(
@@ -211,9 +218,10 @@ class BottomButtonBag extends StatelessWidget {
     return GestureDetector(
       onTap: isActive ? onNext : null,
       child: Container(
+        alignment: Alignment.topCenter,
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.1,
-        color: isActive ? const Color(0xffea0e47) : Colors.grey[50],
+        height: customHeight + MediaQuery.of(context).padding.bottom,
+        color: Theme.of(context).colorScheme.primary,
         child: FittedBox(
           child: child,
         ),

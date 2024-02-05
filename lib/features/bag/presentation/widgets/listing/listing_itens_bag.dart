@@ -188,12 +188,24 @@ class ListingItensBagState extends State<ListingItensBag> {
                   onSelect: setCheckBox,
                   countingBuildWidget: widget.countingBuildWidget,
                   child: SizedBox(
-                    child: Text(
-                      "Tab. Preço: ${saleOrder.priceTableCode?.toString() ?? ""}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          ?.copyWith(fontSize: 14),
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Tab. Preço: ",
+                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                              fontSize: 16,
+                            ),
+                        children: [
+                          TextSpan(
+                            text:
+                                "${saleOrder.priceTableCode?.toString() ?? ""}",
+                            style:
+                                Theme.of(context).textTheme.headline4?.copyWith(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16,
+                                    ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -307,85 +319,165 @@ class ListingItensBagState extends State<ListingItensBag> {
 
   @override
   Widget build(BuildContext context) {
+    double aspectRatio = MediaQuery.of(context).size.aspectRatio;
+
     if (expandSaleOrder != null) {
       return ListView.builder(
-          itemCount: expandSaleOrder!.colorItems.length + 1,
-          addAutomaticKeepAlives: false,
-          cacheExtent: 5,
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return GestureDetector(
-                onTap: () {
-                  widget.onSelectSalesOrder.call(index);
-                },
-                child: Opacity(
-                  opacity: widget.selecetedSalesOrderIndex == index ||
-                          widget.isDismembration
-                      ? 1
-                      : 0.5,
-                  child: ListTile(
-                    title: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: FittedBox(
-                        child: Row(
-                          children: [
-                            const SizedBox(),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.width * 0.2,
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: FittedBox(
-                                fit: BoxFit.contain,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0.5),
-                                  child: widget.buildImage?.call(
-                                      expandSaleOrder?.oficialStore?.logoUrl),
-                                ),
+        itemCount: expandSaleOrder!.colorItems.length + 2,
+        addAutomaticKeepAlives: false,
+        cacheExtent: 5,
+        itemBuilder: (BuildContext context, int index) {
+          if (index == 0) {
+            return GestureDetector(
+              onTap: () {
+                widget.onSelectSalesOrder.call(index);
+              },
+              child: Opacity(
+                opacity: widget.selecetedSalesOrderIndex == index ||
+                        widget.isDismembration
+                    ? 1
+                    : 0.5,
+                child: ListTile(
+                  title: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: aspectRatio < 0.6 ? 16 : 32,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border(
+                        top: BorderSide(
+                          color: Color(0xFFE4E4E4),
+                          width: 1,
+                        ),
+                        left: BorderSide(
+                          color: Color(0xFFE4E4E4),
+                          width: 1,
+                        ),
+                        right: BorderSide(
+                          color: Color(0xFFE4E4E4),
+                          width: 1,
+                        ),
+                        bottom: BorderSide(
+                          color: Color(0xFFE4E4E4),
+                          width: 1,
+                        ),
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                    ),
+                    child: FittedBox(
+                      child: Row(
+                        children: [
+                          // const SizedBox(),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width *
+                                (aspectRatio < 0.6 ? 0.2 : 0.18),
+                            width: MediaQuery.of(context).size.width *
+                                (aspectRatio < 0.6 ? 0.3 : 0.22),
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Padding(
+                                padding: const EdgeInsets.all(0.5),
+                                child: widget.buildImage?.call(
+                                    expandSaleOrder?.oficialStore?.logoUrl),
                               ),
                             ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              color: Colors.transparent,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 5),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                    expandSaleOrder
-                                            ?.oficialStore?.description ??
-                                        "",
-                                    style:
-                                        Theme.of(context).textTheme.headline5,
-                                  ),
-                                  widget.countingBuildWidget
-                                      .call(expandSaleOrder!.orderId ?? ""),
-                                  SizedBox(
-                                    child: Text(
-                                      "Tab. Preço: ${expandSaleOrder?.priceTableCode?.toString() ?? ""}",
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            height: MediaQuery.of(context).size.height * 0.11,
+                            color: Colors.transparent,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                AutoSizeText(
+                                  expandSaleOrder?.oficialStore?.description ??
+                                      "",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      ?.copyWith(
+                                        fontSize: 16,
+                                      ),
+                                ),
+                                widget.countingBuildWidget
+                                    .call(expandSaleOrder!.orderId ?? ""),
+                                SizedBox(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      text: "Tab. Preço: ",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline5
-                                          ?.copyWith(fontSize: 14),
+                                          .headline4
+                                          ?.copyWith(
+                                            fontSize: 16,
+                                          ),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              "${expandSaleOrder?.priceTableCode?.toString() ?? ""}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 16,
+                                              ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            IconButton(
-                                onPressed: () =>
-                                    setState(() => expandSaleOrder = null),
-                                icon: const Icon(Icons.expand_less))
-                          ],
-                        ),
+                          ),
+                          Container(
+                            alignment: Alignment.topCenter,
+                            height: MediaQuery.of(context).size.height * 0.14,
+                            child: IconButton(
+                              onPressed: () =>
+                                  setState(() => expandSaleOrder = null),
+                              icon: const Icon(Icons.expand_less),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
-              );
-            }
-            return buildItem(expandSaleOrder!.colorItems[index - 1],
-                expandSaleOrder!, index - 1);
-          });
+              ),
+            );
+          }
+          if ((expandSaleOrder!.colorItems.length + 2) == (index + 1)) {
+            return Transform.translate(
+              offset: Offset(0.0, -8.0),
+              child: Container(
+                height: 5,
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(
+                    horizontal: aspectRatio < 0.6 ? 32 : 47),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 1,
+                      color: Color(0xFFE4E4E4),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+          return Transform.translate(
+            offset: Offset(0.0, -8.0),
+            child: buildItem(expandSaleOrder!.colorItems[index - 1],
+                expandSaleOrder!, index - 1),
+          );
+        },
+      );
     }
 
     return ListView(

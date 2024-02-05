@@ -21,7 +21,11 @@ class BagTitleWithAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final aspectRatio = MediaQuery.of(context).size.aspectRatio;
+
     return ListTile(
+      contentPadding:
+          EdgeInsets.symmetric(horizontal: aspectRatio < 0.6 ? 16 : 32),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

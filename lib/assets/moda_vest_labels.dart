@@ -515,8 +515,13 @@ class ModaVestLabels {
   static String get copyWithoutSomeItens =>
       "Existem itens que não serão incluídos. Tem certeza que deseja mover?";
   static String get moveEvenSo => "Mover mesmo assim";
+  static String get showMoreOptions => "Visualizar mais opções";
   static String get settings => "Configurações";
   static String get checkUpdates => "Buscar atualizações";
+  static String get back => "Voltar";
+  static String get skip => "Pular";
+  static String get firstAccess => "Primeiro acesso? ";
+  static String get tapToContinue => "Clique aqui para continuar.";
   static String get continueParcialRegister => "Efetuar pré-cadastro";
   static String get continueFullRegister => "Continuar cadastro completo";
   static String get fillCustomerName => "Preencha o a razão social";

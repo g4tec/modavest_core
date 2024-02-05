@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/color_image_reference.dart';
@@ -8,6 +9,7 @@ class VariationProduct extends StatelessWidget {
   final Function()? onTap;
   final bool isSelected;
   final Function(ImageColorReference? imageColorReference)? buildImage;
+  final int? badgeQuantity;
 
   const VariationProduct({
     Key? key,
@@ -15,6 +17,7 @@ class VariationProduct extends StatelessWidget {
     this.onTap,
     this.isSelected = false,
     this.buildImage,
+    this.badgeQuantity,
   }) : super(key: key);
 
   @override
@@ -27,31 +30,38 @@ class VariationProduct extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundColor: isSelected
-                    ? Theme.of(context).primaryColor
-                    : Theme.of(context).secondaryHeaderColor,
-                child: ClipOval(
-                  child: SizedBox(
-                    width: 180.0,
-                    height: 180.0,
-                    child: color.imgList.isNotEmpty
-                        ? Opacity(
-                            opacity: isSelected ? 0.5 : 1,
-                            child: buildImage != null
-                                ? buildImage?.call(color.imgList.first)
-                                : ImageColorReferenceView(
-                                    imageColorReference: color.imgList.first,
-                                  ),
-                          )
-                        : Opacity(
-                            opacity: isSelected ? 0.8 : 1,
-                            child: const Icon(
-                              Icons.image_not_supported,
-                              color: Colors.white,
+              badge.Badge(
+                animationDuration: Duration.zero,
+                showBadge: (badgeQuantity ?? 0) > 0,
+                badgeContent: Text((badgeQuantity ?? 0).toString()),
+                badgeColor: Theme.of(context).canvasColor,
+                alignment: Alignment.bottomRight,
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundColor: isSelected
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).secondaryHeaderColor,
+                  child: ClipOval(
+                    child: SizedBox(
+                      width: 180.0,
+                      height: 180.0,
+                      child: color.imgList.isNotEmpty
+                          ? Opacity(
+                              opacity: isSelected ? 0.5 : 1,
+                              child: buildImage != null
+                                  ? buildImage?.call(color.imgList.first)
+                                  : ImageColorReferenceView(
+                                      imageColorReference: color.imgList.first,
+                                    ),
+                            )
+                          : Opacity(
+                              opacity: isSelected ? 0.8 : 1,
+                              child: const Icon(
+                                Icons.image_not_supported,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
+                    ),
                   ),
                 ),
               ),

@@ -302,6 +302,8 @@ class ModaVestLabels {
       "Após sair, todo o processo de desmembramento será cancelado e todos os produtos retornarão para a sacola.";
   static String get hadSureDoYouWantReturnSubtitle =>
       "Evite reenviar pedidos antes de resolver suas pendências. Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço";
+  static String get hadSureDoYouWantReturnFinishedOrderSubtitle =>
+      "Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço ou de coleções passadas";
   static String get selectedCustomerDoNotMatch =>
       "O lojista atual é diferente do lojista do pedido selecionado";
   static String get barCodeNotFound => "Código de barras não encontrado";
@@ -529,4 +531,6 @@ class ModaVestLabels {
       "Pré cadastro concluído com sucesso :)\nATENÇÃO: Você precisará realizar o cadastro completo antes de finalizar qualquer pedido!";
   static String get preRegistrationCustomers =>
       "Somente lojistas em pré-cadastro";
+  static String get actions => "Ações";
+  static String get recreateOrder => "Refazer pedido";
 }

@@ -5,9 +5,12 @@ import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 
 class OrderActions extends StatelessWidget {
   final Function()? onTapToReturn;
+  final Function()? onTapResend;
+
   const OrderActions({
     super.key,
     required this.onTapToReturn,
+    required this.onTapResend,
   });
 
   Widget buildRow({
@@ -37,6 +40,14 @@ class OrderActions extends StatelessWidget {
     return ListView(
       children: [
         if (onTapToReturn != null)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ModaVestTextButton(
+            title: ModaVestLabels.resendOrder,
+            onPressed: onTapResend,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ModaVestTextButton(

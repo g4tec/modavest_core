@@ -296,12 +296,16 @@ class ModaVestLabels {
   static String get returnOrderToBag => "Retornar itens para a sacola";
   static String get hadSureDoYouWantReturn =>
       "Tem certeza que deseja retornar os itens desse pedido para a sacola?";
+        static String get hadSureDoYouWantResend =>
+      "Tem certeza que deseja reenviar o pedido?";
   static String get hadSureDoYouWantExitDesmembration =>
       "Tem certeza que deseja sair do desmembramento?";
   static String get hadSureDoYouWantExitDesmembrationSubtitle =>
       "Após sair, todo o processo de desmembramento será cancelado e todos os produtos retornarão para a sacola.";
   static String get hadSureDoYouWantReturnSubtitle =>
       "Evite reenviar pedidos antes de resolver suas pendências. Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço";
+        static String get hadSureDoYouWantResendSubtitle =>
+      "Ao reenviar, os dados desse pedido serão encaminhados para seu whatsapp.";
   static String get hadSureDoYouWantReturnFinishedOrderSubtitle =>
       "Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço ou de coleções passadas";
   static String get selectedCustomerDoNotMatch =>
@@ -533,4 +537,5 @@ class ModaVestLabels {
       "Somente lojistas em pré-cadastro";
   static String get actions => "Ações";
   static String get recreateOrder => "Refazer pedido";
+  static String get resendOrder => "Reenviar pedido";
 }

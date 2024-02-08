@@ -537,5 +537,5 @@ class ModaVestLabels {
       "Somente lojistas em pré-cadastro";
   static String get actions => "Ações";
   static String get recreateOrder => "Refazer pedido";
-  static String get resendOrder => "Reenviar pedido";
+  static String get resendOrder => "Reenviar pedido pelo Whatsapp";
 }

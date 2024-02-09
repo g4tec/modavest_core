@@ -40,22 +40,23 @@ class OrderActions extends StatelessWidget {
     return ListView(
       children: [
         if (onTapToReturn != null)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ModaVestTextButton(
-            title: ModaVestLabels.resendOrder,
-            onPressed: onTapResend,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ModaVestTextButton(
-              title: ModaVestLabels.recreateOrder,
-              onPressed: onTapToReturn,
-              color: Theme.of(context).colorScheme.error,
+              title: ModaVestLabels.resendOrder,
+              onPressed: onTapResend,
+              color: Theme.of(context).primaryColor,
             ),
           ),
+        // TODO: ajustar a função de retornar o pedido
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        //   child: ModaVestTextButton(
+        //     title: ModaVestLabels.recreateOrder,
+        //     onPressed: onTapToReturn,
+        //     color: Theme.of(context).colorScheme.error,
+        //   ),
+        // ),
       ],
     );
   }

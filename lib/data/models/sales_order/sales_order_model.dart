@@ -71,7 +71,7 @@ class SalesOrderModel extends SalesOrder {
     super.imageColorsReferences,
     super.status,
   }) : super(
-          paymentconditionCode: paymentConditionCode,
+          paymentConditionCode: paymentConditionCode,
         );
   factory SalesOrderModel.fromJson(Map json) {
     return SalesOrderModel(
@@ -97,7 +97,7 @@ class SalesOrderModel extends SalesOrder {
       purchasingGuideCode: json["purchasingGuideCode"] as num?,
       cnpjPurchasingGuide: json["cnpjPurchasingGuide"] as String?,
       operationCode: json["operationCode"] as num?,
-      paymentConditionCode: json["paymentconditionCode"] as num?,
+      paymentConditionCode: json["paymentConditionCode"] as num?,
       paymentConditionName: json["paymentConditionName"] as String?,
       customerName: json["customerName"] as String?,
       quantity: ((json["quantity"] is int)
@@ -251,7 +251,7 @@ class SalesOrderModel extends SalesOrder {
       purchasingGuideCode: order.purchasingGuideCode,
       cnpjPurchasingGuide: order.cnpjPurchasingGuide,
       operationCode: order.operationCode,
-      paymentConditionCode: order.paymentconditionCode,
+      paymentConditionCode: order.paymentConditionCode,
       paymentConditionName: order.paymentConditionName,
       quantity: order.quantity,
       grossValue: order.grossValue,
@@ -313,7 +313,7 @@ class SalesOrderModel extends SalesOrder {
       purchasingGuideCode: purchasingGuideCode,
       cnpjPurchasingGuide: cnpjPurchasingGuide,
       operationCode: operationCode,
-      paymentConditionCode: paymentconditionCode,
+      paymentConditionCode: paymentConditionCode,
       paymentConditionName: paymentConditionName,
       quantity: quantity,
       grossValue: grossValue,
@@ -357,7 +357,7 @@ class SalesOrderModel extends SalesOrder {
     num? purchasingGuideCode,
     String? cnpjPurchasingGuide,
     num? operationCode,
-    num? paymentconditionCode,
+    num? paymentConditionCode,
     String? paymentConditionName,
     double? quantity,
     double? grossValue,
@@ -410,7 +410,7 @@ class SalesOrderModel extends SalesOrder {
       purchasingGuideCode: purchasingGuideCode ?? this.purchasingGuideCode,
       cnpjPurchasingGuide: cnpjPurchasingGuide ?? this.cnpjPurchasingGuide,
       operationCode: operationCode ?? this.operationCode,
-      paymentConditionCode: paymentconditionCode ?? this.paymentconditionCode,
+      paymentConditionCode: paymentConditionCode ?? this.paymentConditionCode,
       paymentConditionName: paymentConditionName ?? this.paymentConditionName,
       quantity: quantity ?? this.quantity,
       grossValue: grossValue ?? this.grossValue,
@@ -478,7 +478,7 @@ class SalesOrderModel extends SalesOrder {
       "purchasingGuideCode": purchasingGuideCode,
       "cnpjPurchasingGuide": cnpjPurchasingGuide,
       "operationCode": operationCode,
-      "paymentConditionCode": paymentconditionCode,
+      "paymentConditionCode": paymentConditionCode,
       "paymentConditionName": paymentConditionName,
       "quantity": quantity,
       "grossValue": grossValue,

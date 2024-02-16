@@ -28,7 +28,7 @@ class SalesOrder {
   final String? cnpjPurchasingGuide;
   // Not required on app
   final num? operationCode;
-  num? paymentconditionCode;
+  num? paymentConditionCode;
   String? paymentConditionName;
   final double? quantity;
   final double? grossValue;
@@ -93,7 +93,7 @@ class SalesOrder {
     this.sellerCpf,
     this.purchasingGuideCode,
     this.cnpjPurchasingGuide,
-    this.paymentconditionCode,
+    this.paymentConditionCode,
     this.paymentConditionName,
     this.quantity,
     this.grossValue,
@@ -133,7 +133,7 @@ class SalesOrder {
     double? totalAmountOrder,
     double? totalOriginalAmountOrder,
     List<ItemSalesOrder>? items,
-    num? paymentconditionCode,
+    num? paymentConditionCode,
     String? paymentConditionName,
     num? priceTableCode,
   }) {
@@ -159,7 +159,7 @@ class SalesOrder {
       sellerCpf: sellerCpf,
       purchasingGuideCode: purchasingGuideCode,
       cnpjPurchasingGuide: cnpjPurchasingGuide,
-      paymentconditionCode: paymentconditionCode ?? this.paymentconditionCode,
+      paymentConditionCode: paymentConditionCode ?? this.paymentConditionCode,
       paymentConditionName: paymentConditionName ?? this.paymentConditionName,
       quantity: quantity,
       grossValue: grossValue,
@@ -217,7 +217,7 @@ class SalesOrder {
       sellerCpf: order.sellerCpf,
       purchasingGuideCode: order.purchasingGuideCode,
       cnpjPurchasingGuide: order.cnpjPurchasingGuide,
-      paymentconditionCode: order.paymentconditionCode,
+      paymentConditionCode: order.paymentConditionCode,
       paymentConditionName: order.paymentConditionName,
       quantity: order.quantity,
       grossValue: order.grossValue,

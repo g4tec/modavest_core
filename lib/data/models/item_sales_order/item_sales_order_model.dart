@@ -1,5 +1,4 @@
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
-import 'package:modavest_core/data/models/reference/reference_model.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 
 class ItemSalesOrderModel extends ItemSalesOrder {

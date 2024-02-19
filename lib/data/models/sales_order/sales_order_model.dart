@@ -5,11 +5,13 @@ import 'package:modavest_core/data/models/discount/discount_model.dart';
 import 'package:modavest_core/data/models/image_color_reference/image_color_reference_model.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_model.dart';
+import 'package:modavest_core/data/models/official_store_sales_questions/official_store_sales_questions_model.dart';
 import 'package:modavest_core/data/models/sales_order/sales_order_hive.dart';
 import 'package:modavest_core/data/models/sales_order_classification/sales_order_classification_model.dart';
 import 'package:modavest_core/data/models/sales_order_observation/classification_model.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
+import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
@@ -70,6 +72,7 @@ class SalesOrderModel extends SalesOrder {
     super.representativeObservations,
     super.imageColorsReferences,
     super.status,
+    super.officialStoreSalesQuestions,
   }) : super(
           paymentConditionCode: paymentConditionCode,
         );
@@ -230,6 +233,18 @@ class SalesOrderModel extends SalesOrder {
       arrivalDate: hive.arrivalDate,
       shippingCompanyName: hive.shippingCompanyName,
       status: hive.status?.toStatusBag ?? EnumStatusBag.other,
+      shippingAddress: (hive.shippingAddress ?? []).isNotEmpty
+          ? hive.shippingAddress
+              ?.map((e) => AddressModel.fromHive(e))
+              .toList()
+              .first
+          : null,
+      officialStoreSalesQuestions:
+          (hive.officialStoreSalesQuestions ?? []).isNotEmpty
+              ? hive.officialStoreSalesQuestions
+                  ?.map((e) => OfficialStoreSalesQuestionsModel.fromHive(e))
+                  .toList()
+              : null,
     );
   }
 
@@ -291,6 +306,8 @@ class SalesOrderModel extends SalesOrder {
       chargeType: order.chargeType,
       representativeObservations: order.representativeObservations,
       status: order.status,
+      shippingAddress: order.shippingAddress,
+      officialStoreSalesQuestions: order.officialStoreSalesQuestions,
     );
   }
 
@@ -392,6 +409,7 @@ class SalesOrderModel extends SalesOrder {
     num? chargeType,
     List<SalesOrderObservation?>? representativeObservations,
     EnumStatusBag? status,
+    List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions,
   }) {
     return SalesOrderModel(
       integrationId: integrationId ?? this.integrationId,
@@ -456,6 +474,8 @@ class SalesOrderModel extends SalesOrder {
           : null,
       chargeType: chargeType ?? this.chargeType,
       status: status ?? this.status,
+      officialStoreSalesQuestions:
+          officialStoreSalesQuestions ?? this.officialStoreSalesQuestions,
     );
   }
 
@@ -507,6 +527,12 @@ class SalesOrderModel extends SalesOrder {
                   (ItemSalesOrder e) => ItemSalesOrderModel.entity(e).toJson())
               .toList() ??
           [],
+      "officialStoreSalesQuestions": officialStoreSalesQuestions
+          ?.map((e) => OfficialStoreSalesQuestionsModel.entity(e).toJson())
+          .toList(),
+      "shippingAddress": shippingAddress != null
+          ? AddressModel.entite(shippingAddress!).toJson()
+          : null
     };
   }
 }

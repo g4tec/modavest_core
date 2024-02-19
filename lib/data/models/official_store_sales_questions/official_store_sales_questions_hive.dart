@@ -34,6 +34,9 @@ class HiveOfficialStoreSalesQuestions extends HiveObject {
   final bool? isSellerApp;
   @HiveField(13)
   final bool? isShopkeeperApp;
+  @HiveField(14)
+  String? answer;
+
   HiveOfficialStoreSalesQuestions({
     required this.integrationId,
     required this.officialStoreId,
@@ -49,5 +52,6 @@ class HiveOfficialStoreSalesQuestions extends HiveObject {
     required this.isRepresentativeApp,
     required this.isSellerApp,
     required this.isShopkeeperApp,
+    this.answer,
   });
 }

@@ -20,6 +20,7 @@ class OfficialStoreSalesQuestionsModel extends OfficialStoreSalesQuestions {
     required super.isRepresentativeApp,
     required super.isSellerApp,
     required super.isShopkeeperApp,
+    super.answer,
   });
 
   factory OfficialStoreSalesQuestionsModel.fromJson(Map json) {
@@ -45,6 +46,30 @@ class OfficialStoreSalesQuestionsModel extends OfficialStoreSalesQuestions {
       isRepresentativeApp: json['isRepresentativeApp'] as bool?,
       isSellerApp: json['isSellerApp'] as bool?,
       isShopkeeperApp: json['isShopkeeperApp'] as bool?,
+      answer: json['answer'] as String?,
+    );
+  }
+
+  factory OfficialStoreSalesQuestionsModel.entity(
+      OfficialStoreSalesQuestions entity) {
+    return OfficialStoreSalesQuestionsModel(
+      integrationId: entity.integrationId,
+      officialStoreId: entity.officialStoreId,
+      questionId: entity.questionId,
+      description: entity.description,
+      questionType: entity.questionType,
+      isDeliverImmediately: entity.isDeliverImmediately,
+      isMakeToOrder: entity.isMakeToOrder,
+      isRequired: entity.isRequired,
+      classifications: [],
+      options: (entity.options)
+          .map((option) => OptionsModel.entity(option))
+          .toList(),
+      observations: [],
+      isRepresentativeApp: entity.isRepresentativeApp,
+      isSellerApp: entity.isSellerApp,
+      isShopkeeperApp: entity.isShopkeeperApp,
+      answer: entity.answer,
     );
   }
 
@@ -57,6 +82,9 @@ class OfficialStoreSalesQuestionsModel extends OfficialStoreSalesQuestions {
     data['questionType'] = questionType;
     data['isDeliverImmediately'] = isDeliverImmediately;
     data['isMakeToOrder'] = isMakeToOrder;
+    data['answer'] = answer;
+    data['options'] =
+        options.map((option) => OptionsModel.entity(option).toJson()).toList();
     return data;
   }
 
@@ -81,6 +109,7 @@ class OfficialStoreSalesQuestionsModel extends OfficialStoreSalesQuestions {
       isRepresentativeApp: hiveOfficialStoreSalesQuestions.isRepresentativeApp,
       isSellerApp: hiveOfficialStoreSalesQuestions.isSellerApp,
       isShopkeeperApp: hiveOfficialStoreSalesQuestions.isShopkeeperApp,
+      answer: hiveOfficialStoreSalesQuestions.answer,
     );
   }
 
@@ -97,6 +126,7 @@ class OfficialStoreSalesQuestionsModel extends OfficialStoreSalesQuestions {
       isRepresentativeApp: isRepresentativeApp,
       isSellerApp: isSellerApp,
       isShopkeeperApp: isShopkeeperApp,
+      answer: answer,
     );
   }
 }

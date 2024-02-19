@@ -5,6 +5,7 @@ import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
+import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
 import 'package:modavest_core/domain/models/sales_order_classification.dart';
 import 'package:modavest_core/domain/models/sales_order_observation.dart';
 
@@ -67,9 +68,11 @@ class SalesOrder {
   DateTime? arrivalDate;
   String? shippingCompanyName;
   List<SalesOrderClassification>? classifications;
-  Address? shippingAddress;
   num? chargeType;
   List<ImageColorReference>? imageColorsReferences;
+
+  Address? shippingAddress;
+  List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions;
 
   SalesOrder({
     this.integrationId,
@@ -126,6 +129,7 @@ class SalesOrder {
     this.representativeObservations = const [],
     this.imageColorsReferences,
     this.status = EnumStatusBag.other,
+    this.officialStoreSalesQuestions,
   });
 
   SalesOrder copyWith({
@@ -136,6 +140,7 @@ class SalesOrder {
     num? paymentConditionCode,
     String? paymentConditionName,
     num? priceTableCode,
+    List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions,
   }) {
     return SalesOrder(
       integrationId: integrationId,
@@ -191,6 +196,8 @@ class SalesOrder {
       shippingAddress: shippingAddress,
       chargeType: chargeType,
       imageColorsReferences: imageColorsReferences,
+      officialStoreSalesQuestions:
+          officialStoreSalesQuestions ?? this.officialStoreSalesQuestions,
     );
   }
 
@@ -248,6 +255,7 @@ class SalesOrder {
       shippingAddress: order.shippingAddress,
       chargeType: order.chargeType,
       imageColorsReferences: order.imageColorsReferences,
+      officialStoreSalesQuestions: order.officialStoreSalesQuestions,
     );
   }
 }

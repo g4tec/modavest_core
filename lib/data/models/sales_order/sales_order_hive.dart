@@ -1,7 +1,9 @@
 import 'package:hive/hive.dart';
+import 'package:modavest_core/data/models/address/address_hive.dart';
 
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
+import 'package:modavest_core/data/models/official_store_sales_questions/official_store_sales_questions_hive.dart';
 
 part 'sales_order_hive.g.dart';
 
@@ -95,49 +97,54 @@ class HiveSalesOrder extends HiveObject {
   String? shippingCompanyName;
   @HiveField(44)
   String? status;
+  @HiveField(45)
+  HiveList<HiveAddress>? shippingAddress;
+  @HiveField(46)
+  HiveList<HiveOfficialStoreSalesQuestions>? officialStoreSalesQuestions;
 
-  HiveSalesOrder({
-    required this.integrationId,
-    required this.orderId,
-    this.branchCode,
-    this.customerOrderCode,
-    this.integrationCode,
-    this.orderCode,
-    required this.orderDate,
-    required this.customerCode,
-    required this.customerCnpj,
-    this.representativeCode,
-    this.representativeCnpj,
-    this.sellerCode,
-    this.sellerCpf,
-    this.purchasingGuideCode,
-    this.cnpjPurchasingGuide,
-    this.operationCode,
-    this.paymentConditionCode,
-    this.paymentConditionName,
-    this.quantity,
-    this.grossValue,
-    this.discountValue,
-    this.netValue,
-    this.priorityCode,
-    this.shippingCompanyCode,
-    this.shippingCompanyCpfCnpj,
-    this.billingForecastDate,
-    this.freightType,
-    this.freightPercentage,
-    this.freightValue,
-    this.packageint,
-    this.weight,
-    this.totalAmountOrder,
-    this.statusOrder,
-    this.items,
-    this.customerName,
-    required this.officialStoreId,
-    required this.priceTableCode,
-    this.totalOriginalAmountOrder,
-    this.discountPercentage,
-    this.arrivalDate,
-    this.shippingCompanyName,
-    required this.status,
-  });
+  HiveSalesOrder(
+      {required this.integrationId,
+      required this.orderId,
+      this.branchCode,
+      this.customerOrderCode,
+      this.integrationCode,
+      this.orderCode,
+      required this.orderDate,
+      required this.customerCode,
+      required this.customerCnpj,
+      this.representativeCode,
+      this.representativeCnpj,
+      this.sellerCode,
+      this.sellerCpf,
+      this.purchasingGuideCode,
+      this.cnpjPurchasingGuide,
+      this.operationCode,
+      this.paymentConditionCode,
+      this.paymentConditionName,
+      this.quantity,
+      this.grossValue,
+      this.discountValue,
+      this.netValue,
+      this.priorityCode,
+      this.shippingCompanyCode,
+      this.shippingCompanyCpfCnpj,
+      this.billingForecastDate,
+      this.freightType,
+      this.freightPercentage,
+      this.freightValue,
+      this.packageint,
+      this.weight,
+      this.totalAmountOrder,
+      this.statusOrder,
+      this.items,
+      this.customerName,
+      required this.officialStoreId,
+      required this.priceTableCode,
+      this.totalOriginalAmountOrder,
+      this.discountPercentage,
+      this.arrivalDate,
+      this.shippingCompanyName,
+      required this.status,
+      this.shippingAddress,
+      this.officialStoreSalesQuestions});
 }

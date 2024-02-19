@@ -233,16 +233,17 @@ class ListingItensBagState extends State<ListingItensBag> {
         .firstWhereOrNull((item) => item.referenceSimple != null)
         ?.referenceSimple;
 
-    for (final ItemSalesOrder itens in colorItems.items) {
-      if ((itens.price ?? 0) > 0) {
-        final ProductPrice? price =
-            (referenceSimple?.referencePrice?.prices ?? []).firstWhereOrNull(
-                (price) => price.productCode == itens.productCode);
-        if (price != null) {
-          prices.add(price);
-        }
-      }
-    }
+    prices.addAll(referenceSimple?.referencePrice?.prices ?? []);
+    // for (final ItemSalesOrder itens in colorItems.items) {
+    //   if ((itens.price ?? 0) > 0) {
+    //     final ProductPrice? price =
+    //         (referenceSimple?.referencePrice?.prices ?? []).firstWhereOrNull(
+    //             (price) => price.productCode == itens.productCode);
+    //     if (price != null) {
+    //       prices.add(price);
+    //     }
+    //   }
+    // }
 
     return EditItemAmountBag(
       productStock: colorItems.productStock,
@@ -265,7 +266,7 @@ class ListingItensBagState extends State<ListingItensBag> {
       },
       priceTableCode: saleOrder.priceTableCode,
       officialStoreCode: saleOrder.officialStoreId,
-      conditionCode: saleOrder.paymentconditionCode,
+      conditionCode: saleOrder.paymentConditionCode,
       // TODO: rever
       // reference: colorItems.items.first.reference,
       onchangeProductAmount: (

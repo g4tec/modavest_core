@@ -4,7 +4,8 @@ enum EnumStatusBag {
   finished,
   other,
   moved,
-  movedBetweenPriceTables
+  movedBetweenPriceTables,
+  closed,
 }
 
 extension EnumStatusBagExtension on EnumStatusBag {
@@ -20,6 +21,8 @@ extension EnumStatusBagExtension on EnumStatusBag {
         return 'finished';
       case EnumStatusBag.movedBetweenPriceTables:
         return 'movedBetweenPriceTables';
+      case EnumStatusBag.closed:
+        return 'closed';
       default:
         return 'other';
     }
@@ -39,6 +42,8 @@ extension StringEnumStatusBagExtension on String {
         return EnumStatusBag.moved;
       case 'movedBetweenPriceTables':
         return EnumStatusBag.movedBetweenPriceTables;
+      case 'closed':
+        return EnumStatusBag.closed;
       default:
         return EnumStatusBag.other;
     }
@@ -58,6 +63,8 @@ extension StringLabelEnumStatusBagExtension on EnumStatusBag {
         return "Movida";
       case EnumStatusBag.movedBetweenPriceTables:
         return 'Movida entre tabela de preço';
+      case EnumStatusBag.closed:
+        return 'Fechado';
       default:
         return "Outro";
     }

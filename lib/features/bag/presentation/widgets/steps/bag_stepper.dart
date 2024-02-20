@@ -32,14 +32,15 @@ class BagStepper extends StatelessWidget {
                   ? Theme.of(context).primaryColor
                   : Theme.of(context).unselectedWidgetColor.withAlpha(50),
             ),
-            child: FittedBox(
+            child: Align(
+              alignment: Alignment.center,
               child: Text(
                 value,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline5?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: isCurrent ? Colors.white : Colors.black,
-                    ),
+                    fontWeight: FontWeight.w700,
+                    color: isCurrent ? Colors.white : Colors.black,
+                    fontSize: 17),
               ),
             ),
           ),

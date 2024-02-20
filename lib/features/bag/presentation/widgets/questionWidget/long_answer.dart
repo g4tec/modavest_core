@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:modavest_core/utils/validator/default_validator.dart';
-
 import 'package:modavest_core/features/bag/presentation/widgets/questionWidget/question_widget.dart';
+import 'package:modavest_core/utils/validator/default_validator.dart';
 
 class LongAnswer extends QuestionWidget {
   final String? initialValue;
-  const LongAnswer({
-    super.key,
-    required this.initialValue,
-    required void Function(dynamic) super.onChange,
-    required super.isRequired,
-  });
+  final String? label;
+  final InputDecoration? decoration;
+  const LongAnswer(
+      {super.key,
+      required this.initialValue,
+      required void Function(dynamic) super.onChange,
+      required super.isRequired,
+      this.label,
+      this.decoration});
 
   @override
   LongAnswerState createState() => LongAnswerState();
@@ -46,32 +48,33 @@ class LongAnswerState extends State<LongAnswer> {
         validator: (String? value) => widget.isRequired
             ? defaultValidate.call(value, widget.isRequired)
             : null,
-        decoration: InputDecoration(
-          fillColor: Colors.white,
-          filled: true,
-          hintText: "Digite sua resposta",
-          hintStyle: Theme.of(context)
-              .textTheme
-              .headline5!
-              .copyWith(color: Colors.grey[700]),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).errorColor,
-              width: 2.0,
+        decoration: widget.decoration ??
+            InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
+              hintText: "Digite sua resposta",
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(color: Colors.grey[700]),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).errorColor,
+                  width: 2.0,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).primaryColor,
+                  width: 2.0,
+                ),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white,
+                ),
+              ),
             ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: 2.0,
-            ),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-            ),
-          ),
-        ),
       ),
     );
   }

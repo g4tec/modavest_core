@@ -168,6 +168,8 @@ class ModaVestLabels {
   static String get portion => "Prazo médio";
   static String get description => "Descrição";
   static String get checkout => "Concluir pedido";
+  static String get closeAndSynchronizeOrder => "Fechar e sincronizar";
+  static String get closeOrder => "Fechar";
   static String get requestSended => "Pedido realizado com sucesso :)";
   static String get requestNumber => "Pedido #";
   static String get bag => "Sacola";
@@ -189,6 +191,7 @@ class ModaVestLabels {
   static String get selectPriceTable =>
       "Selecione uma tabela de preço para começar a listar os produtos";
   static String get manufacturerObservations => "Dúvidas do fabricante";
+  static String get additionalInformations => "Informações adicionais";
   static String get searchingCustomers => "Buscando clientes";
   static String get searchingOficialStores => "Buscando Lojas oficiais";
   static String get phone => "Telefone";

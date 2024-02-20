@@ -6,13 +6,14 @@ import 'package:modavest_core/features/bag/presentation/widgets/questionWidget/q
 class MultipleChoice extends QuestionWidget {
   final List<Options> options;
   final dynamic initialValue;
-  const MultipleChoice({
-    super.key,
-    required this.options,
-    required this.initialValue,
-    required void Function(dynamic) super.onChange,
-    required super.isRequired,
-  });
+  final InputDecoration? decoration;
+  const MultipleChoice(
+      {super.key,
+      required this.options,
+      required this.initialValue,
+      required void Function(dynamic) super.onChange,
+      required super.isRequired,
+      this.decoration});
 
   @override
   MultipleChoiceState createState() => MultipleChoiceState();
@@ -73,9 +74,10 @@ class MultipleChoiceState extends State<MultipleChoice> {
         options: _buildChildren(),
         initialValue: widget.initialValue as List<Options>?,
         onChanged: widget.onChange,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-        ),
+        decoration: widget.decoration ??
+            const InputDecoration(
+              border: InputBorder.none,
+            ),
         validator: widget.isRequired
             ? (value) {
                 return value != null && value.isNotEmpty

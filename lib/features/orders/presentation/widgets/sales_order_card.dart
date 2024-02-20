@@ -26,37 +26,39 @@ class SalesOrderCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(15),
             child: Column(children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: FittedBox(
-                  child: Container(
-                    padding: const EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: isFailed
-                            ? Theme.of(context).errorColor
-                            : Theme.of(context).primaryColor,
-                        width: 1,
+              if (salesOrder.orderCode != null || salesOrder.sequence != null)
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: FittedBox(
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: isFailed
+                              ? Theme.of(context).errorColor
+                              : Theme.of(context).primaryColor,
+                          width: 1,
+                        ),
                       ),
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: AutoSizeText(
-                        isFailed
-                            ? "${ModaVestLabels.seq} ${salesOrder.sequence?.toString() ?? ""}"
-                            : "#${salesOrder.orderCode}",
-                        maxFontSize: 20,
-                        style: Theme.of(context).textTheme.headline2!.copyWith(
-                              color: isFailed
-                                  ? Theme.of(context).errorColor
-                                  : Theme.of(context).primaryColor,
-                            ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: AutoSizeText(
+                          isFailed
+                              ? "${ModaVestLabels.seq} ${salesOrder.sequence?.toString() ?? ""}"
+                              : "#${salesOrder.orderCode}",
+                          maxFontSize: 20,
+                          style:
+                              Theme.of(context).textTheme.headline2!.copyWith(
+                                    color: isFailed
+                                        ? Theme.of(context).errorColor
+                                        : Theme.of(context).primaryColor,
+                                  ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 2),

@@ -10,13 +10,14 @@ class ModaVestTextButton extends StatelessWidget {
   final Color? colorText;
   final Color disabledBackgroudColor;
   final Color disabledTextColor;
+  final Color? borderColor;
   final Color disabledBorderColor;
   final bool disableBorder;
-
   final bool outlined;
   final double borderRadius;
   final bool isLoading;
   final Icon? prefixIcon;
+
   const ModaVestTextButton({
     Key? key,
     required this.title,
@@ -31,6 +32,7 @@ class ModaVestTextButton extends StatelessWidget {
     this.prefixIcon,
     this.disabledBackgroudColor = Colors.grey,
     this.disabledTextColor = Colors.white,
+    this.borderColor = Colors.white,
     this.disabledBorderColor = Colors.blueGrey,
     this.colorText,
     this.disableBorder = false,
@@ -75,7 +77,7 @@ class ModaVestTextButton extends StatelessWidget {
                       width: 2,
                       color: onPressed == null
                           ? disabledBorderColor
-                          : (color ?? Theme.of(context).primaryColor),
+                          : (borderColor ?? Theme.of(context).primaryColor),
                     )
                   : BorderSide.none,
             ),

@@ -1,4 +1,5 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
@@ -136,24 +137,27 @@ class ObservationsCard extends StatelessWidget {
 
       case 'LISTA DE SELEÇÃO':
         final option = question.options
-            .firstWhere((option) => option.code == question.answer);
+            .firstWhereOrNull((option) => option.code == question.answer);
+        if (option != null) {
+          switch (option.definedFieldType) {
+            case "DATE":
+              return formatDate(DateTime.parse(option.definedFieldValue!));
 
-        switch (option.definedFieldType) {
-          case "DATE":
-            return formatDate(DateTime.parse(option.definedFieldValue!));
+            case "INTEGER":
+              return option.definedFieldValue!;
 
-          case "INTEGER":
-            return option.definedFieldValue!;
-
-          default:
-            return option.observation ?? option.option;
+            default:
+              return option.observation ?? option.option;
+          }
         }
-
+        return "-";
       case 'CAIXA DE SELEÇÃO':
         final option = question.options
-            .firstWhere((option) => option.code == question.answer);
-
-        return option.observation ?? option.option;
+            .firstWhereOrNull((option) => option.code == question.answer);
+        if (option != null) {
+          return option.observation ?? option.option;
+        }
+        return "-";
       case 'TEXTO REPRESENTANTE':
         return question.answer ?? " - ";
 

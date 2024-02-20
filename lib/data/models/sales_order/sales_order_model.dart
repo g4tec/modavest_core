@@ -91,8 +91,12 @@ class SalesOrderModel extends SalesOrder {
           ? DateTime.parse(json["orderDate"] as String)
           : null,
       customerCode: json["customerCode"] as num?,
-      customerCnpj:
-          json["customerCnpj"] as String? ?? json["customerCpfCnpj"] as String?,
+      customerCnpj: json["customerCnpj"] is int
+          ? json["customerCnpj"].toString()
+          : json["customerCpfCnpj"] is int
+              ? json["customerCpfCnpj"].toString()
+              : json["customerCnpj"] as String? ??
+                  json["customerCpfCnpj"] as String?,
       representativeCode: json["representativeCode"] as num?,
       representativeCnpj: json["representativeCnpj"] as String?,
       sellerCode: json["sellerCode"] as num?,

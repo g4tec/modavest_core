@@ -3,6 +3,7 @@ enum EnumSalesOrders {
   finished,
   canceled,
   failed,
+  closed,
 }
 
 extension EnumSalesOrdersExtension on EnumSalesOrders {
@@ -14,6 +15,8 @@ extension EnumSalesOrdersExtension on EnumSalesOrders {
         return 'finished';
       case EnumSalesOrders.canceled:
         return 'canceled';
+      case EnumSalesOrders.closed:
+        return 'closed';
       default:
         return "";
     }

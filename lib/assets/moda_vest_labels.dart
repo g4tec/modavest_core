@@ -176,6 +176,7 @@ class ModaVestLabels {
   static String get finished => "Concluídos";
   static String get progress => "Andamento";
   static String get canceled => "Cancelados";
+  static String get closed => "Fechados";
   static String get searchingSalesOrders => "Buscando pedidos dos lojistas...";
   static String get searchingSalesOrder => "Buscando pedidos do lojista...";
   static String get requestSendedWithoutDelete =>
@@ -234,6 +235,7 @@ class ModaVestLabels {
   static String get stateAndAbreviation => "Área operacional";
   static String get failed => "Rejeitados";
   static String get failToLoadFaileds => "Falha ao buscar pedidos rejeitados";
+  static String get failToLoadCloseds => "Falha ao buscar pedidos fechados";
   static String get priceTable => "Tabela de preço";
   static String get searchingSaleOrderDetail => "Buscando detalhes do pedido";
   static String get datails => "Detalhes";
@@ -296,7 +298,7 @@ class ModaVestLabels {
   static String get returnOrderToBag => "Retornar itens para a sacola";
   static String get hadSureDoYouWantReturn =>
       "Tem certeza que deseja retornar os itens desse pedido para a sacola?";
-        static String get hadSureDoYouWantResend =>
+  static String get hadSureDoYouWantResend =>
       "Tem certeza que deseja reenviar o pedido?";
   static String get hadSureDoYouWantExitDesmembration =>
       "Tem certeza que deseja sair do desmembramento?";
@@ -304,7 +306,7 @@ class ModaVestLabels {
       "Após sair, todo o processo de desmembramento será cancelado e todos os produtos retornarão para a sacola.";
   static String get hadSureDoYouWantReturnSubtitle =>
       "Evite reenviar pedidos antes de resolver suas pendências. Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço";
-        static String get hadSureDoYouWantResendSubtitle =>
+  static String get hadSureDoYouWantResendSubtitle =>
       "Ao reenviar, os dados desse pedido serão encaminhados para seu whatsapp.";
   static String get hadSureDoYouWantReturnFinishedOrderSubtitle =>
       "Não retorne pedidos que possuem produtos que não estão mais na sua lista de referências ou tabelas de preço ou de coleções passadas";
@@ -341,6 +343,8 @@ class ModaVestLabels {
       "Não foram encontrados pedidos em andamento";
   static String get emptyConcludedOrders =>
       "Não foram encontrados pedidos concluídos";
+  static String get emptyClosedOrders =>
+      "Não foram encontrados pedidos fechados";
   static String get emptyCanceledOrders =>
       "Não foram encontrados pedidos cancelados";
   static String get emptyRejectedOrders =>

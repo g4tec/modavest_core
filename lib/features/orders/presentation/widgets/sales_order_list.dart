@@ -37,6 +37,8 @@ class SalesOrderList extends StatelessWidget {
         return ModaVestLabels.emptyRejectedOrders;
       case EnumSalesOrders.finished:
         return ModaVestLabels.emptyConcludedOrders;
+      case EnumSalesOrders.closed:
+        return ModaVestLabels.emptyClosedOrders;
       default:
         return ModaVestLabels.emptyRunningOrders;
     }

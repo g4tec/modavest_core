@@ -16,7 +16,8 @@ class OfficialStoreSalesQuestions {
   final bool? isRepresentativeApp;
   final bool? isSellerApp;
   final bool? isShopkeeperApp;
-  const OfficialStoreSalesQuestions({
+  String? answer;
+  OfficialStoreSalesQuestions({
     required this.integrationId,
     required this.officialStoreId,
     required this.questionId,
@@ -31,5 +32,6 @@ class OfficialStoreSalesQuestions {
     required this.isRepresentativeApp,
     required this.isSellerApp,
     required this.isShopkeeperApp,
+    this.answer,
   });
 }

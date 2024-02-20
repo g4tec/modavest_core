@@ -58,6 +58,21 @@ class OptionsModel extends Options {
     );
   }
 
+  factory OptionsModel.entity(Options option) {
+    return OptionsModel(
+      observation: option.observation,
+      officialStoreId: option.officialStoreId,
+      questionId: option.questionId,
+      sequence: option.sequence,
+      option: option.option,
+      typeCode: option.typeCode,
+      code: option.code,
+      definedField: option.definedField,
+      definedFieldValue: option.definedFieldValue,
+      definedFieldType: option.definedFieldType,
+    );
+  }
+
   HiveOptions toHive() {
     return HiveOptions(
       observation: observation,

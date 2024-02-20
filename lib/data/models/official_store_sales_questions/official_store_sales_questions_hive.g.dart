@@ -32,13 +32,14 @@ class HiveOfficialStoreSalesQuestionsAdapter
       isRepresentativeApp: fields[11] as bool?,
       isSellerApp: fields[12] as bool?,
       isShopkeeperApp: fields[13] as bool?,
+      answer: fields[14] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveOfficialStoreSalesQuestions obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.integrationId)
       ..writeByte(1)
@@ -66,7 +67,9 @@ class HiveOfficialStoreSalesQuestionsAdapter
       ..writeByte(12)
       ..write(obj.isSellerApp)
       ..writeByte(13)
-      ..write(obj.isShopkeeperApp);
+      ..write(obj.isShopkeeperApp)
+      ..writeByte(14)
+      ..write(obj.answer);
   }
 
   @override

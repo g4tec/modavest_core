@@ -1,10 +1,12 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/modavest_public_places.dart';
+import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
+import 'package:modavest_core/domain/models/options.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/utils/format_cep.dart';
 import 'package:modavest_core/utils/format_date.dart';
-import 'package:modavest_core/widgets/text/modavest_title.dart';
 
 class DeliveryCards extends StatelessWidget {
   final SalesOrder salesOrder;
@@ -44,6 +46,23 @@ class DeliveryCards extends StatelessWidget {
     );
   }
 
+  String buildBillingForecastDateFromQuestions() {
+    final OfficialStoreSalesQuestions? question =
+        (salesOrder.officialStoreSalesQuestions ?? []).firstWhereOrNull(
+            (question) => question.options
+                .any((option) => option.definedField == "billingForecastDate"));
+
+    if (question != null) {
+      final Options? option = question.options
+          .firstWhereOrNull((option) => option.code == question.answer);
+      if (option != null) {
+        return formatDate(DateTime.parse(option.definedFieldValue!));
+      }
+    }
+
+    return "-";
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -53,7 +72,7 @@ class DeliveryCards extends StatelessWidget {
           title2: (salesOrder.items ?? []).isNotEmpty &&
                   salesOrder.items!.first.billingForecastDate != null
               ? formatDate(salesOrder.items!.first.billingForecastDate!)
-              : " - ",
+              : buildBillingForecastDateFromQuestions(),
           context: context,
           filled: true,
         ),

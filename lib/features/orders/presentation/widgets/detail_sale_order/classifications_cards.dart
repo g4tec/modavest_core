@@ -1,5 +1,8 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
+import 'package:modavest_core/domain/models/classification.dart';
+import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
+import 'package:modavest_core/domain/models/options.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 
 class ClassificationsCard extends StatelessWidget {
@@ -42,27 +45,90 @@ class ClassificationsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-        children: (salesOrder.classifications ?? [])
-            .asMap()
-            .map(
-              (
+    return ListView(children: [
+      ...(salesOrder.classifications ?? [])
+          .asMap()
+          .map(
+            (
+              index,
+              e,
+            ) {
+              return MapEntry(
+                  index,
+                  buildRow(
+                    title: "Tipo Class/Class",
+                    title2: e.typeName != null && e.name != null
+                        ? "${e.typeName}(${e.typeCode}) / ${e.name}(${e.code})"
+                        : "${e.typeCode} / ${e.code}",
+                    context: context,
+                    filled: index % 2 == 0,
+                  ));
+            },
+          )
+          .values
+          .toList(),
+      ...buidlClassificationsByOfficialStoreQuestions(
+          salesOrder.officialStoreSalesQuestions ?? [], context)
+    ]);
+  }
+
+  List<Widget> buidlClassificationsByOfficialStoreQuestions(
+      List<OfficialStoreSalesQuestions> questions, BuildContext context) {
+    final List<Classification> classifications = [];
+
+    for (final question in questions) {
+      switch (question.questionType) {
+        case 'LISTA DE SELEÇÃO':
+          final Options option = question.options
+              .firstWhere((element) => element.code == question.answer);
+
+          if (option.typeCode != null && option.code != null) {
+            classifications.add(Classification(
+                id: 0,
+                code: option.typeCode?.toString(),
+                typeCode: int.tryParse(option.code ?? "")));
+          }
+
+          break;
+
+        case 'CAIXA DE SELEÇÃO':
+          final List<Options> options = question.options
+              .where((element) =>
+                  (question.answer as List<String>).contains(element.code))
+              .toList();
+
+          for (final Options option in options) {
+            classifications.add(Classification(
+                id: 0,
+                typeName: option.definedFieldType,
+                name: option.definedFieldValue,
+                code: option.typeCode?.toString(),
+                typeCode: int.tryParse(option.code ?? "")));
+          }
+          break;
+      }
+    }
+
+    return classifications
+        .asMap()
+        .map(
+          (
+            index,
+            e,
+          ) {
+            return MapEntry(
                 index,
-                e,
-              ) {
-                return MapEntry(
-                    index,
-                    buildRow(
-                      title: "Tipo Class/Class",
-                      title2: e.typeName != null && e.name != null
-                          ? "${e.typeName}(${e.typeCode}) / ${e.name}(${e.code})"
-                          : "${e.typeCode} / ${e.code}",
-                      context: context,
-                      filled: index % 2 == 0,
-                    ));
-              },
-            )
-            .values
-            .toList());
+                buildRow(
+                  title: "Tipo Class/Class",
+                  title2: e.typeName != null && e.name != null
+                      ? "${e.typeName}(${e.typeCode}) / ${e.name}(${e.code})"
+                      : "${e.typeCode} / ${e.code}",
+                  context: context,
+                  filled: index % 2 == 0,
+                ));
+          },
+        )
+        .values
+        .toList();
   }
 }

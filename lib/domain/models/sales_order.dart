@@ -31,7 +31,7 @@ class SalesOrder {
   final num? operationCode;
   num? paymentConditionCode;
   String? paymentConditionName;
-  final double? quantity;
+  double? quantity;
   final double? grossValue;
   final num? discountValue;
   final double? netValue;

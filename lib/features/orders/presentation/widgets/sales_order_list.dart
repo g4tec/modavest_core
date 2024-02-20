@@ -13,6 +13,7 @@ class SalesOrderList extends StatelessWidget {
   final void Function(num, num)? onSelect;
   final List<SalesOrder> salesOrderList;
   final bool isFailed;
+  final bool isClosed;
   final bool isLoading;
   final bool? isFirstFetch;
   final EnumSalesOrders? status;
@@ -27,6 +28,7 @@ class SalesOrderList extends StatelessWidget {
     required this.isLoading,
     this.isFirstFetch,
     this.isFailed = false,
+    this.isClosed = false,
   });
 
   String emptyListMessageCase() {
@@ -95,7 +97,9 @@ class SalesOrderList extends StatelessWidget {
                   return SalesOrderCard(
                     salesOrder: salesOrderList[index],
                     onSelect: () => onSelect?.call(
-                      isFailed ? index : salesOrderList[index].orderCode!,
+                      isFailed || isClosed
+                          ? index
+                          : salesOrderList[index].orderCode!,
                       salesOrderList[index].integrationId!,
                     ),
                     isFailed: isFailed,

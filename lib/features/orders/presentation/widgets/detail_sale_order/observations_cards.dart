@@ -1,6 +1,8 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
+import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
+import 'package:modavest_core/utils/format_date.dart';
 
 class ObservationsCard extends StatelessWidget {
   final SalesOrder salesOrder;
@@ -104,7 +106,59 @@ class ObservationsCard extends StatelessWidget {
             )
             .values
             .toList(),
+        ...(salesOrder.officialStoreSalesQuestions ?? [])
+            .asMap()
+            .map(
+              (
+                index,
+                e,
+              ) {
+                return MapEntry(
+                    index,
+                    buildRow(
+                      title: e.description,
+                      title2: buildanswerObservation(e),
+                      context: context,
+                      filled: index % 2 == 0,
+                    ));
+              },
+            )
+            .values
+            .toList(),
       ],
     );
+  }
+
+  String buildanswerObservation(OfficialStoreSalesQuestions question) {
+    switch (question.questionType) {
+      case 'TEXTO':
+        return question.answer ?? " - ";
+
+      case 'LISTA DE SELEÇÃO':
+        final option = question.options
+            .firstWhere((option) => option.code == question.answer);
+
+        switch (option.definedFieldType) {
+          case "DATE":
+            return formatDate(DateTime.parse(option.definedFieldValue!));
+
+          case "INTEGER":
+            return option.definedFieldValue!;
+
+          default:
+            return option.observation ?? option.option;
+        }
+
+      case 'CAIXA DE SELEÇÃO':
+        final option = question.options
+            .firstWhere((option) => option.code == question.answer);
+
+        return option.observation ?? option.option;
+      case 'TEXTO REPRESENTANTE':
+        return question.answer ?? " - ";
+
+      default:
+        return " -- ";
+    }
   }
 }

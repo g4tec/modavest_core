@@ -307,7 +307,9 @@ class SalesOrderModel extends SalesOrder {
       representativeObservations: order.representativeObservations,
       status: order.status,
       shippingAddress: order.shippingAddress,
-      officialStoreSalesQuestions: order.officialStoreSalesQuestions,
+      officialStoreSalesQuestions: order.officialStoreSalesQuestions
+          ?.map((e) => OfficialStoreSalesQuestionsModel.entity(e))
+          .toList(),
     );
   }
 

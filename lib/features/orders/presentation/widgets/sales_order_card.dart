@@ -4,7 +4,6 @@ import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/utils/format_date.dart';
 import 'package:modavest_core/widgets/text/modavest_money_bold_text.dart';
-import 'package:modavest_core/widgets/text/modavest_title.dart';
 
 class SalesOrderCard extends StatelessWidget {
   final SalesOrder salesOrder;
@@ -21,64 +20,126 @@ class SalesOrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onSelect,
-      child: Card(
-        child: FittedBox(
-          child: Row(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.4,
-                margin: const EdgeInsets.all(10),
-                child: AutoSizeText(
-                  isFailed
-                      ? "${ModaVestLabels.seq} ${salesOrder.sequence?.toString() ?? ""}"
-                      : "#${salesOrder.orderCode}",
-                  maxFontSize: 32,
-                  style: Theme.of(context).textTheme.headline2!.copyWith(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Card(
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            child: Column(children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: FittedBox(
+                  child: Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
                         color: isFailed
                             ? Theme.of(context).errorColor
                             : Theme.of(context).primaryColor,
-                        fontSize: 45,
+                        width: 1,
                       ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        isFailed
+                            ? "${ModaVestLabels.seq} ${salesOrder.sequence?.toString() ?? ""}"
+                            : "#${salesOrder.orderCode}",
+                        maxFontSize: 20,
+                        style: Theme.of(context).textTheme.headline2!.copyWith(
+                              color: isFailed
+                                  ? Theme.of(context).errorColor
+                                  : Theme.of(context).primaryColor,
+                            ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 2),
+                alignment: Alignment.centerLeft, // Alinha o texto à esquerda
+                child: Text(
+                  salesOrder.customerName!.toUpperCase(),
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    color: Color.fromRGBO(79, 79, 79, 1),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment
+                      .spaceBetween, // Espaçamento igual entre as colunas
                   children: [
-                    ModavestTitle(
-                      salesOrder.customerName ?? " - ",
-                      textAlign: TextAlign.left,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment
+                          .start, // Alinha o conteúdo à esquerda
+                      children: [
+                        const Text(
+                          "Valor",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        ModavestMoneyBoldText(
+                          originalValue: salesOrder.totalAmountOrder ?? 0,
+                          fontSize: 16,
+                        ),
+                      ],
                     ),
-                    ModavestMoneyBoldText(
-                      originalValue: salesOrder.totalAmountOrder ?? 0,
-                      fontSize: 16,
+                    const Spacer(), // Espaço igual entre as colunas
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment
+                          .start, // Alinha o conteúdo à esquerda
+                      children: [
+                        const Text(
+                          "Data",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        AutoSizeText(
+                          salesOrder.orderDate != null
+                              ? formatDate(salesOrder.orderDate!)
+                              : "",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ],
                     ),
-                    AutoSizeText(
-                      salesOrder.orderDate != null
-                          ? formatDate(salesOrder.orderDate!)
-                          : "",
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
+                    const Spacer(), // Espaço igual entre as colunas
                     if (salesOrder.quantity != null)
-                      AutoSizeText(
-                        "${ModaVestLabels.amount} ${salesOrder.quantity}",
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                    if (salesOrder.statusOrder != null &&
-                        salesOrder.statusOrder == "PartiallyAnswered")
-                      AutoSizeText(
-                        ModaVestLabels.partiallyAnswered,
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                              fontStyle: FontStyle.italic,
-                              color: Colors.amber,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment
+                            .start, // Alinha o conteúdo à esquerda
+                        children: [
+                          const Text(
+                            "Quantidade",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
+                          ),
+                          AutoSizeText(
+                            "${salesOrder.quantity}",
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                        ],
                       ),
                   ],
                 ),
               ),
-            ],
+            ]),
           ),
         ),
       ),

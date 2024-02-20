@@ -1,4 +1,5 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/classification.dart';
 import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
@@ -79,14 +80,15 @@ class ClassificationsCard extends StatelessWidget {
     for (final question in questions) {
       switch (question.questionType) {
         case 'LISTA DE SELEÇÃO':
-          final Options option = question.options
-              .firstWhere((element) => element.code == question.answer);
-
-          if (option.typeCode != null && option.code != null) {
-            classifications.add(Classification(
-                id: 0,
-                code: option.typeCode?.toString(),
-                typeCode: int.tryParse(option.code ?? "")));
+          final Options? option = question.options
+              .firstWhereOrNull((element) => element.code == question.answer);
+          if (option != null) {
+            if (option.typeCode != null && option.code != null) {
+              classifications.add(Classification(
+                  id: 0,
+                  code: option.typeCode?.toString(),
+                  typeCode: int.tryParse(option.code ?? "")));
+            }
           }
 
           break;

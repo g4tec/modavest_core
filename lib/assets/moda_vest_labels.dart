@@ -169,7 +169,6 @@ class ModaVestLabels {
   static String get description => "Descrição";
   static String get checkout => "Concluir pedido";
   static String get closeAndSynchronizeOrder => "Fechar e sincronizar";
-  static String get closeOrder => "Fechar";
   static String get requestSended => "Pedido realizado com sucesso :)";
   static String get requestNumber => "Pedido #";
   static String get bag => "Sacola";
@@ -545,4 +544,8 @@ class ModaVestLabels {
   static String get actions => "Ações";
   static String get recreateOrder => "Refazer pedido";
   static String get resendOrder => "Reenviar pedido pelo Whatsapp";
+
+  static String get addProducts => "Adicionar produtos";
+  static String get closeOrder => "Fechar pedido";
+  static String get syncOrder => "Sincronizar pedido";
 }

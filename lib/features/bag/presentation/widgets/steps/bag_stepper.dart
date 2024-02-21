@@ -24,7 +24,7 @@ class BagStepper extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.all(5),
-            width: 100,
+            width: 120,
             height: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),

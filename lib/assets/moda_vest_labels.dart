@@ -170,6 +170,8 @@ class ModaVestLabels {
   static String get checkout => "Concluir pedido";
   static String get closeAndSynchronizeOrder => "Fechar e sincronizar";
   static String get requestSended => "Pedido realizado com sucesso :)";
+  static String get orderClosed =>
+      "Pedido fechado com sucesso, acesse o menu de pedidos para ver detalhes e enviar o pedido";
   static String get requestNumber => "Pedido #";
   static String get bag => "Sacola";
   static String get requestsOfClients => "Pedidos dos Lojistas";
@@ -182,7 +184,8 @@ class ModaVestLabels {
   static String get searchingSalesOrder => "Buscando pedidos do lojista...";
   static String get requestSendedWithoutDelete =>
       "O pedido foi enviado, porém não foi possível apagá-lo da sacola";
-
+  static String get orderClosedWithoutDelete =>
+      "O pedido foi fechado, porém não foi possível remove-lo da  sacola";
   static String get products => "Produtos";
   static String get selectingCustomer => "Selecionando Lojista";
   static String get changeOficialStore => "Trocar Loja Oficial";
@@ -545,7 +548,7 @@ class ModaVestLabels {
   static String get recreateOrder => "Refazer pedido";
   static String get resendOrder => "Reenviar pedido pelo Whatsapp";
 
-  static String get addProducts => "Adicionar produtos";
+  static String get reopenBag => "Reabrir sacola";
   static String get closeOrder => "Fechar pedido";
   static String get syncOrder => "Sincronizar pedido";
 }

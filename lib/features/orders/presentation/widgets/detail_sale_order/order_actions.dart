@@ -10,7 +10,7 @@ class OrderActions extends StatelessWidget {
   const OrderActions({
     super.key,
     required this.onTapToReturn,
-    required this.onTapResend,
+    this.onTapResend,
   });
 
   Widget buildRow({
@@ -39,7 +39,7 @@ class OrderActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        if (onTapToReturn != null)
+        if (onTapResend != null)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ModaVestTextButton(
@@ -49,14 +49,15 @@ class OrderActions extends StatelessWidget {
             ),
           ),
         // TODO: ajustar a função de retornar o pedido
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ModaVestTextButton(
-            title: ModaVestLabels.recreateOrder,
-            onPressed: onTapToReturn,
-            color: Theme.of(context).colorScheme.error,
+        if (onTapToReturn != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ModaVestTextButton(
+              title: ModaVestLabels.recreateOrder,
+              onPressed: onTapToReturn,
+              color: Theme.of(context).colorScheme.error,
+            ),
           ),
-        ),
       ],
     );
   }

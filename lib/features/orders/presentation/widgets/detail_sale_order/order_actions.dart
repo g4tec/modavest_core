@@ -49,15 +49,15 @@ class OrderActions extends StatelessWidget {
             ),
           ),
         // TODO: ajustar a função de retornar o pedido
-        if (onTapToReturn != null)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ModaVestTextButton(
-              title: ModaVestLabels.recreateOrder,
-              onPressed: onTapToReturn,
-              color: Theme.of(context).colorScheme.error,
-            ),
-          ),
+        // if (onTapToReturn != null)
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        //   child: ModaVestTextButton(
+        //     title: ModaVestLabels.recreateOrder,
+        //     onPressed: onTapToReturn,
+        //     color: Theme.of(context).colorScheme.error,
+        //   ),
+        // ),
       ],
     );
   }

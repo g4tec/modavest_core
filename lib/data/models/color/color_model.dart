@@ -103,8 +103,16 @@ class ColorModel extends Color {
     imgList.sort(
       (a, b) => a.sequence.compareTo(b.sequence),
     );
+
+    final List<ProductModel> products = [];
+    for (final product in color.products) {
+      if (product.colorCode == color.code) {
+        products.add(ProductModel.entity(product));
+      }
+    }
+
     return ColorModel(
-      products: (color.products).map((e) => ProductModel.entity(e)).toList(),
+      products: products,
       imgList: imgList,
       code: color.code,
       integrationId: color.integrationId,

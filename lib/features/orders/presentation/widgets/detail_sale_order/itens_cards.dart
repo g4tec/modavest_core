@@ -96,6 +96,7 @@ class ItensRequestCard extends StatelessWidget {
             DataCell(
               Container(
                 padding: const EdgeInsets.symmetric(vertical: padding),
+                constraints: const BoxConstraints(maxWidth: 650),
                 width: 65,
                 child: FittedBox(
                   child: ModavestMoneyBoldText(originalValue: totalItem),
@@ -115,7 +116,10 @@ class ItensRequestCard extends StatelessWidget {
   }) {
     const double padding = 10;
     const int columns = 4;
-    final double width = (MediaQuery.of(context).size.width / columns) -
+    final double width = ((MediaQuery.of(context).size.width > 650
+                ? 650
+                : MediaQuery.of(context).size.width) /
+            columns) -
         (columnSpacing * (columns - 1));
     return [
       DataColumn(
@@ -208,8 +212,9 @@ class ItensRequestCard extends StatelessWidget {
       tilePadding: disableExpand
           ? EdgeInsets.zero
           : const EdgeInsets.symmetric(horizontal: 16),
-      title: SizedBox(
+      title: Container(
         width: MediaQuery.of(context).size.width,
+        constraints: const BoxConstraints(maxWidth: 650),
         child: FittedBox(
           child: Row(
             children: [
@@ -229,6 +234,7 @@ class ItensRequestCard extends StatelessWidget {
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.6,
+                constraints: const BoxConstraints(maxWidth: 650),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,25 +266,28 @@ class ItensRequestCard extends StatelessWidget {
           ],
           columnSpacing: 2,
         ),
-        Padding(
+        Container(
+          constraints: const BoxConstraints(maxWidth: 650),
           padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.05,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: ModavestTitle(ModaVestLabels.itemSubtotal),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
-                child: ModavestMoneyBoldText(
-                  originalValue: subtototal["subtotal"] ?? 0,
-                  fontSize: 16,
+          child: FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: ModavestTitle(ModaVestLabels.itemSubtotal),
                 ),
-              )
-            ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: ModavestMoneyBoldText(
+                    originalValue: subtototal["subtotal"] ?? 0,
+                    fontSize: 16,
+                  ),
+                )
+              ],
+            ),
           ),
         )
       ],

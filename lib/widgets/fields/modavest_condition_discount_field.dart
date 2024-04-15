@@ -19,7 +19,9 @@ class ModavestConditionDiscountPrice extends StatelessWidget {
     return FutureBuilder(
       future: getPaymentConditionDiscount(
         order,
-        condition.averagePeriod?.variationPercentage ?? 0,
+        condition.averagePeriod?.variationPercentage ??
+            condition.variationPercentage ??
+            0,
       ),
       builder: (BuildContext context, AsyncSnapshot<double?> snapshot) {
         final String label =
@@ -35,10 +37,12 @@ class ModavestConditionDiscountPrice extends StatelessWidget {
                           fontSize: 13,
                         ),
                   ),
-                  if (condition.averagePeriod?.variationPercentage != null)
+                  if ((condition.averagePeriod?.variationPercentage ??
+                          condition.variationPercentage) !=
+                      null)
                     TextSpan(
                       text:
-                          "$label \n${toCurrency(snapshot.data?.abs() ?? 0)} (${condition.averagePeriod?.variationPercentage}%)",
+                          "$label \n${toCurrency(snapshot.data?.abs() ?? 0)} (${(condition.averagePeriod?.variationPercentage ?? condition.variationPercentage)}%)",
                     ),
                 ],
               ),

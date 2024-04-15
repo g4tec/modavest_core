@@ -34,12 +34,12 @@ class BagCoreDatasource {
     double totalOriginalAmount = 0;
 
     for (final HiveItemSalesOrder item in salesOrder.items ?? []) {
-      if (condition.averagePeriod?.variationPercentage != null) {
+      if ((condition.averagePeriod?.variationPercentage ?? condition.variationPercentage) != null) {
         item.price = (item.originalPrice ?? 0) *
-            ((100 + condition.averagePeriod!.variationPercentage!) / 100);
-      } else if (condition.averagePeriod?.variationValue != null) {
+            ((100 + (condition.averagePeriod?.variationPercentage ?? condition.variationPercentage)!) / 100);
+      } else if ((condition.averagePeriod?.variationValue ?? condition.variationValue) != null) {
         item.price = (item.originalPrice ?? 0) +
-            condition.averagePeriod!.variationValue!;
+            (condition.averagePeriod?.variationValue ?? condition.variationValue)!;
       } else {
         item.price = item.originalPrice ?? 0;
       }

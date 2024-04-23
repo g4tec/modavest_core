@@ -46,31 +46,33 @@ class ClassificationsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      ...(salesOrder.classifications ?? [])
-          .asMap()
-          .map(
-            (
-              index,
-              e,
-            ) {
-              return MapEntry(
-                  index,
-                  buildRow(
-                    title: "Tipo Class/Class",
-                    title2: e.typeName != null && e.name != null
-                        ? "${e.typeName}(${e.typeCode}) / ${e.name}(${e.code})"
-                        : "${e.typeCode} / ${e.code}",
-                    context: context,
-                    filled: index % 2 == 0,
-                  ));
-            },
-          )
-          .values
-          .toList(),
-      ...buidlClassificationsByOfficialStoreQuestions(
-          salesOrder.officialStoreSalesQuestions ?? [], context)
-    ]);
+    return (salesOrder.classifications ?? []).isEmpty
+        ? const Center(child: Text("Não há claassificações para esse pedido"))
+        : ListView(children: [
+            ...(salesOrder.classifications ?? [])
+                .asMap()
+                .map(
+                  (
+                    index,
+                    e,
+                  ) {
+                    return MapEntry(
+                        index,
+                        buildRow(
+                          title: "Tipo Class/Class",
+                          title2: e.typeName != null && e.name != null
+                              ? "${e.typeName}(${e.typeCode}) / ${e.name}(${e.code})"
+                              : "${e.typeCode} / ${e.code}",
+                          context: context,
+                          filled: index % 2 == 0,
+                        ));
+                  },
+                )
+                .values
+                .toList(),
+            ...buidlClassificationsByOfficialStoreQuestions(
+                salesOrder.officialStoreSalesQuestions ?? [], context)
+          ]);
   }
 
   List<Widget> buidlClassificationsByOfficialStoreQuestions(

@@ -6,6 +6,7 @@ import 'package:modavest_core/utils/format_cep.dart';
 
 class DisplayAddressCard extends StatelessWidget {
   final void Function()? onEdit;
+  final bool showRadio;
   final Address address;
   final bool selected;
   final String? titleEdit;
@@ -15,6 +16,7 @@ class DisplayAddressCard extends StatelessWidget {
     this.onEdit,
     required this.selected,
     this.titleEdit,
+    this.showRadio = true,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -45,15 +47,16 @@ class DisplayAddressCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 40,
-                height: 50,
-                child: Radio<int>(
-                  value: selected ? 1 : 0,
-                  onChanged: (_) {},
-                  groupValue: 1,
+              if (showRadio)
+                SizedBox(
+                  width: 40,
+                  height: 50,
+                  child: Radio<int>(
+                    value: selected ? 1 : 0,
+                    onChanged: (_) {},
+                    groupValue: 1,
+                  ),
                 ),
-              ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

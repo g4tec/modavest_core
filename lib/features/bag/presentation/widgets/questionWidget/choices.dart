@@ -51,7 +51,13 @@ class ChoiceState extends State<Choice> {
         isExpanded: true,
         validator: widget.isRequired
             ? (value) {
-                return value != null ? null : "Responda essa questão";
+                return value != null
+                    ? value is String
+                        ? (value as String).isEmpty
+                            ? "Responda essa questão"
+                            : null
+                        : null
+                    : "Responda essa questão";
               }
             : null,
         decoration: widget.decoration ??

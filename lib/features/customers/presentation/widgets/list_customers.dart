@@ -79,21 +79,26 @@ class _ListCustomersState extends State<ListCustomers> {
                         onChange: widget.onSearch,
                       ),
                     ),
-                  ListView.builder(
-                    itemCount: partionPages >= widget.customers.length
-                        ? widget.customers.length
-                        : partionPages,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    cacheExtent: 10,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CustomerCard(
-                        customer: widget.customers[index],
-                        onTap: () =>
-                            widget.onTapCustomer?.call(widget.customers[index]),
-                      );
-                    },
-                  ),
+                  if (widget.customers.isEmpty)
+                    const Center(
+                      child: Text("Não foram encontrados clientes"),
+                    )
+                  else
+                    ListView.builder(
+                      itemCount: partionPages >= widget.customers.length
+                          ? widget.customers.length
+                          : partionPages,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      cacheExtent: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CustomerCard(
+                          customer: widget.customers[index],
+                          onTap: () => widget.onTapCustomer
+                              ?.call(widget.customers[index]),
+                        );
+                      },
+                    ),
                   if (widget.customers.length > partionPages)
                     SendingLoading(
                       title: ModaVestLabels.loadingMoreCustomers,

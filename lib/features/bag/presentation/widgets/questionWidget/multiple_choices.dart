@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:modavest_core/data/models/options/options_model.dart';
 import 'package:modavest_core/domain/models/options.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/questionWidget/question_widget.dart';
 
@@ -7,12 +8,14 @@ class MultipleChoice extends QuestionWidget {
   final List<Options> options;
   final dynamic initialValue;
   final InputDecoration? decoration;
+  final bool whiteBg;
   const MultipleChoice(
       {super.key,
       required this.options,
       required this.initialValue,
       required void Function(dynamic) super.onChange,
       required super.isRequired,
+      this.whiteBg = false,
       this.decoration});
 
   @override
@@ -29,10 +32,9 @@ class MultipleChoiceState extends State<MultipleChoice> {
           value: option,
           child: Text(
             option.option,
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+            style: Theme.of(context).textTheme.headline5?.copyWith(
+                color: widget.whiteBg ? Colors.white : null,
+                fontWeight: FontWeight.w800),
           ),
         ),
       );
@@ -57,14 +59,14 @@ class MultipleChoiceState extends State<MultipleChoice> {
         ),
         unselectedWidgetColor: MaterialStateColor.resolveWith(
           (states) {
-            return Colors.white;
+            return widget.whiteBg ? Colors.white : Color(0xff4d0c70);
           },
         ),
         backgroundColor: Colors.white,
         checkboxTheme: CheckboxThemeData(
           overlayColor: MaterialStateColor.resolveWith(
             (states) {
-              return Colors.white;
+              return widget.whiteBg ? Colors.white : Color(0xff4d0c70);
             },
           ),
         ),
@@ -72,7 +74,11 @@ class MultipleChoiceState extends State<MultipleChoice> {
       child: FormBuilderCheckboxGroup<Options>(
         name: "choices",
         options: _buildChildren(),
-        initialValue: widget.initialValue as List<Options>?,
+        initialValue: widget.initialValue is Iterable<OptionsModel>
+            ? (widget.initialValue as Iterable<OptionsModel>).toList()
+            : (widget.initialValue as List<Options>?)
+                ?.map((e) => OptionsModel.entity(e))
+                .toList(),
         onChanged: widget.onChange,
         decoration: widget.decoration ??
             const InputDecoration(

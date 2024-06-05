@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -136,8 +138,8 @@ class ObservationsCard extends StatelessWidget {
         return question.answer ?? " - ";
 
       case 'LISTA DE SELEÇÃO':
-        final option = question.options
-            .firstWhereOrNull((option) => option.code == question.answer);
+        final option = question.options.firstWhereOrNull(
+            (option) => option.sequence.toString() == question.answer);
         if (option != null) {
           switch (option.definedFieldType) {
             case "DATE":
@@ -152,10 +154,11 @@ class ObservationsCard extends StatelessWidget {
         }
         return "-";
       case 'CAIXA DE SELEÇÃO':
-        final option = question.options
-            .firstWhereOrNull((option) => option.code == question.answer);
-        if (option != null) {
-          return option.observation ?? option.option;
+        final options = question.options.where((option) =>
+            List<int>.from(jsonDecode(question.answer ?? "[]"))
+                .contains(option.sequence));
+        if ((options ?? []).isNotEmpty) {
+          return options.map((e) => e.option).toList().join(', ');
         }
         return "-";
       case 'TEXTO REPRESENTANTE':

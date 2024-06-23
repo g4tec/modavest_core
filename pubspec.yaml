@@ -16,7 +16,7 @@ dependencies:
   flutter_lints: ^2.0.0
   dotted_border: ^2.0.0+1
   search_cep: ^4.0.0+1
-  intl: ^0.18.1
+  intl: ^0.17.0
   fluttertoast: ^8.0.9
   validadores: ^1.0.5
   flutter_svg: ^0.22.0

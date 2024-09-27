@@ -1,5 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:badges/badges.dart' as badge;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +24,7 @@ class CarouselWithIndicator extends StatefulWidget {
 
   final void Function()? onPressBag;
   final void Function()? onPressBack;
-  final Stream<int>? bagStream;
+  final Stream<num>? bagStream;
   final Stream<InternetConnectionStatus>? streamConection;
 
   const CarouselWithIndicator({
@@ -68,6 +71,15 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
               itemCount: imgList.length,
               builder: (BuildContext contextPhoto, int index) {
                 final urlImage = imgList[index].image;
+
+                if (imgList[index].base64Image != null) {
+                  Uint8List imageBytes =
+                      base64Decode(imgList[index].base64Image!);
+
+                  return PhotoViewGalleryPageOptions(
+                      key: ValueKey("${urlImage ?? ""}carrouselPage"),
+                      imageProvider: Image.memory(imageBytes).image);
+                }
                 return PhotoViewGalleryPageOptions(
                   key: ValueKey("${urlImage ?? ""}carrouselPage"),
                   imageProvider: showAll

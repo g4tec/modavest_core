@@ -10,6 +10,7 @@ class ImageColorReferenceModel extends ImageColorReference {
     String? referenceCode,
     String? colorCode,
     bool? isDefault,
+    super.base64Image,
   }) : super(
           sequence: sequence,
           image: image,
@@ -29,6 +30,7 @@ class ImageColorReferenceModel extends ImageColorReference {
       referenceCode: json["ReferenceCode"] as String?,
       colorCode: json["code"] as String?,
       isDefault: json["isDefault"] as bool?,
+      base64Image: json["base64Image"],
     );
   }
 

@@ -551,4 +551,5 @@ class ModaVestLabels {
   static String get reopenBag => "Reabrir sacola";
   static String get closeOrder => "Fechar pedido";
   static String get syncOrder => "Sincronizar pedido";
+  static String get price => "Preço";
 }

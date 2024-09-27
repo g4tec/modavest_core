@@ -88,9 +88,9 @@ class ProductModel extends Product {
       isRawMaterial: json["isRawMaterial"] as bool?,
       isBulkMaterial: json["isBulkMaterial"] as bool?,
       isOwnProduction: json["isOwnProduction"] as bool?,
-      minimumStockAmount: json["minimumStockAmount"] as double?,
-      maximumStockAmount: json["maximumStockAmount"] as double?,
-      idealStockAmount: json["codeealStockAmount"] as double?,
+      minimumStockAmount: json["minimumStockAmount"]?.toDouble(),
+      maximumStockAmount: json["maximumStockAmount"]?.toDouble(),
+      idealStockAmount: json["codeealStockAmount"]?.toDouble(),
       salesStartDate: json["salesStartDate"] as String?,
       salesEndDate: json["salesEndDate"] as String?,
       barCodes:

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class NumberWithControlsInput extends StatelessWidget {
-  final Function(int, int)? onChange;
-  final Function(int)? onChangeByTyping;
+  final Function(int, num)? onChange;
+  final Function(num)? onChangeByTyping;
   final Function(String?)? onSumbit;
   final bool disableControls;
   final int stepSize;
-  final int? value;
+  final num? value;
   final TextEditingController controller;
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
   final int? maxValue;
+  final bool fractional;
   NumberWithControlsInput({
     super.key,
     this.onChange,
@@ -24,21 +26,31 @@ class NumberWithControlsInput extends StatelessWidget {
     this.focusNode,
     this.onSumbit,
     this.maxValue,
+    this.fractional = false,
   });
-  final MaskTextInputFormatter maskFormatter =
-      MaskTextInputFormatter(mask: '#######', filter: {"#": RegExp('[0-9]')});
+  final List<TextInputFormatter> maskFormatterInt = [
+    MaskTextInputFormatter(mask: '#######', filter: {"#": RegExp('[0-9]')})
+  ];
+  final List<TextInputFormatter> maskFormatterFloat = [
+    FilteringTextInputFormatter.allow(RegExp(r'^[0-9,]*$')),
+    CommaInputFormatter()
+  ];
 
   void _onSum() {
     try {
-      int value = controller.text.isNotEmpty ? int.parse(controller.text) : 0;
+      num value = controller.text.isNotEmpty
+          ? num.parse(controller.text.replaceAll(',', '.'))
+          : 0;
       value += stepSize;
 
       if (maxValue == null || value <= maxValue!) {
-        controller.text = value.toString();
+        controller.text = value.toString().replaceAll(',', '.');
         if (onChange != null) {
           onChange!.call(
             1,
-            controller.text.isNotEmpty ? int.parse(controller.text) : 0,
+            controller.text.isNotEmpty
+                ? num.parse(controller.text.replaceAll(',', '.'))
+                : 0,
           );
         }
       }
@@ -73,8 +85,8 @@ class NumberWithControlsInput extends StatelessWidget {
     _onSubtraction();
   }
 
-  void setValue(int value) {
-    int total = value * stepSize;
+  void setValue(num value) {
+    num total = value * stepSize;
     if (maxValue != null && total > maxValue!) {
       total = maxValue!;
     }
@@ -121,17 +133,18 @@ class NumberWithControlsInput extends StatelessWidget {
               controller: controller,
               textAlign: TextAlign.center,
               textAlignVertical: TextAlignVertical.center,
-              inputFormatters: [maskFormatter],
+              inputFormatters:
+                  fractional ? maskFormatterFloat : maskFormatterInt,
               readOnly: disableControls,
               focusNode: focusNode,
               keyboardType: TextInputType.number,
               onFieldSubmitted: onSumbit ??
                   (_) => FocusScope.of(context).requestFocus(FocusNode()),
               onChanged: (String value) {
-                int? value = int.tryParse(controller.text);
+                num? value = num.tryParse(controller.text.replaceAll(',', '.'));
                 if (maxValue != null && (value ?? 0) > maxValue!) {
                   value = maxValue;
-                  controller.text = value.toString();
+                  controller.text = value.toString().replaceAll('.', ',');
                 }
                 if (onChangeByTyping != null) {
                   try {
@@ -204,5 +217,21 @@ class NumberWithControlsInput extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class CommaInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Count the commas in the current text
+    int commaCount = newValue.text.split(',').length - 1;
+
+    // Allow the update only if there is one or zero commas
+    if (commaCount > 1) {
+      return oldValue;
+    }
+
+    return newValue;
   }
 }

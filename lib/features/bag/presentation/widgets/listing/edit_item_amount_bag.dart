@@ -5,9 +5,9 @@ import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
 import 'package:modavest_core/domain/models/product_stock.dart';
-import 'package:modavest_core/domain/models/reference.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/counting_item_bag.dart';
+import 'package:modavest_core/utils/non_fracionals.dart';
 import 'package:modavest_core/widgets/fields/number_with_controls_input.dart';
 import 'package:modavest_core/widgets/image/image_color_reference_view.dart';
 import 'package:modavest_core/widgets/text/modavest_money_bold_text.dart';
@@ -21,14 +21,14 @@ class EditItemAmountBag extends StatefulWidget {
   // TODO: Remover if need
   // final String brandName;
   final bool disableExpand;
-  final Map<Product, int> productAmount;
+  final Map<Product, num> productAmount;
   final num subtotal;
   final num amount;
   final num notIncludedAmount;
   final bool? isChecked;
   final Function(
     Product,
-    int,
+    num,
     num,
     num, {
     Function({List<SalesOrder>? bagOrders})? callBack,
@@ -40,7 +40,7 @@ class EditItemAmountBag extends StatefulWidget {
   final Function()? initDiscount;
   final Function(bool)? onCheckBoxItemChange;
   final void Function({
-    required int quantity,
+    required num quantity,
     List<SalesOrder>? bagOrders,
   })? updatePrices;
   final Widget Function(ProductPrice?) buildPriceLabel;
@@ -88,11 +88,11 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
     widget.initDiscount?.call();
   }
 
-  void onChangeInGlobalInput(int value, int amount) {
+  void onChangeInGlobalInput(int value, num amount) {
     (tableSizes.currentState! as CountingItemBagState).setValueAll(amount);
   }
 
-  void onTypeGlobalInput(int value) {
+  void onTypeGlobalInput(num value) {
     (tableSizes.currentState! as CountingItemBagState).setValueAll(value);
   }
 
@@ -250,7 +250,8 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                         children: <TextSpan>[
                                           TextSpan(
                                             text:
-                                                "${ModaVestLabels.qtdProduct}: ${widget.amount.toInt()} ",
+                                                "${ModaVestLabels.qtdProduct}: ${widget.amount} "
+                                                    .replaceAll('.', ','),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline5
@@ -261,7 +262,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                           if (widget.notIncludedAmount > 0)
                                             TextSpan(
                                               text:
-                                                  "(${widget.notIncludedAmount.toInt()})",
+                                                  "(${widget.notIncludedAmount})",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headline5
@@ -334,15 +335,18 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                         maxWidth: 140,
                       ),
                       child: NumberWithControlsInput(
+                        fractional: !nonFractional.contains(widget
+                            .productAmount.keys.firstOrNull?.measuredUnit),
                         onChange: onChangeInGlobalInput,
                         controller: TextEditingController(
-                          text: (widget.productAmount.values.first ~/
+                          text: (widget.productAmount.values.first /
                                   int.parse(
                                     widget.productAmount.keys.first
                                             .packAmount ??
                                         "1",
                                   ))
-                              .toString(),
+                              .toString()
+                              .replaceAll('.', ','),
                         ),
                         onChangeByTyping: onTypeGlobalInput,
                       ),

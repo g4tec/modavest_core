@@ -9,7 +9,7 @@ class VariationProduct extends StatelessWidget {
   final Function()? onTap;
   final bool isSelected;
   final Function(ImageColorReference? imageColorReference)? buildImage;
-  final int? badgeQuantity;
+  final num? badgeQuantity;
 
   const VariationProduct({
     Key? key,
@@ -33,7 +33,8 @@ class VariationProduct extends StatelessWidget {
               badge.Badge(
                 animationDuration: Duration.zero,
                 showBadge: (badgeQuantity ?? 0) > 0,
-                badgeContent: Text((badgeQuantity ?? 0).toString()),
+                badgeContent:
+                    Text((badgeQuantity ?? 0).toString().replaceAll('.', ',')),
                 badgeColor: Theme.of(context).canvasColor,
                 alignment: Alignment.bottomRight,
                 child: CircleAvatar(

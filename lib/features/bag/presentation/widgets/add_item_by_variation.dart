@@ -9,22 +9,23 @@ import 'package:modavest_core/domain/models/product_stock.dart';
 import 'package:modavest_core/domain/models/reference.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/counting_item_bag.dart';
+import 'package:modavest_core/utils/non_fracionals.dart';
 import 'package:modavest_core/widgets/fields/modavest_scale_field.dart';
 import 'package:modavest_core/widgets/fields/number_with_controls_input.dart';
 
 class AddItemByVariation extends StatelessWidget {
   final color_entitie.Color color;
   final Reference reference;
-  final Map<Product, int?> productAmount;
+  final Map<Product, num?> productAmount;
   final Stream<List<Reference>>? referencesStream;
-  final Function(Product, int, num, num, {Function()? callBack})
+  final Function(Product, num, num, num, {Function()? callBack})
       onChangeProductAmount;
   final bool streamReferencesIsDoneValue;
   final Function(Reference)? getDiscountEvent;
   final Widget Function(ProductPrice?) buildPriceLabel;
   final Future<List<PriceTableScales>?>? getScale;
   final Function({
-    required int quantity,
+    required num quantity,
     List<SalesOrder>? bagOrders,
     required Reference referenceAux,
   })? updatePrices;
@@ -47,11 +48,11 @@ class AddItemByVariation extends StatelessWidget {
 
   final GlobalKey tableSizes = GlobalKey(debugLabel: "tableSizes");
 
-  void onChangeInGlobalInput(int value, int amount) {
+  void onChangeInGlobalInput(int value, num amount) {
     (tableSizes.currentState! as CountingItemBagState).setValueAll(amount);
   }
 
-  void onTypeGlobalInput(int value) {
+  void onTypeGlobalInput(num value) {
     (tableSizes.currentState! as CountingItemBagState).setValueAll(value);
   }
 
@@ -93,6 +94,8 @@ class AddItemByVariation extends StatelessWidget {
                       onChange: onChangeInGlobalInput,
                       controller: TextEditingController(text: "0"),
                       onChangeByTyping: onTypeGlobalInput,
+                      fractional: !nonFractional
+                          .contains(color.products.firstOrNull?.measuredUnit),
                     ),
                   ),
               ],
@@ -159,7 +162,7 @@ class AddItemByVariation extends StatelessWidget {
                 priceTableCode: referenceAux.priceTable,
                 showAmountColor: true,
                 buildPriceLabel: buildPriceLabel,
-                updatePrices: ({bagOrders, required int quantity}) =>
+                updatePrices: ({bagOrders, required num quantity}) =>
                     updatePrices?.call(
                         bagOrders: bagOrders,
                         quantity: quantity,

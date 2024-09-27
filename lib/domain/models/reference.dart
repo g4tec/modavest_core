@@ -31,6 +31,7 @@ class Reference {
   final bool? isPack;
   final bool? isGrid;
   String? videoUrl;
+  String? base64;
 
   Reference({
     required this.code,
@@ -59,6 +60,7 @@ class Reference {
     this.isPack,
     this.isGrid,
     this.videoUrl,
+    this.base64,
   });
 
   bool filter(String string) {

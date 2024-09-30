@@ -30,6 +30,7 @@ class AddItemByVariation extends StatelessWidget {
     required Reference referenceAux,
   })? updatePrices;
   final List<ProductStock>? productStock;
+  final Function()? onAddProduct;
 
   AddItemByVariation({
     super.key,
@@ -44,6 +45,7 @@ class AddItemByVariation extends StatelessWidget {
     this.getScale,
     this.updatePrices,
     this.productStock,
+    this.onAddProduct,
   });
 
   final GlobalKey tableSizes = GlobalKey(debugLabel: "tableSizes");
@@ -167,6 +169,7 @@ class AddItemByVariation extends StatelessWidget {
                         bagOrders: bagOrders,
                         quantity: quantity,
                         referenceAux: referenceAux),
+                onAddProduct: onAddProduct,
               );
             },
           ),

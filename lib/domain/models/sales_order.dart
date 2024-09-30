@@ -15,7 +15,7 @@ class SalesOrder {
   final String? orderId;
   // Not required on app
   final num? branchCode;
-  final String? customerOrderCode;
+  String? customerOrderCode;
   final String? integrationCode;
   final num? orderCode;
   final DateTime? orderDate;

@@ -30,6 +30,7 @@ class CountingItemBag extends StatefulWidget {
   final num? officialStoreCode;
   final num? priceTableCode;
   final num? conditionCode;
+  final Function()? onAddProduct;
 
   final Widget Function(ProductPrice?) buildPriceLabel;
 
@@ -53,6 +54,7 @@ class CountingItemBag extends StatefulWidget {
     this.updatePrices,
     required this.buildPriceLabel,
     this.productStock,
+    this.onAddProduct,
   });
 
   @override
@@ -364,17 +366,61 @@ class CountingItemBagState extends State<CountingItemBag> {
             columnSpacing: 10,
           ),
         ),
+        if (widget.onAddProduct != null) ...[
+          GestureDetector(
+            onTap: () => widget.onAddProduct?.call(),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "Adicionar novo produto",
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    width: 32,
+                    height: 32,
+                    child: FittedBox(
+                      child: IconButton(
+                        splashRadius: 26,
+                        icon: Icon(
+                          Icons.add,
+                          size: 16,
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        onPressed: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
         if (widget.showAmountColor)
-          ValueListenableBuilder(
-            valueListenable: amountValue,
-            builder: (context, value, _) {
-              return Text(
-                "${ModaVestLabels.qtdProduct}: ${value.toString()}"
-                    .replaceAll('.', ','),
-                style: Theme.of(context).textTheme.headline5,
-              );
-            },
-          )
+          Padding(
+            padding: const EdgeInsets.only(top: 30, right: 30),
+            child: ValueListenableBuilder(
+              valueListenable: amountValue,
+              builder: (context, value, _) {
+                return Text(
+                  "${ModaVestLabels.qtdProduct}: ${value.toString().replaceAll('.', ',')}",
+                  style: Theme.of(context).textTheme.headline5,
+                );
+              },
+            ),
+          ),
       ],
     );
   }

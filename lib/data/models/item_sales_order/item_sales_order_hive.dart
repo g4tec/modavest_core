@@ -36,7 +36,7 @@ class HiveItemSalesOrder extends HiveObject {
   @HiveField(20)
   final num? discountPercentage;
   @HiveField(21)
-  final DateTime? billingForecastDate;
+  DateTime? billingForecastDate;
   @HiveField(22)
   HiveReference? reference;
   @HiveField(23)
@@ -45,6 +45,8 @@ class HiveItemSalesOrder extends HiveObject {
   num? scaleCode;
   @HiveField(25)
   num? settledQuantity;
+  @HiveField(26)
+  String? observation;
 
   HiveItemSalesOrder({
     required this.integrationId,
@@ -67,5 +69,6 @@ class HiveItemSalesOrder extends HiveObject {
     this.reference,
     required this.referenceIsPack,
     required this.scaleCode,
+    this.observation,
   });
 }

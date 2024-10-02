@@ -16,7 +16,7 @@ class HiveSalesOrder extends HiveObject {
   @HiveField(3)
   final num? branchCode;
   @HiveField(4)
-  final String? customerOrderCode;
+  String? customerOrderCode;
   @HiveField(5)
   final String? integrationCode;
   @HiveField(6)

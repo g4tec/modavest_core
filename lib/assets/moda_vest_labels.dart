@@ -552,4 +552,10 @@ class ModaVestLabels {
   static String get closeOrder => "Fechar pedido";
   static String get syncOrder => "Sincronizar pedido";
   static String get price => "Preço";
+  static String get createProduct => "Criar produto";
+  static String get sizeVariation => "Tamanho/variação";
+  static String get ncm => "NCM";
+  static String get measuredUnit => "Unidade de medida";
+  static String get cstCode => "CST";
+  static String get observations => "Obs.";
 }

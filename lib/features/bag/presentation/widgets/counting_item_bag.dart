@@ -31,6 +31,7 @@ class CountingItemBag extends StatefulWidget {
   final num? priceTableCode;
   final num? conditionCode;
   final Function()? onAddProduct;
+  final Function(Product product)? onTapOservations;
 
   final Widget Function(ProductPrice?) buildPriceLabel;
 
@@ -55,6 +56,7 @@ class CountingItemBag extends StatefulWidget {
     required this.buildPriceLabel,
     this.productStock,
     this.onAddProduct,
+    this.onTapOservations,
   });
 
   @override
@@ -159,6 +161,16 @@ class CountingItemBagState extends State<CountingItemBag> {
                 child: Text(
                   element.size ?? "",
                 ),
+              ),
+            ),
+            DataCell(
+              Center(
+                child: IconButton(
+                    onPressed: () => widget.onTapOservations?.call(element),
+                    icon: Icon(
+                      Icons.info,
+                      color: Theme.of(context).primaryColor,
+                    )),
               ),
             ),
             if ((widget.productStock ?? []).isNotEmpty)
@@ -330,6 +342,11 @@ class CountingItemBagState extends State<CountingItemBag> {
           child: Text(ModaVestLabels.tamanho),
         ),
       ),
+      DataColumn(
+        label: FittedBox(
+          child: Text(ModaVestLabels.observations),
+        ),
+      ),
       if ((widget.productStock ?? []).isNotEmpty)
         DataColumn(
           label: FittedBox(
@@ -338,8 +355,8 @@ class CountingItemBagState extends State<CountingItemBag> {
         ),
       DataColumn(
         label: FittedBox(
-          child: Text(ModaVestLabels.price +
-              (widget.color.products.firstOrNull?.measuredUnit ?? "")),
+          child: Text(
+              "${ModaVestLabels.price} ${widget.color.products.firstOrNull?.measuredUnit ?? ""}"),
         ),
       ),
       DataColumn(

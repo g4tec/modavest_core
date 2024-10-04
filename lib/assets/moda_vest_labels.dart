@@ -119,6 +119,7 @@ class ModaVestLabels {
       "Falha ao transcrever os dados do servidor, entre em contato com o suporte";
   static String get composition => "Composição";
   static String get observation => "Observações";
+  static String get invoices => "Notas fiscais";
   static String get howDoYouWantToRecive =>
       "Identificamos que em sua sacola de compras a # dispõem de itens a pronta entrega e sob encomenda. Como deseja receber suas compras?";
   static String get selected => "Selecionado";

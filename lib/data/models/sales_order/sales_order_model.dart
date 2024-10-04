@@ -3,6 +3,7 @@ import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
 import 'package:modavest_core/data/models/image_color_reference/image_color_reference_model.dart';
+import 'package:modavest_core/data/models/invoices/invoice_model.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_model.dart';
 import 'package:modavest_core/data/models/official_store_sales_questions/official_store_sales_questions_model.dart';
@@ -73,6 +74,7 @@ class SalesOrderModel extends SalesOrder {
     super.imageColorsReferences,
     super.status,
     super.officialStoreSalesQuestions,
+    super.invoices,
   }) : super(
           paymentConditionCode: paymentConditionCode,
         );
@@ -183,6 +185,11 @@ class SalesOrderModel extends SalesOrder {
               .toList()
           : null,
       status: EnumStatusBag.finished,
+      invoices: json['invoices'] != null
+          ? (json['invoices'] as List)
+              .map((json) => InvoiceModel.fromJson(json))
+              .toList()
+          : null,
     );
   }
 

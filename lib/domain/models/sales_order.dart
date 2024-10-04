@@ -3,6 +3,7 @@ import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/domain/models/discount.dart';
+import 'package:modavest_core/domain/models/invoice.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
 import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
@@ -73,6 +74,7 @@ class SalesOrder {
 
   Address? shippingAddress;
   List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions;
+  List<Invoice>? invoices;
 
   SalesOrder({
     this.integrationId,
@@ -130,6 +132,7 @@ class SalesOrder {
     this.imageColorsReferences,
     this.status = EnumStatusBag.other,
     this.officialStoreSalesQuestions,
+    this.invoices,
   });
 
   SalesOrder copyWith({

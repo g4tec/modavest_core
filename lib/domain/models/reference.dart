@@ -24,7 +24,7 @@ class Reference {
   final List<Detail>? details;
   final List<Composition>? composition;
   List<Color> colors;
-  final String? imageColorReference;
+  String? imageColorReference;
   ReferencePrice? referencePrice;
   num? priceTable;
   num? oficialStore;
@@ -81,6 +81,7 @@ class Reference {
       referencePrice: referencePrice,
       officialStoreCode: oficialStore,
       priceTableCode: priceTable,
+      base64: base64,
     );
   }
 }

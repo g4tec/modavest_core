@@ -22,13 +22,14 @@ class HiveImageColorReferenceAdapter
       image: fields[1] as String?,
       imageMedium: fields[2] as String?,
       imageSmall: fields[3] as String?,
+      base64: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveImageColorReference obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.sequence)
       ..writeByte(1)
@@ -36,7 +37,9 @@ class HiveImageColorReferenceAdapter
       ..writeByte(2)
       ..write(obj.imageMedium)
       ..writeByte(3)
-      ..write(obj.imageSmall);
+      ..write(obj.imageSmall)
+      ..writeByte(4)
+      ..write(obj.base64);
   }
 
   @override

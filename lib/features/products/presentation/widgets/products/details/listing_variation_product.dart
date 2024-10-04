@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:modavest_core/domain/models/color.dart';
+import 'package:modavest_core/features/products/presentation/widgets/products/details/add_variation_product.dart';
 import 'package:modavest_core/features/products/presentation/widgets/products/details/variation_product.dart';
 
 class ListingVariationProduct extends StatelessWidget {
   final List<Color> colors;
   final int selected;
   final void Function(int) onChange;
-  const ListingVariationProduct({
-    Key? key,
-    this.colors = const [],
-    required this.selected,
-    required this.onChange,
-  }) : super(key: key);
+  final Function()? onAddProductVariation;
+
+  const ListingVariationProduct(
+      {Key? key,
+      this.colors = const [],
+      required this.selected,
+      required this.onChange,
+      this.onAddProductVariation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +31,28 @@ class ListingVariationProduct extends StatelessWidget {
               slivers: <Widget>[
                 SliverList(
                   delegate: SliverChildListDelegate(
-                    colors
-                        .asMap()
-                        .map(
-                          (key, color) => MapEntry(
-                            key,
-                            VariationProduct(
-                              color: color,
-                              isSelected: key == selected,
-                              onTap: () {
-                                onChange.call(key);
-                              },
+                    [
+                      ...colors
+                          .asMap()
+                          .map(
+                            (key, color) => MapEntry(
+                              key,
+                              VariationProduct(
+                                color: color,
+                                isSelected: key == selected,
+                                onTap: () {
+                                  onChange.call(key);
+                                },
+                              ),
                             ),
-                          ),
+                          )
+                          .values
+                          .toList(),
+                      if (onAddProductVariation != null)
+                        AddVariationProduct(
+                          onAddProductVariation: onAddProductVariation,
                         )
-                        .values
-                        .toList(),
+                    ],
                   ),
                 ),
               ],

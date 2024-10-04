@@ -135,76 +135,78 @@ class ReferenceModel extends Reference {
     HiveReference reference,
   ) {
     return ReferenceModel(
-        code: reference.code,
-        priceTable: reference.priceTable,
-        oficialStore: reference.oficialStore,
-        integrationId: reference.integrationId,
-        colors: (reference.colors ?? [])
-            .map((e) => ColorModel.fromHive(e as HiveColor))
-            .toList(),
-        name: reference.name,
-        description: reference.description,
-        descriptive: reference.descriptive,
-        gridCode: reference.gridCode,
-        grid: reference.grid,
-        weight: reference.weight,
-        height: reference.height,
-        width: reference.width,
-        length: reference.length,
-        packWeight: reference.packWeight,
-        packHeight: reference.packHeight,
-        packWidth: reference.packWidth,
-        packLength: reference.packLength,
-        observations: reference.observations,
-        details:
-            reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
-        composition: reference.composition
-            ?.map((e) => CompositionModel.fromHive(e))
-            .toList(),
-        imageColorReference: reference.imageColorReference,
-        isPack: reference.isPack,
-        isGrid: reference.isGrid,
-        referencePrice: reference.referencePrice != null
-            ? ReferencePriceModel.fromHive(reference.referencePrice!)
-            : null);
+      code: reference.code,
+      priceTable: reference.priceTable,
+      oficialStore: reference.oficialStore,
+      integrationId: reference.integrationId,
+      colors: (reference.colors ?? [])
+          .map((e) => ColorModel.fromHive(e as HiveColor))
+          .toList(),
+      name: reference.name,
+      description: reference.description,
+      descriptive: reference.descriptive,
+      gridCode: reference.gridCode,
+      grid: reference.grid,
+      weight: reference.weight,
+      height: reference.height,
+      width: reference.width,
+      length: reference.length,
+      packWeight: reference.packWeight,
+      packHeight: reference.packHeight,
+      packWidth: reference.packWidth,
+      packLength: reference.packLength,
+      observations: reference.observations,
+      details: reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+      composition: reference.composition
+          ?.map((e) => CompositionModel.fromHive(e))
+          .toList(),
+      imageColorReference: reference.imageColorReference,
+      isPack: reference.isPack,
+      isGrid: reference.isGrid,
+      referencePrice: reference.referencePrice != null
+          ? ReferencePriceModel.fromHive(reference.referencePrice!)
+          : null,
+      base64: reference.base64,
+    );
   }
 
   factory ReferenceModel.fromBagsHive(
     HiveReferenceBags reference,
   ) {
     return ReferenceModel(
-        code: reference.code,
-        priceTable: reference.priceTable,
-        oficialStore: reference.oficialStore,
-        integrationId: reference.integrationId,
-        colors: (reference.colors ?? [])
-            .map((e) => ColorModel.fromHive(e as HiveColor))
-            .toList(),
-        name: reference.name,
-        description: reference.description,
-        descriptive: reference.descriptive,
-        gridCode: reference.gridCode,
-        grid: reference.grid,
-        weight: reference.weight,
-        height: reference.height,
-        width: reference.width,
-        length: reference.length,
-        packWeight: reference.packWeight,
-        packHeight: reference.packHeight,
-        packWidth: reference.packWidth,
-        packLength: reference.packLength,
-        observations: reference.observations,
-        details:
-            reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
-        composition: reference.composition
-            ?.map((e) => CompositionModel.fromHive(e))
-            .toList(),
-        imageColorReference: reference.imageColorReference,
-        isPack: reference.isPack,
-        isGrid: reference.isGrid,
-        referencePrice: reference.referencePrice != null
-            ? ReferencePriceModel.fromHive(reference.referencePrice!)
-            : null);
+      code: reference.code,
+      priceTable: reference.priceTable,
+      oficialStore: reference.oficialStore,
+      integrationId: reference.integrationId,
+      colors: (reference.colors ?? [])
+          .map((e) => ColorModel.fromHive(e as HiveColor))
+          .toList(),
+      name: reference.name,
+      description: reference.description,
+      descriptive: reference.descriptive,
+      gridCode: reference.gridCode,
+      grid: reference.grid,
+      weight: reference.weight,
+      height: reference.height,
+      width: reference.width,
+      length: reference.length,
+      packWeight: reference.packWeight,
+      packHeight: reference.packHeight,
+      packWidth: reference.packWidth,
+      packLength: reference.packLength,
+      observations: reference.observations,
+      details: reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+      composition: reference.composition
+          ?.map((e) => CompositionModel.fromHive(e))
+          .toList(),
+      imageColorReference: reference.imageColorReference,
+      isPack: reference.isPack,
+      isGrid: reference.isGrid,
+      referencePrice: reference.referencePrice != null
+          ? ReferencePriceModel.fromHive(reference.referencePrice!)
+          : null,
+      base64: reference.base64,
+    );
   }
 
   factory ReferenceModel.entity(
@@ -240,6 +242,7 @@ class ReferenceModel extends Reference {
       referencePrice: reference.referencePrice != null
           ? ReferencePriceModel.entity(reference.referencePrice!)
           : null,
+      base64: reference.base64,
     );
   }
 
@@ -270,6 +273,7 @@ class ReferenceModel extends Reference {
           : null,
       isPack: isPack,
       isGrid: isGrid,
+      base64: base64,
     );
   }
 
@@ -300,6 +304,7 @@ class ReferenceModel extends Reference {
           : null,
       isPack: isPack,
       isGrid: isGrid,
+      base64: base64,
     );
   }
 }

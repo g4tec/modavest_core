@@ -70,7 +70,7 @@ class VariationProduct extends StatelessWidget {
                 padding: EdgeInsets.only(top: 4, bottom: 4),
                 height: 28.0,
                 child: Text(
-                  color.name ?? (color.auxiliaryName ?? ""),
+                  (color.name ?? (color.auxiliaryName ?? "")).toUpperCase(),
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ),

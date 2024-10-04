@@ -558,4 +558,5 @@ class ModaVestLabels {
   static String get measuredUnit => "Unidade de medida";
   static String get cstCode => "CST";
   static String get observations => "Obs.";
+  static String get color => "Cor";
 }

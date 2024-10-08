@@ -56,13 +56,13 @@ class HiveSalesOrder extends HiveObject {
   @HiveField(23)
   final num? priorityCode;
   @HiveField(24)
-  final num? shippingCompanyCode;
+  num? shippingCompanyCode;
   @HiveField(25)
   final String? shippingCompanyCpfCnpj;
   @HiveField(26)
   final DateTime? billingForecastDate;
   @HiveField(27)
-  final num? freightType;
+  num? freightType;
   @HiveField(28)
   final double? freightPercentage;
   @HiveField(29)
@@ -101,50 +101,54 @@ class HiveSalesOrder extends HiveObject {
   HiveList<HiveAddress>? shippingAddress;
   @HiveField(46)
   HiveList<HiveOfficialStoreSalesQuestions>? officialStoreSalesQuestions;
+  @HiveField(47)
+  String? outsourceds;
 
-  HiveSalesOrder(
-      {required this.integrationId,
-      required this.orderId,
-      this.branchCode,
-      this.customerOrderCode,
-      this.integrationCode,
-      this.orderCode,
-      required this.orderDate,
-      required this.customerCode,
-      required this.customerCnpj,
-      this.representativeCode,
-      this.representativeCnpj,
-      this.sellerCode,
-      this.sellerCpf,
-      this.purchasingGuideCode,
-      this.cnpjPurchasingGuide,
-      this.operationCode,
-      this.paymentConditionCode,
-      this.paymentConditionName,
-      this.quantity,
-      this.grossValue,
-      this.discountValue,
-      this.netValue,
-      this.priorityCode,
-      this.shippingCompanyCode,
-      this.shippingCompanyCpfCnpj,
-      this.billingForecastDate,
-      this.freightType,
-      this.freightPercentage,
-      this.freightValue,
-      this.packageint,
-      this.weight,
-      this.totalAmountOrder,
-      this.statusOrder,
-      this.items,
-      this.customerName,
-      required this.officialStoreId,
-      required this.priceTableCode,
-      this.totalOriginalAmountOrder,
-      this.discountPercentage,
-      this.arrivalDate,
-      this.shippingCompanyName,
-      required this.status,
-      this.shippingAddress,
-      this.officialStoreSalesQuestions});
+  HiveSalesOrder({
+    required this.integrationId,
+    required this.orderId,
+    this.branchCode,
+    this.customerOrderCode,
+    this.integrationCode,
+    this.orderCode,
+    required this.orderDate,
+    required this.customerCode,
+    required this.customerCnpj,
+    this.representativeCode,
+    this.representativeCnpj,
+    this.sellerCode,
+    this.sellerCpf,
+    this.purchasingGuideCode,
+    this.cnpjPurchasingGuide,
+    this.operationCode,
+    this.paymentConditionCode,
+    this.paymentConditionName,
+    this.quantity,
+    this.grossValue,
+    this.discountValue,
+    this.netValue,
+    this.priorityCode,
+    this.shippingCompanyCode,
+    this.shippingCompanyCpfCnpj,
+    this.billingForecastDate,
+    this.freightType,
+    this.freightPercentage,
+    this.freightValue,
+    this.packageint,
+    this.weight,
+    this.totalAmountOrder,
+    this.statusOrder,
+    this.items,
+    this.customerName,
+    required this.officialStoreId,
+    required this.priceTableCode,
+    this.totalOriginalAmountOrder,
+    this.discountPercentage,
+    this.arrivalDate,
+    this.shippingCompanyName,
+    required this.status,
+    this.shippingAddress,
+    this.officialStoreSalesQuestions,
+    required this.outsourceds,
+  });
 }

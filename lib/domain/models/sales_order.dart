@@ -2,6 +2,7 @@ import 'package:modavest_core/assets/moda_vest_bag_status_enum.dart';
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
+import 'package:modavest_core/domain/models/commissioned.dart';
 import 'package:modavest_core/domain/models/discount.dart';
 import 'package:modavest_core/domain/models/invoice.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
@@ -38,10 +39,10 @@ class SalesOrder {
   final double? netValue;
   // Not required on app
   final num? priorityCode;
-  final num? shippingCompanyCode;
+  num? shippingCompanyCode;
   final String? shippingCompanyCpfCnpj;
   final DateTime? billingForecastDate;
-  final num? freightType;
+  num? freightType;
   final double? freightPercentage;
   final double? freightValue;
   final double? packageint;
@@ -75,6 +76,8 @@ class SalesOrder {
   Address? shippingAddress;
   List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions;
   List<Invoice>? invoices;
+  String? outsourceds;
+  List<Commissioned>? commissioneds;
 
   SalesOrder({
     this.integrationId,
@@ -133,6 +136,8 @@ class SalesOrder {
     this.status = EnumStatusBag.other,
     this.officialStoreSalesQuestions,
     this.invoices,
+    this.outsourceds,
+    this.commissioneds,
   });
 
   SalesOrder copyWith({
@@ -201,6 +206,8 @@ class SalesOrder {
       imageColorsReferences: imageColorsReferences,
       officialStoreSalesQuestions:
           officialStoreSalesQuestions ?? this.officialStoreSalesQuestions,
+      outsourceds: outsourceds,
+      commissioneds: commissioneds,
     );
   }
 
@@ -259,6 +266,8 @@ class SalesOrder {
       chargeType: order.chargeType,
       imageColorsReferences: order.imageColorsReferences,
       officialStoreSalesQuestions: order.officialStoreSalesQuestions,
+      outsourceds: order.outsourceds,
+      commissioneds: order.commissioneds,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:modavest_core/assets/moda_vest_bag_status_enum.dart';
 import 'package:modavest_core/data/models/address/address_model.dart';
+import 'package:modavest_core/data/models/commissioned/commissioned_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
 import 'package:modavest_core/data/models/image_color_reference/image_color_reference_model.dart';
@@ -75,6 +76,8 @@ class SalesOrderModel extends SalesOrder {
     super.status,
     super.officialStoreSalesQuestions,
     super.invoices,
+    super.outsourceds,
+    super.commissioneds,
   }) : super(
           paymentConditionCode: paymentConditionCode,
         );
@@ -190,6 +193,11 @@ class SalesOrderModel extends SalesOrder {
               .map((json) => InvoiceModel.fromJson(json))
               .toList()
           : null,
+      commissioneds: json['commissioneds'] != null
+          ? (json['commissioneds'] as List)
+              .map((json) => CommissionedModel.fromJson(json))
+              .toList()
+          : null,
     );
   }
 
@@ -256,6 +264,7 @@ class SalesOrderModel extends SalesOrder {
                   ?.map((e) => OfficialStoreSalesQuestionsModel.fromHive(e))
                   .toList()
               : null,
+      outsourceds: hive.outsourceds,
     );
   }
 
@@ -321,6 +330,7 @@ class SalesOrderModel extends SalesOrder {
       officialStoreSalesQuestions: order.officialStoreSalesQuestions
           ?.map((e) => OfficialStoreSalesQuestionsModel.entity(e))
           .toList(),
+      outsourceds: order.outsourceds,
     );
   }
 
@@ -367,6 +377,7 @@ class SalesOrderModel extends SalesOrder {
       arrivalDate: arrivalDate,
       shippingCompanyName: shippingCompanyName,
       status: status.value,
+      outsourceds: outsourceds,
     );
   }
 
@@ -489,6 +500,7 @@ class SalesOrderModel extends SalesOrder {
       status: status ?? this.status,
       officialStoreSalesQuestions:
           officialStoreSalesQuestions ?? this.officialStoreSalesQuestions,
+      outsourceds: outsourceds,
     );
   }
 
@@ -545,7 +557,8 @@ class SalesOrderModel extends SalesOrder {
           .toList(),
       "shippingAddress": shippingAddress != null
           ? AddressModel.entite(shippingAddress!).toJson()
-          : null
+          : null,
+      "outsourceds": {"customerCpfCnpj": outsourceds},
     };
   }
 }

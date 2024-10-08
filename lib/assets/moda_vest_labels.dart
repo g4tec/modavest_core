@@ -560,4 +560,9 @@ class ModaVestLabels {
   static String get cstCode => "CST";
   static String get observations => "Obs.";
   static String get color => "Cor";
+  static String get shippingCompany => "Transportadora";
+  static String get freightType => "Tipo de frete";
+  static String get useShippingCompany => "Adicionar transportadora?";
+  static String get useOutsourceds => "Adicionar entrega triângular?";
+  static String get commissions => "Comissões";
 }

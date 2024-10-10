@@ -415,6 +415,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                           color: Theme.of(context).canvasColor,
                         ),
                         onPressed: () {
+                          widget.onAddProduct?.call();
                           FocusScope.of(context).requestFocus(FocusNode());
                         },
                       ),

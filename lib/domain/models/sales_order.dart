@@ -77,6 +77,7 @@ class SalesOrder {
   List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions;
   List<Invoice>? invoices;
   String? outsourceds;
+  String? outsourcedsName;
   List<Commissioned>? commissioneds;
 
   SalesOrder({
@@ -137,6 +138,7 @@ class SalesOrder {
     this.officialStoreSalesQuestions,
     this.invoices,
     this.outsourceds,
+    this.outsourcedsName,
     this.commissioneds,
   });
 
@@ -207,6 +209,7 @@ class SalesOrder {
       officialStoreSalesQuestions:
           officialStoreSalesQuestions ?? this.officialStoreSalesQuestions,
       outsourceds: outsourceds,
+      outsourcedsName: outsourcedsName,
       commissioneds: commissioneds,
     );
   }
@@ -267,6 +270,7 @@ class SalesOrder {
       imageColorsReferences: order.imageColorsReferences,
       officialStoreSalesQuestions: order.officialStoreSalesQuestions,
       outsourceds: order.outsourceds,
+      outsourcedsName: order.outsourcedsName,
       commissioneds: order.commissioneds,
     );
   }

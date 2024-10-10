@@ -103,7 +103,8 @@ class HiveSalesOrder extends HiveObject {
   HiveList<HiveOfficialStoreSalesQuestions>? officialStoreSalesQuestions;
   @HiveField(47)
   String? outsourceds;
-
+  @HiveField(48)
+  String? outsourcedsName;
   HiveSalesOrder({
     required this.integrationId,
     required this.orderId,
@@ -150,5 +151,6 @@ class HiveSalesOrder extends HiveObject {
     this.shippingAddress,
     this.officialStoreSalesQuestions,
     required this.outsourceds,
+    required this.outsourcedsName,
   });
 }

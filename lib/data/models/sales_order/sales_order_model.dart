@@ -77,6 +77,7 @@ class SalesOrderModel extends SalesOrder {
     super.officialStoreSalesQuestions,
     super.invoices,
     super.outsourceds,
+    super.outsourcedsName,
     super.commissioneds,
   }) : super(
           paymentConditionCode: paymentConditionCode,
@@ -265,6 +266,7 @@ class SalesOrderModel extends SalesOrder {
                   .toList()
               : null,
       outsourceds: hive.outsourceds,
+      outsourcedsName: hive.outsourcedsName,
     );
   }
 
@@ -378,6 +380,7 @@ class SalesOrderModel extends SalesOrder {
       shippingCompanyName: shippingCompanyName,
       status: status.value,
       outsourceds: outsourceds,
+      outsourcedsName: outsourcedsName,
     );
   }
 

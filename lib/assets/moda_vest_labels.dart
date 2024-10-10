@@ -565,4 +565,6 @@ class ModaVestLabels {
   static String get useShippingCompany => "Adicionar transportadora?";
   static String get useOutsourceds => "Adicionar entrega triângular?";
   static String get commissions => "Comissões";
+  static String get shippingCompaniesNotfound =>
+      "Transportadoras não encotradas";
 }

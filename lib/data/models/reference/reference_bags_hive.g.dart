@@ -42,13 +42,14 @@ class HiveReferenceBagsAdapter extends TypeAdapter<HiveReferenceBags> {
       referencePrice: fields[24] as HiveReferencePrice?,
       isPack: fields[27] as bool?,
       isGrid: fields[28] as bool?,
+      base64: fields[29] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveReferenceBags obj) {
     writer
-      ..writeByte(25)
+      ..writeByte(26)
       ..writeByte(0)
       ..write(obj.code)
       ..writeByte(1)
@@ -98,7 +99,9 @@ class HiveReferenceBagsAdapter extends TypeAdapter<HiveReferenceBags> {
       ..writeByte(27)
       ..write(obj.isPack)
       ..writeByte(28)
-      ..write(obj.isGrid);
+      ..write(obj.isGrid)
+      ..writeByte(29)
+      ..write(obj.base64);
   }
 
   @override

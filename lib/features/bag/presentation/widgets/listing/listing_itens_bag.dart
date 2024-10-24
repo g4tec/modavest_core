@@ -25,7 +25,7 @@ class ListingItensBag extends StatefulWidget {
   final Widget Function(String) countingBuildWidget;
   final void Function({
     required Product product,
-    required int value,
+    required num value,
     required num price,
     required num originalPrice,
     required SalesOrder saleOrder,
@@ -39,7 +39,7 @@ class ListingItensBag extends StatefulWidget {
     num? priceTableCode,
   })? initDiscount;
   final void Function({
-    required int quantity,
+    required num quantity,
     List<SalesOrder>? bagOrders,
     num? oficialStoreId,
     num? priceTableCode,
@@ -137,8 +137,8 @@ class ListingItensBagState extends State<ListingItensBag> {
     });
   }
 
-  Map<Product, int> buildGridAmount(ColorItemSalesOrder colorItem) {
-    final Map<Product, int> productAmount = {};
+  Map<Product, num> buildGridAmount(ColorItemSalesOrder colorItem) {
+    final Map<Product, num> productAmount = {};
 
     for (final ItemSalesOrder item in colorItem.items) {
       final int index = colorItem.color.products
@@ -146,7 +146,7 @@ class ListingItensBagState extends State<ListingItensBag> {
 
       if (index >= 0) {
         final Product product = colorItem.color.products[index];
-        productAmount.putIfAbsent(product, () => (item.quantity ?? 0).toInt());
+        productAmount.putIfAbsent(product, () => (item.quantity ?? 0.0));
       }
     }
     return productAmount;
@@ -271,7 +271,7 @@ class ListingItensBagState extends State<ListingItensBag> {
       // reference: colorItems.items.first.reference,
       onchangeProductAmount: (
         Product product,
-        int value,
+        num value,
         num price,
         num originalPrice, {
         Function({List<SalesOrder>? bagOrders})? callBack,
@@ -302,7 +302,7 @@ class ListingItensBagState extends State<ListingItensBag> {
         priceTableCode: saleOrder.priceTableCode,
       ),
       updatePrices: ({
-        required int quantity,
+        required num quantity,
         List<SalesOrder>? bagOrders,
       }) =>
           widget.updatePrices?.call(

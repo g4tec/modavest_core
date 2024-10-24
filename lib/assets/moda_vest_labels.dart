@@ -119,6 +119,7 @@ class ModaVestLabels {
       "Falha ao transcrever os dados do servidor, entre em contato com o suporte";
   static String get composition => "Composição";
   static String get observation => "Observações";
+  static String get invoices => "Notas fiscais";
   static String get howDoYouWantToRecive =>
       "Identificamos que em sua sacola de compras a # dispõem de itens a pronta entrega e sob encomenda. Como deseja receber suas compras?";
   static String get selected => "Selecionado";
@@ -551,4 +552,19 @@ class ModaVestLabels {
   static String get reopenBag => "Reabrir sacola";
   static String get closeOrder => "Fechar pedido";
   static String get syncOrder => "Sincronizar pedido";
+  static String get price => "Preço";
+  static String get createProduct => "Criar produto";
+  static String get sizeVariation => "Tamanho/variação";
+  static String get ncm => "NCM";
+  static String get measuredUnit => "Unidade de medida";
+  static String get cstCode => "CST";
+  static String get observations => "Obs.";
+  static String get color => "Cor";
+  static String get shippingCompany => "Transportadora";
+  static String get freightType => "Tipo de frete";
+  static String get useShippingCompany => "Adicionar transportadora?";
+  static String get useOutsourceds => "Adicionar entrega triângular?";
+  static String get commissions => "Comissões";
+  static String get shippingCompaniesNotfound =>
+      "Transportadoras não encotradas";
 }

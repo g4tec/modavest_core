@@ -21,6 +21,7 @@ class ItemSalesOrder {
   ReferenceSimple? referenceSimple;
   bool? referenceIsPack;
   num? scaleCode;
+  String? observation;
 
   ItemSalesOrder({
     required this.integrationId,
@@ -43,6 +44,7 @@ class ItemSalesOrder {
     this.referenceSimple,
     this.scaleCode,
     this.settledQuantity,
+    this.observation,
   });
 
   factory ItemSalesOrder.copy(ItemSalesOrder item) {
@@ -67,6 +69,7 @@ class ItemSalesOrder {
       referenceSimple: item.referenceSimple,
       scaleCode: item.scaleCode,
       settledQuantity: item.settledQuantity,
+      observation: item.observation,
     );
   }
 }

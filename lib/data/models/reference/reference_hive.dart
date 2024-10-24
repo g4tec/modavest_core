@@ -59,6 +59,8 @@ class HiveReference extends HiveObject {
   final bool? isPack;
   @HiveField(28)
   final bool? isGrid;
+  @HiveField(29)
+  final String? base64;
   HiveReference({
     required this.oficialStore,
     required this.priceTable,
@@ -85,5 +87,6 @@ class HiveReference extends HiveObject {
     this.referencePrice,
     this.isPack,
     this.isGrid,
+    this.base64,
   });
 }

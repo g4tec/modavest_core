@@ -24,13 +24,14 @@ class Reference {
   final List<Detail>? details;
   final List<Composition>? composition;
   List<Color> colors;
-  final String? imageColorReference;
+  String? imageColorReference;
   ReferencePrice? referencePrice;
   num? priceTable;
   num? oficialStore;
   final bool? isPack;
   final bool? isGrid;
   String? videoUrl;
+  String? base64;
 
   Reference({
     required this.code,
@@ -59,6 +60,7 @@ class Reference {
     this.isPack,
     this.isGrid,
     this.videoUrl,
+    this.base64,
   });
 
   bool filter(String string) {
@@ -79,6 +81,7 @@ class Reference {
       referencePrice: referencePrice,
       officialStoreCode: oficialStore,
       priceTableCode: priceTable,
+      base64: base64,
     );
   }
 }

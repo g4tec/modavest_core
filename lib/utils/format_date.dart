@@ -4,6 +4,14 @@ String formatDate(DateTime date) {
   return DateFormat('dd/MM/yyyy').format(date);
 }
 
+DateTime? convertDate(String dateString) {
+  try {
+    return DateFormat('dd/MM/yyyy').parse(dateString);
+  } catch (_) {
+    return null;
+  }
+}
+
 String formatDateYMD(DateTime date) {
   return DateFormat('yyyy-MM-dd').format(date);
 }

@@ -47,6 +47,7 @@ class _ModaVestDropdownFieldState extends State<ModaVestDropdownField> {
             : const SizedBox(),
       );
     }).toList();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Stack(

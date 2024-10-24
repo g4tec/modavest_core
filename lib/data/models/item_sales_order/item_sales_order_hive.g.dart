@@ -37,13 +37,14 @@ class HiveItemSalesOrderAdapter extends TypeAdapter<HiveItemSalesOrder> {
       reference: fields[22] as HiveReference?,
       referenceIsPack: fields[23] as bool?,
       scaleCode: fields[24] as num?,
+      observation: fields[26] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveItemSalesOrder obj) {
     writer
-      ..writeByte(20)
+      ..writeByte(21)
       ..writeByte(0)
       ..write(obj.integrationId)
       ..writeByte(1)
@@ -83,7 +84,9 @@ class HiveItemSalesOrderAdapter extends TypeAdapter<HiveItemSalesOrder> {
       ..writeByte(24)
       ..write(obj.scaleCode)
       ..writeByte(25)
-      ..write(obj.settledQuantity);
+      ..write(obj.settledQuantity)
+      ..writeByte(26)
+      ..write(obj.observation);
   }
 
   @override

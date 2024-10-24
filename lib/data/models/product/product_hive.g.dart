@@ -23,7 +23,7 @@ class HiveProductAdapter extends TypeAdapter<HiveProduct> {
       colorCode: fields[3] as String,
       sku: fields[4] as String?,
       name: fields[5] as String?,
-      nmc: fields[6] as String?,
+      ncm: fields[6] as String?,
       cst: fields[7] as String?,
       measuredUnit: fields[8] as String?,
       size: fields[9] as String?,
@@ -66,7 +66,7 @@ class HiveProductAdapter extends TypeAdapter<HiveProduct> {
       ..writeByte(5)
       ..write(obj.name)
       ..writeByte(6)
-      ..write(obj.nmc)
+      ..write(obj.ncm)
       ..writeByte(7)
       ..write(obj.cst)
       ..writeByte(8)

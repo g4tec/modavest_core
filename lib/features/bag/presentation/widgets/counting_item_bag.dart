@@ -8,18 +8,19 @@ import 'package:modavest_core/domain/models/product.dart';
 import 'package:modavest_core/domain/models/product_price.dart';
 import 'package:modavest_core/domain/models/product_stock.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
+import 'package:modavest_core/utils/non_fracionals.dart';
 import 'package:modavest_core/utils/uniques.dart';
 import 'package:modavest_core/widgets/fields/number_with_controls_input.dart';
 
 class CountingItemBag extends StatefulWidget {
   final color_entitie.Color color;
   final bool disableInputsControls;
-  final Map<Product, int?> productAmount;
+  final Map<Product, num?> productAmount;
   final List<ProductStock>? productStock;
   final bool showAmountColor;
   final Function(
     Product,
-    int,
+    num,
     num,
     num, {
     Function({List<SalesOrder>? bagOrders})? callBack,
@@ -29,11 +30,13 @@ class CountingItemBag extends StatefulWidget {
   final num? officialStoreCode;
   final num? priceTableCode;
   final num? conditionCode;
+  final Function()? onAddProduct;
+  final Function(Product product)? onTapOservations;
 
   final Widget Function(ProductPrice?) buildPriceLabel;
 
   final void Function({
-    required int quantity,
+    required num quantity,
     List<SalesOrder>? bagOrders,
   })? updatePrices;
 
@@ -52,6 +55,8 @@ class CountingItemBag extends StatefulWidget {
     this.updatePrices,
     required this.buildPriceLabel,
     this.productStock,
+    this.onAddProduct,
+    this.onTapOservations,
   });
 
   @override
@@ -61,7 +66,7 @@ class CountingItemBag extends StatefulWidget {
 class CountingItemBagState extends State<CountingItemBag> {
   late Map<String, GlobalKey> keys = {};
 
-  final ValueNotifier<int> amountValue = ValueNotifier(0);
+  final ValueNotifier<num> amountValue = ValueNotifier(0);
   @override
   void initState() {
     // TODO: paleativo para a duplicação dos produtos
@@ -78,7 +83,7 @@ class CountingItemBagState extends State<CountingItemBag> {
     amountValue.value =
         widget.productAmount.entries.fold(0, (previousValue, element) {
       if (element.key.colorCode == widget.color.code) {
-        return previousValue + (element.value ?? 0);
+        return previousValue + (element.value ?? 0.0);
       }
       return previousValue;
     });
@@ -100,7 +105,7 @@ class CountingItemBagState extends State<CountingItemBag> {
     }
   }
 
-  void setValueAll(int value) {
+  void setValueAll(num value) {
     for (final GlobalKey element in keys.values) {
       final widget = element.currentWidget as NumberWithControlsInput?;
       if (widget?.maxValue != null && value >= widget!.maxValue!) {
@@ -131,7 +136,7 @@ class CountingItemBagState extends State<CountingItemBag> {
   }
 
   List<DataRow> _buildRows(
-    Map<Product, int?>? values,
+    Map<Product, num?>? values,
   ) {
     final List<Product> products = widget.color.products;
 
@@ -158,11 +163,21 @@ class CountingItemBagState extends State<CountingItemBag> {
                 ),
               ),
             ),
+            DataCell(
+              Center(
+                child: IconButton(
+                    onPressed: () => widget.onTapOservations?.call(element),
+                    icon: Icon(
+                      Icons.info,
+                      color: Theme.of(context).primaryColor,
+                    )),
+              ),
+            ),
             if ((widget.productStock ?? []).isNotEmpty)
               DataCell(
                 Center(
                   child: Text(
-                    "${widget.productStock?.firstWhereOrNull((stock) => stock.productCode == element.code)?.stock?.toString() ?? "0"} unid",
+                    "${widget.productStock?.firstWhereOrNull((stock) => stock.productCode == element.code)?.stock?.toString() ?? "0"} ${element.measuredUnit ?? ""}",
                   ),
                 ),
               ),
@@ -182,6 +197,8 @@ class CountingItemBagState extends State<CountingItemBag> {
                               minWidth: 140,
                             ),
                             child: NumberWithControlsInput(
+                              fractional:
+                                  !nonFractional.contains(element.measuredUnit),
                               maxValue: (widget.productStock ?? []).isNotEmpty
                                   ? widget.productStock
                                           ?.firstWhereOrNull((stock) =>
@@ -190,7 +207,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                                           ?.toInt() ??
                                       0
                                   : null,
-                              onChangeByTyping: (int amount) {
+                              onChangeByTyping: (num amount) {
                                 widget.onchangeProductAmount(
                                   element,
                                   amount,
@@ -205,7 +222,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                                   getTotalColorAmount.call();
                                 }
                               },
-                              onChange: (int value, int amount) {
+                              onChange: (int value, num amount) {
                                 if (!widget.isPack) {
                                   widget.onchangeProductAmount(
                                     element,
@@ -224,7 +241,9 @@ class CountingItemBagState extends State<CountingItemBag> {
                               },
                               value: values?[element],
                               controller: TextEditingController(
-                                text: (values?[element] ?? 0).toString(),
+                                text: (values?[element] ?? 0)
+                                    .toString()
+                                    .replaceAll('.', ','),
                               ),
                               key: keys[
                                   element.code.toString() + element.colorCode],
@@ -250,6 +269,8 @@ class CountingItemBagState extends State<CountingItemBag> {
                           minWidth: 140,
                         ),
                         child: NumberWithControlsInput(
+                          fractional:
+                              !nonFractional.contains(element.measuredUnit),
                           maxValue: (widget.productStock ?? []).isNotEmpty
                               ? widget.productStock
                                       ?.firstWhereOrNull((stock) =>
@@ -258,7 +279,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                                       ?.toInt() ??
                                   0
                               : null,
-                          onChangeByTyping: (int amount) {
+                          onChangeByTyping: (num amount) {
                             widget.onchangeProductAmount(
                               element,
                               amount,
@@ -273,7 +294,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                               getTotalColorAmount.call();
                             }
                           },
-                          onChange: (int value, int amount) {
+                          onChange: (int value, num amount) {
                             if (!widget.isPack) {
                               widget.onchangeProductAmount(
                                 element,
@@ -293,7 +314,9 @@ class CountingItemBagState extends State<CountingItemBag> {
                           },
                           value: values?[element],
                           controller: TextEditingController(
-                            text: (values?[element] ?? 0).toString(),
+                            text: (values?[element] ?? 0)
+                                .toString()
+                                .replaceAll('.', ','),
                           ),
                           key:
                               keys[element.code.toString() + element.colorCode],
@@ -319,6 +342,11 @@ class CountingItemBagState extends State<CountingItemBag> {
           child: Text(ModaVestLabels.tamanho),
         ),
       ),
+      DataColumn(
+        label: FittedBox(
+          child: Text(ModaVestLabels.observations),
+        ),
+      ),
       if ((widget.productStock ?? []).isNotEmpty)
         DataColumn(
           label: FittedBox(
@@ -327,7 +355,8 @@ class CountingItemBagState extends State<CountingItemBag> {
         ),
       DataColumn(
         label: FittedBox(
-          child: Text(ModaVestLabels.precoUnid),
+          child: Text(
+              "${ModaVestLabels.price} ${widget.color.products.firstOrNull?.measuredUnit ?? ""}"),
         ),
       ),
       DataColumn(
@@ -354,16 +383,62 @@ class CountingItemBagState extends State<CountingItemBag> {
             columnSpacing: 10,
           ),
         ),
+        if (widget.onAddProduct != null) ...[
+          GestureDetector(
+            onTap: () => widget.onAddProduct?.call(),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "Adicionar novo produto",
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    width: 32,
+                    height: 32,
+                    child: FittedBox(
+                      child: IconButton(
+                        splashRadius: 26,
+                        icon: Icon(
+                          Icons.add,
+                          size: 16,
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        onPressed: () {
+                          widget.onAddProduct?.call();
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
         if (widget.showAmountColor)
-          ValueListenableBuilder(
-            valueListenable: amountValue,
-            builder: (context, value, _) {
-              return Text(
-                "${ModaVestLabels.qtdProduct}: ${value.toString()}",
-                style: Theme.of(context).textTheme.headline5,
-              );
-            },
-          )
+          Padding(
+            padding: const EdgeInsets.only(top: 30, right: 30),
+            child: ValueListenableBuilder(
+              valueListenable: amountValue,
+              builder: (context, value, _) {
+                return Text(
+                  "${ModaVestLabels.qtdProduct}: ${value.toString().replaceAll('.', ',')}",
+                  style: Theme.of(context).textTheme.headline5,
+                );
+              },
+            ),
+          ),
       ],
     );
   }

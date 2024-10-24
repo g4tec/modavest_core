@@ -22,7 +22,7 @@ class HiveProduct extends HiveObject {
   @HiveField(5)
   final String? name;
   @HiveField(6)
-  final String? nmc;
+  final String? ncm;
   @HiveField(7)
   final String? cst;
   @HiveField(8)
@@ -74,7 +74,7 @@ class HiveProduct extends HiveObject {
     required this.colorCode,
     this.sku,
     this.name,
-    this.nmc,
+    this.ncm,
     this.cst,
     this.measuredUnit,
     this.size,

@@ -24,6 +24,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
     required super.referenceIsPack,
     required super.scaleCode,
     super.settledQuantity,
+    super.observation,
   });
 
   factory ItemSalesOrderModel.fromJson(Map json) {
@@ -50,6 +51,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
           : null,
       referenceIsPack: false,
       scaleCode: json["scaleCode"] as num?,
+      observation: json["oservation"]?.toString(),
     );
   }
   factory ItemSalesOrderModel.fromHive(HiveItemSalesOrder hive) {
@@ -77,6 +79,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       //     : null,
       referenceIsPack: hive.referenceIsPack,
       scaleCode: hive.scaleCode,
+      observation: hive.observation,
     );
   }
   factory ItemSalesOrderModel.entity(ItemSalesOrder item) {
@@ -104,6 +107,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       //     : null,
       referenceIsPack: item.referenceIsPack,
       scaleCode: item.scaleCode,
+      observation: item.observation,
     );
   }
 
@@ -128,6 +132,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       billingForecastDate: billingForecastDate,
       referenceIsPack: referenceIsPack,
       scaleCode: scaleCode,
+      observation: observation,
     );
   }
 
@@ -152,6 +157,7 @@ class ItemSalesOrderModel extends ItemSalesOrder {
       "billingForecastDate": billingForecastDate,
       "referenceIsPack": referenceIsPack,
       "scaleCode": scaleCode,
+      "observation": observation,
     };
   }
 }

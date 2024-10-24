@@ -2,7 +2,9 @@ import 'package:modavest_core/assets/moda_vest_bag_status_enum.dart';
 import 'package:modavest_core/domain/models/address.dart';
 import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
+import 'package:modavest_core/domain/models/commissioned.dart';
 import 'package:modavest_core/domain/models/discount.dart';
+import 'package:modavest_core/domain/models/invoice.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
 import 'package:modavest_core/domain/models/official_store_sales_questions.dart';
@@ -15,7 +17,7 @@ class SalesOrder {
   final String? orderId;
   // Not required on app
   final num? branchCode;
-  final String? customerOrderCode;
+  String? customerOrderCode;
   final String? integrationCode;
   final num? orderCode;
   final DateTime? orderDate;
@@ -37,10 +39,10 @@ class SalesOrder {
   final double? netValue;
   // Not required on app
   final num? priorityCode;
-  final num? shippingCompanyCode;
+  num? shippingCompanyCode;
   final String? shippingCompanyCpfCnpj;
   final DateTime? billingForecastDate;
-  final num? freightType;
+  num? freightType;
   final double? freightPercentage;
   final double? freightValue;
   final double? packageint;
@@ -73,6 +75,10 @@ class SalesOrder {
 
   Address? shippingAddress;
   List<OfficialStoreSalesQuestions>? officialStoreSalesQuestions;
+  List<Invoice>? invoices;
+  String? outsourceds;
+  String? outsourcedsName;
+  List<Commissioned>? commissioneds;
 
   SalesOrder({
     this.integrationId,
@@ -130,6 +136,10 @@ class SalesOrder {
     this.imageColorsReferences,
     this.status = EnumStatusBag.other,
     this.officialStoreSalesQuestions,
+    this.invoices,
+    this.outsourceds,
+    this.outsourcedsName,
+    this.commissioneds,
   });
 
   SalesOrder copyWith({
@@ -198,6 +208,9 @@ class SalesOrder {
       imageColorsReferences: imageColorsReferences,
       officialStoreSalesQuestions:
           officialStoreSalesQuestions ?? this.officialStoreSalesQuestions,
+      outsourceds: outsourceds,
+      outsourcedsName: outsourcedsName,
+      commissioneds: commissioneds,
     );
   }
 
@@ -256,6 +269,9 @@ class SalesOrder {
       chargeType: order.chargeType,
       imageColorsReferences: order.imageColorsReferences,
       officialStoreSalesQuestions: order.officialStoreSalesQuestions,
+      outsourceds: order.outsourceds,
+      outsourcedsName: order.outsourcedsName,
+      commissioneds: order.commissioneds,
     );
   }
 }

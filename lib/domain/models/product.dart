@@ -12,7 +12,7 @@ class Product extends Equatable {
   final String colorCode;
   final String? sku;
   final String? name;
-  final String? nmc;
+  final String? ncm;
   final String? cst;
   final String? measuredUnit;
   final String? size;
@@ -41,7 +41,7 @@ class Product extends Equatable {
     required this.colorCode,
     this.sku,
     this.name,
-    this.nmc,
+    this.ncm,
     this.cst,
     this.measuredUnit,
     this.size,
@@ -72,7 +72,7 @@ class Product extends Equatable {
         colorCode,
         sku,
         name,
-        nmc,
+        ncm,
         cst,
         measuredUnit,
         size,

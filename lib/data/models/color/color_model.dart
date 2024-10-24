@@ -43,7 +43,7 @@ class ColorModel extends Color {
       (a, b) => a.sequence.compareTo(b.sequence),
     );
     return ColorModel(
-      products: (json["products"] as List)
+      products: ((json["products"] ?? []) as List)
           .map(
             (e) => ProductModel.fromJson(
               e as Map,

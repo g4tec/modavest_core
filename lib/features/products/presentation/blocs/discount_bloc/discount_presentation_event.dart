@@ -26,7 +26,7 @@ class UpdatePriceEvent extends DiscountPresentationEvent {
   final num oficialStoreId;
   final num priceTableCode;
   final Reference? reference;
-  final int quantity;
+  final num quantity;
   final List<ProductPrice?> prices;
   final List<SalesOrder>? bagOrders;
 

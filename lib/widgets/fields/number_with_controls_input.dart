@@ -137,7 +137,8 @@ class NumberWithControlsInput extends StatelessWidget {
                   fractional ? maskFormatterFloat : maskFormatterInt,
               readOnly: disableControls,
               focusNode: focusNode,
-              keyboardType: TextInputType.number,
+              keyboardType:
+                  TextInputType.numberWithOptions(decimal: fractional),
               onFieldSubmitted: onSumbit ??
                   (_) => FocusScope.of(context).requestFocus(FocusNode()),
               onChanged: (String value) {

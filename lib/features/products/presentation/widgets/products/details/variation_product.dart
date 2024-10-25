@@ -87,7 +87,9 @@ class VariationProduct extends StatelessWidget {
                                 color: Theme.of(context).canvasColor,
                               ),
                               child: Center(
-                                child: Text((badgeQuantity ?? 0)
+                                child: Text(((badgeQuantity ?? 0) % 1 == 0
+                                        ? (badgeQuantity ?? 0).toInt()
+                                        : (badgeQuantity ?? 0))
                                     .toString()
                                     .replaceAll('.', ',')),
                               ),

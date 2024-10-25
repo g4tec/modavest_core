@@ -7,4 +7,5 @@ final nonFractional = [
   'UN',
   'UNID',
   'PCS',
+  null
 ];

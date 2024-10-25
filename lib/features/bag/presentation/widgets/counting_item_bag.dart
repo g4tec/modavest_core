@@ -120,15 +120,16 @@ class CountingItemBagState extends State<CountingItemBag> {
   }
 
   void getTotalColorAmount() {
-    final int subtotal = keys.entries.fold(
+    final num subtotal = keys.entries.fold(
       0,
       (previousValue, key) =>
           previousValue +
-          (int.tryParse(
-                (key.value.currentWidget as NumberWithControlsInput?)
-                        ?.controller
-                        .text ??
-                    '0',
+          (num.tryParse(
+                ((key.value.currentWidget as NumberWithControlsInput?)
+                            ?.controller
+                            .text ??
+                        '0')
+                    .replaceAll(',', '.'),
               ) ??
               0),
     );
@@ -432,8 +433,9 @@ class CountingItemBagState extends State<CountingItemBag> {
             child: ValueListenableBuilder(
               valueListenable: amountValue,
               builder: (context, value, _) {
+                print(value);
                 return Text(
-                  "${ModaVestLabels.qtdProduct}: ${value.toString().replaceAll('.', ',')}",
+                  "${ModaVestLabels.qtdProduct}: ${(value % 1 == 0 ? value.toInt() : value).toString().replaceAll('.', ',')}",
                   style: Theme.of(context).textTheme.headline5,
                 );
               },

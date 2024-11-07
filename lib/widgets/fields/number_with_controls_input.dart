@@ -61,14 +61,18 @@ class NumberWithControlsInput extends StatelessWidget {
 
   void _onSubtraction() {
     try {
-      int value = controller.text.isNotEmpty ? int.parse(controller.text) : 0;
+      int value = controller.text.isNotEmpty
+          ? int.parse(controller.text.replaceAll(',', '.'))
+          : 0;
       value -= stepSize;
       if (value >= 0) {
         controller.text = value.toString();
         if (onChange != null) {
           onChange!.call(
             -1,
-            controller.text.isNotEmpty ? int.parse(controller.text) : 0,
+            controller.text.isNotEmpty
+                ? int.parse(controller.text.replaceAll(',', '.'))
+                : 0,
           );
         }
       }
@@ -105,10 +109,11 @@ class NumberWithControlsInput extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
-                color:
-                    maxValue != null && maxValue! < num.parse(controller.text)
-                        ? Colors.red
-                        : Theme.of(context).primaryColor,
+                color: maxValue != null &&
+                        maxValue! <
+                            num.parse(controller.text.replaceAll(',', '.'))
+                    ? Colors.red
+                    : Theme.of(context).primaryColor,
               ),
               width: 32,
               child: disableControls
@@ -169,7 +174,8 @@ class NumberWithControlsInput extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
                     color: maxValue != null &&
-                            maxValue! < num.parse(controller.text)
+                            maxValue! <
+                                num.parse(controller.text.replaceAll(',', '.'))
                         ? Colors.red
                         : Theme.of(context).primaryColor,
                     width: 2,
@@ -179,7 +185,8 @@ class NumberWithControlsInput extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
                     color: maxValue != null &&
-                            maxValue! < num.parse(controller.text)
+                            maxValue! <
+                                num.parse(controller.text.replaceAll(',', '.'))
                         ? Colors.red
                         : Theme.of(context).primaryColor,
                     width: 2,
@@ -193,10 +200,11 @@ class NumberWithControlsInput extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
-                color:
-                    maxValue != null && maxValue! < num.parse(controller.text)
-                        ? Colors.red
-                        : Theme.of(context).primaryColor,
+                color: maxValue != null &&
+                        maxValue! <
+                            num.parse(controller.text.replaceAll(',', '.'))
+                    ? Colors.red
+                    : Theme.of(context).primaryColor,
               ),
               width: 32,
               child: disableControls

@@ -20,7 +20,7 @@ class HiveParameterItemAdapter extends TypeAdapter<HiveParameterItem> {
       integrationId: fields[0] as num?,
       value: fields[1] as String?,
       variant: fields[2] as String?,
-      parameter: fields[3] as dynamic,
+      parameter: fields[3] as HiveParameter?,
     );
   }
 

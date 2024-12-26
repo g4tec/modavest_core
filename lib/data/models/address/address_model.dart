@@ -38,7 +38,8 @@ class AddressModel extends Address {
   factory AddressModel.fromJson(Map json) {
     return AddressModel(
       publicPlace: json["publicPlace"] as String?,
-      number: json["number"] as num? ?? json["addressNumber"] as num?,
+      number:
+          num.tryParse((json["number"] ?? json["addressNumber"]).toString()),
       complement: json["complement"] as String?,
       neighborhood: json["neighborhood"] as String?,
       cityName: json["cityName"] as String? ?? "",

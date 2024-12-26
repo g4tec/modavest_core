@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/domain/models/address.dart';
+import 'package:modavest_core/domain/models/individual.dart';
 import 'package:modavest_core/domain/models/legal_person.dart';
 import 'package:modavest_core/widgets/address/add_address_card.dart';
 import 'package:modavest_core/widgets/address/display_address_card.dart';
@@ -10,7 +11,7 @@ class AddressDisplayBag extends StatelessWidget {
   final void Function(int id)? onSelect;
   final int? selected;
   final Function({bool? force})? getAddresses;
-  final LegalPerson? legalPersonCustomer;
+  final Object? personCustomer;
   final Address? address;
   final String? error;
   const AddressDisplayBag({
@@ -19,7 +20,7 @@ class AddressDisplayBag extends StatelessWidget {
     this.onSelect,
     required this.selected,
     this.getAddresses,
-    this.legalPersonCustomer,
+    this.personCustomer,
     this.error,
     this.address,
   });
@@ -30,7 +31,10 @@ class AddressDisplayBag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Builder(
         builder: ((context) {
-          if (legalPersonCustomer?.addresses != null) {
+          if ((personCustomer is LegalPerson &&
+                  (personCustomer as LegalPerson?)?.addresses != null) ||
+              (personCustomer is Individual &&
+                  (personCustomer as Individual?)?.addresses != null)) {
             return RefreshIndicator(
               onRefresh: () async {
                 getAddresses?.call(force: true);
@@ -39,7 +43,9 @@ class AddressDisplayBag extends StatelessWidget {
                 children: [
                   if (onPressedAdd != null)
                     AddAddressCard(onPressed: onPressedAdd),
-                  ...legalPersonCustomer!.addresses
+                  ...(personCustomer is LegalPerson
+                          ? (personCustomer! as LegalPerson).addresses
+                          : (personCustomer! as Individual).addresses)
                       .asMap()
                       .map(
                         (key, e) => MapEntry(
@@ -51,7 +57,12 @@ class AddressDisplayBag extends StatelessWidget {
                             address: e,
                             selected: key == selected ||
                                 (key ==
-                                    legalPersonCustomer?.addresses.indexWhere(
+                                    (personCustomer is LegalPerson
+                                            ? (personCustomer! as LegalPerson)
+                                                .addresses
+                                            : (personCustomer! as Individual)
+                                                .addresses)
+                                        .indexWhere(
                                       (element) => element == address,
                                     )),
                           ),

@@ -1,5 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modavest_core/data/models/address/address_hive.dart';
+import 'package:modavest_core/data/models/enterprise_reference.dart/enterprise_reference_hive.dart';
+import 'package:modavest_core/data/models/legal_person_email/legal_person_email_hive.dart';
+import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone_hive.dart';
 
 part 'individuals_hive.g.dart';
 
@@ -22,7 +25,7 @@ class HiveIndividual extends HiveObject {
   @HiveField(7)
   String? gender;
   @HiveField(8)
-  String? dateOfBirth;
+  String? birthDate;
   @HiveField(9)
   String? maritalStatus;
   @HiveField(10)
@@ -30,7 +33,7 @@ class HiveIndividual extends HiveObject {
   @HiveField(11)
   String? occupation;
   @HiveField(12)
-  num income;
+  num monthlyIncome;
   @HiveField(13)
   String? status;
   @HiveField(14)
@@ -43,6 +46,12 @@ class HiveIndividual extends HiveObject {
   bool isSynchronized;
   @HiveField(18)
   num integrationId;
+  @HiveField(19)
+  HiveList<HiveLegalPersonEmail>? emails;
+  @HiveField(20)
+  HiveList<HiveLegalPersonPhone>? phones;
+  @HiveField(21)
+  HiveList<HiveEnterpriseReference>? references;
 
   HiveIndividual({
     this.code,
@@ -53,16 +62,19 @@ class HiveIndividual extends HiveObject {
     this.surname,
     this.uf,
     this.gender,
-    this.dateOfBirth,
+    this.birthDate,
     this.maritalStatus,
     this.nationality,
     this.occupation,
-    this.income = 0,
+    this.monthlyIncome = 0,
     this.status,
     this.maxChangeFilterDate,
     required this.insertDate,
     this.addresses,
     this.isSynchronized = true,
     this.integrationId = 0,
+    this.phones,
+    this.emails,
+    this.references,
   });
 }

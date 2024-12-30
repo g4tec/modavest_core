@@ -25,24 +25,27 @@ class HiveIndividualAdapter extends TypeAdapter<HiveIndividual> {
       surname: fields[5] as String?,
       uf: fields[6] as String?,
       gender: fields[7] as String?,
-      dateOfBirth: fields[8] as String?,
+      birthDate: fields[8] as String?,
       maritalStatus: fields[9] as String?,
       nationality: fields[10] as String?,
       occupation: fields[11] as String?,
-      income: fields[12] as num,
+      monthlyIncome: fields[12] as num,
       status: fields[13] as String?,
       maxChangeFilterDate: fields[14] as String?,
       insertDate: fields[15] as String?,
       addresses: (fields[16] as HiveList?)?.castHiveList(),
       isSynchronized: fields[17] as bool,
       integrationId: fields[18] as num,
+      phones: (fields[20] as HiveList?)?.castHiveList(),
+      emails: (fields[19] as HiveList?)?.castHiveList(),
+      references: (fields[21] as HiveList?)?.castHiveList(),
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveIndividual obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(22)
       ..writeByte(0)
       ..write(obj.code)
       ..writeByte(1)
@@ -60,7 +63,7 @@ class HiveIndividualAdapter extends TypeAdapter<HiveIndividual> {
       ..writeByte(7)
       ..write(obj.gender)
       ..writeByte(8)
-      ..write(obj.dateOfBirth)
+      ..write(obj.birthDate)
       ..writeByte(9)
       ..write(obj.maritalStatus)
       ..writeByte(10)
@@ -68,7 +71,7 @@ class HiveIndividualAdapter extends TypeAdapter<HiveIndividual> {
       ..writeByte(11)
       ..write(obj.occupation)
       ..writeByte(12)
-      ..write(obj.income)
+      ..write(obj.monthlyIncome)
       ..writeByte(13)
       ..write(obj.status)
       ..writeByte(14)
@@ -80,7 +83,13 @@ class HiveIndividualAdapter extends TypeAdapter<HiveIndividual> {
       ..writeByte(17)
       ..write(obj.isSynchronized)
       ..writeByte(18)
-      ..write(obj.integrationId);
+      ..write(obj.integrationId)
+      ..writeByte(19)
+      ..write(obj.emails)
+      ..writeByte(20)
+      ..write(obj.phones)
+      ..writeByte(21)
+      ..write(obj.references);
   }
 
   @override

@@ -346,7 +346,7 @@ class LegalPersonModel extends LegalPerson {
       status: legalPerson.status,
       insertDate: legalPerson.insertDate,
       addresses:
-          legalPerson.addresses.map((e) => AddressModel.entite(e)).toList(),
+          legalPerson.addresses.map((e) => AddressModel.entitie(e)).toList(),
       phones: legalPerson.phones,
       emails: legalPerson.emails,
       isSynchronized: legalPerson.isSynchronized,

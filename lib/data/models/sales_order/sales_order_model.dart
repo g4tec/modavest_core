@@ -497,7 +497,7 @@ class SalesOrderModel extends SalesOrder {
               .toList() ??
           [],
       shippingAddress: shippingAddress != null
-          ? AddressModel.entite(shippingAddress!)
+          ? AddressModel.entitie(shippingAddress!)
           : null,
       chargeType: chargeType ?? this.chargeType,
       status: status ?? this.status,
@@ -559,7 +559,7 @@ class SalesOrderModel extends SalesOrder {
           ?.map((e) => OfficialStoreSalesQuestionsModel.entity(e).toJson())
           .toList(),
       "shippingAddress": shippingAddress != null
-          ? AddressModel.entite(shippingAddress!).toJson()
+          ? AddressModel.entitie(shippingAddress!).toJson()
           : null,
       "outsourceds": {"customerCpfCnpj": outsourceds},
     };

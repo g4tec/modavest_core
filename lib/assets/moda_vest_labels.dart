@@ -249,9 +249,10 @@ class ModaVestLabels {
   static String get details => "Detalhes";
   static String get value => "Valor";
   static String get itemSubtotal => "Subtotal do item";
-  static String get validateCustomerCnpj =>
-      "Olá! Precisamos verificar se o CNPJ desejado está ou não vinculado a um de nossos fabricantes.";
+  static String get validateCustomer =>
+      "Olá! Precisamos verificar se o lojista está ou não vinculado a um de nossos fabricantes.";
   static String get customerCNPJ => "CNPJ do lojista *";
+  static String get customerCPF => "CPF do lojista *";
   static String get selectAnBrand => "Selecione uma marca";
   static String get salesRegionEmpty => "Região de venda vazia para essa marca";
   static String get seeCustomers => "Ver clientes";
@@ -499,9 +500,9 @@ class ModaVestLabels {
   static String get all => "Todos";
   static String get emptyProducts => "Nenhum produto encontrado";
   static String get modavestAlreadyRegisteredWithStore =>
-      "O cadastro com CNPJ informado já consta na plataforma para a loja #store#.\n\nVerifique o email de cadastro na plataforma!";
+      "O cadastro com CNPJ ou CPF informado já consta na plataforma para a loja #store#.\n\nVerifique o email de cadastro na plataforma!";
   static String get modavestAlreadyRegisteredWithOutStore =>
-      "O cadastro com CNPJ informado foi cadastrado na plataforma :)";
+      "O cadastro com CNPJ ou CPF informado foi cadastrado na plataforma :)";
   static String get partiallyAnswered => "Parcialmente atendido";
   static String get dismember => "Desmembrar";
   static String get selectAnProduct => "Selecione um ou mais produtos";
@@ -567,4 +568,17 @@ class ModaVestLabels {
   static String get commissions => "Comissões";
   static String get shippingCompaniesNotfound =>
       "Transportadoras não encotradas";
+  static String get useCNPJ => 'Usar CNPJ';
+  static String get cpfValidatedLocaly =>
+      'CPF validado localmente, sujeito a reavalização no envio do cadastro';
+
+  static String get cpf => 'CPF';
+  static String get surname => 'Sobrenome';
+  static String get gender => 'Gênero';
+  static String get dateOfBirth => 'Data de nascimento';
+  static String get maritalStatus => 'Estado civil';
+  static String get nationality => 'Nacionalidade';
+  static String get occupation => 'Ocupação';
+  static String get income => 'Renda';
+  static String get individualData => 'Dados básicos da pessoa';
 }

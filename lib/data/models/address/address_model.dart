@@ -92,7 +92,7 @@ class AddressModel extends Address {
     );
   }
 
-  factory AddressModel.entite(Address address) {
+  factory AddressModel.entitie(Address address) {
     return AddressModel(
       publicPlace: address.publicPlace,
       number: address.number,

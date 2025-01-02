@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/assets/modavest_gender.dart';
-import 'package:modavest_core/assets/modavest_states.dart';
 import 'package:modavest_core/assets/modavest_marital_status.dart';
 import 'package:modavest_core/data/models/individuals/individuals_model.dart';
 import 'package:modavest_core/domain/models/individual.dart';
@@ -43,7 +42,6 @@ class IndividualFormState extends State<IndividualForm> {
   late Field cpf;
   late Field name;
   late Field gender;
-  late Field uf;
   late Field birthDate;
   late Field maritalStatus;
   late Field nationality;
@@ -74,14 +72,6 @@ class IndividualFormState extends State<IndividualForm> {
       title: ModaVestLabels.gender,
       controller: TextEditingController(
         text: widget.initialIndividual?.gender ?? "",
-      ),
-    );
-
-    uf = Field(
-      key: const Key("uf"),
-      title: ModaVestLabels.uf,
-      controller: TextEditingController(
-        text: widget.initialIndividual?.uf ?? "",
       ),
     );
 
@@ -130,7 +120,6 @@ class IndividualFormState extends State<IndividualForm> {
       cpf: cpf.controller!.text.replaceAll(RegExp(r'[^\w\s]+'), ''),
       name: name.controller!.text,
       gender: gender.controller!.text,
-      uf: isentable ? null : states[uf.controller!.text],
       birthDate: birthDate.controller!.text,
       maritalStatus: maritalStatus.controller!.text,
       nationality: nationality.controller!.text,
@@ -166,14 +155,6 @@ class IndividualFormState extends State<IndividualForm> {
         controller: gender.controller!,
         items: modavestGender,
         title: gender.title!,
-        isRequired: !isentable,
-        readOnly: isentable,
-      ),
-      ModaVestDropdownField(
-        key: uf.key,
-        controller: uf.controller!,
-        items: states,
-        title: uf.title!,
         isRequired: !isentable,
         readOnly: isentable,
       ),

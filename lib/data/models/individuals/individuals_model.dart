@@ -64,7 +64,7 @@ class IndividualModel extends Individual {
       name: json["name"] as String,
       surname: json["surname"] as String?,
       gender: json["gender"] as String?,
-      birthDate: json["birthDate"] as String?,
+      birthDate: formatDate(DateTime.tryParse(json["birthDate"])),
       maritalStatus: json["maritalStatus"] as String?,
       nationality: json["nationality"] as String?,
       occupation: json["occupation"] as String?,

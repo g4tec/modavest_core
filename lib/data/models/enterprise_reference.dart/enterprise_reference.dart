@@ -23,7 +23,7 @@ class EnterpriseReferenceModel extends EnterpriseReference {
   ) {
     return EnterpriseReferenceModel(
       phoneNumber: json["phoneNumber"] as String?,
-      integrationId: json["integrationId"] as num,
+      integrationId: json["integrationId"] as num?,
       name: json["responsiblePersonName"] as String?,
       description: json["description"] as String?,
       typeReference: json["type"] as String?,

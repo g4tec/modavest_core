@@ -139,7 +139,7 @@ class ModaVestLabels {
   static String get buyForMe => "Comprar para mim";
   static String get selectStorekeeper => "Selecione um Lojista";
   static String get fieldToFindStorekeeper =>
-      "CNPJ, Razão social ou Nome Fantasia";
+      "CNPJ/CPF, Razão social ou Nome Fantasia";
   static String get typeToFindCustomers => "Digite para procurar seus lojistas";
   static String get searchForClient => "Pesquisar por cliente";
   static String get typeToFindManufacturers =>

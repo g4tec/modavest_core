@@ -63,7 +63,7 @@ class IndividualFormState extends State<IndividualForm> {
       key: const Key("name"),
       title: ModaVestLabels.fullName,
       controller: TextEditingController(
-        text: widget.initialIndividual?.name ?? "",
+        text: widget.initialIndividual?.name ?? (widget.initialName ?? ""),
       ),
     );
 
@@ -165,7 +165,7 @@ class IndividualFormState extends State<IndividualForm> {
         textCapitalization: TextCapitalization.none,
         textInputAction: TextInputAction.done,
         maxLength: 60,
-        isRequired: false,
+        isRequired: true,
         maskFormatter: [
           TextInputMask(
             mask: ['99/99/9999'],

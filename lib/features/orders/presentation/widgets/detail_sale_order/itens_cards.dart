@@ -16,6 +16,7 @@ class ItensRequestCard extends StatelessWidget {
   final String referenceCode;
   final bool disableExpand;
   final List<ItemSalesOrder> itemSalesOrder;
+  final String? measuredUnit;
   ItensRequestCard({
     super.key,
     required this.color,
@@ -24,6 +25,7 @@ class ItensRequestCard extends StatelessWidget {
     required this.itemSalesOrder,
     required this.referenceName,
     required this.referenceCode,
+    this.measuredUnit,
   });
 
   final Map<String, double> subtototal = {"subtotal": 0};
@@ -87,7 +89,8 @@ class ItensRequestCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: padding),
                   child: FittedBox(
                     child: Text(
-                      "${item.settledQuantity ?? "-"}/${item.quantity}",
+                      "${item.settledQuantity ?? "-"}/${item.quantity}"
+                          .replaceAll('.', ','),
                     ),
                   ),
                 ),
@@ -148,7 +151,7 @@ class ItensRequestCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  ModaVestLabels.precoUnid,
+                  ModaVestLabels.price + (measuredUnit ?? ''),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

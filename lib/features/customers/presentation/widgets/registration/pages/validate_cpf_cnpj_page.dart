@@ -6,15 +6,16 @@ import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/widgets/buttons/modavest_button.dart';
 import 'package:modavest_core/widgets/fields/modavest_cnpj_field.dart';
 
-class ValidateCustomerCnpjWidget extends StatefulWidget {
+class ValidateCustomerCpfCnpjWidget extends StatefulWidget {
   final Function() submitForm;
   final bool isLoading;
   final Function() onChangeForm;
   final String? errorMsg;
   final GlobalKey<FormState> formKey;
   final TextEditingController cnpjController;
+  final TextEditingController cpfController;
 
-  const ValidateCustomerCnpjWidget({
+  const ValidateCustomerCpfCnpjWidget({
     super.key,
     required this.submitForm,
     required this.isLoading,
@@ -22,15 +23,18 @@ class ValidateCustomerCnpjWidget extends StatefulWidget {
     required this.errorMsg,
     required this.formKey,
     required this.cnpjController,
+    required this.cpfController,
   });
 
   @override
-  ValidateCustomerCnpjWidgetState createState() =>
-      ValidateCustomerCnpjWidgetState();
+  ValidateCustomerCpfCnpjWidgetState createState() =>
+      ValidateCustomerCpfCnpjWidgetState();
 }
 
-class ValidateCustomerCnpjWidgetState
-    extends State<ValidateCustomerCnpjWidget> {
+class ValidateCustomerCpfCnpjWidgetState
+    extends State<ValidateCustomerCpfCnpjWidget> {
+  bool isCnpj = true;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -64,24 +68,49 @@ class ValidateCustomerCnpjWidgetState
                         vertical: MediaQuery.of(context).size.height * 0.01,
                       ),
                       child: Text(
-                        ModaVestLabels.validateCustomerCnpj,
+                        ModaVestLabels.validateCustomer,
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    ModaVestCNPJField(
-                      label: ModaVestLabels.customerCNPJ,
-                      controller: widget.cnpjController,
-                      cnpjOnly: true,
-                      maskFormatterCnpjCpf: TextInputMask(
-                        mask: ['99.999.999/9999-99'],
-                      ),
-                      onSubmit: widget.isLoading
-                          ? null
-                          : (value) {
-                              widget.submitForm();
-                            },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          ModaVestLabels.useCNPJ,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Switch(
+                          value: isCnpj,
+                          onChanged: (value) {
+                            setState(() {
+                              isCnpj = value;
+                            });
+                          },
+                        ),
+                      ],
                     ),
+                    isCnpj
+                        ? ModaVestCNPJField(
+                            label: ModaVestLabels.customerCNPJ,
+                            controller: widget.cnpjController,
+                            cnpjOnly: true,
+                            maskFormatterCnpjCpf: TextInputMask(
+                              mask: ['99.999.999/9999-99'],
+                            ),
+                            onSubmit: widget.isLoading
+                                ? null
+                                : (value) {
+                                    widget.submitForm();
+                                  },
+                          )
+                        : ModaVestCNPJField(
+                            controller: widget.cpfController,
+                            label: ModaVestLabels.customerCPF,
+                            maskFormatterCnpjCpf: TextInputMask(
+                              mask: ['999.999.999-99'],
+                            ),
+                          ),
                     if (widget.errorMsg != null)
                       Padding(
                         padding: const EdgeInsets.only(left: 10),

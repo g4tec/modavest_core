@@ -15,6 +15,8 @@ class ModaVestTextField extends StatelessWidget {
   final int? maxLength;
   final List<TextInputMask>? maskFormatter;
   final bool isRequired;
+  final int? minLines;
+  final int? maxLines;
 
   const ModaVestTextField({
     Key? key,
@@ -28,6 +30,8 @@ class ModaVestTextField extends StatelessWidget {
     this.maskFormatter,
     this.maxLength,
     this.isRequired = true,
+    this.minLines,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -41,7 +45,9 @@ class ModaVestTextField extends StatelessWidget {
             keyboardType: keyboardType,
             inputFormatters: maskFormatter,
             readOnly: readOnly,
+            minLines: minLines,
             maxLength: maxLength,
+            maxLines: maxLines,
             textCapitalization: textCapitalization,
             textInputAction: textInputAction,
             controller: controller,
@@ -56,11 +62,13 @@ class ModaVestTextField extends StatelessWidget {
             ),
           ),
           if (readOnly)
-            Container(
-              color: Theme.of(context).primaryColor.withAlpha(60),
-              width: double.infinity,
-              height: 59,
-            ),
+            Positioned.fill(
+              child: Container(
+                color: Theme.of(context).primaryColor.withAlpha(60),
+                width: double.infinity,
+                height: 59,
+              ),
+            )
         ],
       ),
     );

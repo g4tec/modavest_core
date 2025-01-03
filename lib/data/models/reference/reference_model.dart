@@ -36,6 +36,7 @@ class ReferenceModel extends Reference {
     num? oficialStore,
     bool? isPack,
     bool? isGrid,
+    super.base64,
   }) : super(
           code: code,
           integrationId: integrationId,
@@ -70,140 +71,142 @@ class ReferenceModel extends Reference {
     num? oficialStore,
   }) {
     return ReferenceModel(
-      code: json["ReferenceCode"] as String,
-      priceTable: priceTable ??
-          (json["priceTable"] as int? ??
-              (json["referencePrice"] != null
-                  ? (json["referencePrice"] as Map)["priceTableCode"] as int?
-                  : null)),
-      oficialStore: oficialStore ?? json["oficialStore"] as num?,
-      integrationId: json["integrationId"] as int,
-      colors: ((json["colors"] ?? []) as List)
-          .map(
-            (e) => ColorModel.fromJson(
-              e as Map,
-              integrationId: json["integrationId"] as int,
-              referenceCode: json["ReferenceCode"] as String,
-            ),
-          )
-          .toList(),
-      name: json["name"] as String?,
-      description: json["description"] as String?,
-      descriptive: json["descriptive"] as String?,
-      gridCode: json["gridCode"] as int?,
-      grid: ((json["grid"] ?? []) as List).map((e) => e.toString()).toList(),
-      weight: json["weight"] as String?,
-      height: json["height"] as String?,
-      width: json["width"] as String?,
-      length: json["length"] as String?,
-      packWeight: json["packWeight"] as String?,
-      packHeight: json["packHeight"] as String?,
-      packWidth: json["packWidth"] as String?,
-      packLength: json["packLength"] as String?,
-      observations: (json["referenceObservations"] as List?)
-          ?.map((e) => (e as Map)["observation"] as String)
-          .toList(),
-      details: (json["details"] as List?)
-          ?.map(
-            (e) => DetailModel.fromJson(
-              e as Map,
-              integrationId: json["integrationId"] as int,
-              referenceCode: json["ReferenceCode"] as String,
-            ),
-          )
-          .toList(),
-      composition: (json["composition"] as List?)
-          ?.map(
-            (e) => CompositionModel.fromJson(
-              e as Map,
-              integrationId: json["integrationId"] as int,
-              referenceCode: json["ReferenceCode"] as String,
-            ),
-          )
-          .toList(),
-      imageColorReference: json["defaultImage"] as String?,
-      isPack: json["isPack"] as bool?,
-      isGrid: json["isGrid"] as bool?,
-      referencePrice: json["referencePrice"] != null
-          ? ReferencePriceModel.fromJson(json["referencePrice"])
-          : null,
-    );
+        code: json["ReferenceCode"] as String,
+        priceTable: priceTable ??
+            (json["priceTable"] as int? ??
+                (json["referencePrice"] != null
+                    ? (json["referencePrice"] as Map)["priceTableCode"] as int?
+                    : null)),
+        oficialStore: oficialStore ?? json["oficialStore"] as num?,
+        integrationId: json["integrationId"] as int,
+        colors: ((json["colors"] ?? []) as List)
+            .map(
+              (e) => ColorModel.fromJson(
+                e as Map,
+                integrationId: json["integrationId"] as int,
+                referenceCode: json["ReferenceCode"] as String,
+              ),
+            )
+            .toList(),
+        name: json["name"] as String?,
+        description: json["description"] as String?,
+        descriptive: json["descriptive"] as String?,
+        gridCode: json["gridCode"] as int?,
+        grid: ((json["grid"] ?? []) as List).map((e) => e.toString()).toList(),
+        weight: json["weight"]?.toString(),
+        height: json["height"]?.toString(),
+        width: json["width"]?.toString(),
+        length: json["length"]?.toString(),
+        packWeight: json["packWeight"]?.toString(),
+        packHeight: json["packHeight"]?.toString(),
+        packWidth: json["packWidth"]?.toString(),
+        packLength: json["packLength"]?.toString(),
+        observations: (json["referenceObservations"] as List?)
+            ?.map((e) => (e as Map)["observation"] as String)
+            .toList(),
+        details: (json["details"] as List?)
+            ?.map(
+              (e) => DetailModel.fromJson(
+                e as Map,
+                integrationId: json["integrationId"] as int,
+                referenceCode: json["ReferenceCode"] as String,
+              ),
+            )
+            .toList(),
+        composition: (json["composition"] as List?)
+            ?.map(
+              (e) => CompositionModel.fromJson(
+                e as Map,
+                integrationId: json["integrationId"] as int,
+                referenceCode: json["ReferenceCode"] as String,
+              ),
+            )
+            .toList(),
+        imageColorReference: json["defaultImage"] as String?,
+        isPack: json["isPack"] as bool?,
+        isGrid: json["isGrid"] as bool?,
+        referencePrice: json["referencePrice"] != null
+            ? ReferencePriceModel.fromJson(json["referencePrice"])
+            : null,
+        base64: json['base64']);
   }
 
   factory ReferenceModel.fromHive(
     HiveReference reference,
   ) {
     return ReferenceModel(
-        code: reference.code,
-        priceTable: reference.priceTable,
-        oficialStore: reference.oficialStore,
-        integrationId: reference.integrationId,
-        colors: (reference.colors ?? [])
-            .map((e) => ColorModel.fromHive(e as HiveColor))
-            .toList(),
-        name: reference.name,
-        description: reference.description,
-        descriptive: reference.descriptive,
-        gridCode: reference.gridCode,
-        grid: reference.grid,
-        weight: reference.weight,
-        height: reference.height,
-        width: reference.width,
-        length: reference.length,
-        packWeight: reference.packWeight,
-        packHeight: reference.packHeight,
-        packWidth: reference.packWidth,
-        packLength: reference.packLength,
-        observations: reference.observations,
-        details:
-            reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
-        composition: reference.composition
-            ?.map((e) => CompositionModel.fromHive(e))
-            .toList(),
-        imageColorReference: reference.imageColorReference,
-        isPack: reference.isPack,
-        isGrid: reference.isGrid,
-        referencePrice: reference.referencePrice != null
-            ? ReferencePriceModel.fromHive(reference.referencePrice!)
-            : null);
+      code: reference.code,
+      priceTable: reference.priceTable,
+      oficialStore: reference.oficialStore,
+      integrationId: reference.integrationId,
+      colors: (reference.colors ?? [])
+          .map((e) => ColorModel.fromHive(e as HiveColor))
+          .toList(),
+      name: reference.name,
+      description: reference.description,
+      descriptive: reference.descriptive,
+      gridCode: reference.gridCode,
+      grid: reference.grid,
+      weight: reference.weight,
+      height: reference.height,
+      width: reference.width,
+      length: reference.length,
+      packWeight: reference.packWeight,
+      packHeight: reference.packHeight,
+      packWidth: reference.packWidth,
+      packLength: reference.packLength,
+      observations: reference.observations,
+      details: reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+      composition: reference.composition
+          ?.map((e) => CompositionModel.fromHive(e))
+          .toList(),
+      imageColorReference: reference.imageColorReference,
+      isPack: reference.isPack,
+      isGrid: reference.isGrid,
+      referencePrice: reference.referencePrice != null
+          ? ReferencePriceModel.fromHive(reference.referencePrice!)
+          : null,
+      base64: reference.base64,
+    );
   }
 
   factory ReferenceModel.fromBagsHive(
     HiveReferenceBags reference,
   ) {
     return ReferenceModel(
-        code: reference.code,
-        priceTable: reference.priceTable,
-        oficialStore: reference.oficialStore,
-        integrationId: reference.integrationId,
-        colors: (reference.colors ?? [])
-            .map((e) => ColorModel.fromHive(e as HiveColor))
-            .toList(),
-        name: reference.name,
-        description: reference.description,
-        descriptive: reference.descriptive,
-        gridCode: reference.gridCode,
-        grid: reference.grid,
-        weight: reference.weight,
-        height: reference.height,
-        width: reference.width,
-        length: reference.length,
-        packWeight: reference.packWeight,
-        packHeight: reference.packHeight,
-        packWidth: reference.packWidth,
-        packLength: reference.packLength,
-        observations: reference.observations,
-        details:
-            reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
-        composition: reference.composition
-            ?.map((e) => CompositionModel.fromHive(e))
-            .toList(),
-        imageColorReference: reference.imageColorReference,
-        isPack: reference.isPack,
-        isGrid: reference.isGrid,
-        referencePrice: reference.referencePrice != null
-            ? ReferencePriceModel.fromHive(reference.referencePrice!)
-            : null);
+      code: reference.code,
+      priceTable: reference.priceTable,
+      oficialStore: reference.oficialStore,
+      integrationId: reference.integrationId,
+      colors: (reference.colors ?? [])
+          .map((e) => ColorModel.fromHive(e as HiveColor))
+          .toList(),
+      name: reference.name,
+      description: reference.description,
+      descriptive: reference.descriptive,
+      gridCode: reference.gridCode,
+      grid: reference.grid,
+      weight: reference.weight,
+      height: reference.height,
+      width: reference.width,
+      length: reference.length,
+      packWeight: reference.packWeight,
+      packHeight: reference.packHeight,
+      packWidth: reference.packWidth,
+      packLength: reference.packLength,
+      observations: reference.observations,
+      details: reference.details?.map((e) => DetailModel.fromHive(e)).toList(),
+      composition: reference.composition
+          ?.map((e) => CompositionModel.fromHive(e))
+          .toList(),
+      imageColorReference: reference.imageColorReference,
+      isPack: reference.isPack,
+      isGrid: reference.isGrid,
+      referencePrice: reference.referencePrice != null
+          ? ReferencePriceModel.fromHive(reference.referencePrice!)
+          : null,
+      base64: reference.base64,
+    );
   }
 
   factory ReferenceModel.entity(
@@ -239,6 +242,7 @@ class ReferenceModel extends Reference {
       referencePrice: reference.referencePrice != null
           ? ReferencePriceModel.entity(reference.referencePrice!)
           : null,
+      base64: reference.base64,
     );
   }
 
@@ -269,6 +273,7 @@ class ReferenceModel extends Reference {
           : null,
       isPack: isPack,
       isGrid: isGrid,
+      base64: base64,
     );
   }
 
@@ -299,6 +304,7 @@ class ReferenceModel extends Reference {
           : null,
       isPack: isPack,
       isGrid: isGrid,
+      base64: base64,
     );
   }
 }

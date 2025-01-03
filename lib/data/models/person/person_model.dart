@@ -142,7 +142,7 @@ class PersonModel extends Person {
       isRepresentative: person.isRepresentative,
       isPurchasingGuide: person.isPurchasingGuide,
       isShippingCompany: person.isShippingCompany,
-      addresses: person.addresses?.map((e) => AddressModel.entite(e)).toList(),
+      addresses: person.addresses?.map((e) => AddressModel.entitie(e)).toList(),
       phones:
           person.phones?.map((e) => LegalPersonPhoneModel.entitie(e)).toList(),
       emails:
@@ -198,7 +198,7 @@ class PersonModel extends Person {
       "shippingCompany": shippingCompany,
       "statistics": statistics,
       "addresses":
-          addresses?.map((e) => AddressModel.entite(e).toJson()).toList(),
+          addresses?.map((e) => AddressModel.entitie(e).toJson()).toList(),
       "phones": phones
           ?.map((e) => LegalPersonPhoneModel.entitie(e).toJson())
           .toList(),

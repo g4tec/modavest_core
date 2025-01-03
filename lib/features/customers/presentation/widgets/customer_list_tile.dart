@@ -77,7 +77,8 @@ class CustomerListTile extends StatelessWidget {
                         ),
                         if (customer.cpfCnpj != null)
                           AutoSizeText(
-                            "CNPJ: ${(formatCnpjCpf(customer.cpfCnpj.toString()))}",
+                            formatCnpjCpf(customer.cpfCnpj.toString(),
+                                prefixCNPJ: 'CNPJ: ', prefixCPF: 'CPF: '),
                             style: LegalPersonStatus.active
                                 .style(context)
                                 ?.copyWith(

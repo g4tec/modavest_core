@@ -12,10 +12,13 @@ class HiveImageColorReference extends HiveObject {
   final String? imageMedium;
   @HiveField(3)
   final String? imageSmall;
+  @HiveField(4)
+  final String? base64;
   HiveImageColorReference({
     required this.sequence,
     required this.image,
     required this.imageMedium,
     required this.imageSmall,
+    required this.base64,
   });
 }

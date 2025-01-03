@@ -10,6 +10,7 @@ class ImageColorReferenceModel extends ImageColorReference {
     String? referenceCode,
     String? colorCode,
     bool? isDefault,
+    super.base64Image,
   }) : super(
           sequence: sequence,
           image: image,
@@ -29,6 +30,7 @@ class ImageColorReferenceModel extends ImageColorReference {
       referenceCode: json["ReferenceCode"] as String?,
       colorCode: json["code"] as String?,
       isDefault: json["isDefault"] as bool?,
+      base64Image: json["base64Image"],
     );
   }
 
@@ -38,6 +40,7 @@ class ImageColorReferenceModel extends ImageColorReference {
       image: hive.image,
       imageMedium: hive.imageMedium,
       imageSmall: hive.imageSmall,
+      base64Image: hive.base64,
     );
   }
 
@@ -49,6 +52,7 @@ class ImageColorReferenceModel extends ImageColorReference {
       image: imageColorReference.image,
       imageMedium: imageColorReference.imageMedium,
       imageSmall: imageColorReference.imageSmall,
+      base64Image: imageColorReference.base64Image,
     );
   }
 
@@ -58,6 +62,7 @@ class ImageColorReferenceModel extends ImageColorReference {
       image: image,
       imageMedium: imageMedium,
       imageSmall: imageSmall,
+      base64: base64Image,
     );
   }
 }

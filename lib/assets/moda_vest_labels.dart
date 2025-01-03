@@ -96,9 +96,9 @@ class ModaVestLabels {
   static String get tamanho => "Tam.";
   static String get estoque => "Estoque";
   static String get precoUnid => "Preço Unid.";
-  static String get qtdProduct => "Qtd. de Peças";
+  static String get qtdProduct => "Qtd. de produto";
   static String get qtdProductSettled => "Qtd. Fat/Sol";
-  static String get amountProduct => "Quantidade de Peças";
+  static String get amountProduct => "Quantidade de produto";
   static String get amount => "Quantidade";
   static String get addDeliveryAddres => "Adicionar um endereço de entrega";
   static String get save => "Salvar";
@@ -119,13 +119,14 @@ class ModaVestLabels {
       "Falha ao transcrever os dados do servidor, entre em contato com o suporte";
   static String get composition => "Composição";
   static String get observation => "Observações";
+  static String get invoices => "Notas fiscais";
   static String get howDoYouWantToRecive =>
       "Identificamos que em sua sacola de compras a # dispõem de itens a pronta entrega e sob encomenda. Como deseja receber suas compras?";
   static String get selected => "Selecionado";
   static String get select => "Selecionar";
   static String get shipping => "Frete";
   static String get totalItens => "Total dos itens";
-  static String get totalUnids => "Total de peças";
+  static String get totalUnids => "Total de itens";
   static String get totalBag => "Total do pedido";
   static String get qtdItens => "Qtd. peças";
   static String get freeShipping => "Frete grátis a partir de ";
@@ -138,7 +139,7 @@ class ModaVestLabels {
   static String get buyForMe => "Comprar para mim";
   static String get selectStorekeeper => "Selecione um Lojista";
   static String get fieldToFindStorekeeper =>
-      "CNPJ, Razão social ou Nome Fantasia";
+      "CNPJ/CPF, Razão social ou Nome Fantasia";
   static String get typeToFindCustomers => "Digite para procurar seus lojistas";
   static String get searchForClient => "Pesquisar por cliente";
   static String get typeToFindManufacturers =>
@@ -248,9 +249,10 @@ class ModaVestLabels {
   static String get details => "Detalhes";
   static String get value => "Valor";
   static String get itemSubtotal => "Subtotal do item";
-  static String get validateCustomerCnpj =>
-      "Olá! Precisamos verificar se o CNPJ desejado está ou não vinculado a um de nossos fabricantes.";
+  static String get validateCustomer =>
+      "Olá! Precisamos verificar se o lojista está ou não vinculado a um de nossos fabricantes.";
   static String get customerCNPJ => "CNPJ do lojista *";
+  static String get customerCPF => "CPF do lojista *";
   static String get selectAnBrand => "Selecione uma marca";
   static String get salesRegionEmpty => "Região de venda vazia para essa marca";
   static String get seeCustomers => "Ver clientes";
@@ -498,9 +500,9 @@ class ModaVestLabels {
   static String get all => "Todos";
   static String get emptyProducts => "Nenhum produto encontrado";
   static String get modavestAlreadyRegisteredWithStore =>
-      "O cadastro com CNPJ informado já consta na plataforma para a loja #store#.\n\nVerifique o email de cadastro na plataforma!";
+      "O cadastro com CNPJ ou CPF informado já consta na plataforma para a loja #store#.\n\nVerifique o email de cadastro na plataforma!";
   static String get modavestAlreadyRegisteredWithOutStore =>
-      "O cadastro com CNPJ informado foi cadastrado na plataforma :)";
+      "O cadastro com CNPJ ou CPF informado foi cadastrado na plataforma :)";
   static String get partiallyAnswered => "Parcialmente atendido";
   static String get dismember => "Desmembrar";
   static String get selectAnProduct => "Selecione um ou mais produtos";
@@ -551,4 +553,32 @@ class ModaVestLabels {
   static String get reopenBag => "Reabrir sacola";
   static String get closeOrder => "Fechar pedido";
   static String get syncOrder => "Sincronizar pedido";
+  static String get price => "Preço";
+  static String get createProduct => "Criar produto";
+  static String get sizeVariation => "Tamanho/variação";
+  static String get ncm => "NCM";
+  static String get measuredUnit => "Unidade de medida";
+  static String get cstCode => "CST";
+  static String get observations => "Obs.";
+  static String get color => "Cor";
+  static String get shippingCompany => "Transportadora";
+  static String get freightType => "Tipo de frete";
+  static String get useShippingCompany => "Adicionar transportadora?";
+  static String get useOutsourceds => "Adicionar entrega triângular?";
+  static String get commissions => "Comissões";
+  static String get shippingCompaniesNotfound =>
+      "Transportadoras não encotradas";
+  static String get useCNPJ => 'Usar CNPJ';
+  static String get cpfValidatedLocaly =>
+      'CPF validado localmente, sujeito a reavalização no envio do cadastro';
+
+  static String get cpf => 'CPF';
+  static String get surname => 'Sobrenome';
+  static String get gender => 'Gênero';
+  static String get dateOfBirth => 'Data de nascimento';
+  static String get maritalStatus => 'Estado civil';
+  static String get nationality => 'Nacionalidade';
+  static String get occupation => 'Ocupação';
+  static String get income => 'Renda';
+  static String get individualData => 'Dados básicos da pessoa';
 }

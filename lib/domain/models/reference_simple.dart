@@ -13,6 +13,7 @@ class ReferenceSimple {
 
   ReferencePrice? referencePrice;
   num? oficialStore;
+  final String? base64;
 
   ReferenceSimple({
     required this.code,
@@ -25,6 +26,7 @@ class ReferenceSimple {
     required this.referencePrice,
     this.officialStoreCode,
     this.priceTableCode,
+    this.base64,
   });
 
   bool filter(String string) {

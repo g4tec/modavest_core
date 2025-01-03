@@ -1,7 +1,16 @@
 import 'package:intl/intl.dart';
 
-String formatDate(DateTime date) {
+String formatDate(DateTime? date) {
+  if (date == null) return '';
   return DateFormat('dd/MM/yyyy').format(date);
+}
+
+DateTime? convertDate(String dateString) {
+  try {
+    return DateFormat('dd/MM/yyyy').parse(dateString);
+  } catch (_) {
+    return null;
+  }
 }
 
 String formatDateYMD(DateTime date) {

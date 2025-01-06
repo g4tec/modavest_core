@@ -44,7 +44,9 @@ class EnterpriseFormState extends State<EnterpriseForm> {
   late Field numberStateRegistration;
   late Field ufStateRegistration;
   late Field homePage;
+  late Field cpfCnpjMainRelated;
   bool isentable = false;
+  bool isRelated = false;
   final formKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -96,6 +98,16 @@ class EnterpriseFormState extends State<EnterpriseForm> {
       ),
     );
 
+    cpfCnpjMainRelated = Field(
+      key: const Key("cpfCnpjMainRelated"),
+      title: ModaVestLabels.cpfCnpjMainRelated,
+      controller: TextEditingController(
+        text: widget.initialLegalPerson?.cpfCnpjMainRelated ?? "",
+      ),
+    );
+
+    isRelated = widget.initialLegalPerson?.cpfCnpjMainRelated != null;
+
     if ((widget.initialLegalPerson?.numberStateRegistration ?? "") ==
         "ISENTO") {
       isentable = true;
@@ -114,6 +126,7 @@ class EnterpriseFormState extends State<EnterpriseForm> {
               .replaceAll(RegExp(r'[^\w\s]+'), ''),
       uf: isentable ? null : states[ufStateRegistration.controller!.text],
       homePage: homePage.controller!.text,
+      cpfCnpjMainRelated: cpfCnpjMainRelated.controller!.text,
       insertDate: DateFormat('yyyy-MM-dd').format(DateTime.now().toLocal()),
       addresses: [],
       emails: [],
@@ -148,6 +161,27 @@ class EnterpriseFormState extends State<EnterpriseForm> {
         title: socialReason.title!,
         maxLength: 60,
       ),
+      CheckboxListTile(
+        key: const Key("isRelated"),
+        value: isRelated,
+        onChanged: (value) {
+          setState(() {
+            isRelated = value ?? false;
+          });
+        },
+        title: Text(
+          ModaVestLabels.isRelated,
+          style: Theme.of(context).textTheme.headline5,
+        ),
+        contentPadding: EdgeInsets.zero,
+        activeColor: Theme.of(context).primaryColor,
+      ),
+      if (isRelated)
+        ModaVestCNPJField(
+          key: cpfCnpjMainRelated.key,
+          controller: cpfCnpjMainRelated.controller!,
+          label: cpfCnpjMainRelated.title!,
+        ),
       CheckboxListTile(
         key: const Key("isentable"),
         value: isentable,

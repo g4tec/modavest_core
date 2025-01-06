@@ -581,4 +581,6 @@ class ModaVestLabels {
   static String get occupation => 'Ocupação';
   static String get income => 'Renda';
   static String get individualData => 'Dados básicos da pessoa';
+  static String get isRelated => 'Empresa é coligada';
+  static String get cpfCnpjMainRelated => "CNPJ do coligador";
 }

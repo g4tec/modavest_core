@@ -79,6 +79,10 @@ class SalesOrder {
   String? outsourceds;
   String? outsourcedsName;
   List<Commissioned>? commissioneds;
+  num? reasonBlockingCode;
+  String? reasonBlockingDescription;
+  num? reasonCancellationCode;
+  String? reasonCancellationDescription;
 
   SalesOrder({
     this.integrationId,
@@ -140,6 +144,10 @@ class SalesOrder {
     this.outsourceds,
     this.outsourcedsName,
     this.commissioneds,
+    this.reasonBlockingCode,
+    this.reasonBlockingDescription,
+    this.reasonCancellationCode,
+    this.reasonCancellationDescription,
   });
 
   SalesOrder copyWith({
@@ -211,6 +219,10 @@ class SalesOrder {
       outsourceds: outsourceds,
       outsourcedsName: outsourcedsName,
       commissioneds: commissioneds,
+      reasonBlockingCode: reasonBlockingCode,
+      reasonBlockingDescription: reasonBlockingDescription,
+      reasonCancellationCode: reasonCancellationCode,
+      reasonCancellationDescription: reasonCancellationDescription,
     );
   }
 
@@ -272,6 +284,10 @@ class SalesOrder {
       outsourceds: order.outsourceds,
       outsourcedsName: order.outsourcedsName,
       commissioneds: order.commissioneds,
+      reasonBlockingCode: order.reasonBlockingCode,
+      reasonBlockingDescription: order.reasonBlockingDescription,
+      reasonCancellationCode: order.reasonCancellationCode,
+      reasonCancellationDescription: order.reasonCancellationDescription,
     );
   }
 }

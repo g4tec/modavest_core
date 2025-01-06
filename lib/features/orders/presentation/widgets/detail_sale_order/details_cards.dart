@@ -105,6 +105,23 @@ class DetailsCard extends StatelessWidget {
           title2: salesOrder.quantity?.toString() ?? " - ",
           context: context,
         ),
+        if (salesOrder.reasonBlockingDescription != null)
+          buildRow(
+            title: "Motivo de bloqueio",
+            title2: salesOrder.reasonBlockingDescription ?? " - ",
+            context: context,
+            filled: true,
+          ),
+        if (salesOrder.reasonCancellationDescription != null)
+          buildRow(
+            title: "Motivo de cancelamento",
+            title2: salesOrder.reasonCancellationDescription ?? " - ",
+            context: context,
+            filled: salesOrder.reasonBlockingDescription == null,
+          ),
+        const SizedBox(
+          height: 40,
+        )
       ],
     );
   }

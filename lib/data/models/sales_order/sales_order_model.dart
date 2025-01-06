@@ -79,6 +79,10 @@ class SalesOrderModel extends SalesOrder {
     super.outsourceds,
     super.outsourcedsName,
     super.commissioneds,
+    super.reasonBlockingCode,
+    super.reasonBlockingDescription,
+    super.reasonCancellationCode,
+    super.reasonCancellationDescription,
   }) : super(
           paymentConditionCode: paymentConditionCode,
         );
@@ -199,6 +203,10 @@ class SalesOrderModel extends SalesOrder {
               .map((json) => CommissionedModel.fromJson(json))
               .toList()
           : null,
+      reasonBlockingCode: json['reasonBlockingCode'],
+      reasonBlockingDescription: json['reasonBlockingDescription'],
+      reasonCancellationCode: json['reasonCancellationCode'],
+      reasonCancellationDescription: json['reasonCancellationDescription'],
     );
   }
 

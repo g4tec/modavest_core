@@ -13,6 +13,8 @@ import 'package:modavest_core/data/models/legal_person_email/legal_person_email.
 import 'package:modavest_core/data/models/legal_person_email/legal_person_email_hive.dart';
 import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone.dart';
 import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone_hive.dart';
+import 'package:modavest_core/data/models/legal_person_related/legal_person_related_hive.dart';
+import 'package:modavest_core/data/models/legal_person_related/legal_person_related_model.dart';
 import 'package:modavest_core/domain/models/category.dart';
 import 'package:modavest_core/domain/models/enterprise_reference.dart';
 import 'package:modavest_core/domain/models/enterprise_social_network.dart';
@@ -20,6 +22,7 @@ import 'package:modavest_core/domain/models/legal_person.dart';
 import 'package:modavest_core/domain/models/legal_person_contact.dart';
 import 'package:modavest_core/domain/models/legal_person_email.dart';
 import 'package:modavest_core/domain/models/legal_person_phone.dart';
+import 'package:modavest_core/domain/models/legal_person_related.dart';
 
 class LegalPersonModel extends LegalPerson {
   LegalPersonModel({
@@ -60,6 +63,7 @@ class LegalPersonModel extends LegalPerson {
     required List<EnterpriseReference> references,
     required List<EnterpriseSocialNetwork> socialNetworks,
     List<Category>? storeSalesStyles,
+    List<LegalPersonRelated>? relateds,
   }) : super(
           code: code,
           integrationId: integrationId,
@@ -98,6 +102,7 @@ class LegalPersonModel extends LegalPerson {
           references: references,
           socialNetworks: socialNetworks,
           storeSalesStyles: storeSalesStyles,
+          relateds: relateds,
         );
   factory LegalPersonModel.fromJson(Map json) {
     return LegalPersonModel(
@@ -217,6 +222,11 @@ class LegalPersonModel extends LegalPerson {
               .values
               .toList()
           : null,
+      relateds: (json["relateds"] as List? ?? [])
+          .map(
+            (e) => LegalPersonRelatedModel.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     );
   }
 
@@ -356,6 +366,9 @@ class LegalPersonModel extends LegalPerson {
       storeSalesStyles: legalPerson.storeSalesStyles
           ?.map((e) => CategoryModel.entitie(e))
           .toList(),
+      relateds: legalPerson.relateds
+          ?.map((e) => LegalPersonRelatedModel.entitie(e))
+          .toList(),
     );
   }
 
@@ -470,6 +483,14 @@ class LegalPersonModel extends LegalPerson {
                     EnterpriseSocialNetworkModel.fromHive(
                   hiveEnterpriseSocialNetwork,
                 ),
+              )
+              .toList()
+          : [],
+      relateds: hiveLegalPerson.relateds != null
+          ? hiveLegalPerson.relateds!
+              .map(
+                (HiveLegalPersonRelated hiveAddress) =>
+                    LegalPersonRelatedModel.fromHive(hiveAddress),
               )
               .toList()
           : [],

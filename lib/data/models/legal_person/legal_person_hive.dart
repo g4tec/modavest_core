@@ -5,6 +5,7 @@ import 'package:modavest_core/data/models/enterprise_social_network.dart/enterpr
 import 'package:modavest_core/data/models/legal_person_contact/legal_person_contact_hive.dart';
 import 'package:modavest_core/data/models/legal_person_email/legal_person_email_hive.dart';
 import 'package:modavest_core/data/models/legal_person_phone/legal_person_phone_hive.dart';
+import 'package:modavest_core/data/models/legal_person_related/legal_person_related_hive.dart';
 
 part 'legal_person_hive.g.dart';
 
@@ -82,7 +83,8 @@ class HiveLegalPerson extends HiveObject {
   List<HiveEnterpriseReference>? references;
   @HiveField(35)
   List<HiveEnterpriseSocialNetwork>? socialNetworks;
-
+  @HiveField(36)
+  List<HiveLegalPersonRelated>? relateds;
   HiveLegalPerson({
     this.code,
     this.cnpj,
@@ -118,5 +120,6 @@ class HiveLegalPerson extends HiveObject {
     this.contacts,
     this.isSynchronized = true,
     this.socialNetworks,
+    this.relateds,
   });
 }

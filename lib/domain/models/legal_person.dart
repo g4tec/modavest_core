@@ -5,6 +5,7 @@ import 'package:modavest_core/domain/models/enterprise_social_network.dart';
 import 'package:modavest_core/domain/models/legal_person_contact.dart';
 import 'package:modavest_core/domain/models/legal_person_email.dart';
 import 'package:modavest_core/domain/models/legal_person_phone.dart';
+import 'package:modavest_core/domain/models/legal_person_related.dart';
 
 class LegalPerson {
   bool isSynchronized;
@@ -44,6 +45,7 @@ class LegalPerson {
   List<EnterpriseReference> references;
   List<EnterpriseSocialNetwork> socialNetworks;
   List<Category>? storeSalesStyles;
+  List<LegalPersonRelated>? relateds;
 
   LegalPerson({
     this.code,
@@ -83,6 +85,7 @@ class LegalPerson {
     required this.references,
     required this.socialNetworks,
     this.storeSalesStyles,
+    this.relateds,
   });
 
   LegalPerson copyWith({List<Address>? addresses}) {
@@ -124,6 +127,7 @@ class LegalPerson {
       references: references,
       socialNetworks: socialNetworks,
       storeSalesStyles: storeSalesStyles,
+      relateds: relateds,
     );
   }
 }

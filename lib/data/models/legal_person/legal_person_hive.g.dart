@@ -52,6 +52,7 @@ class HiveLegalPersonAdapter extends TypeAdapter<HiveLegalPerson> {
       isSynchronized: fields[31] as bool,
       socialNetworks:
           (fields[35] as List?)?.cast<HiveEnterpriseSocialNetwork>(),
+      relateds: (fields[36] as List?)?.cast<HiveLegalPersonRelated>(),
     )
       ..integrationId = fields[33] as num?
       ..references = (fields[34] as List?)?.cast<HiveEnterpriseReference>();
@@ -60,7 +61,7 @@ class HiveLegalPersonAdapter extends TypeAdapter<HiveLegalPerson> {
   @override
   void write(BinaryWriter writer, HiveLegalPerson obj) {
     writer
-      ..writeByte(36)
+      ..writeByte(37)
       ..writeByte(0)
       ..write(obj.code)
       ..writeByte(1)
@@ -132,7 +133,9 @@ class HiveLegalPersonAdapter extends TypeAdapter<HiveLegalPerson> {
       ..writeByte(34)
       ..write(obj.references)
       ..writeByte(35)
-      ..write(obj.socialNetworks);
+      ..write(obj.socialNetworks)
+      ..writeByte(36)
+      ..write(obj.relateds);
   }
 
   @override

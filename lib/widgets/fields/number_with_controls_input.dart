@@ -61,17 +61,17 @@ class NumberWithControlsInput extends StatelessWidget {
 
   void _onSubtraction() {
     try {
-      int value = controller.text.isNotEmpty
-          ? int.parse(controller.text.replaceAll(',', '.'))
+      num value = controller.text.isNotEmpty
+          ? num.parse(controller.text.replaceAll(',', '.'))
           : 0;
       value -= stepSize;
       if (value >= 0) {
-        controller.text = value.toString();
+        controller.text = value.toString().replaceAll(',', '.');
         if (onChange != null) {
           onChange!.call(
             -1,
             controller.text.isNotEmpty
-                ? int.parse(controller.text.replaceAll(',', '.'))
+                ? num.parse(controller.text.replaceAll(',', '.'))
                 : 0,
           );
         }

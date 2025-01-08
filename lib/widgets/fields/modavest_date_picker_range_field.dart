@@ -7,7 +7,10 @@ class ModavestDatePickerRangeField extends StatelessWidget {
   final DateTime? initialDate;
   final DateTime? finalDate;
   final void Function()? callBack;
+  final Color? fieldColor;
+  final Color? rangeSelectColor;
   final Function(DateRangePickerSelectionChangedArgs)? onSelectionChanged;
+  final bool popOnSelect;
 
   const ModavestDatePickerRangeField({
     Key? key,
@@ -16,6 +19,9 @@ class ModavestDatePickerRangeField extends StatelessWidget {
     this.finalDate,
     required this.onSelectionChanged,
     this.callBack,
+    this.fieldColor,
+    this.rangeSelectColor,
+    this.popOnSelect = true,
   }) : super(key: key);
 
   void onShowDateRangePicker(BuildContext context) {
@@ -29,13 +35,15 @@ class ModavestDatePickerRangeField extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: SfDateRangePicker(
-            backgroundColor: Colors.white,
+            backgroundColor: rangeSelectColor ?? Colors.white,
             cancelText: "CANCELAR",
             onSelectionChanged: onSelectionChanged,
             onCancel: () => Navigator.of(context).pop(),
             onSubmit: (Object? args) {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              if (popOnSelect) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              }
               callBack?.call();
             },
             showActionButtons: true,
@@ -63,7 +71,7 @@ class ModavestDatePickerRangeField extends StatelessWidget {
               Text(
                 title,
                 style: Theme.of(context).textTheme.headline5?.copyWith(
-                      color: Colors.white,
+                      color: fieldColor ?? Colors.white,
                       fontWeight: FontWeight.w800,
                     ),
               ),
@@ -71,15 +79,15 @@ class ModavestDatePickerRangeField extends StatelessWidget {
                 Text(
                   "${mask.format(initialDate!)} à ${mask.format(finalDate!)}",
                   style: Theme.of(context).textTheme.headline5?.copyWith(
-                        color: Colors.white,
+                        color: fieldColor ?? Colors.white,
                         fontWeight: FontWeight.w800,
                       ),
                 ),
             ],
           ),
-          icon: const Icon(
+          icon: Icon(
             Icons.calendar_month,
-            color: Colors.white,
+            color: fieldColor ?? Colors.white,
           ),
         ),
       ),

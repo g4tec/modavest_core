@@ -270,7 +270,8 @@ class LegalPersonModel extends LegalPerson {
       "dateRegJuntaCial": dateRegJuntaCial,
       "codeMainRelated":
           codeMainRelated != null ? int.tryParse(codeMainRelated!) : null,
-      "cpfCnpjMainRelated": cpfCnpjMainRelated,
+      "cpfCnpjMainRelated":
+          cpfCnpjMainRelated?.replaceAll(RegExp(r'[^\w\s]+'), ''),
       "nameMainRelated": nameMainRelated,
       "maxChangeFilterDate": maxChangeFilterDate,
       "status": status,

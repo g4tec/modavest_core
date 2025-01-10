@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modavest_core/assets/moda_vest_images.dart';
 import 'package:modavest_core/domain/models/color.dart' as color_entitie;
 import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/domain/models/product.dart';
@@ -53,10 +54,8 @@ class VariationProduct extends StatelessWidget {
                               )
                             : Opacity(
                                 opacity: isSelected ? 0.8 : 1,
-                                child: const Icon(
-                                  Icons.image_not_supported,
-                                  color: Colors.white,
-                                ),
+                                child: Image.asset(
+                                    ModaVestImages.imageNotSuportedWhite),
                               ),
                       ),
                     ),

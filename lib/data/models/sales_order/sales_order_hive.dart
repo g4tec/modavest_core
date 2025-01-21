@@ -67,7 +67,7 @@ class HiveSalesOrder extends HiveObject {
   @HiveField(28)
   final double? freightPercentage;
   @HiveField(29)
-  final double? freightValue;
+  double? freightValue;
   @HiveField(30)
   final double? packageint;
   @HiveField(31)

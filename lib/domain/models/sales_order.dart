@@ -45,7 +45,7 @@ class SalesOrder {
   final DateTime? billingForecastDate;
   num? freightType;
   final double? freightPercentage;
-  final double? freightValue;
+  double? freightValue;
   final double? packageint;
   final double? weight;
   // Can be null on app when initialized

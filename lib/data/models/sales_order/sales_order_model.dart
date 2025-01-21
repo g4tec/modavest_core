@@ -346,6 +346,9 @@ class SalesOrderModel extends SalesOrder {
           ?.map((e) => OfficialStoreSalesQuestionsModel.entity(e))
           .toList(),
       outsourceds: order.outsourceds,
+      freight: order.freight != null
+          ? FreightQuoteModel.entity(order.freight!)
+          : null,
     );
   }
 

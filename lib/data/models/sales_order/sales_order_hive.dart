@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:modavest_core/data/models/address/address_hive.dart';
 
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
+import 'package:modavest_core/data/models/freightQuote/freight_quotes_hive.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
 import 'package:modavest_core/data/models/official_store_sales_questions/official_store_sales_questions_hive.dart';
 
@@ -105,6 +106,9 @@ class HiveSalesOrder extends HiveObject {
   String? outsourceds;
   @HiveField(48)
   String? outsourcedsName;
+  @HiveField(50)
+  HiveFreightQuote? freight;
+
   HiveSalesOrder({
     required this.integrationId,
     required this.orderId,
@@ -152,5 +156,6 @@ class HiveSalesOrder extends HiveObject {
     this.officialStoreSalesQuestions,
     required this.outsourceds,
     required this.outsourcedsName,
+    this.freight,
   });
 }

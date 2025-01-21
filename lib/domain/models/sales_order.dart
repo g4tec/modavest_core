@@ -4,6 +4,7 @@ import 'package:modavest_core/domain/models/category_item_sales_order.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
 import 'package:modavest_core/domain/models/commissioned.dart';
 import 'package:modavest_core/domain/models/discount.dart';
+import 'package:modavest_core/domain/models/freight_quotes.dart';
 import 'package:modavest_core/domain/models/invoice.dart';
 import 'package:modavest_core/domain/models/item_sales_order.dart';
 import 'package:modavest_core/domain/models/official_store.dart';
@@ -84,6 +85,8 @@ class SalesOrder {
   num? reasonCancellationCode;
   String? reasonCancellationDescription;
 
+  FreightQuote? freight;
+
   SalesOrder({
     this.integrationId,
     this.orderId,
@@ -148,6 +151,7 @@ class SalesOrder {
     this.reasonBlockingDescription,
     this.reasonCancellationCode,
     this.reasonCancellationDescription,
+    this.freight,
   });
 
   SalesOrder copyWith({
@@ -223,6 +227,7 @@ class SalesOrder {
       reasonBlockingDescription: reasonBlockingDescription,
       reasonCancellationCode: reasonCancellationCode,
       reasonCancellationDescription: reasonCancellationDescription,
+      freight: freight,
     );
   }
 
@@ -288,6 +293,7 @@ class SalesOrder {
       reasonBlockingDescription: order.reasonBlockingDescription,
       reasonCancellationCode: order.reasonCancellationCode,
       reasonCancellationDescription: order.reasonCancellationDescription,
+      freight: order.freight,
     );
   }
 }

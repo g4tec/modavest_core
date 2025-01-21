@@ -566,6 +566,7 @@ class ModaVestLabels {
   static String get useShippingCompany => "Adicionar transportadora?";
   static String get useOutsourceds => "Adicionar entrega triângular?";
   static String get commissions => "Comissões";
+  static String get budget => "Orçamento";
   static String get shippingCompaniesNotfound =>
       "Transportadoras não encotradas";
   static String get useCNPJ => 'Usar CNPJ';
@@ -583,4 +584,9 @@ class ModaVestLabels {
   static String get individualData => 'Dados básicos da pessoa';
   static String get isRelated => 'Empresa é coligada';
   static String get cpfCnpjMainRelated => "CNPJ do coligador";
+  static String get generateBudgetLink => "Gerar link de orçamento";
+  static String get getFreightQuotes => "Cotar frete com transportadoras";
+  static String get failLoadingFreights => "Erro ao carregar os fretes.";
+  static String get selectFreight => "Selecione um frete";
+  static String get failLoadingFreight => "Nenhum frete disponível.";
 }

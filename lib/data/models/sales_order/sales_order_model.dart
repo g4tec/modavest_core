@@ -580,6 +580,8 @@ class SalesOrderModel extends SalesOrder {
           ? AddressModel.entitie(shippingAddress!).toJson()
           : null,
       "outsourceds": {"customerCpfCnpj": outsourceds},
+      "freight":
+          freight != null ? FreightQuoteModel.entity(freight!).toJson() : null,
     };
   }
 }

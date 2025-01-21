@@ -33,14 +33,14 @@ class FreightQuoteModel extends FreightQuote {
     );
   }
 
-  factory FreightQuoteModel.entity(FreightQuote freightHive) {
+  factory FreightQuoteModel.entity(FreightQuote freight) {
     return FreightQuoteModel(
-      freightValue: freightHive.freightValue,
-      shippingCompanyCpfCnpj: freightHive.shippingCompanyCpfCnpj,
-      shippingCompanyName: freightHive.shippingCompanyName,
-      deliveryEstimateBusinessDays: freightHive.deliveryEstimateBusinessDays,
-      deliveryMethodName: freightHive.deliveryMethodName,
-      shippingCompanyCode: freightHive.shippingCompanyCode,
+      freightValue: freight.freightValue,
+      shippingCompanyCpfCnpj: freight.shippingCompanyCpfCnpj,
+      shippingCompanyName: freight.shippingCompanyName,
+      deliveryEstimateBusinessDays: freight.deliveryEstimateBusinessDays,
+      deliveryMethodName: freight.deliveryMethodName,
+      shippingCompanyCode: freight.shippingCompanyCode,
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:modavest_core/assets/moda_vest_images.dart';
 import 'package:modavest_core/domain/models/color_image_reference.dart';
 
 class ImageColorReferenceView extends StatelessWidget {
@@ -26,7 +27,7 @@ class ImageColorReferenceView extends StatelessWidget {
     if (imageColorReference == null && urlImg == null && base64 == null) {
       return Container(
         padding: const EdgeInsets.all(20.0),
-        child: const Icon(Icons.image_not_supported),
+        child: Image.asset(ModaVestImages.imageNotSuported),
       );
     }
 
@@ -76,10 +77,7 @@ class ImageColorReferenceView extends StatelessWidget {
             print(stackTrace);
             return Container(
               padding: const EdgeInsets.all(20.0),
-              child: const Icon(
-                Icons.image_not_supported,
-                color: Colors.red,
-              ),
+              child: Image.asset(ModaVestImages.imageNotSuported),
             );
           });
         }

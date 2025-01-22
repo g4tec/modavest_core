@@ -63,6 +63,7 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
       officialStoreSalesQuestions: (fields[46] as HiveList?)?.castHiveList(),
       outsourceds: fields[47] as String?,
       outsourcedsName: fields[48] as String?,
+      freight: fields[50] as HiveFreightQuote?,
     )
       ..discounts = (fields[38] as HiveList?)?.castHiveList()
       ..observations = (fields[41] as List?)?.cast<String?>();
@@ -71,7 +72,7 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
   @override
   void write(BinaryWriter writer, HiveSalesOrder obj) {
     writer
-      ..writeByte(48)
+      ..writeByte(49)
       ..writeByte(1)
       ..write(obj.integrationId)
       ..writeByte(2)
@@ -167,7 +168,9 @@ class HiveSalesOrderAdapter extends TypeAdapter<HiveSalesOrder> {
       ..writeByte(47)
       ..write(obj.outsourceds)
       ..writeByte(48)
-      ..write(obj.outsourcedsName);
+      ..write(obj.outsourcedsName)
+      ..writeByte(50)
+      ..write(obj.freight);
   }
 
   @override

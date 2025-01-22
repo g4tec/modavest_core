@@ -3,6 +3,7 @@ import 'package:modavest_core/data/models/address/address_model.dart';
 import 'package:modavest_core/data/models/commissioned/commissioned_model.dart';
 import 'package:modavest_core/data/models/discount/discount_hive.dart';
 import 'package:modavest_core/data/models/discount/discount_model.dart';
+import 'package:modavest_core/data/models/freightQuote/freight_quotes_models.dart';
 import 'package:modavest_core/data/models/image_color_reference/image_color_reference_model.dart';
 import 'package:modavest_core/data/models/invoices/invoice_model.dart';
 import 'package:modavest_core/data/models/item_sales_order/item_sales_order_hive.dart';
@@ -83,6 +84,7 @@ class SalesOrderModel extends SalesOrder {
     super.reasonBlockingDescription,
     super.reasonCancellationCode,
     super.reasonCancellationDescription,
+    super.freight,
   }) : super(
           paymentConditionCode: paymentConditionCode,
         );
@@ -275,6 +277,9 @@ class SalesOrderModel extends SalesOrder {
               : null,
       outsourceds: hive.outsourceds,
       outsourcedsName: hive.outsourcedsName,
+      freight: hive.freight != null
+          ? FreightQuoteModel.fromHive(hive.freight!)
+          : null,
     );
   }
 
@@ -341,6 +346,9 @@ class SalesOrderModel extends SalesOrder {
           ?.map((e) => OfficialStoreSalesQuestionsModel.entity(e))
           .toList(),
       outsourceds: order.outsourceds,
+      freight: order.freight != null
+          ? FreightQuoteModel.entity(order.freight!)
+          : null,
     );
   }
 
@@ -389,6 +397,8 @@ class SalesOrderModel extends SalesOrder {
       status: status.value,
       outsourceds: outsourceds,
       outsourcedsName: outsourcedsName,
+      freight:
+          freight != null ? FreightQuoteModel.entity(freight!).toHive() : null,
     );
   }
 
@@ -570,6 +580,8 @@ class SalesOrderModel extends SalesOrder {
           ? AddressModel.entitie(shippingAddress!).toJson()
           : null,
       "outsourceds": {"customerCpfCnpj": outsourceds},
+      "freight":
+          freight != null ? FreightQuoteModel.entity(freight!).toJson() : null,
     };
   }
 }

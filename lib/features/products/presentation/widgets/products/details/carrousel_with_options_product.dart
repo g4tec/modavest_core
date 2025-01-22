@@ -220,7 +220,7 @@ class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                             width: widget.width ??
                                 MediaQuery.of(context).size.width,
                             height: widget.height ?? 300,
-                            child: const Icon(Icons.image_not_supported),
+                            child: Image.asset(ModaVestImages.imageNotSuported),
                           );
                         },
                       ),

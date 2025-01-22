@@ -7,6 +7,7 @@ import 'package:modavest_core/domain/models/options.dart';
 import 'package:modavest_core/domain/models/sales_order.dart';
 import 'package:modavest_core/utils/format_cep.dart';
 import 'package:modavest_core/utils/format_date.dart';
+import 'package:modavest_core/utils/format_money.dart';
 
 class DeliveryCards extends StatelessWidget {
   final SalesOrder salesOrder;
@@ -166,6 +167,13 @@ class DeliveryCards extends StatelessWidget {
           context: context,
           filled: true,
         ),
+        if (salesOrder.freight != null)
+          buildRow(
+            title: "Frete",
+            title2:
+                '${salesOrder.freight!.deliveryMethodName}: R\$${toCurrency(salesOrder.freight!.freightValue.toDouble())}',
+            context: context,
+          ),
       ],
     );
   }

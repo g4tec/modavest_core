@@ -171,7 +171,7 @@ class EnterpriseFormState extends State<EnterpriseForm> {
         },
         title: Text(
           ModaVestLabels.isRelated,
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         contentPadding: EdgeInsets.zero,
         activeColor: Theme.of(context).primaryColor,
@@ -192,7 +192,7 @@ class EnterpriseFormState extends State<EnterpriseForm> {
         },
         title: Text(
           ModaVestLabels.isentable,
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         contentPadding: EdgeInsets.zero,
         activeColor: Theme.of(context).primaryColor,

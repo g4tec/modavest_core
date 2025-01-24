@@ -25,7 +25,7 @@ class PaymentDetailCard extends StatelessWidget {
         children: [
           AutoSizeText(
             title,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(
             width: 10,
@@ -33,7 +33,7 @@ class PaymentDetailCard extends StatelessWidget {
           Flexible(
             child: AutoSizeText(
               title2,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           )
         ],

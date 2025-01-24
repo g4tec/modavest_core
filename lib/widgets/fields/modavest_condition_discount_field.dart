@@ -33,7 +33,7 @@ class ModavestConditionDiscountPrice extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     text: "${condition.name}\n",
-                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontSize: 13,
                         ),
                   ),

@@ -47,8 +47,8 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
       fillColor: Colors.grey.shade200,
       filled: true,
       counterText: "",
-      labelStyle: Theme.of(context).textTheme.headline5,
-      hintStyle: Theme.of(context).textTheme.headline5,
+      labelStyle: Theme.of(context).textTheme.bodySmall,
+      hintStyle: Theme.of(context).textTheme.bodySmall,
       focusColor: Theme.of(context).primaryColor,
       hoverColor: Theme.of(context).primaryColor,
       focusedBorder: UnderlineInputBorder(
@@ -94,7 +94,7 @@ class _ModavestCreditCardFormState extends State<ModavestCreditCardForm> {
                   numberValidationMessage: "Insira o número do cartão",
                   dateValidationMessage: "Insira uma data válida",
                   themeColor: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).textTheme.headline5?.color ??
+                  textColor: Theme.of(context).textTheme.bodySmall?.color ??
                       Colors.black,
                   cardNumberDecoration:
                       decoration.copyWith(labelText: ModaVestLabels.cardNumber),

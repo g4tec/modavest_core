@@ -77,7 +77,7 @@ class AddItemByVariation extends StatelessWidget {
                   reference.isPack ?? false
                       ? ModaVestLabels.porPack
                       : ModaVestLabels.porUnidade,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 if (streamReferencesIsDoneValue && (reference.isPack ?? false))
                   const Padding(

@@ -103,7 +103,7 @@ class VariationProduct extends StatelessWidget {
                 height: 28.0,
                 child: Text(
                   (color.name ?? (color.auxiliaryName ?? "")).toUpperCase(),
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
             ],

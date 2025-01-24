@@ -27,7 +27,7 @@ class ModavestEmailField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
         maxLength: maxLength,
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         keyboardType: TextInputType.emailAddress,
         textInputAction: textInputAction,
         readOnly: readOnly,
@@ -47,8 +47,8 @@ class ModavestEmailField extends StatelessWidget {
           filled: true,
           errorText: error,
           labelText: title ?? ModaVestLabels.requiredAcessEmail,
-          labelStyle: Theme.of(context).textTheme.headline5,
-          hintStyle: Theme.of(context).textTheme.headline5,
+          labelStyle: Theme.of(context).textTheme.bodySmall,
+          hintStyle: Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );

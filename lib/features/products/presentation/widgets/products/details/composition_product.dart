@@ -25,13 +25,13 @@ class CompositionProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         children: <TextSpan>[
           TextSpan(
             text: "${ModaVestLabels.composition}: ",
             style: Theme.of(context)
                 .textTheme
-                .headline5!
+                .bodySmall!
                 .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
           ),
           TextSpan(text: formatComposition()),

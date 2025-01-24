@@ -68,7 +68,7 @@ class LazyPageWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
                         widget.title!,
-                        style: Theme.of(context).textTheme.headline2,
+                        style: Theme.of(context).textTheme.headlineLarge,
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -79,7 +79,7 @@ class LazyPageWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
                         widget.subTitle!,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
                     )

@@ -55,7 +55,7 @@ class BottomButtonBag extends StatelessWidget {
                     : AutoSizeText(
                         toCurrency(total),
                         minFontSize: 1,
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -80,7 +80,7 @@ class BottomButtonBag extends StatelessWidget {
                   child: AutoSizeText(
                     totalItens!.toStringAsFixed(0),
                     minFontSize: 1,
-                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
@@ -129,7 +129,7 @@ class BottomButtonBag extends StatelessWidget {
             ? CircularProgressIndicator()
             : Text(
                 toCurrency(selectedSalesOrder.totalAmountOrder ?? 0),
-                style: Theme.of(context).textTheme.headline4!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -194,7 +194,7 @@ class BottomButtonBag extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.40,
                   child: Text(
                     label,
-                    style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: isActive ? Colors.white : Colors.grey,
                           fontSize: isActive ? 25 : 18,
                         ),

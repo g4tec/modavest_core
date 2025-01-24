@@ -14,7 +14,7 @@ class ModavestVideoPlayer extends StatefulWidget {
 }
 
 class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
-  VideoPlayerController? videoController;
+  CachedVideoPlayerController? videoController;
   CustomVideoPlayerController? _customVideoPlayerController;
   ValueNotifier<bool> muteNotifier = ValueNotifier<bool>(false);
 
@@ -36,7 +36,7 @@ class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
     final tempDir = await getTemporaryDirectory();
     final videoFile = File('${tempDir.path}/video.mp4');
     await videoFile.writeAsBytes(videoData);
-    videoController = VideoPlayerController.file(videoFile)
+    videoController = CachedVideoPlayerController.file(videoFile)
       ..initialize().then((_) {
         setState(() {});
         videoController?.setVolume(0);

@@ -63,22 +63,22 @@ extension LegalPersonStatusStyle on LegalPersonStatus {
   TextStyle? style(BuildContext context) {
     switch (this) {
       case LegalPersonStatus.active:
-        return Theme.of(context).textTheme.headline5?.copyWith(
+        return Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Colors.white,
             );
 
       case LegalPersonStatus.inactive:
-        return Theme.of(context).textTheme.headline5?.copyWith(
+        return Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Theme.of(context).disabledColor,
             );
 
       case LegalPersonStatus.bloqued:
-        return Theme.of(context).textTheme.headline5?.copyWith(
+        return Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Colors.white,
               fontStyle: FontStyle.italic,
             );
       case LegalPersonStatus.other:
-        return Theme.of(context).textTheme.headline5?.copyWith(
+        return Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Colors.white,
             );
     }

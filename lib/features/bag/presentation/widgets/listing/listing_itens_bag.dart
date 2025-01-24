@@ -191,18 +191,20 @@ class ListingItensBagState extends State<ListingItensBag> {
                     child: RichText(
                       text: TextSpan(
                         text: "Tab. Preço: ",
-                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontSize: 16,
                             ),
                         children: [
                           TextSpan(
                             text:
                                 "${saleOrder.priceTableCode?.toString() ?? ""}",
-                            style:
-                                Theme.of(context).textTheme.headline4?.copyWith(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16,
+                                ),
                           )
                         ],
                       ),
@@ -399,7 +401,7 @@ class ListingItensBagState extends State<ListingItensBag> {
                                       "",
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline4
+                                      .bodyMedium
                                       ?.copyWith(
                                         fontSize: 16,
                                       ),
@@ -412,7 +414,7 @@ class ListingItensBagState extends State<ListingItensBag> {
                                       text: "Tab. Preço: ",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline4
+                                          .bodyMedium
                                           ?.copyWith(
                                             fontSize: 16,
                                           ),
@@ -422,7 +424,7 @@ class ListingItensBagState extends State<ListingItensBag> {
                                               "${expandSaleOrder?.priceTableCode?.toString() ?? ""}",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline4
+                                              .bodyMedium
                                               ?.copyWith(
                                                 fontWeight: FontWeight.normal,
                                                 fontSize: 16,
@@ -523,14 +525,14 @@ class ListingItensBagState extends State<ListingItensBag> {
                       ),
                       Text(
                         ModaVestLabels.areYousureToDelete,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.bodyMedium,
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
                   content: Text(
                     ModaVestLabels.afterDeleteYouCantRowback,
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   ),
                   actions: <Widget>[

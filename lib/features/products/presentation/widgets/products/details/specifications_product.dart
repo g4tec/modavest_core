@@ -61,14 +61,14 @@ class SpecicificationsProduct extends StatelessWidget {
             children: [
               Text(
                 detail.title ?? "",
-                style: Theme.of(context).textTheme.headline5!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
               ),
               Text(
                 detail.description ?? "",
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),
@@ -112,13 +112,13 @@ class SpecicificationsProduct extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: spacing),
                         child: RichText(
                           text: TextSpan(
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.bodySmall,
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${ModaVestLabels.ref}: ",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5!
+                                    .bodySmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
@@ -133,13 +133,13 @@ class SpecicificationsProduct extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: spacing),
                         child: RichText(
                           text: TextSpan(
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.bodySmall,
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${ModaVestLabels.description}: ",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5!
+                                    .bodySmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
@@ -156,7 +156,7 @@ class SpecicificationsProduct extends StatelessWidget {
                               const EdgeInsets.symmetric(vertical: spacing),
                           child: RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.headline5,
+                              style: Theme.of(context).textTheme.bodySmall,
                               children: <TextSpan>[
                                 TextSpan(text: reference.descriptive),
                               ],
@@ -167,13 +167,13 @@ class SpecicificationsProduct extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: spacing),
                         child: RichText(
                           text: TextSpan(
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.bodySmall,
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${ModaVestLabels.sizes}: ",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5!
+                                    .bodySmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
@@ -192,13 +192,13 @@ class SpecicificationsProduct extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: spacing),
                         child: RichText(
                           text: TextSpan(
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.bodySmall,
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${ModaVestLabels.priceTable}: ",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5!
+                                    .bodySmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
@@ -213,13 +213,13 @@ class SpecicificationsProduct extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: spacing),
                         child: RichText(
                           text: TextSpan(
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.bodySmall,
                             children: <TextSpan>[
                               TextSpan(
                                 text: "${ModaVestLabels.officialStore}: ",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5!
+                                    .bodySmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,

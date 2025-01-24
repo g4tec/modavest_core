@@ -105,7 +105,7 @@ class PaymentConditionsWidget extends StatelessWidget {
         label: FittedBox(
           child: Text(
             ModaVestLabels.description,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ),
@@ -113,7 +113,7 @@ class PaymentConditionsWidget extends StatelessWidget {
         label: FittedBox(
           child: Text(
             ModaVestLabels.installment,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ),
@@ -121,7 +121,7 @@ class PaymentConditionsWidget extends StatelessWidget {
         label: FittedBox(
           child: Text(
             ModaVestLabels.portion,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ),

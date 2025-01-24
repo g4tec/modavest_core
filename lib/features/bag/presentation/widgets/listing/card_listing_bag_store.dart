@@ -112,7 +112,7 @@ class CardListingBagStoreState extends State<CardListingBagStore> {
                     children: [
                       AutoSizeText(
                         widget.title,
-                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontSize: 16,
                             ),
                       ),

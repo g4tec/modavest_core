@@ -27,7 +27,7 @@ class OrderActions extends StatelessWidget {
           Flexible(
             child: AutoSizeText(
               title,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ],

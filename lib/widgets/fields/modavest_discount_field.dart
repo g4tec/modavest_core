@@ -28,7 +28,7 @@ class ModavestDiscountPrice extends StatelessWidget {
                 "A partir de",
                 minFontSize: 1,
                 maxFontSize: 13,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.right,
               ),
             ),

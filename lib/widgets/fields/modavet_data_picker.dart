@@ -60,7 +60,7 @@ class _ModaVestDataPickerFieldState extends State<ModaVestDataPickerField> {
             onTap: () {
               if (!widget.readOnly) _selectDate(context);
             },
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
             keyboardType: widget.keyboardType,
             inputFormatters: widget.maskFormatter,
             readOnly: true,
@@ -75,8 +75,8 @@ class _ModaVestDataPickerFieldState extends State<ModaVestDataPickerField> {
               filled: true,
               counterText: "",
               labelText: '${widget.title} ${widget.isRequired ? ' *' : ''}',
-              labelStyle: Theme.of(context).textTheme.headline5,
-              hintStyle: Theme.of(context).textTheme.headline5,
+              labelStyle: Theme.of(context).textTheme.bodySmall,
+              hintStyle: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           if (widget.readOnly)

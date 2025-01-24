@@ -70,7 +70,7 @@ class ModavestDatePickerRangeField extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: fieldColor ?? Colors.white,
                       fontWeight: FontWeight.w800,
                     ),
@@ -78,7 +78,7 @@ class ModavestDatePickerRangeField extends StatelessWidget {
               if (initialDate != null && finalDate != null)
                 Text(
                   "${mask.format(initialDate!)} à ${mask.format(finalDate!)}",
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: fieldColor ?? Colors.white,
                         fontWeight: FontWeight.w800,
                       ),

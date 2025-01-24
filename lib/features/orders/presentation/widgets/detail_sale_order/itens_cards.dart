@@ -250,7 +250,7 @@ class ItensRequestCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: AutoSizeText(
                         "${ModaVestLabels.ref}: $referenceCode",
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.left,
                       ),
                     ),

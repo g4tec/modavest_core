@@ -1,5 +1,5 @@
 import 'package:awesome_card/awesome_card.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousel;
 import 'package:flutter/material.dart';
 import 'package:modavest_core/assets/moda_vest_labels.dart';
 import 'package:modavest_core/features/bag/presentation/widgets/credit_card/add_credit_card.dart';
@@ -27,7 +27,8 @@ class ListCreditCards extends StatefulWidget {
 }
 
 class _ListCreditCardsState extends State<ListCreditCards> {
-  CarouselController carouselController = CarouselController();
+  carousel.CarouselController carouselController =
+      carousel.CarouselController();
   String? deletingCard;
   @override
   Widget build(BuildContext context) {
@@ -72,10 +73,10 @@ class _ListCreditCardsState extends State<ListCreditCards> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(360.0),
                 child: Container(
-                  color: Theme.of(context).errorColor,
+                  color: Theme.of(context).colorScheme.error,
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    focusColor: Theme.of(context).errorColor,
+                    focusColor: Theme.of(context).colorScheme.error,
                     icon: const Icon(
                       Icons.delete_outline,
                       size: 24,
@@ -108,10 +109,10 @@ class _ListCreditCardsState extends State<ListCreditCards> {
       );
     }).toList());
 
-    return CarouselSlider(
+    return carousel.CarouselSlider(
       carouselController: carouselController,
       items: creditCards,
-      options: CarouselOptions(
+      options: carousel.CarouselOptions(
         aspectRatio: 15 / 7,
         initialPage: widget.initialCard != null
             ? widget.creditCardInfos

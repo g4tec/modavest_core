@@ -23,7 +23,7 @@ class DottedAddCard extends StatelessWidget {
               Flexible(
                 child: Text(
                   title ?? ModaVestLabels.add,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
               IconButton(

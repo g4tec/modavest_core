@@ -34,7 +34,7 @@ class ModaVestCNPJField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         textInputAction: textInputAction,
         keyboardType: TextInputType.number,
         onFieldSubmitted: onSubmit,
@@ -46,8 +46,8 @@ class ModaVestCNPJField extends StatelessWidget {
           fillColor: Colors.grey.shade200,
           filled: true,
           labelText: label ?? ModaVestLabels.requiredCnpj,
-          labelStyle: Theme.of(context).textTheme.headline5,
-          hintStyle: Theme.of(context).textTheme.headline5,
+          labelStyle: Theme.of(context).textTheme.bodySmall,
+          hintStyle: Theme.of(context).textTheme.bodySmall,
           errorText: onError?.call(),
         ),
       ),

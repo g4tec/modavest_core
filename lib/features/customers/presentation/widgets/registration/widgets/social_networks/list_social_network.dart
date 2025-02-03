@@ -42,7 +42,7 @@ class ListSocialNetworks extends StatelessWidget {
                     Flexible(
                       child: Text(
                         ModaVestLabels.addSocialNetwork,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     IconButton(

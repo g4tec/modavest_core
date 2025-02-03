@@ -30,7 +30,7 @@ class ObservationsCard extends StatelessWidget {
             title,
             style: Theme.of(context)
                 .textTheme
-                .headline5
+                .bodySmall
                 ?.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(
@@ -38,7 +38,7 @@ class ObservationsCard extends StatelessWidget {
           ),
           AutoSizeText(
             title2,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),
@@ -56,7 +56,7 @@ class ObservationsCard extends StatelessWidget {
               "Pedido",
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .bodySmall
                   ?.copyWith(color: Colors.black),
             ),
           ),
@@ -86,7 +86,7 @@ class ObservationsCard extends StatelessWidget {
               "Representante",
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .bodySmall
                   ?.copyWith(color: Colors.black),
             ),
           ),

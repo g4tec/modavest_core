@@ -30,7 +30,7 @@ class _BrandGroupCheckBoxState extends State<BrandGroupCheckBox> {
         children: [
           Text(
             ModaVestLabels.brands.toUpperCase(),
-            style: Theme.of(context).textTheme.headline4!.copyWith(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -84,7 +84,7 @@ class _BrandGroupCheckBoxState extends State<BrandGroupCheckBox> {
               ),
               Text(
                 brand.brandName ?? '',
-                style: Theme.of(context).textTheme.headline4!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,

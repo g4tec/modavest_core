@@ -25,7 +25,7 @@ class ModavestMoneyBoldText extends StatelessWidget {
             minFontSize: 1,
             style: Theme.of(context)
                 .textTheme
-                .headline4!
+                .bodyMedium!
                 .copyWith(color: color, fontSize: fontSize),
             textAlign: TextAlign.end,
           )
@@ -39,7 +39,7 @@ class ModavestMoneyBoldText extends StatelessWidget {
                 ),
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .bodyMedium!
                     .copyWith(color: color, fontSize: fontSize),
               )
             : Text.rich(
@@ -55,7 +55,7 @@ class ModavestMoneyBoldText extends StatelessWidget {
                             )
                           : Theme.of(context)
                               .textTheme
-                              .headline4!
+                              .bodyMedium!
                               .copyWith(color: color, fontSize: fontSize),
                     ),
                     if (discountValue != null && discountValue != originalValue)
@@ -68,7 +68,7 @@ class ModavestMoneyBoldText extends StatelessWidget {
                         ),
                         style: Theme.of(context)
                             .textTheme
-                            .headline4!
+                            .bodyMedium!
                             .copyWith(color: color, fontSize: fontSize),
                       ),
                   ],

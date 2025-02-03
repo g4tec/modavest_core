@@ -30,7 +30,7 @@ class DeliveryCards extends StatelessWidget {
         children: [
           AutoSizeText(
             title,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(
             width: 10,
@@ -39,7 +39,7 @@ class DeliveryCards extends StatelessWidget {
             child: AutoSizeText(
               title2,
               textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           )
         ],
@@ -94,7 +94,7 @@ class DeliveryCards extends StatelessWidget {
             "Endereço de entrega",
             style: Theme.of(context)
                 .textTheme
-                .headline5
+                .bodySmall
                 ?.copyWith(color: Colors.black),
           ),
         ),

@@ -268,7 +268,7 @@ class GoalItemCard extends StatelessWidget {
           child: Column(
             children: [
               buildTerm(
-                titleStyle: Theme.of(context).textTheme.headline5,
+                titleStyle: Theme.of(context).textTheme.bodySmall,
               ),
               ProgressCard(value: progressPercentage),
               Container(
@@ -276,12 +276,12 @@ class GoalItemCard extends StatelessWidget {
                 child: buildProgress(
                   percentage: progressPercentage,
                   width: MediaQuery.of(context).size.width * 0.7,
-                  titleStyle: Theme.of(context).textTheme.headline5,
+                  titleStyle: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
               buildSpecifications(
                 MediaQuery.of(context).size.width * 0.7 / 2,
-                Theme.of(context).textTheme.headline5,
+                Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),
@@ -300,7 +300,7 @@ class GoalItemCard extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
                       goalItem.description!,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 Row(

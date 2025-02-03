@@ -53,7 +53,7 @@ class AddCreditCardWidget extends StatelessWidget {
                     ModaVestLabels.addCreditCard,
                     style: Theme.of(context)
                         .textTheme
-                        .headline5
+                        .bodySmall
                         ?.copyWith(color: Colors.white),
                   ),
                 ],

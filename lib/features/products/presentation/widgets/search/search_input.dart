@@ -45,7 +45,7 @@ class SearchInputState extends State<SearchInput> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         keyboardType: widget.keyboardType,
         textCapitalization: widget.textCapitalization,
         textInputAction: widget.textInputAction,
@@ -70,8 +70,8 @@ class SearchInputState extends State<SearchInput> {
             ),
           ),
           labelText: widget.title ?? ModaVestLabels.whatDoYouNeed,
-          labelStyle: Theme.of(context).textTheme.headline5,
-          hintStyle: Theme.of(context).textTheme.headline5,
+          labelStyle: Theme.of(context).textTheme.bodySmall,
+          hintStyle: Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );

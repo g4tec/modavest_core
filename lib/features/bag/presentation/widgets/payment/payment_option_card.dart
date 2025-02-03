@@ -39,7 +39,7 @@ class PaymentOptionCard extends StatelessWidget {
                 paymentOption.name,
                 style: Theme.of(context)
                     .textTheme
-                    .headline5!
+                    .bodySmall!
                     .copyWith(color: isSelected ? Colors.white : null),
               ),
             ],

@@ -28,7 +28,7 @@ class ModavestCepField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.next,
         onFieldSubmitted: onSubmit,
@@ -45,8 +45,8 @@ class ModavestCepField extends StatelessWidget {
           fillColor: Colors.grey.shade200,
           filled: true,
           labelText: title,
-          labelStyle: Theme.of(context).textTheme.headline5,
-          hintStyle: Theme.of(context).textTheme.headline5,
+          labelStyle: Theme.of(context).textTheme.bodySmall,
+          hintStyle: Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );

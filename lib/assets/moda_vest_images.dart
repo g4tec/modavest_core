@@ -4,7 +4,7 @@ import 'package:flutter_flavor/flutter_flavor.dart';
 class ModaVestImages {
   static String get _assetsPrefix {
     final flavor = FlavorConfig.instance.variables["flavor"];
-    return "$flavor/";
+    return "${flavor ?? 'modavest'}/";
   }
 
   static String get horizontalLogo =>

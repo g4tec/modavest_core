@@ -30,7 +30,7 @@ class ChoiceState extends State<Choice> {
             option.option,
             style: Theme.of(context)
                 .textTheme
-                .headline5
+                .bodySmall
                 ?.copyWith(fontWeight: FontWeight.w800),
           ),
         ),
@@ -45,7 +45,7 @@ class ChoiceState extends State<Choice> {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: DropdownButtonFormField<Options>(
         value: widget.initialValue as Options?,
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         onChanged: widget.onChange,
         items: _buildItems(),
         isExpanded: true,
@@ -64,7 +64,7 @@ class ChoiceState extends State<Choice> {
             InputDecoration(
               fillColor: Colors.grey.shade200,
               filled: true,
-              labelStyle: Theme.of(context).textTheme.headline5,
+              labelStyle: Theme.of(context).textTheme.bodySmall,
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),

@@ -41,7 +41,7 @@ class FilterDrawerMenu extends StatelessWidget {
             option.value,
             style: Theme.of(context)
                 .textTheme
-                .headline5
+                .bodySmall
                 ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
           ),
         ),

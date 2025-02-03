@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:badges/badges.dart' as badge;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -45,7 +44,7 @@ class CarouselWithIndicator extends StatefulWidget {
 }
 
 class CarouselWithIndicatorState extends State<CarouselWithIndicator> {
-  CarouselController carouselController = CarouselController();
+  CarouselSliderController carouselController = CarouselSliderController();
   int currentTab = 0;
   ValueNotifier<int> indexPage = ValueNotifier(0);
 

@@ -69,7 +69,7 @@ class ValidateCustomerCpfCnpjWidgetState
                       ),
                       child: Text(
                         ModaVestLabels.validateCustomer,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.labelSmall,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -78,7 +78,7 @@ class ValidateCustomerCpfCnpjWidgetState
                       children: [
                         Text(
                           ModaVestLabels.useCNPJ,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.labelSmall,
                         ),
                         Switch(
                           value: isCnpj,

@@ -59,7 +59,7 @@ class GoalCard extends StatelessWidget {
       child: ExpansionTile(
         title: Text(
           "${ModaVestLabels.goal}: ${goal.description}",
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         children: buildGoalItem(goal.goalItems),
       ),

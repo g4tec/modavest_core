@@ -395,7 +395,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                 children: [
                   Text(
                     "Adicionar novo produto",
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(
                     width: 10,
@@ -436,7 +436,7 @@ class CountingItemBagState extends State<CountingItemBag> {
                 print(value);
                 return Text(
                   "${ModaVestLabels.qtdProduct}: ${(value % 1 == 0 ? value.toInt() : value).toString().replaceAll('.', ',')}",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.bodySmall,
                 );
               },
             ),

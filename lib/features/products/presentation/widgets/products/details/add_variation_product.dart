@@ -38,7 +38,7 @@ class AddVariationProduct extends StatelessWidget {
                 height: 28.0,
                 child: Text(
                   "ADICIONAR COR",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
             ],

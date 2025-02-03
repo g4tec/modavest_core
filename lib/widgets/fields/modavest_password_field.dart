@@ -31,7 +31,7 @@ class _ModavestPasswordFieldState extends State<ModavestPasswordField> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodySmall,
         obscureText: !_passwordVisible,
         controller: widget.controller,
         textInputAction: widget.textInputAction,
@@ -42,7 +42,7 @@ class _ModavestPasswordFieldState extends State<ModavestPasswordField> {
           fillColor: Colors.grey.shade200,
           filled: true,
           labelText: widget.title,
-          labelStyle: Theme.of(context).textTheme.headline5,
+          labelStyle: Theme.of(context).textTheme.bodySmall,
           suffixIcon: IconButton(
             icon: Icon(
               _passwordVisible ? Icons.visibility : Icons.visibility_off,

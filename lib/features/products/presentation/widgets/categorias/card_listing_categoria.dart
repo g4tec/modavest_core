@@ -114,7 +114,7 @@ class CardListingCategory extends StatelessWidget {
                   category.description ?? "",
                   minFontSize: 10,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                         color: color,
                       ),
                 ),

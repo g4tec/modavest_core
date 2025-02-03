@@ -35,7 +35,7 @@ class _AppVersionTextState extends State<AppVersionText> {
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
-                    .headline5
+                    .bodySmall
                     ?.copyWith(fontSize: 12, color: widget.textColor),
               ),
               Text(
@@ -51,7 +51,7 @@ class _AppVersionTextState extends State<AppVersionText> {
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
-                    .headline5
+                    .bodySmall
                     ?.copyWith(fontSize: 12, color: widget.textColor),
               )
             ],

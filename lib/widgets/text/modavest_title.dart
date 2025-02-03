@@ -30,7 +30,7 @@ class ModavestTitle extends StatelessWidget {
           Flexible(
             child: Text(
               captalize ? text.toUpperCase() : text,
-              style: Theme.of(context).textTheme.headline4!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontSize: fontSize,
                     fontWeight: FontWeight.w900,
                     color: color,

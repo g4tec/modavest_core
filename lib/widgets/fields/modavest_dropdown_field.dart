@@ -57,7 +57,7 @@ class _ModaVestDropdownFieldState extends State<ModaVestDropdownField> {
             value: widget.controller.value.text.isEmpty
                 ? null
                 : widget.controller.text,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
             onChanged: (value) {
               setState(() {
                 widget.controller.text = value.toString();
@@ -72,7 +72,7 @@ class _ModaVestDropdownFieldState extends State<ModaVestDropdownField> {
               fillColor: Colors.grey.shade200,
               filled: true,
               labelText: widget.title,
-              labelStyle: Theme.of(context).textTheme.headline5,
+              labelStyle: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           if (widget.readOnly)

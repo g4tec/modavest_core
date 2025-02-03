@@ -24,7 +24,7 @@ class DetailsCard extends StatelessWidget {
         children: [
           AutoSizeText(
             title,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(
             width: 10,
@@ -33,7 +33,7 @@ class DetailsCard extends StatelessWidget {
             child: AutoSizeText(
               title2,
               textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           )
         ],

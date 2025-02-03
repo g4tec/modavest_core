@@ -55,11 +55,11 @@ class ShortAnswerState extends State<ShortAnswer> {
               hintText: "Digite sua resposta",
               hintStyle: Theme.of(context)
                   .textTheme
-                  .headline5!
+                  .bodySmall!
                   .copyWith(color: Colors.grey[700]),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).errorColor,
+                  color: Theme.of(context).colorScheme.error,
                   width: 2.0,
                 ),
               ),

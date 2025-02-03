@@ -41,7 +41,7 @@ class ModaVestTextField extends StatelessWidget {
       child: Stack(
         children: [
           TextFormField(
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.bodySmall,
             keyboardType: keyboardType,
             inputFormatters: maskFormatter,
             readOnly: readOnly,
@@ -57,8 +57,8 @@ class ModaVestTextField extends StatelessWidget {
               filled: true,
               counterText: "",
               labelText: '$title ${isRequired ? ' *' : ''}',
-              labelStyle: Theme.of(context).textTheme.headline5,
-              hintStyle: Theme.of(context).textTheme.headline5,
+              labelStyle: Theme.of(context).textTheme.bodySmall,
+              hintStyle: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           if (readOnly)

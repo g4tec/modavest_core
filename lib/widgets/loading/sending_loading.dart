@@ -28,7 +28,7 @@ class SendingLoading extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .headline5!
+                  .bodySmall!
                   .copyWith(color: blackForegraund ? Colors.white : null),
             ),
           ),

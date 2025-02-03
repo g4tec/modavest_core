@@ -43,7 +43,7 @@ class ListEmail extends StatelessWidget {
                     Flexible(
                       child: Text(
                         ModaVestLabels.addEmail,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     IconButton(

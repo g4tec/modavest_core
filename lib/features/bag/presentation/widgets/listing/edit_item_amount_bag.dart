@@ -217,12 +217,12 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                             text: "${widget.referenceCode}",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline5,
+                                                .bodySmall,
                                           )
                                         ],
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline5
+                                            .bodySmall
                                             ?.copyWith(
                                               fontWeight: FontWeight.w900,
                                             ),
@@ -254,7 +254,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                                     .replaceAll('.', ','),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline5
+                                                .bodySmall
                                                 ?.copyWith(
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -265,7 +265,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                                   "(${widget.notIncludedAmount})",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline5
+                                                  .bodySmall
                                                   ?.copyWith(
                                                     color: Colors.grey,
                                                     decoration: TextDecoration
@@ -281,7 +281,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                   //   padding: const EdgeInsets.symmetric(vertical: 2),
                                   //   child: AutoSizeText(
                                   //     "${ModaVestLabels.brand}: ${widget.brandName}",
-                                  //     style: Theme.of(context).textTheme.headline5,
+                                  //     style: Theme.of(context).textTheme.bodySmall,
                                   //     textAlign: TextAlign.left,
                                   //   ),
                                   // ),
@@ -303,7 +303,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                                         : "Não icluso",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headline5
+                                        .bodySmall
                                         ?.copyWith(color: Colors.white),
                                   ),
                                 ),
@@ -328,7 +328,7 @@ class EditItemAmountBagState extends State<EditItemAmountBag>
                       widget.referenceIsPack
                           ? ModaVestLabels.porPack
                           : ModaVestLabels.porUnidade,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Container(
                       constraints: const BoxConstraints(

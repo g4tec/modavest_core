@@ -37,7 +37,7 @@ class BagStepper extends StatelessWidget {
               child: Text(
                 value,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w700,
                     color: isCurrent ? Colors.white : Colors.black,
                     fontSize: 17),

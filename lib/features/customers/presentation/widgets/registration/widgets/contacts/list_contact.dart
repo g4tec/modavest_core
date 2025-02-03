@@ -42,7 +42,7 @@ class ListContacts extends StatelessWidget {
                     Flexible(
                       child: Text(
                         ModaVestLabels.addContact,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     IconButton(

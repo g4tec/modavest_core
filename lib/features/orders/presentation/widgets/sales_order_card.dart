@@ -36,7 +36,7 @@ class SalesOrderCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: isFailed
-                              ? Theme.of(context).errorColor
+                              ? Theme.of(context).colorScheme.error
                               : Theme.of(context).primaryColor,
                           width: 1,
                         ),
@@ -48,12 +48,14 @@ class SalesOrderCard extends StatelessWidget {
                               ? "${ModaVestLabels.seq} ${salesOrder.sequence?.toString() ?? ""}"
                               : "#${salesOrder.orderCode}",
                           maxFontSize: 20,
-                          style:
-                              Theme.of(context).textTheme.headline2!.copyWith(
-                                    color: isFailed
-                                        ? Theme.of(context).errorColor
-                                        : Theme.of(context).primaryColor,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                color: isFailed
+                                    ? Theme.of(context).colorScheme.error
+                                    : Theme.of(context).primaryColor,
+                              ),
                         ),
                       ),
                     ),
@@ -114,7 +116,7 @@ class SalesOrderCard extends StatelessWidget {
                           salesOrder.orderDate != null
                               ? formatDate(salesOrder.orderDate!)
                               : "",
-                          style: Theme.of(context).textTheme.headline5,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],
                     ),
@@ -134,7 +136,7 @@ class SalesOrderCard extends StatelessWidget {
                           ),
                           AutoSizeText(
                             "${salesOrder.quantity}",
-                            style: Theme.of(context).textTheme.headline5,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),

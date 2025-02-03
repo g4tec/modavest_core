@@ -69,7 +69,7 @@ class DisplayAddressCard extends StatelessWidget {
                           "Endereço ${addressTypes[address.addressType.toString()] ?? ""}",
                           style: Theme.of(context)
                               .textTheme
-                              .headline4
+                              .bodyMedium
                               ?.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
@@ -80,7 +80,7 @@ class DisplayAddressCard extends StatelessWidget {
                           const EdgeInsets.only(left: 5, right: 5, top: 10),
                       child: Text(
                         "${address.publicPlace ?? ""} ${address.address}, ${address.number ?? ""}${address.complement != null ? ", ${address.complement}" : ""}${address.neighborhood != null ? ", ${address.neighborhood}" : ""}, ${address.cityName}/${address.stateAbbreviation ?? ""} - ${formatCep(address.cep)}",
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     // if (address.complement != null)
@@ -88,7 +88,7 @@ class DisplayAddressCard extends StatelessWidget {
                     //     padding: const EdgeInsets.symmetric(horizontal: 5),
                     //     child: Text(
                     //       address.complement!,
-                    //       style: Theme.of(context).textTheme.headline5,
+                    //       style: Theme.of(context).textTheme.bodySmall,
                     //     ),
                     //   ),
                     // if (address.neighborhood != null)
@@ -96,21 +96,21 @@ class DisplayAddressCard extends StatelessWidget {
                     //     padding: const EdgeInsets.symmetric(horizontal: 5),
                     //     child: Text(
                     //       address.neighborhood!,
-                    //       style: Theme.of(context).textTheme.headline5,
+                    //       style: Theme.of(context).textTheme.bodySmall,
                     //     ),
                     //   ),
                     // Padding(
                     //   padding: const EdgeInsets.symmetric(horizontal: 5),
                     //   child: Text(
                     //     "${address.cityName}/${address.stateAbbreviation ?? ""}",
-                    //     style: Theme.of(context).textTheme.headline5,
+                    //     style: Theme.of(context).textTheme.bodySmall,
                     //   ),
                     // ),
                     // Padding(
                     //   padding: const EdgeInsets.symmetric(horizontal: 5),
                     //   child: Text(
                     //     formatCep(address.cep),
-                    //     style: Theme.of(context).textTheme.headline5,
+                    //     style: Theme.of(context).textTheme.bodySmall,
                     //   ),
                     // ),
                   ],

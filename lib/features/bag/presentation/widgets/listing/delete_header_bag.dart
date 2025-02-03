@@ -34,7 +34,7 @@ class DeleteHeaderBag extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
                     ModaVestLabels.selectAll,
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
               ),

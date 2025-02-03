@@ -32,7 +32,7 @@ class MultipleChoiceState extends State<MultipleChoice> {
           value: option,
           child: Text(
             option.option,
-            style: Theme.of(context).textTheme.headline5?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: widget.whiteBg ? Colors.white : null,
                 fontWeight: FontWeight.w800),
           ),
@@ -47,10 +47,12 @@ class MultipleChoiceState extends State<MultipleChoice> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        toggleableActiveColor: MaterialStateColor.resolveWith(
-          (states) {
-            return const Color(0xff4d0c70);
-          },
+        toggleButtonsTheme: Theme.of(context).toggleButtonsTheme.copyWith(
+          color: MaterialStateColor.resolveWith(
+            (states) {
+              return const Color(0xff4d0c70);
+            },
+          ),
         ),
         canvasColor: MaterialStateColor.resolveWith(
           (states) {
@@ -62,7 +64,9 @@ class MultipleChoiceState extends State<MultipleChoice> {
             return widget.whiteBg ? Colors.white : Color(0xff4d0c70);
           },
         ),
-        backgroundColor: Colors.white,
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              background: Colors.white,
+            ),
         checkboxTheme: CheckboxThemeData(
           overlayColor: MaterialStateColor.resolveWith(
             (states) {

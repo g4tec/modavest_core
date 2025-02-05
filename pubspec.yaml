@@ -10,7 +10,7 @@ environment:
 dependency_overrides:
   cached_video_player:
     git: 
-      url: https://github.com/JailsonLucas/flutter_cached_video_player.git
+      url: https://github.com/g4tec/flutter_cached_video_player.git
       branch: feat/adjustNamespace
 
 dependencies:
@@ -23,7 +23,7 @@ dependencies:
   dotted_border: ^2.0.0+1
   search_cep:
     git: 
-      url: https://github.com/JailsonLucas/search_cep.git
+      url: https://github.com/g4tec/search_cep.git
       branch: fix/update_http 
   intl: 0.19.0
   fluttertoast: 8.2.10

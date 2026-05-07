@@ -22,12 +22,12 @@ class CommissionedListWidget extends StatelessWidget {
               children: [
                 Text(
                     'Código do representante: ${commissioned.representativeCode ?? 'N/A'}'),
-                // Text(
-                //     'Comissão de faturamento: ${commissioned.commissionPercentageBilling?.toStringAsFixed(2) ?? 'N/A'}%'),
+                Text(
+                    'Comissão de faturamento: ${commissioned.commissionPercentageBilling?.toStringAsFixed(2) ?? 'N/A'}%'),
                 // Text(
                 //     'Comissão de receita: ${commissioned.commissionPercentageReceipt?.toStringAsFixed(2) ?? 'N/A'}%'),
-                // Text(
-                //     'Tipo de comissão: ${commissionedTypes[commissioned.commissionedType] ?? 'N/A'}'),
+                Text(
+                    'Tipo de comissão: ${commissionedTypes[commissioned.commissionedType] ?? 'N/A'}'),
               ],
             ),
           ),

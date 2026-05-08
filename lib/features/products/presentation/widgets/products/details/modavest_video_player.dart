@@ -50,7 +50,7 @@ class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return videoController?.isInitialized == true
+    return videoController?.controller.value.isInitialized == true
         ? Stack(
             children: [
               AspectRatio(

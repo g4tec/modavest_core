@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:appinio_video_player_plus/appinio_video_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -14,7 +14,7 @@ class ModavestVideoPlayer extends StatefulWidget {
 }
 
 class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
-  CachedVideoPlayerController? videoController;
+  CachedVideoPlayerPlus? videoController;
   CustomVideoPlayerController? _customVideoPlayerController;
   ValueNotifier<bool> muteNotifier = ValueNotifier<bool>(false);
 
@@ -31,16 +31,17 @@ class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
   }
 
   Future<void> _initializeVideo() async {
-    final response = await http.get(Uri.parse(widget.videoUrl));
-    final videoData = response.bodyBytes;
-    final tempDir = await getTemporaryDirectory();
-    final videoFile = File('${tempDir.path}/video.mp4');
-    await videoFile.writeAsBytes(videoData);
-    videoController = CachedVideoPlayerController.file(videoFile)
-      ..initialize().then((_) {
-        setState(() {});
-        videoController?.setVolume(0);
-      });
+    // final response = await http.get(Uri.parse(widget.videoUrl));
+    // final videoData = response.bodyBytes;
+    // final tempDir = await getTemporaryDirectory();
+    // final videoFile = File('${tempDir.path}/video.mp4');
+    // await videoFile.writeAsBytes(videoData);
+    videoController =
+        CachedVideoPlayerPlus.networkUrl(Uri.parse(widget.videoUrl))
+          ..initialize().then((_) {
+            setState(() {});
+            videoController?.controller.setVolume(0);
+          });
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,
       videoPlayerController: videoController!,
@@ -49,11 +50,11 @@ class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return videoController?.value.isInitialized == true
+    return videoController?.isInitialized == true
         ? Stack(
             children: [
               AspectRatio(
-                aspectRatio: videoController!.value.aspectRatio,
+                aspectRatio: videoController!.controller.value.aspectRatio,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 300,
@@ -67,7 +68,8 @@ class _ModavestVideoPlayerState extends State<ModavestVideoPlayer> {
                 right: 0,
                 child: IconButton(
                   onPressed: () {
-                    videoController?.setVolume(muteNotifier.value ? 0 : 1);
+                    videoController?.controller
+                        .setVolume(muteNotifier.value ? 0 : 1);
                     muteNotifier.value = !muteNotifier.value;
                   },
                   icon: AnimatedBuilder(

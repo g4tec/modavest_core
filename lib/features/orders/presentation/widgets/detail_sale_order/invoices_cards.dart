@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:modavest_core/domain/models/invoice.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -22,16 +23,22 @@ class InvoicesCard extends StatefulWidget {
 }
 
 class _InvoicesCardState extends State<InvoicesCard> {
-  final Map<int, bool> _loadingDanfe = {};
+  final Map<int, bool> _loadingShare = {};
+  final Map<int, bool> _loadingView = {};
+
+  Future<File> _downloadDanfe(String accessKey) async {
+    final String base64Pdf = await widget.onFetchDanfe!(accessKey);
+    final List<int> bytes = base64Decode(base64Pdf);
+    final Directory dir = await getTemporaryDirectory();
+    final File file = File('${dir.path}/danfe_$accessKey.pdf');
+    await file.writeAsBytes(bytes);
+    return file;
+  }
 
   Future<void> _fetchAndShareDanfe(int index, String accessKey) async {
-    setState(() => _loadingDanfe[index] = true);
+    setState(() => _loadingShare[index] = true);
     try {
-      final String base64Pdf = await widget.onFetchDanfe!(accessKey);
-      final List<int> bytes = base64Decode(base64Pdf);
-      final Directory dir = await getTemporaryDirectory();
-      final File file = File('${dir.path}/danfe_$accessKey.pdf');
-      await file.writeAsBytes(bytes);
+      final file = await _downloadDanfe(accessKey);
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'application/pdf')],
         subject: 'Nota Fiscal',
@@ -43,7 +50,31 @@ class _InvoicesCardState extends State<InvoicesCard> {
         );
       }
     } finally {
-      if (mounted) setState(() => _loadingDanfe[index] = false);
+      if (mounted) setState(() => _loadingShare[index] = false);
+    }
+  }
+
+  Future<void> _fetchAndViewDanfe(int index, String accessKey) async {
+    setState(() => _loadingView[index] = true);
+    try {
+      final file = await _downloadDanfe(accessKey);
+      if (!mounted) return;
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => Scaffold(
+            appBar: AppBar(title: const Text('Nota Fiscal')),
+            body: PDFView(filePath: file.path),
+          ),
+        ),
+      );
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Erro ao carregar a nota fiscal.')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _loadingView[index] = false);
     }
   }
 
@@ -100,24 +131,39 @@ class _InvoicesCardState extends State<InvoicesCard> {
                   ),
                   if (showDanfeButton) ...[
                     const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: TextButton.icon(
-                        onPressed: _loadingDanfe[index] == true
-                            ? null
-                            : () => _fetchAndShareDanfe(
-                                  index,
-                                  invoice.accessKey!,
-                                ),
-                        icon: _loadingDanfe[index] == true
-                            ? const SizedBox(
-                                width: 16,
-                                height: 16,
-                                child: CircularProgressIndicator(strokeWidth: 2),
-                              )
-                            : const Icon(Icons.picture_as_pdf_outlined),
-                        label: const Text('Exibir Nota Fiscal'),
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton.icon(
+                            onPressed: _loadingShare[index] == true
+                                ? null
+                                : () => _fetchAndShareDanfe(index, invoice.accessKey!),
+                            icon: _loadingShare[index] == true
+                                ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(Icons.share),
+                            label: const Text('Compartilhar'),
+                          ),
+                        ),
+                        Expanded(
+                          child: TextButton.icon(
+                            onPressed: _loadingView[index] == true
+                                ? null
+                                : () => _fetchAndViewDanfe(index, invoice.accessKey!),
+                            icon: _loadingView[index] == true
+                                ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(Icons.visibility_outlined),
+                            label: const Text('Visualizar'),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ],

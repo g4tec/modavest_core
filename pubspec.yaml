@@ -58,7 +58,7 @@ dependencies:
   syncfusion_flutter_gauges: "^28.1.41"
   flutter_flavor: ^3.1.1
   package_info_plus: 8.1.3
-  appinio_video_player_plus: 1.0.7
+  # appinio_video_player_plus: 1.0.7
   http: ^1.3.0
   video_player: ^2.11.1
 
